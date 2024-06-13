@@ -1,0 +1,587 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: #03045e;
+    color: #03045e;
+}
+
+#hero {
+    display: flex;
+    flex-direction: column; /* Ensure H1 is above P */
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #03045e, #0077b6);
+    color: #fff;
+    padding: 20px 70px 20px 40px;
+    height: 100vh;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+    height: auto;
+}
+.hero-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    max-width: 600px;
+}
+
+.hero-image {
+    max-width: 310px; /* Ensure the image is smaller */
+    height: auto;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #03045e;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 2rem;
+    margin-top: 50px;
+}
+
+p, ul {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+
+/* Section Differentiation */
+.section-bar {
+    width: 50px;
+    height: 7px;
+    background: #00b4d8;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+
+
+/* Gradient Backgrounds */
+#about {
+    background: linear-gradient(135deg, #90e0ef, #caf0f8);
+}
+
+#skills {
+    background: linear-gradient(135deg, #0077b6, #90e0ef);
+}
+
+#experience {
+    background: linear-gradient(135deg, #90e0ef, #caf0f8);
+}
+
+#education {
+    background: linear-gradient(135deg, #48cae4, #0096c7);
+}
+
+#certifications {
+    background: linear-gradient(135deg, #90e0ef, #caf0f8);
+}
+
+#languages {
+    background: linear-gradient(135deg, #0077b6, #90e0ef);
+}
+
+#volunteering {
+    background: linear-gradient(135deg, #90e0ef, #caf0f8);
+}
+
+#contact {
+    background: linear-gradient(135deg, #03045e, #0077b6);
+    color: #fff;
+}
+
+
+/* Bold Typography */
+h2, h3 {
+    font-weight: 700;
+}
+
+
+/* Microinteractions */
+a, button {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+a:hover, button:hover {
+    color: #00b4d8;
+    transform: scale(1.1);
+}
+
+a::before, button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 180, 216, 0.2);
+    z-index: -1;
+    transition: transform 0.3s ease;
+    transform: scaleX(0);
+    transform-origin: right;
+}
+
+a:hover::before, button:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Scroll-Triggered Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.visible > * {
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+}
+
+section {
+    padding: 60px 20px;
+    position: relative;
+    opacity: 1;
+    transition: opacity 1s;
+}
+
+/* Specific elements fade in */
+section h2, section p, section ul, section img > div {
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+}
+
+
+/* Override any background changes */
+section.visible {
+    opacity: 1;
+}
+
+
+
+
+/* Assign animation delay to each section */
+section:nth-of-type(1) { --section-index: 1; }
+section:nth-of-type(2) { --section-index: 2; }
+section:nth-of-type(3) { --section-index: 3; }
+section:nth-of-type(4) { --section-index: 4; }
+section:nth-of-type(5) { --section-index: 5; }
+section:nth-of-type(6) { --section-index: 6; }
+section:nth-of-type(7) { --section-index: 7; }
+section:nth-of-type(8) { --section-index: 8; }
+section:nth-of-type(9) { --section-index: 9; }
+
+
+/* Ensure all elements within sections are animated */
+section > * {
+    opacity: 0; /* Ensure they are initially invisible */
+    animation: fadeIn 1s forwards;
+    animation-delay: calc(0.2s * var(--element-index));
+}
+
+section h2 { --element-index: 1; }
+section p { --element-index: 2; }
+section ul { --element-index: 3; }
+section img { --element-index: 4; }
+
+
+/* Specific Animation for Titles, Text, and Images */
+section h2, section p, section ul, section img {
+    opacity: 0; /* Ensure they are initially invisible */
+    animation: fadeIn 1s forwards;
+    animation-delay: calc(0.2s * var(--element-index));
+}
+
+/* When the element has the 'visible' class, apply the animation */
+section.visible, section.visible > * {
+    opacity: 1;
+    transform: none;
+}
+
+/* When the element has the 'visible' class, apply the animation */
+.visible {
+    opacity: 1;
+    transform: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #hero {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .hero-image img {
+        width: 150px;
+    }
+}
+
+
+/* Skills Section */
+#skills .skills-content {
+    display: flex;
+    color: #fff;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row-reverse; /* Reverse the direction to place the image on the left */
+}
+
+#skills ul {
+    flex: 1;
+    list-style-type: disc;
+    margin-left: 0px; /* Add margin to move list closer to image */
+    padding-left: 20px;
+}
+
+#skills .skills-image {
+    flex: 0 1 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+    padding-right: 50px;
+    max-width: 100%;
+}
+
+#skills .skills-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Education Section */
+#education .education-content {
+    color: #fff;
+}
+
+
+/* Certifications Section */
+#certifications .certifications-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+#certifications ul {
+    flex: 1;
+    list-style-type: disc;
+    margin-left: 0px; /* Add margin to move list closer to image */
+    padding-left: 20px;
+}
+
+#certifications .certifications-image {
+   flex: 0 1 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 60px;
+    padding-top: 40px;
+    max-width: 300px;
+}
+
+#certifications .certifications-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#certifications .certifications-text {
+    flex: 1;
+}
+
+
+/* Languages Section */
+#languages .languages-content {
+    display: flex;
+    color: #fff;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row-reverse; 
+}
+
+#languages ul {
+    flex: 1;
+    list-style-type: disc;
+    margin-left: 0px; /* Add margin to move list closer to image */
+    padding-left: 20px;
+}
+
+#languages .languages-image {
+   flex: 0 1 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 0px;
+    max-width: 500px;
+}
+
+#languages .languages-image img {
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#languages .languages-text {
+    flex: 1;
+}
+
+
+
+/* Volunteering Section */
+#volunteering .volunteering-content {
+    position: relative;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row-reverse;
+}
+
+#volunteering .volunteering-image {
+    position: absolute; /* Use absolute positioning for the image */
+    top: 0; /* Align the image to the top */
+    right: 0; /* Align the image to the right */
+    width: 200px; /* Set a fixed width for the image */
+    flex: 0 0 200px; /* Adjust the width as necessary */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 20px;
+}
+
+#volunteering .volunteering-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#volunteering .volunteering-text {
+    flex: 1;
+}
+
+
+#contact h2 {
+    color: #fff;
+}
+#contact a {
+    color: #fff;
+}
+#contact a:hover {
+    color: #00b4d8; /* Slightly darker color on hover for interactivity */
+    text-decoration: underline; /* Add underline on hover for interactivity */
+}
+
+
+nav {
+    background: #03045e;
+    color: #fff;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #00b4d8;
+}
+
+body {
+    padding-top: 70px; /* Adjust for fixed nav height */
+}
+
+section h2 {
+    animation: slideInFromLeft 0.6s ease-out forwards;
+    opacity: 0; /* Ensure they are initially invisible */
+    animation-delay: 0.2s;
+}
+
+
+#scrollToTop {
+    display: flex;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #03045e;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+#scrollToTop:hover {
+    background: #00b4d8;
+    transform: scale(1.1);
+}
+
+
+footer {
+    background: #03045e;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+footer ul li {
+    margin: 0 15px;
+}
+
+footer ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+footer ul li a:hover {
+    color: #00b4d8;
+}
+
+
+#about p {
+    animation: fadeIn 1s ease-out forwards;
+    opacity: 0; /* Ensure they are initially invisible */
+    animation-delay: 0.4s;
+}
+
+button {
+    background-color: #0077b6;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #00b4d8;
+    transform: scale(1.05);
+}
