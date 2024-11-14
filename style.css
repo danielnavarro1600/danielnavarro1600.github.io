@@ -22,7 +22,7 @@ body {
     align-items: center;
     justify-content: space-between;
     width: 100%; /* Changed from auto to ensure full width */
-    gap: 40px; /* Adds space between image and text */
+    gap: 60px; /* Adds space between image and text */
 }
 
     
