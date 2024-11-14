@@ -7,30 +7,33 @@ body {
 
 #hero {
     display: flex;
-    flex-direction: column; /* Ensure H1 is above P */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background: linear-gradient(135deg, #03045e, #0077b6);
     color: #fff;
-    padding: 20px 70px 20px 40px;
+    padding: 20px 40px; /* Simplified padding */
     height: 100vh;
 }
 
 .hero-content {
     display: flex;
+    flex-direction: row-reverse; /* This will put the text on the right */
     align-items: center;
     justify-content: space-between;
-    width: auto;
-    height: auto;
+    width: 100%; /* Changed from auto to ensure full width */
+    gap: 40px; /* Adds space between image and text */
 }
+
+    
 .hero-text {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    padding-right: 40px; /* Adds some spacing on the right side */
 }
-
 .hero-text h1 {
     font-size: 3rem;
     line-height: 1.2;
@@ -44,14 +47,14 @@ body {
     max-width: 600px;
 }
 
+
 .hero-image {
-    max-width: 310px; /* Ensure the image is smaller */
+    max-width: 310px;
     height: auto;
-    width: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-right: auto; /* This helps push the image to the left */
+    margin-left: 40px; /* Adds some spacing from the left edge */
 }
+
 
 .hero-image img {
     max-width: 100%;
