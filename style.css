@@ -56,7 +56,7 @@ body {
 .hero-image img {
     max-width: 100%;
     height: auto;
-    border-radius: 60%;
+    border-radius: 30%;
     object-fit: cover;
 }
 
