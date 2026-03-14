@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daniel Navarro Delgado — Finance & Technology Senior Analyst</title>
+  <meta name="description" content="Finance & Technology Senior Analyst at Deloitte. Oracle EPM Cloud, OCI & AI specialist. 10x Oracle Certified, 6x AI Specialist. Barcelona." />
+  <meta property="og:title" content="Daniel Navarro Delgado — Finance & Technology" />
+  <meta property="og:description" content="Senior Analyst at Deloitte specializing in Oracle EPM Cloud, OCI and Applied AI." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0a0a0f" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* =========================================================
+       TOKENS & RESET
+    ========================================================= */
+    :root {
+      --bg: #f7f5f0;
+      --bg-alt: #eeebe3;
+      --surface: #ffffff;
+      --text: #0d0c0a;
+      --text-muted: #6b6560;
+      --accent: #b8860b;
+      --accent-light: #d4a017;
+      --accent-glow: rgba(184,134,11,0.15);
+      --dark: #0a0a0f;
+      --dark-surface: #111118;
+      --dark-border: rgba(255,255,255,0.07);
+      --border: rgba(0,0,0,0.08);
+      --radius: 16px;
+      --radius-sm: 8px;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-ui: 'Syne', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --hero-bg: #0a0a0f;
+      --hero-text: #f0ede8;
+      --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0a0a0f;
+      --bg-alt: #111118;
+      --surface: #16161e;
+      --text: #f0ede8;
+      --text-muted: #8b8680;
+      --border: rgba(255,255,255,0.07);
+      --accent: #d4a017;
+      --accent-light: #e8b820;
+      --accent-glow: rgba(212,160,23,0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text);
+      transition: background var(--transition), color var(--transition);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    /* =========================================================
+       SCROLL ANIMATIONS
+    ========================================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* =========================================================
+       NAVBAR
+    ========================================================= */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    [data-theme="dark"] nav.scrolled {
+      background: rgba(10,10,15,0.9);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #f0ede8;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-family: var(--font-ui);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240,237,232,0.7);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent-light); }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid rgba(240,237,232,0.2);
+      border-radius: 50px;
+      padding: 6px 14px;
+      color: rgba(240,237,232,0.7);
+      font-size: 0.75rem;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent-light);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      width: 24px; height: 2px;
+      background: rgba(240,237,232,0.8);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+    #hero {
+      min-height: 100vh;
+      background: var(--dark);
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(184,134,11,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184,134,11,0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+    }
+    .hero-orb-1 {
+      width: 600px; height: 600px;
+      top: -150px; right: -100px;
+      background: radial-gradient(circle, rgba(184,134,11,0.12) 0%, transparent 70%);
+      animation: orbFloat 8s ease-in-out infinite;
+    }
+    .hero-orb-2 {
+      width: 400px; height: 400px;
+      bottom: -100px; left: -50px;
+      background: radial-gradient(circle, rgba(100,120,200,0.08) 0%, transparent 70%);
+      animation: orbFloat 12s ease-in-out infinite reverse;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 48px 80px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 32px; height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      font-weight: 300;
+      color: #f0ede8;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent-light);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 300;
+      color: rgba(240,237,232,0.55);
+      margin-bottom: 32px;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-desc {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: rgba(240,237,232,0.65);
+      max-width: 460px;
+      margin-bottom: 40px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+
+    .hero-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      padding: 6px 14px;
+      border: 1px solid rgba(184,134,11,0.3);
+      border-radius: 4px;
+      color: var(--accent-light);
+      letter-spacing: 0.06em;
+      transition: all 0.2s;
+    }
+    .hero-tag:hover {
+      background: var(--accent-glow);
+      border-color: var(--accent);
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 14px 32px;
+      background: var(--accent);
+      color: #0a0a0f;
+      font-family: var(--font-ui);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .btn-primary:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(184,134,11,0.35);
+    }
+
+    .btn-ghost {
+      padding: 14px 32px;
+      background: transparent;
+      color: rgba(240,237,232,0.8);
+      font-family: var(--font-ui);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid rgba(240,237,232,0.2);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(240,237,232,0.5);
+      color: #f0ede8;
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .stat-card {
+      padding: 28px 24px;
+      border: 1px solid var(--dark-border);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .stat-card:hover { border-color: rgba(184,134,11,0.3); }
+    .stat-card:hover::before { opacity: 1; }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--accent-light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: rgba(240,237,232,0.5);
+      letter-spacing: 0.06em;
+      line-height: 1.4;
+    }
+
+    .hero-photo-placeholder {
+      grid-column: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .photo-frame {
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      border: 2px solid rgba(184,134,11,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: rgba(255,255,255,0.03);
+    }
+    .photo-frame::after {
+      content: '';
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      border: 1px solid rgba(184,134,11,0.1);
+    }
+    .photo-initials {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      font-weight: 300;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+
+    /* =========================================================
+       SECTION SHARED STYLES
+    ========================================================= */
+    .section {
+      padding: 100px 48px;
+    }
+
+    .section-alt {
+      background: var(--bg-alt);
+    }
+
+    [data-theme="dark"] .section-alt {
+      background: var(--bg-alt);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-label::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--accent);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+    .section-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 64px;
+    }
+
+    /* =========================================================
+       EXPERIENCE TIMELINE
+    ========================================================= */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: linear-gradient(180deg, var(--accent), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 56px;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: -40px;
+      top: 8px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      background: var(--bg);
+      transition: background 0.2s;
+    }
+    .timeline-item.active .timeline-dot {
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-glow);
+    }
+
+    .timeline-period {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .timeline-company {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .timeline-role {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .timeline-desc {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin-bottom: 20px;
+    }
+
+    .timeline-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .timeline-bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .timeline-bullet::before {
+      content: '→';
+      color: var(--accent);
+      flex-shrink: 0;
+      font-size: 0.8rem;
+      margin-top: 2px;
+    }
+
+    .timeline-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag-chip {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      padding: 4px 10px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(184,134,11,0.2);
+      border-radius: 4px;
+      color: var(--accent-light);
+      letter-spacing: 0.04em;
+    }
+
+    /* =========================================================
+       CERTIFICATIONS
+    ========================================================= */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .cert-group-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cert-group-title span {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .cert-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cert-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      transition: all 0.25s;
+      cursor: default;
+    }
+    .cert-item:hover {
+      border-color: rgba(184,134,11,0.35);
+      transform: translateX(4px);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+
+    .cert-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .cert-icon.oracle { background: rgba(220,50,50,0.1); color: #e05555; }
+    .cert-icon.ai { background: rgba(100,100,220,0.12); color: #7878e0; }
+    .cert-icon.pm { background: rgba(50,180,120,0.12); color: #44b888; }
+    .cert-icon.deloitte { background: rgba(0,100,200,0.1); color: #4488dd; }
+
+    .cert-name {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .cert-issuer {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+    }
+
+    .cert-badge {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      padding: 2px 8px;
+      background: var(--accent-glow);
+      border-radius: 4px;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+    }
+    .cert-badge.ai-badge { background: rgba(100,100,220,0.1); color: #7878e0; }
+
+    /* =========================================================
+       PROJECTS
+    ========================================================= */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 32px 28px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+    .project-card:hover {
+      border-color: rgba(184,134,11,0.25);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.1);
+    }
+    .project-card:hover::before { transform: scaleX(1); }
+
+    .project-number {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      margin-bottom: 20px;
+    }
+
+    .project-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .project-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* =========================================================
+       SKILLS
+    ========================================================= */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    .skill-group h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-item {
+      margin-bottom: 16px;
+    }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .skill-name {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .skill-level {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    .skill-bar {
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      border-radius: 2px;
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .skill-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .skill-chip {
+      font-size: 0.78rem;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    .skill-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent-light);
+    }
+
+    /* =========================================================
+       EDUCATION
+    ========================================================= */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .edu-card {
+      padding: 32px 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      transition: all 0.3s;
+    }
+    .edu-card:hover {
+      border-color: rgba(184,134,11,0.25);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+    }
+
+    .edu-period {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .edu-institution {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .edu-degree {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .edu-highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      padding: 4px 10px;
+      background: var(--accent-glow);
+      border-radius: 4px;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    /* =========================================================
+       LANGUAGES
+    ========================================================= */
+    .languages-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .lang-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      font-size: 0.82rem;
+      background: var(--surface);
+      transition: all 0.2s;
+    }
+    .lang-item:hover { border-color: var(--accent); }
+
+    .lang-flag {
+      font-size: 1.1rem;
+    }
+
+    .lang-level {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* =========================================================
+       CONTACT
+    ========================================================= */
+    #contact {
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(184,134,11,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184,134,11,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    #contact .section-label { color: var(--accent); }
+    #contact .section-title { color: #f0ede8; }
+    #contact .section-subtitle { color: rgba(240,237,232,0.55); }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 28px;
+      border: 1px solid rgba(240,237,232,0.12);
+      border-radius: var(--radius-sm);
+      color: rgba(240,237,232,0.7);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.25s;
+    }
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent-light);
+      background: var(--accent-glow);
+      transform: translateY(-2px);
+    }
+    .contact-link i { font-size: 1rem; }
+
+    .contact-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 3.5rem);
+      font-weight: 300;
+      color: rgba(240,237,232,0.9);
+      line-height: 1.2;
+      max-width: 700px;
+      margin-bottom: 16px;
+    }
+    .contact-tagline em { color: var(--accent-light); font-style: italic; }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+    footer {
+      background: #060608;
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .footer-name {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      color: rgba(240,237,232,0.4);
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: rgba(240,237,232,0.2);
+      letter-spacing: 0.06em;
+    }
+
+    /* =========================================================
+       SCROLLBAR
+    ========================================================= */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(184,134,11,0.3); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+    @media (max-width: 1024px) {
+      .cert-grid,
+      .projects-grid,
+      .skills-grid,
+      .edu-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 18px 24px; }
+
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        inset: 0;
+        background: rgba(10,10,15,0.97);
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+        z-index: 99;
+      }
+      .nav-links.open a {
+        font-size: 1.2rem;
+      }
+      .hamburger { display: flex; }
+
+      .hero-container {
+        grid-template-columns: 1fr;
+        padding: 100px 24px 60px;
+        gap: 48px;
+      }
+
+      .hero-photo-placeholder { grid-column: 1; order: -1; }
+      .photo-frame { width: 200px; height: 200px; }
+      .photo-initials { font-size: 3.5rem; }
+
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+
+      .section { padding: 70px 24px; }
+
+      .cert-grid,
+      .projects-grid,
+      .skills-grid,
+      .edu-grid { grid-template-columns: 1fr; }
+
+      footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px 24px; }
+
+      .contact-links { flex-direction: column; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">DN</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#experience">Experience</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+      <i class="fa-solid fa-moon" id="themeIcon"></i>
+      <span id="themeLabel">Dark</span>
+    </button>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+
+  <div class="hero-container">
+    <div>
+      <div class="hero-eyebrow">Finance & Technology · Deloitte · Barcelona</div>
+      <h1 class="hero-name">Daniel<br><em>Navarro</em></h1>
+      <p class="hero-title">Senior Analyst — Oracle EPM Cloud & Applied AI</p>
+      <p class="hero-desc">
+        Bridging financial planning, enterprise technology and applied AI to drive transformation at scale.
+        Specialist in Oracle EPM Cloud, OCI and Generative AI — with 10 Oracle certifications and a track record
+        delivering complex controlling solutions for leading industrial clients at Deloitte.
+      </p>
+      <div class="hero-tags">
+        <span class="hero-tag">Oracle EPM Cloud</span>
+        <span class="hero-tag">OCI</span>
+        <span class="hero-tag">AI Generativa</span>
+        <span class="hero-tag">10× Oracle Certified</span>
+        <span class="hero-tag">Finance & Technology</span>
+        <span class="hero-tag">Deloitte</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="#experience" class="btn-primary">Ver experiencia</a>
+        <a href="#contact" class="btn-ghost">Contactar</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="hero-photo-placeholder">
+        <div class="photo-frame">
+          <span class="photo-initials">DN</span>
+        </div>
+      </div>
+      <div class="hero-stats" style="margin-top: 40px;">
+        <div class="stat-card">
+          <div class="stat-number">10×</div>
+          <div class="stat-label">Oracle Certifications<br>6 in Artificial Intelligence</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">1.3+</div>
+          <div class="stat-label">Years at Deloitte<br>Finance & Technology</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">20+</div>
+          <div class="stat-label">Professional certifications<br>across tech & consulting</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Languages spoken<br>ES · EN · CA · IT · DE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EXPERIENCE ===================== -->
+<section class="section section-alt" id="experience">
+  <div class="container">
+    <div class="section-label reveal">Trayectoria profesional</div>
+    <h2 class="section-title reveal">Experiencia <em>profesional</em></h2>
+    <p class="section-subtitle reveal">Consultor en transformación financiera y tecnológica, con foco en Oracle EPM Cloud, OCI e inteligencia artificial aplicada a finanzas y controlling.</p>
+
+    <div class="timeline">
+
+      <!-- Deloitte Senior -->
+      <div class="timeline-item active reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">JUL 2025 — PRESENTE</div>
+        <div class="timeline-company">Deloitte</div>
+        <div class="timeline-role">Finance & Technology Senior Analyst</div>
+        <p class="timeline-desc">Consultor senior en proyectos de transformación financiera y tecnológica, liderando la definición funcional e implementación de soluciones Oracle EPM Cloud para grandes clientes del sector industrial.</p>
+        <div class="timeline-bullets">
+          <div class="timeline-bullet">Diseño funcional e implementación de Oracle EPM Cloud para procesos de planificación y controlling (PR, Budget, Forecast y Real) en el ámbito de I+D e Inversiones para clientes de referencia como SEAT-CUPRA.</div>
+          <div class="timeline-bullet">Estructuración del modelo dimensional: cubos, dimensiones, jerarquías, atributos y reglas de cálculo para procesos críticos de I+D e Inversiones.</div>
+          <div class="timeline-bullet">Definición y validación de reglas de negocio para activaciones, amortizaciones, subvenciones, retroactividad y efectos financieros bajo criterios IFRS, HB1 y Fiscal.</div>
+          <div class="timeline-bullet">Coordinación de integraciones funcionales entre Oracle EPM Cloud, SAP, Oracle Data Integrator (ODI), EPMAutomate y Data Exchange.</div>
+          <div class="timeline-bullet">Diseño y optimización de Data Forms, Task Lists y flujos operativos; definición de salidas analíticas en Smart View, dashboards y Power BI.</div>
+        </div>
+        <div class="timeline-tags">
+          <span class="tag-chip">Oracle EPM Cloud</span>
+          <span class="tag-chip">OCI</span>
+          <span class="tag-chip">SAP</span>
+          <span class="tag-chip">ODI</span>
+          <span class="tag-chip">Power BI</span>
+          <span class="tag-chip">Smart View</span>
+          <span class="tag-chip">IFRS</span>
+        </div>
+      </div>
+
+      <!-- Deloitte Analyst -->
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">ENE 2025 — JUN 2025</div>
+        <div class="timeline-company">Deloitte</div>
+        <div class="timeline-role">Finance & Technology Analyst</div>
+        <p class="timeline-desc">Incorporación al equipo con foco en análisis funcional, levantamiento de requisitos y configuración inicial de soluciones EPM, obteniendo en paralelo 10 certificaciones Oracle.</p>
+        <div class="timeline-bullets">
+          <div class="timeline-bullet">Análisis funcional de procesos financieros y traducción a diseño de solución en Oracle EPM Cloud.</div>
+          <div class="timeline-bullet">Documentación técnico-funcional del proyecto y coordinación entre equipos de negocio y tecnología.</div>
+          <div class="timeline-bullet">Adquisición de 10 certificaciones Oracle (6 especializadas en IA) para consolidar base técnica en plataformas del proyecto.</div>
+        </div>
+        <div class="timeline-tags">
+          <span class="tag-chip">Oracle EPM</span>
+          <span class="tag-chip">Business Analysis</span>
+          <span class="tag-chip">Functional Design</span>
+        </div>
+      </div>
+
+      <!-- CleverStrategy -->
+      <div class="timeline-item reveal reveal-delay-2">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">JUL 2024 — DIC 2024</div>
+        <div class="timeline-company">CleverStrategy</div>
+        <div class="timeline-role">IT Business Consultant</div>
+        <p class="timeline-desc">Consultoría de negocio IT con foco en transformación digital y aplicaciones de IA para empresas.</p>
+        <div class="timeline-bullets">
+          <div class="timeline-bullet">Desarrollo e implementación de algoritmos de predicción de churn y optimización del Customer Lifetime Value (CLV).</div>
+          <div class="timeline-bullet">Creación de una calculadora de matriz de confusión para optimizar la toma de decisiones y calcular ROI en proyectos de IA.</div>
+          <div class="timeline-bullet">Diseño de materiales de alto impacto para captación de clientes y desarrollo de relaciones comerciales.</div>
+        </div>
+        <div class="timeline-tags">
+          <span class="tag-chip">Python</span>
+          <span class="tag-chip">Power BI</span>
+          <span class="tag-chip">Machine Learning</span>
+          <span class="tag-chip">Agile</span>
+        </div>
+      </div>
+
+      <!-- Chameleon Pharma -->
+      <div class="timeline-item reveal reveal-delay-3">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">SEPT 2023 — DIC 2023 · Berlín</div>
+        <div class="timeline-company">Chameleon Pharma</div>
+        <div class="timeline-role">Business Operations Intern</div>
+        <p class="timeline-desc">Elaboración de informes financieros y de investigación de mercado en Berlín, con logro de +15% de productividad mediante optimización de procesos.</p>
+        <div class="timeline-tags">
+          <span class="tag-chip">Financial Analysis</span>
+          <span class="tag-chip">Market Research</span>
+          <span class="tag-chip">CRM</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CERTIFICATIONS ===================== -->
+<section class="section" id="certifications">
+  <div class="container">
+    <div class="section-label reveal">Credenciales verificadas</div>
+    <h2 class="section-title reveal">Certificaciones <em>Oracle & Consultoría</em></h2>
+    <p class="section-subtitle reveal">20+ certificaciones profesionales en tecnología Oracle, inteligencia artificial, gestión de proyectos y metodologías de consultoría.</p>
+
+    <div class="cert-grid">
+      <!-- Oracle Block -->
+      <div class="reveal">
+        <div class="cert-group-title">Oracle Cloud <span>& AI</span> — 10 Certifications</div>
+        <div class="cert-list">
+          <div class="cert-item">
+            <div class="cert-icon ai"><i class="fa-solid fa-brain"></i></div>
+            <div>
+              <div class="cert-name">OCI Certified Data Science Professional</div>
+              <div class="cert-issuer">Oracle · Jan 2026</div>
+            </div>
+            <span class="cert-badge ai-badge">AI</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon ai"><i class="fa-solid fa-microchip"></i></div>
+            <div>
+              <div class="cert-name">OCI Generative AI Professional</div>
+              <div class="cert-issuer">Oracle · Sep 2025</div>
+            </div>
+            <span class="cert-badge ai-badge">AI</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon ai"><i class="fa-solid fa-robot"></i></div>
+            <div>
+              <div class="cert-name">Oracle Certified AI Associate</div>
+              <div class="cert-issuer">Oracle · Sep 2025</div>
+            </div>
+            <span class="cert-badge ai-badge">AI</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon ai"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <div>
+              <div class="cert-name">Oracle Fusion AI Agent Studio Associate</div>
+              <div class="cert-issuer">Oracle · Sep 2025</div>
+            </div>
+            <span class="cert-badge ai-badge">AI</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon oracle"><i class="fa-solid fa-chart-line"></i></div>
+            <div>
+              <div class="cert-name">Oracle AI in Enterprise Performance Management</div>
+              <div class="cert-issuer">Oracle · Aug 2025</div>
+            </div>
+            <span class="cert-badge ai-badge">AI + EPM</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon ai"><i class="fa-solid fa-database"></i></div>
+            <div>
+              <div class="cert-name">Oracle AI Autonomous Database Professional</div>
+              <div class="cert-issuer">Oracle · Dec 2025</div>
+            </div>
+            <span class="cert-badge ai-badge">AI</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon oracle"><i class="fa-solid fa-arrows-spin"></i></div>
+            <div>
+              <div class="cert-name">Oracle Cloud EPM Data Integration Professional</div>
+              <div class="cert-issuer">Oracle · Dec 2025</div>
+            </div>
+            <span class="cert-badge">EPM</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon oracle"><i class="fa-solid fa-server"></i></div>
+            <div>
+              <div class="cert-name">Oracle Data Platform Certified Associate</div>
+              <div class="cert-issuer">Oracle · Dec 2025</div>
+            </div>
+            <span class="cert-badge">OCI</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon oracle"><i class="fa-solid fa-cloud"></i></div>
+            <div>
+              <div class="cert-name">Oracle Certified Associate (OCI Foundations)</div>
+              <div class="cert-issuer">Oracle · Sep 2025</div>
+            </div>
+            <span class="cert-badge">OCI</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon oracle"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div>
+              <div class="cert-name">Oracle Guided Learning Administrator Associate</div>
+              <div class="cert-issuer">Oracle · Dec 2025</div>
+            </div>
+            <span class="cert-badge">OCI</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PM & Consulting Block -->
+      <div class="reveal reveal-delay-1">
+        <div class="cert-group-title">Project Management <span>& Consulting</span> — 11 Certs</div>
+        <div class="cert-list">
+          <div class="cert-item">
+            <div class="cert-icon deloitte"><i class="fa-solid fa-building"></i></div>
+            <div>
+              <div class="cert-name">The Deloitte Way — Project Management</div>
+              <div class="cert-issuer">Deloitte · Internal</div>
+            </div>
+            <span class="cert-badge">Internal</span>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon pm"><i class="fa-solid fa-lightbulb"></i></div>
+            <div>
+              <div class="cert-name">Consulting Approach to Problem Solving</div>
+              <div class="cert-issuer">Udemy · Mar 2026</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon pm"><i class="fa-solid fa-gear"></i></div>
+            <div>
+              <div class="cert-name">Service Management with ITIL® 4</div>
+              <div class="cert-issuer">LinkedIn · Mar 2026</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon pm"><i class="fa-solid fa-code-branch"></i></div>
+            <div>
+              <div class="cert-name">Hybrid Project Management</div>
+              <div class="cert-issuer">LinkedIn · Mar 2026</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon pm"><i class="fa-solid fa-diagram-project"></i></div>
+            <div>
+              <div class="cert-name">Agile Project Management</div>
+              <div class="cert-issuer">LinkedIn · Sep 2024</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon pm"><i class="fa-solid fa-rotate"></i></div>
+            <div>
+              <div class="cert-name">Scrum Master Framework</div>
+              <div class="cert-issuer">LinkedIn · Sep 2024</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon pm"><i class="fa-solid fa-chart-bar"></i></div>
+            <div>
+              <div class="cert-name">Lean Six Sigma</div>
+              <div class="cert-issuer">LinkedIn · Sep 2024</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon pm"><i class="fa-solid fa-list-check"></i></div>
+            <div>
+              <div class="cert-name">Project Management</div>
+              <div class="cert-issuer">LinkedIn · May 2024</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon pm"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+            <div>
+              <div class="cert-name">Business Analysis</div>
+              <div class="cert-issuer">LinkedIn · May 2024</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon pm"><i class="fa-solid fa-handshake"></i></div>
+            <div>
+              <div class="cert-name">Consulting: Client Relationship Management</div>
+              <div class="cert-issuer">LinkedIn · Sep 2024</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon pm"><i class="fa-solid fa-crown"></i></div>
+            <div>
+              <div class="cert-name">Executive Leadership</div>
+              <div class="cert-issuer">LinkedIn · Jun 2024</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<section class="section section-alt" id="projects">
+  <div class="container">
+    <div class="section-label reveal">Trabajo destacado</div>
+    <h2 class="section-title reveal">Proyectos <em>relevantes</em></h2>
+    <p class="section-subtitle reveal">Iniciativas de alto impacto en consultoría, tecnología y desarrollo profesional.</p>
+
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="project-number">01 / Oracle EPM Cloud</div>
+        <div class="project-title">SEAT-CUPRA MasterList — I+D & Inversiones</div>
+        <p class="project-desc">Rediseño y transformación de procesos de planificación y controlling en Oracle EPM Cloud para los ámbitos de I+D e Inversiones. Diseño funcional completo, modelo dimensional, reglas de cálculo IFRS/HB1/Fiscal e integración con SAP y ODI.</p>
+        <div class="project-tags">
+          <span class="tag-chip">Oracle EPM Cloud</span>
+          <span class="tag-chip">SAP</span>
+          <span class="tag-chip">ODI</span>
+          <span class="tag-chip">IFRS</span>
+          <span class="tag-chip">Power BI</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-number">02 / Oracle & AI</div>
+        <div class="project-title">10 Oracle Certifications — 6 in AI</div>
+        <p class="project-desc">Itinerario de 4 meses completando 10 certificaciones Oracle, con 6 especializadas en Inteligencia Artificial: GenAI, AI Agents, Data Science, Autonomous Database y EPM+AI. Objetivo: integrar IA aplicada en proyectos cloud reales.</p>
+        <div class="project-tags">
+          <span class="tag-chip">GenAI</span>
+          <span class="tag-chip">AI Agents</span>
+          <span class="tag-chip">OCI</span>
+          <span class="tag-chip">Data Science</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-number">03 / Consulting</div>
+        <div class="project-title">11 PM & Consulting Certifications</div>
+        <p class="project-desc">Itinerario integral en gestión de proyectos y consultoría: Agile, Scrum, ITIL 4, Lean Six Sigma, Business Analysis y The Deloitte Way. Base metodológica sólida para operar en entornos de transformación compleja.</p>
+        <div class="project-tags">
+          <span class="tag-chip">Agile</span>
+          <span class="tag-chip">ITIL 4</span>
+          <span class="tag-chip">Lean Six Sigma</span>
+          <span class="tag-chip">Deloitte</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-3">
+        <div class="project-number">04 / AI Presentation</div>
+        <div class="project-title">Internal AI Adoption Guide — Deloitte Team</div>
+        <p class="project-desc">Presentación de IA preparada en menos de 4 horas y entregada en overtime a un equipo de ~15 personas en Deloitte. Recibida con muy buen feedback e interés por parte del equipo.</p>
+        <div class="project-tags">
+          <span class="tag-chip">Claude</span>
+          <span class="tag-chip">ChatGPT</span>
+          <span class="tag-chip">Gemini</span>
+          <span class="tag-chip">Prompt Engineering</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-number">05 / Education</div>
+        <div class="project-title">Personal Finance Workshop — High School</div>
+        <p class="project-desc">Impartición de taller de finanzas personales para adolescentes en el instituto donde estudié. Recibió aplausos y solicitudes de retorno por parte de los alumnos y el centro.</p>
+        <div class="project-tags">
+          <span class="tag-chip">Financial Literacy</span>
+          <span class="tag-chip">Teaching</span>
+          <span class="tag-chip">Public Speaking</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-number">06 / Dev</div>
+        <div class="project-title">Professional Website — danielnavarro1600.github.io</div>
+        <p class="project-desc">Diseño y desarrollo de sitio web personal interactivo en HTML, CSS y JavaScript. +1.000 líneas de código. Responsive, optimizado para SEO y completado en un día. Alojado en GitHub Pages.</p>
+        <div class="project-tags">
+          <span class="tag-chip">HTML</span>
+          <span class="tag-chip">CSS</span>
+          <span class="tag-chip">JavaScript</span>
+          <span class="tag-chip">GitHub Pages</span>
+          <span class="tag-chip">SEO</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SKILLS ===================== -->
+<section class="section" id="skills">
+  <div class="container">
+    <div class="section-label reveal">Stack técnico</div>
+    <h2 class="section-title reveal">Habilidades <em>técnicas</em></h2>
+    <p class="section-subtitle reveal">Competencias consolidadas en tecnología Oracle, análisis financiero, herramientas BI y metodologías de consultoría.</p>
+
+    <div class="skills-grid">
+
+      <div class="skill-group reveal">
+        <h3>Oracle EPM & OCI</h3>
+        <div class="skill-item">
+          <div class="skill-header"><span class="skill-name">Oracle EPM Cloud (Planning)</span><span class="skill-level">Advanced</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span class="skill-name">Oracle Cloud Infrastructure (OCI)</span><span class="skill-level">Advanced</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span class="skill-name">Oracle Data Integration / ODI</span><span class="skill-level">Proficient</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span class="skill-name">Smart View & Essbase</span><span class="skill-level">Proficient</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="82"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span class="skill-name">EPMAutomate & Data Exchange</span><span class="skill-level">Proficient</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+        </div>
+      </div>
+
+      <div class="skill-group reveal reveal-delay-1">
+        <h3>Applied AI & Data</h3>
+        <div class="skill-item">
+          <div class="skill-header"><span class="skill-name">Generative AI & Prompt Engineering</span><span class="skill-level">Advanced</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span class="skill-name">OCI Data Science</span><span class="skill-level">Proficient</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="76"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span class="skill-name">SQL & Database Management</span><span class="skill-level">Advanced</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="84"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span class="skill-name">Python (Data & ML)</span><span class="skill-level">Proficient</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="72"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span class="skill-name">Power BI</span><span class="skill-level">Proficient</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
+        </div>
+      </div>
+
+      <div class="skill-group reveal reveal-delay-2">
+        <h3>Finance & Analysis</h3>
+        <div class="skill-chips">
+          <span class="skill-chip">Financial Planning</span>
+          <span class="skill-chip">Controlling</span>
+          <span class="skill-chip">Budgeting</span>
+          <span class="skill-chip">Forecasting</span>
+          <span class="skill-chip">IFRS</span>
+          <span class="skill-chip">SAP S/4HANA (FI)</span>
+          <span class="skill-chip">Financial Modelling</span>
+          <span class="skill-chip">Business Analysis</span>
+          <span class="skill-chip">Econometrics</span>
+          <span class="skill-chip">Financial Analysis</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal reveal-delay-3">
+        <h3>Metodologías & Herramientas</h3>
+        <div class="skill-chips">
+          <span class="skill-chip">Agile</span>
+          <span class="skill-chip">Scrum</span>
+          <span class="skill-chip">ITIL 4</span>
+          <span class="skill-chip">Lean Six Sigma</span>
+          <span class="skill-chip">Jira</span>
+          <span class="skill-chip">Salesforce</span>
+          <span class="skill-chip">Consulting Delivery</span>
+          <span class="skill-chip">Stakeholder Mgmt</span>
+          <span class="skill-chip">Business Psychology</span>
+          <span class="skill-chip">Change Management</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EDUCATION ===================== -->
+<section class="section section-alt" id="education">
+  <div class="container">
+    <div class="section-label reveal">Formación académica</div>
+    <h2 class="section-title reveal">Educación <em>& formación</em></h2>
+    <p class="section-subtitle reveal">Formación multidisciplinar en economía, psicología empresarial y negocios internacionales, con distinción académica en todas las etapas.</p>
+
+    <div class="edu-grid">
+
+      <div class="edu-card reveal">
+        <div class="edu-period">2023 — 2025</div>
+        <div class="edu-institution">Steinbeis University Berlin</div>
+        <div class="edu-degree">Máster en Psicología Empresarial y Organizativa<br><em>Schools of Next Practices (Berlin)</em></div>
+        <span class="edu-highlight"><i class="fa-solid fa-award"></i> Nota 1.3 — A</span>
+        <p style="font-size:0.78rem; color: var(--text-muted); margin-top: 14px; line-height:1.6;">Tesis: Impacto de chatbots de IA en el compromiso y bienestar de empleados.</p>
+      </div>
+
+      <div class="edu-card reveal reveal-delay-1">
+        <div class="edu-period">2019 — 2023</div>
+        <div class="edu-institution">Universitat Pompeu Fabra</div>
+        <div class="edu-degree">Licenciatura en Economía<br><em>Barcelona</em></div>
+        <span class="edu-highlight"><i class="fa-solid fa-star"></i> Magna Cum Laude</span>
+        <p style="font-size:0.78rem; color: var(--text-muted); margin-top: 14px; line-height:1.6;">Tesis premiada sobre implicaciones distributivas de un impuesto al carbono. Nota: 9.7/10.</p>
+      </div>
+
+      <div class="edu-card reveal reveal-delay-2">
+        <div class="edu-period">2021 — 2022</div>
+        <div class="edu-institution">Università Milano-Bicocca</div>
+        <div class="edu-degree">Erasmus — International Business Economics<br><em>Milán, Italia</em></div>
+        <span class="edu-highlight"><i class="fa-solid fa-globe"></i> 29/30 · Magna Cum Laude</span>
+        <p style="font-size:0.78rem; color: var(--text-muted); margin-top: 14px; line-height:1.6;">Materias: Global Management, Behavioral Economics, Data-Driven Decision Making.</p>
+      </div>
+
+    </div>
+
+    <div class="languages-row reveal">
+      <div class="lang-item"><span class="lang-flag">🇪🇸</span> Español <span class="lang-level">NATIVO</span></div>
+      <div class="lang-item"><span class="lang-flag">🏴</span> Catalán <span class="lang-level">NATIVO</span></div>
+      <div class="lang-item"><span class="lang-flag">🇬🇧</span> Inglés <span class="lang-level">C1 PROFESIONAL</span></div>
+      <div class="lang-item"><span class="lang-flag">🇮🇹</span> Italiano <span class="lang-level">B2</span></div>
+      <div class="lang-item"><span class="lang-flag">🇩🇪</span> Alemán <span class="lang-level">A2</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="section" id="contact">
+  <div class="contact-grid-bg"></div>
+  <div class="container" style="position:relative; z-index:2;">
+    <div class="section-label reveal">Conectemos</div>
+    <p class="contact-tagline reveal">¿Trabajamos <em>juntos</em>?</p>
+    <p class="section-subtitle reveal">Abierto a conversaciones sobre proyectos Oracle EPM/OCI, oportunidades en transformación financiera y tecnológica, o simplemente a conectar con profesionales del sector.</p>
+
+    <div class="contact-links reveal">
+      <a href="https://www.linkedin.com/in/daniel-navarro-delgado" target="_blank" class="contact-link">
+        <i class="fa-brands fa-linkedin"></i> LinkedIn
+      </a>
+      <a href="https://danielnavarro1600.github.io" target="_blank" class="contact-link">
+        <i class="fa-solid fa-globe"></i> Website
+      </a>
+      <a href="https://github.com/danielnavarro1600" target="_blank" class="contact-link">
+        <i class="fa-brands fa-github"></i> GitHub
+      </a>
+      <a href="mailto:danielnavarro@example.com" class="contact-link">
+        <i class="fa-solid fa-envelope"></i> Email
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <span class="footer-name">Daniel Navarro Delgado</span>
+  <span class="footer-copy">Finance & Technology · Deloitte · Barcelona · 2025</span>
+</footer>
+
+<!-- ===================== JS ===================== -->
+<script>
+  // ---- NAV SCROLL ----
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ---- THEME TOGGLE ----
+  let isDark = false;
+  function toggleTheme() {
+    isDark = !isDark;
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : '');
+    document.getElementById('themeIcon').className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+    document.getElementById('themeLabel').textContent = isDark ? 'Light' : 'Dark';
+  }
+
+  // ---- HAMBURGER ----
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // ---- INTERSECTION OBSERVER — REVEAL ----
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // ---- SKILL BARS ----
+  const skillFills = document.querySelectorAll('.skill-fill');
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const target = entry.target;
+        const width = target.getAttribute('data-width');
+        target.style.width = width + '%';
+        skillObserver.unobserve(target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  skillFills.forEach(el => skillObserver.observe(el));
+
+  // ---- SMOOTH ANCHOR (close menu on mobile) ----
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+</script>
+
+</body>
+</html>
