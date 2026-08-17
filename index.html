@@ -7,15 +7,17 @@
   <meta name="description" content="Finance & Technology Senior Analyst at Deloitte. Oracle EPM Cloud, OCI & AI specialist. 10x Oracle Certified, 6x AI Specialist. Barcelona." />
   <meta property="og:title" content="Daniel Navarro — Finance & Technology" />
   <meta property="og:description" content="Senior Analyst at Deloitte specializing in Oracle EPM Cloud, OCI and Applied AI." />
-  <meta property="og:image" content="https://i.ibb.co/n19LBvV/Professional-Logo-3.png">
+  <meta property="og:image" content="https://danielnavarro1600.github.io/img/logo.jpg">
   <meta property="og:type" content="website" />
-  <link rel="icon" type="image/png" href="https://i.ibb.co/n19LBvV/Professional-Logo-3.png">
-  <link rel="shortcut icon" type="image/png" href="https://i.ibb.co/n19LBvV/Professional-Logo-3.png">
+  <link rel="icon" type="image/png" href="img/logo-circular.png">
+  <link rel="shortcut icon" type="image/png" href="img/logo-circular.png">
   <meta name="theme-color" content="#0a0a0f" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css" />
 
   <style>
     /* =========================================================
@@ -997,7 +999,7 @@
     .footer-name {
       font-family: var(--font-display);
       font-size: 0.95rem;
-      color: rgba(240,237,232,0.4);
+      color: rgba(240,237,232,0.6);
     }
 
     .footer-copy {
@@ -1079,6 +1081,24 @@
       footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px 24px; }
 
       .contact-links { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .skill-fill {
+        transition: none;
+      }
+      .hero-orb-1,
+      .hero-orb-2 {
+        animation: none;
+      }
+      * {
+        scroll-behavior: auto !important;
+      }
     }
   </style>
 </head>
@@ -1183,7 +1203,7 @@
       <div class="timeline-item active reveal">
         <div class="timeline-dot"></div>
         <div class="timeline-period">JUL 2025 — PRESENTE</div>
-        <div class="timeline-company">Deloitte</div>
+        <h3 class="timeline-company">Deloitte</h3>
         <div class="timeline-role">Finance & Technology Senior Analyst</div>
         <p class="timeline-desc">Consultor senior en proyectos de transformación financiera y tecnológica, liderando la definición funcional e implementación de soluciones Oracle EPM Cloud para grandes clientes del sector industrial.</p>
         <div class="timeline-bullets">
@@ -1207,7 +1227,7 @@
       <div class="timeline-item reveal reveal-delay-1">
         <div class="timeline-dot"></div>
         <div class="timeline-period">ENE 2025 — JUN 2025</div>
-        <div class="timeline-company">Deloitte</div>
+        <h3 class="timeline-company">Deloitte</h3>
         <div class="timeline-role">Finance & Technology Analyst</div>
         <p class="timeline-desc">Incorporación al equipo con foco en análisis funcional, levantamiento de requisitos y configuración inicial de soluciones EPM, obteniendo en paralelo 10 certificaciones Oracle.</p>
         <div class="timeline-bullets">
@@ -1226,7 +1246,7 @@
       <div class="timeline-item reveal reveal-delay-2">
         <div class="timeline-dot"></div>
         <div class="timeline-period">JUL 2024 — DIC 2024</div>
-        <div class="timeline-company">CleverStrategy</div>
+        <h3 class="timeline-company">CleverStrategy</h3>
         <div class="timeline-role">IT Business Consultant</div>
         <p class="timeline-desc">Consultoría de negocio IT con foco en transformación digital y aplicaciones de IA para empresas.</p>
         <div class="timeline-bullets">
@@ -1256,7 +1276,7 @@
     <div class="cert-grid">
       <!-- Oracle Block -->
       <div class="reveal">
-        <div class="cert-group-title">Oracle Cloud <span>& AI</span> — 10 Certificaciones</div>
+        <h3 class="cert-group-title">Oracle Cloud <span>& AI</span> — 10 Certificaciones</h3>
         <div class="cert-list">
           <div class="cert-item">
             <div class="cert-icon ai"><i class="fa-solid fa-brain"></i></div>
@@ -1343,7 +1363,7 @@
 
       <!-- PM & Consulting Block -->
       <div class="reveal reveal-delay-1">
-        <div class="cert-group-title">Gestión de Proyectos <span>& Consultoría</span> — 10 Certificaciones</div>
+        <h3 class="cert-group-title">Gestión de Proyectos <span>& Consultoría</span> — 10 Certificaciones</h3>
         <div class="cert-list">
           <div class="cert-item">
             <div class="cert-icon deloitte"><i class="fa-solid fa-building"></i></div>
@@ -1433,7 +1453,7 @@
 
       <div class="project-card reveal">
         <div class="project-number">01 / Oracle EPM Cloud</div>
-        <div class="project-title">SEAT-CUPRA</div>
+        <h3 class="project-title">SEAT-CUPRA</h3>
         <p class="project-desc">Rediseño y transformación de procesos de planificación y controlling en Oracle EPM Cloud para SEAT-Cupra. Diseño funcional completo, modelo dimensional, reglas de cálculo IFRS/HB1/Fiscal e integración con SAP y ODI.</p>
         <div class="project-tags">
           <span class="tag-chip">Oracle EPM Cloud</span>
@@ -1446,7 +1466,7 @@
 
       <div class="project-card reveal reveal-delay-1">
         <div class="project-number">02 / Oracle & AI</div>
-        <div class="project-title">10 Certificaciones Oracle — 6 en IA</div>
+        <h3 class="project-title">10 Certificaciones Oracle — 6 en IA</h3>
         <p class="project-desc">Itinerario de 4 meses completando 10 certificaciones Oracle, con 6 especializadas en Inteligencia Artificial: GenAI, AI Agents, Data Science, Autonomous Database y EPM+AI. Objetivo: integrar IA aplicada en proyectos cloud reales.</p>
         <div class="project-tags">
           <span class="tag-chip">GenAI</span>
@@ -1458,7 +1478,7 @@
 
       <div class="project-card reveal reveal-delay-2">
         <div class="project-number">03 / Consultoría</div>
-        <div class="project-title">10 Certificaciones de Gestión de Proyectos y Consultoría</div>
+        <h3 class="project-title">10 Certificaciones de Gestión de Proyectos y Consultoría</h3>
         <p class="project-desc">Itinerario integral en gestión de proyectos y consultoría: Agile, Scrum, ITIL 4, Lean Six Sigma, Business Analysis y The Deloitte Way. Base metodológica sólida para operar en entornos de transformación compleja.</p>
         <div class="project-tags">
           <span class="tag-chip">Agile</span>
@@ -1470,7 +1490,7 @@
 
       <div class="project-card reveal reveal-delay-3">
         <div class="project-number">04 / Presentación IA</div>
-        <div class="project-title">Guía interna de adopción de IA — Equipo Deloitte</div>
+        <h3 class="project-title">Guía interna de adopción de IA — Equipo Deloitte</h3>
         <p class="project-desc">Presentación de IA realizada a un equipo de ~15 personas en Deloitte. Recibida con muy buen feedback e interés por parte del equipo.</p>
         <div class="project-tags">
           <span class="tag-chip">Claude</span>
@@ -1482,7 +1502,7 @@
 
       <div class="project-card reveal reveal-delay-1">
         <div class="project-number">05 / Educación</div>
-        <div class="project-title">Taller de finanzas personales — Instituto</div>
+        <h3 class="project-title">Taller de finanzas personales — Instituto</h3>
         <p class="project-desc">Impartición de taller de finanzas personales para adolescentes en un instituto. Recibió cumplidos y solicitudes de retorno por parte de los alumnos y el centro.</p>
         <div class="project-tags">
           <span class="tag-chip">Financial Literacy</span>
@@ -1493,7 +1513,7 @@
 
       <div class="project-card reveal reveal-delay-2">
         <div class="project-number">06 / Desarrollo</div>
-        <div class="project-title">Web profesional</div>
+        <h3 class="project-title">Web profesional</h3>
         <p class="project-desc">Diseño y desarrollo de sitio web personal interactivo en HTML, CSS y JavaScript. +1.000 líneas de código. Responsive, optimizado para SEO y completado en un día. Alojado en GitHub Pages.</p>
         <div class="project-tags">
           <span class="tag-chip">HTML</span>
@@ -1612,7 +1632,7 @@
 
       <div class="edu-card reveal">
         <div class="edu-period">2019 — 2023</div>
-        <div class="edu-institution">Universitat Pompeu Fabra</div>
+        <h3 class="edu-institution">Universitat Pompeu Fabra</h3>
         <div class="edu-degree">Licenciatura en Economía<br><em>Barcelona</em></div>
         <span class="edu-highlight"><i class="fa-solid fa-star"></i> TFG Premiado y Publicado</span>
         <p style="font-size:0.78rem; color: var(--text-muted); margin-top: 14px; line-height:1.6;">Tesis premiada sobre implicaciones distributivas de un impuesto al carbono. Nota: 9.7/10.</p>
@@ -1620,7 +1640,7 @@
 
       <div class="edu-card reveal reveal-delay-1">
         <div class="edu-period">2021 — 2022</div>
-        <div class="edu-institution">Università Milano-Bicocca</div>
+        <h3 class="edu-institution">Università Milano-Bicocca</h3>
         <div class="edu-degree">Erasmus — International Business Economics<br><em>Milán, Italia</em></div>
         <span class="edu-highlight"><i class="fa-solid fa-globe"></i> 29/30 · Magna Cum Laude</span>
         <p style="font-size:0.78rem; color: var(--text-muted); margin-top: 14px; line-height:1.6;">Materias: Global Management, Behavioral Economics, Data-Driven Decision Making.</p>
@@ -1628,7 +1648,7 @@
 
       <div class="edu-card reveal reveal-delay-2">
         <div class="edu-period">2023 — 2025</div>
-        <div class="edu-institution">Steinbeis University Berlin</div>
+        <h3 class="edu-institution">Steinbeis University Berlin</h3>
         <div class="edu-degree">Máster en Psicología Empresarial y Organizativa<br><em>Schools of Next Practices (Berlin)</em></div>
         <span class="edu-highlight"><i class="fa-solid fa-award"></i> Nota 1.3 — A</span>
         <p style="font-size:0.78rem; color: var(--text-muted); margin-top: 14px; line-height:1.6;">Tesis: Impacto de chatbots de IA en el compromiso y bienestar de empleados.</p>
