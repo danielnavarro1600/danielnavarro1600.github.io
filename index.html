@@ -164,6 +164,8 @@
       gap: 5px;
       cursor: pointer;
       padding: 4px;
+      background: none;
+      border: none;
     }
     .hamburger span {
       width: 24px; height: 2px;
@@ -1001,7 +1003,7 @@
     .footer-copy {
       font-family: var(--font-mono);
       font-size: 0.65rem;
-      color: rgba(240,237,232,0.2);
+      color: rgba(240,237,232,0.5);
       letter-spacing: 0.06em;
     }
 
@@ -1088,9 +1090,9 @@
       <span id="themeLabel">Dark</span>
     </button>
   </div>
-  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">
     <span></span><span></span><span></span>
-  </div>
+  </button>
 </nav>
 
 <!-- ===================== HERO ===================== -->
@@ -1730,7 +1732,10 @@
 
   // ---- HAMBURGER ----
   function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('open');
+    const isOpen = document.getElementById('navLinks').classList.toggle('open');
+    const hamburger = document.getElementById('hamburger');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    hamburger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
   }
 
   // ---- INTERSECTION OBSERVER — REVEAL ----
@@ -1765,6 +1770,9 @@
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       document.getElementById('navLinks').classList.remove('open');
+      const hamburger = document.getElementById('hamburger');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Abrir menú');
     });
   });
 </script>
