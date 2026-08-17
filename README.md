@@ -34,9 +34,12 @@ The website includes:
 ## Project structure
 
 ```text
-professional-website/
-├── index.html
-└── README.md
+danielnavarro1600.github.io/
+├── .github/workflows/static.yml
+├── CLAUDE.md
+├── README.md
+├── img/foto-perfil.jpg
+└── index.html
 ```
 
 ## Run locally
@@ -65,7 +68,7 @@ Before making substantial changes, create a Git branch or a backup copy of `inde
 
 ## External resources
 
-The page currently loads fonts, icons and selected images from external services. An internet connection is therefore required for all visual assets to display correctly.
+The page loads fonts and icons from external services, and the favicon/social preview image from a third-party image host. The profile photo is hosted locally in `img/`. An internet connection is required for fonts, icons and the favicon to display correctly.
 
 ## Deployment
 
