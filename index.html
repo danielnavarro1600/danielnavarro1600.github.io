@@ -5,17 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daniel Navarro Delgado — Finance & Technology Senior Analyst</title>
   <meta name="description" content="Finance & Technology Senior Analyst at Deloitte. Oracle EPM Cloud, OCI & AI specialist. 10x Oracle Certified, 6x AI Specialist. Barcelona." />
-  <meta property="og:title" content="Daniel Navarro — Finance & Technology" />
+  <meta property="og:title" content="Daniel Navarro Delgado — Finance & Technology Senior Analyst" />
   <meta property="og:description" content="Senior Analyst at Deloitte specializing in Oracle EPM Cloud, OCI and Applied AI." />
-  <meta property="og:image" content="https://i.ibb.co/n19LBvV/Professional-Logo-3.png">
+  <meta property="og:image" content="https://danielnavarro1600.github.io/img/logo.jpg">
   <meta property="og:type" content="website" />
-  <link rel="icon" type="image/png" href="https://i.ibb.co/n19LBvV/Professional-Logo-3.png">
-  <link rel="shortcut icon" type="image/png" href="https://i.ibb.co/n19LBvV/Professional-Logo-3.png">
+  <link rel="canonical" href="https://danielnavarro1600.github.io" />
+  <link rel="icon" type="image/png" href="img/logo-circular.png">
+  <link rel="shortcut icon" type="image/png" href="img/logo-circular.png">
   <meta name="theme-color" content="#0a0a0f" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Daniel Navarro Delgado",
+    "jobTitle": "Finance & Technology Senior Analyst",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Deloitte"
+    },
+    "url": "https://danielnavarro1600.github.io",
+    "image": "https://danielnavarro1600.github.io/img/foto-perfil.jpg",
+    "sameAs": [
+      "https://www.linkedin.com/in/daniel-navarro-delgado",
+      "https://github.com/danielnavarro1600"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Barcelona",
+      "addressCountry": "ES"
+    }
+  }
+  </script>
 
   <style>
     /* =========================================================
@@ -29,7 +55,9 @@
       --text-muted: #6b6560;
       --accent: #b8860b;
       --accent-light: #d4a017;
-      --accent-glow: rgba(184,134,11,0.15);
+      --accent-rgb: 184,134,11;
+      --accent-glow: rgba(var(--accent-rgb),0.15);
+      --hero-text-rgb: 240,237,232;
       --dark: #0a0a0f;
       --dark-surface: #111118;
       --dark-border: rgba(255,255,255,0.07);
@@ -53,7 +81,8 @@
       --border: rgba(255,255,255,0.07);
       --accent: #d4a017;
       --accent-light: #e8b820;
-      --accent-glow: rgba(212,160,23,0.12);
+      --accent-rgb: 212,160,23;
+      --accent-glow: rgba(var(--accent-rgb),0.12);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -117,7 +146,7 @@
       font-family: var(--font-display);
       font-size: 1.4rem;
       font-weight: 500;
-      color: #f0ede8;
+      color: var(--hero-text);
       letter-spacing: 0.02em;
     }
 
@@ -133,7 +162,7 @@
       font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(240,237,232,0.7);
+      color: rgba(var(--hero-text-rgb),0.7);
       transition: color 0.2s;
     }
 
@@ -141,10 +170,10 @@
 
     .theme-toggle {
       background: none;
-      border: 1px solid rgba(240,237,232,0.2);
+      border: 1px solid rgba(var(--hero-text-rgb),0.2);
       border-radius: 50px;
       padding: 6px 14px;
-      color: rgba(240,237,232,0.7);
+      color: rgba(var(--hero-text-rgb),0.7);
       font-size: 0.75rem;
       font-family: var(--font-ui);
       cursor: pointer;
@@ -169,7 +198,7 @@
     }
     .hamburger span {
       width: 24px; height: 2px;
-      background: rgba(240,237,232,0.8);
+      background: rgba(var(--hero-text-rgb),0.8);
       border-radius: 2px;
       transition: all 0.3s;
     }
@@ -190,8 +219,8 @@
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(184,134,11,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(184,134,11,0.04) 1px, transparent 1px);
+        linear-gradient(rgba(var(--accent-rgb),0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--accent-rgb),0.04) 1px, transparent 1px);
       background-size: 80px 80px;
       mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
     }
@@ -205,7 +234,7 @@
     .hero-orb-1 {
       width: 600px; height: 600px;
       top: -150px; right: -100px;
-      background: radial-gradient(circle, rgba(184,134,11,0.12) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(var(--accent-rgb),0.12) 0%, transparent 70%);
       animation: orbFloat 8s ease-in-out infinite;
     }
     .hero-orb-2 {
@@ -254,7 +283,7 @@
       font-family: var(--font-display);
       font-size: clamp(3.5rem, 6vw, 6rem);
       font-weight: 300;
-      color: #f0ede8;
+      color: var(--hero-text);
       line-height: 1.05;
       letter-spacing: -0.01em;
       margin-bottom: 8px;
@@ -268,7 +297,7 @@
       font-family: var(--font-display);
       font-size: clamp(1.1rem, 2vw, 1.5rem);
       font-weight: 300;
-      color: rgba(240,237,232,0.55);
+      color: rgba(var(--hero-text-rgb),0.55);
       margin-bottom: 32px;
       letter-spacing: 0.01em;
     }
@@ -276,7 +305,7 @@
     .hero-desc {
       font-size: 0.95rem;
       line-height: 1.75;
-      color: rgba(240,237,232,0.65);
+      color: rgba(var(--hero-text-rgb),0.65);
       max-width: 460px;
       margin-bottom: 40px;
     }
@@ -292,7 +321,7 @@
       font-family: var(--font-mono);
       font-size: 0.68rem;
       padding: 6px 14px;
-      border: 1px solid rgba(184,134,11,0.3);
+      border: 1px solid rgba(var(--accent-rgb),0.3);
       border-radius: 4px;
       color: var(--accent-light);
       letter-spacing: 0.06em;
@@ -312,7 +341,7 @@
     .btn-primary {
       padding: 14px 32px;
       background: var(--accent);
-      color: #0a0a0f;
+      color: var(--hero-bg);
       font-family: var(--font-ui);
       font-size: 0.82rem;
       font-weight: 600;
@@ -326,26 +355,26 @@
     .btn-primary:hover {
       background: var(--accent-light);
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(184,134,11,0.35);
+      box-shadow: 0 8px 32px rgba(var(--accent-rgb),0.35);
     }
 
     .btn-ghost {
       padding: 14px 32px;
       background: transparent;
-      color: rgba(240,237,232,0.8);
+      color: rgba(var(--hero-text-rgb),0.8);
       font-family: var(--font-ui);
       font-size: 0.82rem;
       font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      border: 1px solid rgba(240,237,232,0.2);
+      border: 1px solid rgba(var(--hero-text-rgb),0.2);
       border-radius: var(--radius-sm);
       cursor: pointer;
       transition: all 0.25s;
     }
     .btn-ghost:hover {
-      border-color: rgba(240,237,232,0.5);
-      color: #f0ede8;
+      border-color: rgba(var(--hero-text-rgb),0.5);
+      color: var(--hero-text);
       transform: translateY(-2px);
     }
 
@@ -374,7 +403,7 @@
       opacity: 0;
       transition: opacity 0.3s;
     }
-    .stat-card:hover { border-color: rgba(184,134,11,0.3); }
+    .stat-card:hover { border-color: rgba(var(--accent-rgb),0.3); }
     .stat-card:hover::before { opacity: 1; }
 
     .stat-number {
@@ -387,7 +416,7 @@
     }
     .stat-label {
       font-size: 0.78rem;
-      color: rgba(240,237,232,0.5);
+      color: rgba(var(--hero-text-rgb),0.5);
       letter-spacing: 0.06em;
       line-height: 1.4;
     }
@@ -402,7 +431,7 @@
     .photo-frame {
       width: 300px; height: 370px;
       border-radius: 50%;
-      border: 2px solid rgba(184,134,11,0.3);
+      border: 2px solid rgba(var(--accent-rgb),0.3);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -415,14 +444,7 @@
       position: absolute;
       inset: -10px;
       border-radius: 50%;
-      border: 1px solid rgba(184,134,11,0.1);
-    }
-    .photo-initials {
-      font-family: var(--font-display);
-      font-size: 5rem;
-      font-weight: 300;
-      color: var(--accent);
-      letter-spacing: -0.02em;
+      border: 1px solid rgba(var(--accent-rgb),0.1);
     }
 
     /* =========================================================
@@ -436,9 +458,6 @@
       background: var(--bg-alt);
     }
 
-    [data-theme="dark"] .section-alt {
-      background: var(--bg-alt);
-    }
 
     .container {
       max-width: 1200px;
@@ -589,7 +608,7 @@
       font-size: 0.65rem;
       padding: 4px 10px;
       background: var(--accent-glow);
-      border: 1px solid rgba(184,134,11,0.2);
+      border: 1px solid rgba(var(--accent-rgb),0.2);
       border-radius: 4px;
       color: var(--accent-light);
       letter-spacing: 0.04em;
@@ -636,13 +655,14 @@
       cursor: default;
     }
     .cert-item:hover {
-      border-color: rgba(184,134,11,0.35);
+      border-color: rgba(var(--accent-rgb),0.35);
       transform: translateX(4px);
       box-shadow: 0 4px 24px rgba(0,0,0,0.06);
     }
 
     .cert-icon {
       width: 36px; height: 36px;
+      flex-shrink: 0;
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -654,6 +674,10 @@
     .cert-icon.ai { background: rgba(100,100,220,0.12); color: #7878e0; }
     .cert-icon.pm { background: rgba(50,180,120,0.12); color: #44b888; }
     .cert-icon.deloitte { background: rgba(0,100,200,0.1); color: #4488dd; }
+
+    .cert-item > div:not(.cert-icon) {
+      min-width: 0;
+    }
 
     .cert-name {
       font-size: 0.82rem;
@@ -671,6 +695,7 @@
 
     .cert-badge {
       margin-left: auto;
+      flex-shrink: 0;
       font-family: var(--font-mono);
       font-size: 0.6rem;
       padding: 2px 8px;
@@ -710,7 +735,7 @@
       transition: transform 0.35s ease;
     }
     .project-card:hover {
-      border-color: rgba(184,134,11,0.25);
+      border-color: rgba(var(--accent-rgb),0.25);
       transform: translateY(-6px);
       box-shadow: 0 24px 60px rgba(0,0,0,0.1);
     }
@@ -839,7 +864,7 @@
       transition: all 0.3s;
     }
     .edu-card:hover {
-      border-color: rgba(184,134,11,0.25);
+      border-color: rgba(var(--accent-rgb),0.25);
       transform: translateY(-4px);
       box-shadow: 0 16px 48px rgba(0,0,0,0.08);
     }
@@ -866,6 +891,13 @@
       color: var(--text-muted);
       margin-bottom: 16px;
       line-height: 1.5;
+    }
+
+    .edu-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 14px;
+      line-height: 1.6;
     }
 
     .edu-highlight {
@@ -935,14 +967,13 @@
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(184,134,11,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(184,134,11,0.03) 1px, transparent 1px);
+        linear-gradient(rgba(var(--accent-rgb),0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--accent-rgb),0.03) 1px, transparent 1px);
       background-size: 60px 60px;
     }
 
-    #contact .section-label { color: var(--accent); }
-    #contact .section-title { color: #f0ede8; }
-    #contact .section-subtitle { color: rgba(240,237,232,0.55); }
+    #contact .section-title { color: var(--hero-text); }
+    #contact .section-subtitle { color: rgba(var(--hero-text-rgb),0.55); }
 
     .contact-links {
       display: flex;
@@ -956,9 +987,9 @@
       align-items: center;
       gap: 12px;
       padding: 16px 28px;
-      border: 1px solid rgba(240,237,232,0.12);
+      border: 1px solid rgba(var(--hero-text-rgb),0.12);
       border-radius: var(--radius-sm);
-      color: rgba(240,237,232,0.7);
+      color: rgba(var(--hero-text-rgb),0.7);
       font-size: 0.85rem;
       font-weight: 500;
       transition: all 0.25s;
@@ -975,7 +1006,7 @@
       font-family: var(--font-display);
       font-size: clamp(1.8rem, 4vw, 3.5rem);
       font-weight: 300;
-      color: rgba(240,237,232,0.9);
+      color: rgba(var(--hero-text-rgb),0.9);
       line-height: 1.2;
       max-width: 700px;
       margin-bottom: 16px;
@@ -997,13 +1028,13 @@
     .footer-name {
       font-family: var(--font-display);
       font-size: 0.95rem;
-      color: rgba(240,237,232,0.4);
+      color: rgba(var(--hero-text-rgb),0.6);
     }
 
     .footer-copy {
       font-family: var(--font-mono);
       font-size: 0.65rem;
-      color: rgba(240,237,232,0.5);
+      color: rgba(var(--hero-text-rgb),0.5);
       letter-spacing: 0.06em;
     }
 
@@ -1012,7 +1043,7 @@
     ========================================================= */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: rgba(184,134,11,0.3); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: rgba(var(--accent-rgb),0.3); border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
     /* =========================================================
@@ -1065,7 +1096,6 @@
 
       .hero-photo-placeholder { grid-column: 1; order: -1; }
       .photo-frame { width: 200px; height: 200px; }
-      .photo-initials { font-size: 3.5rem; }
 
       .hero-stats { grid-template-columns: 1fr 1fr; }
 
@@ -1079,6 +1109,24 @@
       footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px 24px; }
 
       .contact-links { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .skill-fill {
+        transition: none;
+      }
+      .hero-orb-1,
+      .hero-orb-2 {
+        animation: none;
+      }
+      * {
+        scroll-behavior: auto !important;
+      }
     }
   </style>
 </head>
@@ -1105,6 +1153,8 @@
   </button>
 </nav>
 
+<main>
+
 <!-- ===================== HERO ===================== -->
 <section id="hero">
   <div class="hero-grid"></div>
@@ -1113,9 +1163,9 @@
 
   <div class="hero-container">
     <div>
-      <div class="hero-eyebrow">Finance & Technology · Deloitte · Barcelona</div>
+      <div class="hero-eyebrow"><span lang="en">Finance & Technology</span> · Deloitte · Barcelona</div>
       <h1 class="hero-name">Daniel<br><em>Navarro</em></h1>
-      <p class="hero-title">Senior Analyst — Oracle EPM Cloud & Oracle AI Specialist</p>
+      <p class="hero-title" lang="en">Senior Analyst — Oracle EPM Cloud & Oracle AI Specialist</p>
       <p class="hero-desc">
         Conectando la planificación financiera, la tecnología empresarial y la IA aplicada para impulsar
         la transformación a gran escala. Especialista en Oracle EPM Cloud, OCI e IA — con 10 certificaciones
@@ -1126,8 +1176,8 @@
         <span class="hero-tag">Oracle EPM Cloud</span>
         <span class="hero-tag">OCI</span>
         <span class="hero-tag">Oracle AI</span>
-        <span class="hero-tag">10× Oracle Certified</span>
-        <span class="hero-tag">Finance & Technology</span>
+        <span class="hero-tag" lang="en">10× Oracle Certified</span>
+        <span class="hero-tag" lang="en">Finance & Technology</span>
         <span class="hero-tag">Deloitte</span>
       </div>
       <div class="hero-ctas">
@@ -1155,7 +1205,7 @@
         </div>
         <div class="stat-card">
           <div class="stat-number">1.5+</div>
-          <div class="stat-label">Años en Deloitte<br>Finance & Technology</div>
+          <div class="stat-label">Años en Deloitte<br><span lang="en">Finance & Technology</span></div>
         </div>
         <div class="stat-card">
           <div class="stat-number">30+</div>
@@ -1183,8 +1233,8 @@
       <div class="timeline-item active reveal">
         <div class="timeline-dot"></div>
         <div class="timeline-period">JUL 2025 — PRESENTE</div>
-        <div class="timeline-company">Deloitte</div>
-        <div class="timeline-role">Finance & Technology Senior Analyst</div>
+        <h3 class="timeline-company">Deloitte</h3>
+        <div class="timeline-role" lang="en">Finance & Technology Senior Analyst</div>
         <p class="timeline-desc">Consultor senior en proyectos de transformación financiera y tecnológica, liderando la definición funcional e implementación de soluciones Oracle EPM Cloud para grandes clientes del sector industrial.</p>
         <div class="timeline-bullets">
           <div class="timeline-bullet">Diseño funcional e implementación de Oracle EPM Cloud para procesos de planificación y controlling (PR, Budget, Forecast y Real) en el ámbito de I+D e Inversiones para clientes de referencia como SEAT-CUPRA.</div>
@@ -1207,8 +1257,8 @@
       <div class="timeline-item reveal reveal-delay-1">
         <div class="timeline-dot"></div>
         <div class="timeline-period">ENE 2025 — JUN 2025</div>
-        <div class="timeline-company">Deloitte</div>
-        <div class="timeline-role">Finance & Technology Analyst</div>
+        <h3 class="timeline-company">Deloitte</h3>
+        <div class="timeline-role" lang="en">Finance & Technology Analyst</div>
         <p class="timeline-desc">Incorporación al equipo con foco en análisis funcional, levantamiento de requisitos y configuración inicial de soluciones EPM, obteniendo en paralelo 10 certificaciones Oracle.</p>
         <div class="timeline-bullets">
           <div class="timeline-bullet">Análisis funcional de procesos financieros y traducción a diseño de solución en Oracle EPM Cloud.</div>
@@ -1226,7 +1276,7 @@
       <div class="timeline-item reveal reveal-delay-2">
         <div class="timeline-dot"></div>
         <div class="timeline-period">JUL 2024 — DIC 2024</div>
-        <div class="timeline-company">CleverStrategy</div>
+        <h3 class="timeline-company">CleverStrategy</h3>
         <div class="timeline-role">IT Business Consultant</div>
         <p class="timeline-desc">Consultoría de negocio IT con foco en transformación digital y aplicaciones de IA para empresas.</p>
         <div class="timeline-bullets">
@@ -1256,7 +1306,7 @@
     <div class="cert-grid">
       <!-- Oracle Block -->
       <div class="reveal">
-        <div class="cert-group-title">Oracle Cloud <span>& AI</span> — 10 Certificaciones</div>
+        <h3 class="cert-group-title">Oracle Cloud <span>& AI</span> — 10 Certificaciones</h3>
         <div class="cert-list">
           <div class="cert-item">
             <div class="cert-icon ai"><i class="fa-solid fa-brain"></i></div>
@@ -1343,7 +1393,7 @@
 
       <!-- PM & Consulting Block -->
       <div class="reveal reveal-delay-1">
-        <div class="cert-group-title">Gestión de Proyectos <span>& Consultoría</span> — 10 Certificaciones</div>
+        <h3 class="cert-group-title">Gestión de Proyectos <span>& Consultoría</span> — 10 Certificaciones</h3>
         <div class="cert-list">
           <div class="cert-item">
             <div class="cert-icon deloitte"><i class="fa-solid fa-building"></i></div>
@@ -1433,7 +1483,7 @@
 
       <div class="project-card reveal">
         <div class="project-number">01 / Oracle EPM Cloud</div>
-        <div class="project-title">SEAT-CUPRA</div>
+        <h3 class="project-title">SEAT-CUPRA</h3>
         <p class="project-desc">Rediseño y transformación de procesos de planificación y controlling en Oracle EPM Cloud para SEAT-Cupra. Diseño funcional completo, modelo dimensional, reglas de cálculo IFRS/HB1/Fiscal e integración con SAP y ODI.</p>
         <div class="project-tags">
           <span class="tag-chip">Oracle EPM Cloud</span>
@@ -1446,7 +1496,7 @@
 
       <div class="project-card reveal reveal-delay-1">
         <div class="project-number">02 / Oracle & AI</div>
-        <div class="project-title">10 Certificaciones Oracle — 6 en IA</div>
+        <h3 class="project-title">10 Certificaciones Oracle — 6 en IA</h3>
         <p class="project-desc">Itinerario de 4 meses completando 10 certificaciones Oracle, con 6 especializadas en Inteligencia Artificial: GenAI, AI Agents, Data Science, Autonomous Database y EPM+AI. Objetivo: integrar IA aplicada en proyectos cloud reales.</p>
         <div class="project-tags">
           <span class="tag-chip">GenAI</span>
@@ -1458,7 +1508,7 @@
 
       <div class="project-card reveal reveal-delay-2">
         <div class="project-number">03 / Consultoría</div>
-        <div class="project-title">10 Certificaciones de Gestión de Proyectos y Consultoría</div>
+        <h3 class="project-title">10 Certificaciones de Gestión de Proyectos y Consultoría</h3>
         <p class="project-desc">Itinerario integral en gestión de proyectos y consultoría: Agile, Scrum, ITIL 4, Lean Six Sigma, Business Analysis y The Deloitte Way. Base metodológica sólida para operar en entornos de transformación compleja.</p>
         <div class="project-tags">
           <span class="tag-chip">Agile</span>
@@ -1470,7 +1520,7 @@
 
       <div class="project-card reveal reveal-delay-3">
         <div class="project-number">04 / Presentación IA</div>
-        <div class="project-title">Guía interna de adopción de IA — Equipo Deloitte</div>
+        <h3 class="project-title">Guía interna de adopción de IA — Equipo Deloitte</h3>
         <p class="project-desc">Presentación de IA realizada a un equipo de ~15 personas en Deloitte. Recibida con muy buen feedback e interés por parte del equipo.</p>
         <div class="project-tags">
           <span class="tag-chip">Claude</span>
@@ -1482,7 +1532,7 @@
 
       <div class="project-card reveal reveal-delay-1">
         <div class="project-number">05 / Educación</div>
-        <div class="project-title">Taller de finanzas personales — Instituto</div>
+        <h3 class="project-title">Taller de finanzas personales — Instituto</h3>
         <p class="project-desc">Impartición de taller de finanzas personales para adolescentes en un instituto. Recibió cumplidos y solicitudes de retorno por parte de los alumnos y el centro.</p>
         <div class="project-tags">
           <span class="tag-chip">Financial Literacy</span>
@@ -1493,7 +1543,7 @@
 
       <div class="project-card reveal reveal-delay-2">
         <div class="project-number">06 / Desarrollo</div>
-        <div class="project-title">Web profesional</div>
+        <h3 class="project-title">Web profesional</h3>
         <p class="project-desc">Diseño y desarrollo de sitio web personal interactivo en HTML, CSS y JavaScript. +1.000 líneas de código. Responsive, optimizado para SEO y completado en un día. Alojado en GitHub Pages.</p>
         <div class="project-tags">
           <span class="tag-chip">HTML</span>
@@ -1612,26 +1662,26 @@
 
       <div class="edu-card reveal">
         <div class="edu-period">2019 — 2023</div>
-        <div class="edu-institution">Universitat Pompeu Fabra</div>
+        <h3 class="edu-institution">Universitat Pompeu Fabra</h3>
         <div class="edu-degree">Licenciatura en Economía<br><em>Barcelona</em></div>
         <span class="edu-highlight"><i class="fa-solid fa-star"></i> TFG Premiado y Publicado</span>
-        <p style="font-size:0.78rem; color: var(--text-muted); margin-top: 14px; line-height:1.6;">Tesis premiada sobre implicaciones distributivas de un impuesto al carbono. Nota: 9.7/10.</p>
+        <p class="edu-note">Tesis premiada sobre implicaciones distributivas de un impuesto al carbono. Nota: 9.7/10.</p>
       </div>
 
       <div class="edu-card reveal reveal-delay-1">
         <div class="edu-period">2021 — 2022</div>
-        <div class="edu-institution">Università Milano-Bicocca</div>
+        <h3 class="edu-institution">Università Milano-Bicocca</h3>
         <div class="edu-degree">Erasmus — International Business Economics<br><em>Milán, Italia</em></div>
         <span class="edu-highlight"><i class="fa-solid fa-globe"></i> 29/30 · Magna Cum Laude</span>
-        <p style="font-size:0.78rem; color: var(--text-muted); margin-top: 14px; line-height:1.6;">Materias: Global Management, Behavioral Economics, Data-Driven Decision Making.</p>
+        <p class="edu-note">Materias: Global Management, Behavioral Economics, Data-Driven Decision Making.</p>
       </div>
 
       <div class="edu-card reveal reveal-delay-2">
         <div class="edu-period">2023 — 2025</div>
-        <div class="edu-institution">Steinbeis University Berlin</div>
+        <h3 class="edu-institution">Steinbeis University Berlin</h3>
         <div class="edu-degree">Máster en Psicología Empresarial y Organizativa<br><em>Schools of Next Practices (Berlin)</em></div>
         <span class="edu-highlight"><i class="fa-solid fa-award"></i> Nota 1.3 — A</span>
-        <p style="font-size:0.78rem; color: var(--text-muted); margin-top: 14px; line-height:1.6;">Tesis: Impacto de chatbots de IA en el compromiso y bienestar de empleados.</p>
+        <p class="edu-note">Tesis: Impacto de chatbots de IA en el compromiso y bienestar de empleados.</p>
       </div>
 
     </div>
@@ -1700,7 +1750,7 @@
   <div class="contact-grid-bg"></div>
   <div class="container" style="position:relative; z-index:2;">
     <div class="section-label reveal">Conectemos</div>
-    <p class="contact-tagline reveal">¿Trabajamos <em>juntos</em>?</p>
+    <h2 class="contact-tagline reveal">¿Trabajamos <em>juntos</em>?</h2>
     <p class="section-subtitle reveal">Abierto a conversaciones sobre proyectos Oracle EPM/OCI, oportunidades en transformación financiera y tecnológica, o simplemente a conectar con profesionales del sector.</p>
 
     <div class="contact-links reveal">
@@ -1708,22 +1758,24 @@
         <i class="fa-brands fa-linkedin"></i> LinkedIn
       </a>
       <a href="https://danielnavarro1600.github.io" target="_blank" class="contact-link">
-        <i class="fa-solid fa-globe"></i> Website
+        <i class="fa-solid fa-globe"></i> <span lang="en">Website</span>
       </a>
       <a href="https://github.com/danielnavarro1600" target="_blank" class="contact-link">
         <i class="fa-brands fa-github"></i> GitHub
       </a>
       <a href="mailto:danielnavarrodelgado16@gmail.com" class="contact-link">
-        <i class="fa-solid fa-envelope"></i> Email
+        <i class="fa-solid fa-envelope"></i> <span lang="en">Email</span>
       </a>
     </div>
   </div>
 </section>
 
+</main>
+
 <!-- ===================== FOOTER ===================== -->
 <footer>
   <span class="footer-name">Daniel Navarro Delgado</span>
-  <span class="footer-copy">Finance & Technology · Deloitte · Barcelona · 2026</span>
+  <span class="footer-copy"><span lang="en">Finance & Technology</span> · Deloitte · Barcelona · 2026</span>
 </footer>
 
 <!-- ===================== JS ===================== -->
@@ -1735,9 +1787,8 @@
   });
 
   // ---- THEME TOGGLE ----
-  let isDark = false;
   function toggleTheme() {
-    isDark = !isDark;
+    const isDark = document.documentElement.getAttribute('data-theme') !== 'dark';
     document.documentElement.setAttribute('data-theme', isDark ? 'dark' : '');
     document.getElementById('themeIcon').className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
     document.getElementById('themeLabel').textContent = isDark ? 'Claro' : 'Oscuro';

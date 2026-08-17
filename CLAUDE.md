@@ -24,7 +24,8 @@ No hay build, gestor de paquetes ni tests automatizados. La web ejecutable está
 - **Tema claro/oscuro**: variables CSS en `:root` (tema claro, por defecto) sobrescritas bajo `[data-theme="dark"]`. `toggleTheme()` cambia el atributo `data-theme` de `<html>`. No hay persistencia (sin localStorage): el tema vuelve a claro al recargar.
 - **Secciones** (anclas de navegación): `#hero`, `#experience`, `#certifications`, `#projects`, `#skills`, `#education`, `#contact`, dentro de `<nav id="navbar">` y `<footer>`.
 - **Interactividad** (JS nativo, sin dependencias): scroll del navbar, menú hamburguesa móvil, animaciones de aparición con `IntersectionObserver` (`.reveal`), barras de habilidades animadas (`.skill-fill` con `data-width`), y anclas de scroll suave que cierran el menú móvil al pulsar.
-- **Dependencias externas** (CDN, en `<head>`): Google Fonts, Font Awesome, e imágenes alojadas en ibb.co: el logo/favicon (también usado como og:image) y la fotografía de perfil de la sección hero. Requiere conexión a internet para verse correctamente — no hay assets locales.
+- **Dependencias externas** (CDN, en `<head>`): Google Fonts y Font Awesome. El logo/favicon (también usado como og:image) sigue alojado en ibb.co.
+- **Assets locales**: la fotografía de perfil de la sección hero está en `img/foto-perfil.jpg` y se sirve desde el propio repositorio (no depende de conexión externa).
 - Idioma del contenido: español (`<html lang="es">`); algunos metadatos (`title`, `og:`) están en inglés.
 
 ## Reglas de trabajo
