@@ -1025,6 +1025,16 @@
       .edu-grid {
         grid-template-columns: 1fr 1fr;
       }
+
+      .hero-container {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 100px 32px 60px;
+      }
+
+      .hero-photo-placeholder { grid-column: 1; order: -1; }
+      .photo-frame { width: 240px; height: 300px; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 768px) {
