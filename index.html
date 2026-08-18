@@ -606,12 +606,12 @@
     /* =========================================================
        SECTION SHARED STYLES
     ========================================================= */
-    /* El nav es fijo (~88px de alto); sin esto, saltar a un ancla dejaba el
-       título justo debajo, tapado. La generosa esquina superior de .section
-       ya disimulaba el problema en la mayoría de los casos, pero no en #hero
-       ni en móvil. */
+    /* El nav es fijo; sin esto, saltar a un ancla dejaba el título justo
+       debajo, tapado. --nav-height la fija el script con la altura real del
+       nav (varía por breakpoint y al cargar las fuentes) — 88px es solo el
+       valor de respaldo por si el JS no llega a ejecutarse. */
     section[id] {
-      scroll-margin-top: 88px;
+      scroll-margin-top: calc(var(--nav-height, 88px) + var(--space-4));
     }
 
     .section {
@@ -1940,6 +1940,17 @@
     navbar.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 
+  // ---- ALTURA REAL DEL NAV ----
+  // La usa scroll-margin-top (CSS) para que saltar a un ancla no deje el
+  // título ni tapado ni con un hueco de más. Medida, no adivinada: cambia
+  // entre escritorio y móvil, y al terminar de cargar las fuentes.
+  function setNavHeight() {
+    document.documentElement.style.setProperty('--nav-height', navbar.offsetHeight + 'px');
+  }
+  setNavHeight();
+  window.addEventListener('resize', setNavHeight, { passive: true });
+  if (document.fonts) document.fonts.ready.then(setNavHeight);
+
   // ---- THEME TOGGLE ----
   function toggleTheme() {
     const isDark = document.documentElement.getAttribute('data-theme') !== 'dark';
@@ -2018,6 +2029,20 @@
   }, { rootMargin: '-88px 0px -70% 0px', threshold: 0 });
 
   navSectionLinks.forEach((_, section) => spyObserver.observe(section));
+
+  // Contacto es la última sección y, al ser corta, su título nunca llega a
+  // cruzar la franja de detección de más arriba: una vez no queda más
+  // página por debajo, el observador ya no tiene forma de marcarla y se
+  // queda con la anterior (Educación). Al llegar abajo del todo, se fuerza
+  // el último enlace.
+  const lastSectionLink = [...navSectionLinks.values()].pop();
+  window.addEventListener('scroll', () => {
+    const atBottom = window.innerHeight + Math.ceil(window.scrollY) >= document.documentElement.scrollHeight - 2;
+    if (atBottom && lastSectionLink) {
+      navSectionLinks.forEach(a => a.removeAttribute('aria-current'));
+      lastSectionLink.setAttribute('aria-current', 'page');
+    }
+  }, { passive: true });
 
   // ---- INTERSECTION OBSERVER — REVEAL ----
   const revealEls = document.querySelectorAll('.reveal');
