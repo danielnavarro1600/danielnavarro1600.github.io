@@ -187,7 +187,6 @@
     .reveal-delay-1 { transition-delay: 0.1s; }
     .reveal-delay-2 { transition-delay: 0.2s; }
     .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
 
     /* =========================================================
        CHIPS
@@ -309,6 +308,10 @@
       border-radius: 2px;
       transition: transform var(--dur-base) var(--ease), opacity var(--dur-base) var(--ease);
     }
+    /* Estado abierto: las tres barras forman una X */
+    .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* =========================================================
        HERO
@@ -329,6 +332,7 @@
         linear-gradient(rgba(var(--accent-rgb),var(--a-grid)) 1px, transparent 1px),
         linear-gradient(90deg, rgba(var(--accent-rgb),var(--a-grid)) 1px, transparent 1px);
       background-size: 80px 80px;
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
       mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
     }
 
@@ -544,14 +548,18 @@
       justify-content: center;
       position: relative;
       background: rgba(255,255,255,0.03);
-      overflow: hidden;
     }
+    /* El anillo exterior estaba a inset:-10px dentro de un padre con
+       overflow:hidden, así que nunca llegaba a dibujarse. El recorte lo hace
+       ya la propia imagen (border-radius:50%), de modo que el contenedor no
+       necesita recortar y el anillo vuelve a ser visible en todos los tamaños. */
     .photo-frame::after {
       content: '';
       position: absolute;
       inset: -10px;
       border-radius: 50%;
       border: 1px solid rgba(var(--accent-rgb),var(--a-tint));
+      pointer-events: none;
     }
 
     /* =========================================================
@@ -640,7 +648,7 @@
       width: 16px; height: 16px;
       border-radius: 50%;
       border: 2px solid var(--accent);
-      background: var(--bg);
+      background: var(--bg-alt);
       transition: background var(--dur-fast);
     }
     .timeline-item.active .timeline-dot {
@@ -1138,9 +1146,12 @@
         padding: var(--space-17) var(--space-12) var(--space-15);
       }
 
+      /* La sección acompaña al hero: antes el hero bajaba a 32px de canaleta
+         y el resto de secciones seguía en 48px, con los bordes desalineados. */
+      .section { padding: var(--space-17) var(--space-12); }
+
       .hero-photo-placeholder { grid-column: 1; order: -1; }
       .photo-frame { width: 240px; height: 300px; }
-      .hero-stats { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 768px) {
@@ -1156,12 +1167,14 @@
         justify-content: center;
         align-items: center;
         gap: var(--space-12);
-        z-index: 99;
+        z-index: 101;
       }
       .nav-links.open a {
         font-size: var(--text-lg);
       }
-      .hamburger { display: flex; }
+      /* Por encima del overlay, para que la X siga siendo pulsable.
+         Antes el menu abierto solo se podia cerrar tocando un enlace. */
+      .hamburger { display: flex; position: relative; z-index: 102; }
 
       .hero-container {
         grid-template-columns: 1fr;
@@ -1172,7 +1185,8 @@
       .hero-photo-placeholder { grid-column: 1; order: -1; }
       .photo-frame { width: 200px; height: 200px; }
 
-      .hero-stats { grid-template-columns: 1fr 1fr; }
+      /* 3rem en media columna a 320px quedaba desproporcionado */
+      .stat-number { font-size: var(--text-3xl); }
 
       .section { padding: var(--space-15) var(--space-10); }
 
@@ -1607,7 +1621,7 @@
         </ul>
       </li>
 
-      <li class="project-card reveal reveal-delay-3">
+      <li class="project-card reveal">
         <div class="project-number">04 / Presentación IA</div>
         <h3 class="project-title">Guía interna de adopción de IA — Equipo Deloitte</h3>
         <p class="project-desc">Presentación de IA realizada a un equipo de ~15 personas en Deloitte. Recibida con muy buen feedback e interés por parte del equipo.</p>
