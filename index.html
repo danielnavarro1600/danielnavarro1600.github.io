@@ -579,6 +579,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: var(--space-10);
+      margin-top: var(--space-13);
     }
 
     .stat-card {
@@ -623,6 +624,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      border-radius: 50%;
+      display: block;
     }
 
     .photo-frame {
@@ -1142,6 +1152,11 @@
       position: relative;
       overflow: hidden;
     }
+    /* Encima del fondo decorativo absoluto de la sección */
+    #contact .container {
+      position: relative;
+      z-index: 2;
+    }
 
     .contact-grid-bg {
       position: absolute;
@@ -1416,11 +1431,10 @@
             alt="Daniel Navarro Delgado"
             width="528"
             height="1143"
-            style="width:100%;height:100%;object-fit:cover;object-position:center 15%;border-radius:50%;display:block;"
           />
         </div>
       </div>
-      <ul class="hero-stats" style="margin-top: 40px;">
+      <ul class="hero-stats">
         <li class="stat-card">
           <div class="stat-number">10×</div>
           <div class="stat-label">Certificaciones Oracle<br>6 en Inteligencia Artificial</div>
@@ -1467,12 +1481,12 @@
           <li class="timeline-bullet">Adquisición de 10 certificaciones Oracle (6 especializadas en IA) para consolidar la base técnica en las plataformas del proyecto.</li>
         </ul>
         <ul class="timeline-tags">
-          <li class="tag-chip">Oracle EPM Cloud</li>
-          <li class="tag-chip">OCI</li>
-          <li class="tag-chip">Essbase</li>
-          <li class="tag-chip">ODI</li>
-          <li class="tag-chip">Smart View</li>
-          <li class="tag-chip">SQL</li>
+          <li class="tag-chip" lang="en">Oracle EPM Cloud</li>
+          <li class="tag-chip" lang="en">OCI</li>
+          <li class="tag-chip" lang="en">Essbase</li>
+          <li class="tag-chip" lang="en">ODI</li>
+          <li class="tag-chip" lang="en">Smart View</li>
+          <li class="tag-chip" lang="en">SQL</li>
         </ul>
       </li>
 
@@ -1488,9 +1502,9 @@
           <li class="timeline-bullet">Documentación técnico-funcional del proyecto y coordinación entre equipos de negocio y tecnología.</li>
         </ul>
         <ul class="timeline-tags">
-          <li class="tag-chip">Oracle EPM</li>
-          <li class="tag-chip">Business Analysis</li>
-          <li class="tag-chip">Functional Design</li>
+          <li class="tag-chip" lang="en">Oracle EPM</li>
+          <li class="tag-chip" lang="en">Business Analysis</li>
+          <li class="tag-chip" lang="en">Functional Design</li>
         </ul>
       </li>
 
@@ -1499,7 +1513,7 @@
         <div class="timeline-dot"></div>
         <div class="timeline-period"><time datetime="2024-07">JUL 2024</time> — <time datetime="2024-12">DIC 2024</time></div>
         <h3 class="timeline-company">CleverStrategy</h3>
-        <div class="timeline-role">IT Business Consultant</div>
+        <div class="timeline-role" lang="en">IT Business Consultant</div>
         <p class="timeline-desc">Consultoría de negocio IT con foco en transformación digital y aplicaciones de IA para empresas.</p>
         <ul class="timeline-bullets">
           <li class="timeline-bullet">Desarrollo e implementación de algoritmos de predicción de churn y optimización del Customer Lifetime Value (CLV).</li>
@@ -1507,10 +1521,10 @@
           <li class="timeline-bullet">Diseño de materiales de alto impacto para captación de clientes y desarrollo de relaciones comerciales.</li>
         </ul>
         <ul class="timeline-tags">
-          <li class="tag-chip">Python</li>
-          <li class="tag-chip">Power BI</li>
-          <li class="tag-chip">Machine Learning</li>
-          <li class="tag-chip">Agile</li>
+          <li class="tag-chip" lang="en">Python</li>
+          <li class="tag-chip" lang="en">Power BI</li>
+          <li class="tag-chip" lang="en">Machine Learning</li>
+          <li class="tag-chip" lang="en">Agile</li>
         </ul>
       </li>
 
@@ -1522,93 +1536,93 @@
 <section class="section" id="certifications">
   <div class="container">
     <div class="section-label reveal">Credenciales verificadas</div>
-    <h2 class="section-title reveal">Certificaciones <span>Oracle & Project Management</span></h2>
+    <h2 class="section-title reveal">Certificaciones <span lang="en">Oracle & Project Management</span></h2>
     <p class="section-subtitle reveal">20+ certificaciones profesionales en tecnología Oracle, inteligencia artificial, gestión de proyectos y metodologías de consultoría.</p>
 
     <div class="cert-grid">
       <!-- Oracle Block -->
       <div class="reveal">
-        <h3 class="cert-group-title">Oracle Cloud <span>& AI</span> — 10 Certificaciones</h3>
+        <h3 class="cert-group-title">Oracle Cloud <span lang="en">& AI</span> — 10 Certificaciones</h3>
         <ul class="cert-list">
           <li class="cert-item">
             <div class="cert-icon ai"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">OCI Certified Data Science Professional</div>
-              <div class="cert-issuer">Oracle · <time datetime="2026-01">Jan 2026</time></div>
+              <div class="cert-name" lang="en">OCI Certified Data Science Professional</div>
+              <div class="cert-issuer" lang="en">Oracle · <time datetime="2026-01">Jan 2026</time></div>
             </div>
-            <span class="cert-badge ai-badge">AI</span>
+            <span class="cert-badge ai-badge" lang="en">AI</span>
           </li>
           <li class="cert-item">
             <div class="cert-icon ai"><i class="fa-solid fa-microchip" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">OCI Generative AI Professional</div>
-              <div class="cert-issuer">Oracle · <time datetime="2025-09">Sep 2025</time></div>
+              <div class="cert-name" lang="en">OCI Generative AI Professional</div>
+              <div class="cert-issuer" lang="en">Oracle · <time datetime="2025-09">Sep 2025</time></div>
             </div>
-            <span class="cert-badge ai-badge">AI</span>
+            <span class="cert-badge ai-badge" lang="en">AI</span>
           </li>
           <li class="cert-item">
             <div class="cert-icon ai"><i class="fa-solid fa-robot" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">Oracle Certified AI Associate</div>
-              <div class="cert-issuer">Oracle · <time datetime="2025-09">Sep 2025</time></div>
+              <div class="cert-name" lang="en">Oracle Certified AI Associate</div>
+              <div class="cert-issuer" lang="en">Oracle · <time datetime="2025-09">Sep 2025</time></div>
             </div>
-            <span class="cert-badge ai-badge">AI</span>
+            <span class="cert-badge ai-badge" lang="en">AI</span>
           </li>
           <li class="cert-item">
             <div class="cert-icon ai"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">Oracle Fusion AI Agent Studio Associate</div>
-              <div class="cert-issuer">Oracle · <time datetime="2025-09">Sep 2025</time></div>
+              <div class="cert-name" lang="en">Oracle Fusion AI Agent Studio Associate</div>
+              <div class="cert-issuer" lang="en">Oracle · <time datetime="2025-09">Sep 2025</time></div>
             </div>
-            <span class="cert-badge ai-badge">AI</span>
+            <span class="cert-badge ai-badge" lang="en">AI</span>
           </li>
           <li class="cert-item">
             <div class="cert-icon oracle"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">Oracle AI in Enterprise Performance Management</div>
-              <div class="cert-issuer">Oracle · <time datetime="2025-08">Aug 2025</time></div>
+              <div class="cert-name" lang="en">Oracle AI in Enterprise Performance Management</div>
+              <div class="cert-issuer" lang="en">Oracle · <time datetime="2025-08">Aug 2025</time></div>
             </div>
-            <span class="cert-badge ai-badge">AI + EPM</span>
+            <span class="cert-badge ai-badge" lang="en">AI + EPM</span>
           </li>
           <li class="cert-item">
             <div class="cert-icon ai"><i class="fa-solid fa-database" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">Oracle AI Autonomous Database Professional</div>
-              <div class="cert-issuer">Oracle · <time datetime="2025-12">Dec 2025</time></div>
+              <div class="cert-name" lang="en">Oracle AI Autonomous Database Professional</div>
+              <div class="cert-issuer" lang="en">Oracle · <time datetime="2025-12">Dec 2025</time></div>
             </div>
-            <span class="cert-badge ai-badge">AI</span>
+            <span class="cert-badge ai-badge" lang="en">AI</span>
           </li>
           <li class="cert-item">
             <div class="cert-icon oracle"><i class="fa-solid fa-arrows-spin" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">Oracle Cloud EPM Data Integration Professional</div>
-              <div class="cert-issuer">Oracle · <time datetime="2025-12">Dec 2025</time></div>
+              <div class="cert-name" lang="en">Oracle Cloud EPM Data Integration Professional</div>
+              <div class="cert-issuer" lang="en">Oracle · <time datetime="2025-12">Dec 2025</time></div>
             </div>
-            <span class="cert-badge">EPM</span>
+            <span class="cert-badge" lang="en">EPM</span>
           </li>
           <li class="cert-item">
             <div class="cert-icon oracle"><i class="fa-solid fa-server" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">Oracle Data Platform Certified Associate</div>
-              <div class="cert-issuer">Oracle · <time datetime="2025-12">Dec 2025</time></div>
+              <div class="cert-name" lang="en">Oracle Data Platform Certified Associate</div>
+              <div class="cert-issuer" lang="en">Oracle · <time datetime="2025-12">Dec 2025</time></div>
             </div>
-            <span class="cert-badge">OCI</span>
+            <span class="cert-badge" lang="en">OCI</span>
           </li>
           <li class="cert-item">
             <div class="cert-icon oracle"><i class="fa-solid fa-cloud" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">Oracle Certified Associate (OCI Foundations)</div>
-              <div class="cert-issuer">Oracle · <time datetime="2025-09">Sep 2025</time></div>
+              <div class="cert-name" lang="en">Oracle Certified Associate (OCI Foundations)</div>
+              <div class="cert-issuer" lang="en">Oracle · <time datetime="2025-09">Sep 2025</time></div>
             </div>
-            <span class="cert-badge">OCI</span>
+            <span class="cert-badge" lang="en">OCI</span>
           </li>
           <li class="cert-item">
             <div class="cert-icon oracle"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">Oracle Guided Learning Administrator Associate</div>
-              <div class="cert-issuer">Oracle · <time datetime="2025-12">Dec 2025</time></div>
+              <div class="cert-name" lang="en">Oracle Guided Learning Administrator Associate</div>
+              <div class="cert-issuer" lang="en">Oracle · <time datetime="2025-12">Dec 2025</time></div>
             </div>
-            <span class="cert-badge">OCI</span>
+            <span class="cert-badge" lang="en">OCI</span>
           </li>
         </ul>
       </div>
@@ -1620,72 +1634,72 @@
           <li class="cert-item">
             <div class="cert-icon deloitte"><i class="fa-solid fa-building" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">The Deloitte Way — Project Management</div>
-              <div class="cert-issuer">Deloitte · Internal</div>
+              <div class="cert-name" lang="en">The Deloitte Way — Project Management</div>
+              <div class="cert-issuer" lang="en">Deloitte · Internal</div>
             </div>
-            <span class="cert-badge">Internal</span>
+            <span class="cert-badge" lang="en">Internal</span>
           </li>
           <li class="cert-item">
             <div class="cert-icon pm"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">Consulting Approach to Problem Solving</div>
-              <div class="cert-issuer">Udemy · <time datetime="2026-03">Mar 2026</time></div>
+              <div class="cert-name" lang="en">Consulting Approach to Problem Solving</div>
+              <div class="cert-issuer" lang="en">Udemy · <time datetime="2026-03">Mar 2026</time></div>
             </div>
           </li>
           <li class="cert-item">
             <div class="cert-icon pm"><i class="fa-solid fa-gear" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">Service Management with ITIL® 4</div>
-              <div class="cert-issuer">LinkedIn · <time datetime="2026-03">Mar 2026</time></div>
+              <div class="cert-name" lang="en">Service Management with ITIL® 4</div>
+              <div class="cert-issuer" lang="en">LinkedIn · <time datetime="2026-03">Mar 2026</time></div>
             </div>
           </li>
           <li class="cert-item">
             <div class="cert-icon pm"><i class="fa-solid fa-code-branch" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">Hybrid Project Management</div>
-              <div class="cert-issuer">LinkedIn · <time datetime="2026-03">Mar 2026</time></div>
+              <div class="cert-name" lang="en">Hybrid Project Management</div>
+              <div class="cert-issuer" lang="en">LinkedIn · <time datetime="2026-03">Mar 2026</time></div>
             </div>
           </li>
           <li class="cert-item">
             <div class="cert-icon pm"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">Agile Project Management</div>
-              <div class="cert-issuer">LinkedIn · <time datetime="2024-09">Sep 2024</time></div>
+              <div class="cert-name" lang="en">Agile Project Management</div>
+              <div class="cert-issuer" lang="en">LinkedIn · <time datetime="2024-09">Sep 2024</time></div>
             </div>
           </li>
           <li class="cert-item">
             <div class="cert-icon pm"><i class="fa-solid fa-rotate" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">Scrum Master Framework</div>
-              <div class="cert-issuer">LinkedIn · <time datetime="2024-09">Sep 2024</time></div>
+              <div class="cert-name" lang="en">Scrum Master Framework</div>
+              <div class="cert-issuer" lang="en">LinkedIn · <time datetime="2024-09">Sep 2024</time></div>
             </div>
           </li>
           <li class="cert-item">
             <div class="cert-icon pm"><i class="fa-solid fa-chart-bar" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">Lean Six Sigma</div>
-              <div class="cert-issuer">LinkedIn · <time datetime="2024-09">Sep 2024</time></div>
+              <div class="cert-name" lang="en">Lean Six Sigma</div>
+              <div class="cert-issuer" lang="en">LinkedIn · <time datetime="2024-09">Sep 2024</time></div>
             </div>
           </li>
           <li class="cert-item">
             <div class="cert-icon pm"><i class="fa-solid fa-list-check" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">Project Management</div>
-              <div class="cert-issuer">LinkedIn · <time datetime="2024-05">May 2024</time></div>
+              <div class="cert-name" lang="en">Project Management</div>
+              <div class="cert-issuer" lang="en">LinkedIn · <time datetime="2024-05">May 2024</time></div>
             </div>
           </li>
           <li class="cert-item">
             <div class="cert-icon pm"><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">Business Analysis</div>
-              <div class="cert-issuer">LinkedIn · <time datetime="2024-05">May 2024</time></div>
+              <div class="cert-name" lang="en">Business Analysis</div>
+              <div class="cert-issuer" lang="en">LinkedIn · <time datetime="2024-05">May 2024</time></div>
             </div>
           </li>
           <li class="cert-item">
             <div class="cert-icon pm"><i class="fa-solid fa-handshake" aria-hidden="true"></i></div>
             <div>
-              <div class="cert-name">Consulting: Client Relationship Management</div>
-              <div class="cert-issuer">LinkedIn · <time datetime="2024-09">Sep 2024</time></div>
+              <div class="cert-name" lang="en">Consulting: Client Relationship Management</div>
+              <div class="cert-issuer" lang="en">LinkedIn · <time datetime="2024-09">Sep 2024</time></div>
             </div>
           </li>
         </ul>
@@ -1708,11 +1722,11 @@
         <h3 class="project-title">Transformación EPM a escala corporativa</h3>
         <p class="project-desc">Rediseño y transformación de procesos de planificación y controlling en Oracle EPM Cloud para uno de los 10 mayores grupos empresariales de España por facturación. Diseño funcional completo, modelo dimensional, reglas de cálculo bajo criterios IFRS y fiscales, e integración con SAP y ODI.</p>
         <ul class="project-tags">
-          <li class="tag-chip">Oracle EPM Cloud</li>
-          <li class="tag-chip">SAP</li>
-          <li class="tag-chip">ODI</li>
-          <li class="tag-chip">IFRS</li>
-          <li class="tag-chip">Power BI</li>
+          <li class="tag-chip" lang="en">Oracle EPM Cloud</li>
+          <li class="tag-chip" lang="en">SAP</li>
+          <li class="tag-chip" lang="en">ODI</li>
+          <li class="tag-chip" lang="en">IFRS</li>
+          <li class="tag-chip" lang="en">Power BI</li>
         </ul>
       </li>
 
@@ -1721,10 +1735,10 @@
         <h3 class="project-title">10 Certificaciones Oracle — 6 en IA</h3>
         <p class="project-desc">Itinerario de 4 meses completando 10 certificaciones Oracle, con 6 especializadas en Inteligencia Artificial: GenAI, AI Agents, Data Science, Autonomous Database y EPM+AI. Objetivo: integrar IA aplicada en proyectos cloud reales.</p>
         <ul class="project-tags">
-          <li class="tag-chip">GenAI</li>
-          <li class="tag-chip">AI Agents</li>
-          <li class="tag-chip">OCI</li>
-          <li class="tag-chip">Data Science</li>
+          <li class="tag-chip" lang="en">GenAI</li>
+          <li class="tag-chip" lang="en">AI Agents</li>
+          <li class="tag-chip" lang="en">OCI</li>
+          <li class="tag-chip" lang="en">Data Science</li>
         </ul>
       </li>
 
@@ -1733,10 +1747,10 @@
         <h3 class="project-title">10 Certificaciones de Gestión de Proyectos y Consultoría</h3>
         <p class="project-desc">Itinerario integral en gestión de proyectos y consultoría: Agile, Scrum, ITIL 4, Lean Six Sigma, Business Analysis y The Deloitte Way. Base metodológica sólida para operar en entornos de transformación compleja.</p>
         <ul class="project-tags">
-          <li class="tag-chip">Agile</li>
-          <li class="tag-chip">ITIL 4</li>
-          <li class="tag-chip">Lean Six Sigma</li>
-          <li class="tag-chip">Deloitte</li>
+          <li class="tag-chip" lang="en">Agile</li>
+          <li class="tag-chip" lang="en">ITIL 4</li>
+          <li class="tag-chip" lang="en">Lean Six Sigma</li>
+          <li class="tag-chip" lang="en">Deloitte</li>
         </ul>
       </li>
 
@@ -1745,21 +1759,21 @@
         <h3 class="project-title">Guía interna de adopción de IA — Equipo Deloitte</h3>
         <p class="project-desc">Presentación de IA realizada a un equipo de ~15 personas en Deloitte. Recibida con muy buen feedback e interés por parte del equipo.</p>
         <ul class="project-tags">
-          <li class="tag-chip">Claude</li>
-          <li class="tag-chip">ChatGPT</li>
-          <li class="tag-chip">Gemini</li>
-          <li class="tag-chip">Prompt Engineering</li>
+          <li class="tag-chip" lang="en">Claude</li>
+          <li class="tag-chip" lang="en">ChatGPT</li>
+          <li class="tag-chip" lang="en">Gemini</li>
+          <li class="tag-chip" lang="en">Prompt Engineering</li>
         </ul>
       </li>
 
       <li class="project-card reveal reveal-delay-1">
         <div class="project-number">05 / Educación</div>
         <h3 class="project-title">Taller de finanzas personales — Instituto</h3>
-        <p class="project-desc">Impartición de taller de finanzas personales para adolescentes en un instituto. Recibió cumplidos y solicitudes de retorno por parte de los alumnos y el centro.</p>
+        <p class="project-desc">Impartición de taller de finanzas personales para adolescentes en un instituto. Recibió cumplidos y peticiones para repetir la experiencia por parte de los alumnos y el centro.</p>
         <ul class="project-tags">
-          <li class="tag-chip">Financial Literacy</li>
-          <li class="tag-chip">Teaching</li>
-          <li class="tag-chip">Public Speaking</li>
+          <li class="tag-chip" lang="en">Financial Literacy</li>
+          <li class="tag-chip" lang="en">Teaching</li>
+          <li class="tag-chip" lang="en">Public Speaking</li>
         </ul>
       </li>
 
@@ -1768,11 +1782,11 @@
         <h3 class="project-title">Web profesional</h3>
         <p class="project-desc">Diseño y desarrollo de sitio web personal interactivo en HTML, CSS y JavaScript. +1.000 líneas de código. Responsive, optimizado para SEO y completado en un día. Alojado en GitHub Pages.</p>
         <ul class="project-tags">
-          <li class="tag-chip">HTML</li>
-          <li class="tag-chip">CSS</li>
-          <li class="tag-chip">JavaScript</li>
-          <li class="tag-chip">GitHub Pages</li>
-          <li class="tag-chip">SEO</li>
+          <li class="tag-chip" lang="en">HTML</li>
+          <li class="tag-chip" lang="en">CSS</li>
+          <li class="tag-chip" lang="en">JavaScript</li>
+          <li class="tag-chip" lang="en">GitHub Pages</li>
+          <li class="tag-chip" lang="en">SEO</li>
         </ul>
       </li>
 
@@ -1790,82 +1804,82 @@
     <ul class="skills-grid">
 
       <li class="skill-group reveal">
-        <h3>Oracle EPM & OCI</h3>
+        <h3 lang="en">Oracle EPM & OCI</h3>
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">Oracle EPM Cloud (Planning)</span><span class="skill-level">Avanzado</span></div>
+          <div class="skill-header"><span class="skill-name" lang="en">Oracle EPM Cloud (Planning)</span><span class="skill-level">Avanzado</span></div>
           <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
         </div>
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">Oracle Cloud Infrastructure (OCI)</span><span class="skill-level">Avanzado</span></div>
+          <div class="skill-header"><span class="skill-name" lang="en">Oracle Cloud Infrastructure (OCI)</span><span class="skill-level">Avanzado</span></div>
           <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
         </div>
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">Oracle Data Integration / ODI</span><span class="skill-level">Competente</span></div>
+          <div class="skill-header"><span class="skill-name" lang="en">Oracle Data Integration / ODI</span><span class="skill-level">Competente</span></div>
           <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
         </div>
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">Smart View & Essbase</span><span class="skill-level">Competente</span></div>
+          <div class="skill-header"><span class="skill-name" lang="en">Smart View & Essbase</span><span class="skill-level">Competente</span></div>
           <div class="skill-bar"><div class="skill-fill" data-width="82"></div></div>
         </div>
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">EPMAutomate & Data Exchange</span><span class="skill-level">Competente</span></div>
+          <div class="skill-header"><span class="skill-name" lang="en">EPMAutomate & Data Exchange</span><span class="skill-level">Competente</span></div>
           <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
         </div>
       </li>
 
       <li class="skill-group reveal reveal-delay-1">
-        <h3>Applied AI & Data</h3>
+        <h3 lang="en">Applied AI & Data</h3>
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">Generative AI & Prompt Engineering</span><span class="skill-level">Avanzado</span></div>
+          <div class="skill-header"><span class="skill-name" lang="en">Generative AI & Prompt Engineering</span><span class="skill-level">Avanzado</span></div>
           <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
         </div>
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">OCI Data Science</span><span class="skill-level">Competente</span></div>
+          <div class="skill-header"><span class="skill-name" lang="en">OCI Data Science</span><span class="skill-level">Competente</span></div>
           <div class="skill-bar"><div class="skill-fill" data-width="76"></div></div>
         </div>
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">SQL & Database Management</span><span class="skill-level">Avanzado</span></div>
+          <div class="skill-header"><span class="skill-name" lang="en">SQL & Database Management</span><span class="skill-level">Avanzado</span></div>
           <div class="skill-bar"><div class="skill-fill" data-width="84"></div></div>
         </div>
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">Python (Data & ML)</span><span class="skill-level">Competente</span></div>
+          <div class="skill-header"><span class="skill-name" lang="en">Python (Data & ML)</span><span class="skill-level">Competente</span></div>
           <div class="skill-bar"><div class="skill-fill" data-width="72"></div></div>
         </div>
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">Power BI</span><span class="skill-level">Competente</span></div>
+          <div class="skill-header"><span class="skill-name" lang="en">Power BI</span><span class="skill-level">Competente</span></div>
           <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
         </div>
       </li>
 
       <li class="skill-group reveal reveal-delay-2">
-        <h3>Finance & Analysis</h3>
+        <h3 lang="en">Finance & Analysis</h3>
         <ul class="skill-chips">
-          <li class="skill-chip">Financial Planning</li>
-          <li class="skill-chip">Controlling</li>
-          <li class="skill-chip">Budgeting</li>
-          <li class="skill-chip">Forecasting</li>
-          <li class="skill-chip">IFRS</li>
-          <li class="skill-chip">SAP S/4HANA (FI)</li>
-          <li class="skill-chip">Financial Modelling</li>
-          <li class="skill-chip">Business Analysis</li>
-          <li class="skill-chip">Econometrics</li>
-          <li class="skill-chip">Financial Analysis</li>
+          <li class="skill-chip" lang="en">Financial Planning</li>
+          <li class="skill-chip" lang="en">Controlling</li>
+          <li class="skill-chip" lang="en">Budgeting</li>
+          <li class="skill-chip" lang="en">Forecasting</li>
+          <li class="skill-chip" lang="en">IFRS</li>
+          <li class="skill-chip" lang="en">SAP S/4HANA (FI)</li>
+          <li class="skill-chip" lang="en">Financial Modelling</li>
+          <li class="skill-chip" lang="en">Business Analysis</li>
+          <li class="skill-chip" lang="en">Econometrics</li>
+          <li class="skill-chip" lang="en">Financial Analysis</li>
         </ul>
       </li>
 
       <li class="skill-group reveal reveal-delay-3">
         <h3>Metodologías & Herramientas</h3>
         <ul class="skill-chips">
-          <li class="skill-chip">Agile</li>
-          <li class="skill-chip">Scrum</li>
-          <li class="skill-chip">ITIL 4</li>
-          <li class="skill-chip">Lean Six Sigma</li>
-          <li class="skill-chip">Jira</li>
-          <li class="skill-chip">Salesforce</li>
-          <li class="skill-chip">Consulting Delivery</li>
-          <li class="skill-chip">Stakeholder Mgmt</li>
-          <li class="skill-chip">Business Psychology</li>
-          <li class="skill-chip">Change Management</li>
+          <li class="skill-chip" lang="en">Agile</li>
+          <li class="skill-chip" lang="en">Scrum</li>
+          <li class="skill-chip" lang="en">ITIL 4</li>
+          <li class="skill-chip" lang="en">Lean Six Sigma</li>
+          <li class="skill-chip" lang="en">Jira</li>
+          <li class="skill-chip" lang="en">Salesforce</li>
+          <li class="skill-chip" lang="en">Consulting Delivery</li>
+          <li class="skill-chip" lang="en">Stakeholder Mgmt</li>
+          <li class="skill-chip" lang="en">Business Psychology</li>
+          <li class="skill-chip" lang="en">Change Management</li>
         </ul>
       </li>
 
@@ -1885,24 +1899,24 @@
       <li class="edu-card reveal">
         <div class="edu-period"><time datetime="2019">2019</time> — <time datetime="2023">2023</time></div>
         <h3 class="edu-institution">Universitat Pompeu Fabra</h3>
-        <div class="edu-degree">Licenciatura en Economía<br><span>Barcelona</span></div>
+        <div class="edu-degree">Grado en Economía<br><span>Barcelona</span></div>
         <span class="edu-highlight"><i class="fa-solid fa-star" aria-hidden="true"></i> TFG Premiado y Publicado</span>
-        <p class="edu-note">Tesis premiada sobre implicaciones distributivas de un impuesto al carbono. Nota: 9.7/10.</p>
+        <p class="edu-note">Tesis premiada sobre implicaciones distributivas de un impuesto al carbono. Nota: 9,7/10.</p>
       </li>
 
       <li class="edu-card reveal reveal-delay-1">
         <div class="edu-period"><time datetime="2021">2021</time> — <time datetime="2022">2022</time></div>
         <h3 class="edu-institution">Università Milano-Bicocca</h3>
-        <div class="edu-degree">Erasmus — International Business Economics<br><span>Milán, Italia</span></div>
+        <div class="edu-degree">Erasmus — <span lang="en">International Business Economics</span><br><span>Milán, Italia</span></div>
         <span class="edu-highlight"><i class="fa-solid fa-globe" aria-hidden="true"></i> 29/30 · Magna Cum Laude</span>
-        <p class="edu-note">Materias: Global Management, Behavioral Economics, Data-Driven Decision Making.</p>
+        <p class="edu-note">Materias: <span lang="en">Global Management, Behavioral Economics, Data-Driven Decision Making</span>.</p>
       </li>
 
       <li class="edu-card reveal reveal-delay-2">
         <div class="edu-period"><time datetime="2023">2023</time> — <time datetime="2025">2025</time></div>
         <h3 class="edu-institution">Steinbeis University Berlin</h3>
-        <div class="edu-degree">Máster en Psicología Empresarial y Organizativa<br><span>Schools of Next Practices (Berlin)</span></div>
-        <span class="edu-highlight"><i class="fa-solid fa-award" aria-hidden="true"></i> Nota 1.3 — A</span>
+        <div class="edu-degree">Máster en Psicología Empresarial y Organizativa<br><span lang="en">Schools of Next Practices (Berlin)</span></div>
+        <span class="edu-highlight"><i class="fa-solid fa-award" aria-hidden="true"></i> Nota 1,3 — A</span>
         <p class="edu-note">Tesis: Impacto de chatbots de IA en el compromiso y bienestar de empleados.</p>
       </li>
 
@@ -1970,7 +1984,7 @@
 <!-- ===================== CONTACT ===================== -->
 <section class="section" id="contact">
   <div class="contact-grid-bg"></div>
-  <div class="container" style="position:relative; z-index:2;">
+  <div class="container">
     <div class="section-label reveal">Conectemos</div>
     <h2 class="contact-tagline reveal">¿Trabajamos <span>juntos</span>?</h2>
     <p class="section-subtitle reveal">Abierto a conversaciones sobre proyectos Oracle EPM/OCI, oportunidades en transformación financiera y tecnológica, o simplemente a conectar con profesionales del sector.</p>
@@ -1997,11 +2011,17 @@
 <!-- ===================== FOOTER ===================== -->
 <footer>
   <span class="footer-name">Daniel Navarro Delgado</span>
-  <span class="footer-copy"><span lang="en">Finance & Technology</span> · Deloitte · Barcelona · 2026</span>
+  <span class="footer-copy"><span lang="en">Finance & Technology</span> · Deloitte · Barcelona · <span id="footerYear">2026</span></span>
 </footer>
 
 <!-- ===================== JS ===================== -->
 <script>
+  // ---- AÑO DEL PIE ----
+  // "2026" queda en el HTML como respaldo por si el JS no llega a
+  // ejecutarse; en el caso normal se sustituye por el año real.
+  const footerYear = document.getElementById('footerYear');
+  if (footerYear) footerYear.textContent = new Date().getFullYear();
+
   // ---- NAV SCROLL ----
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {

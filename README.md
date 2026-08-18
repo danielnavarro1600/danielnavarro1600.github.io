@@ -38,7 +38,10 @@ danielnavarro1600.github.io/
 ├── .github/workflows/static.yml
 ├── CLAUDE.md
 ├── README.md
-├── img/foto-perfil.jpg
+├── img/
+│   ├── favicon.png
+│   ├── foto-perfil.jpg
+│   └── logo.jpg
 └── index.html
 ```
 
@@ -68,7 +71,7 @@ Before making substantial changes, create a Git branch or a backup copy of `inde
 
 ## External resources
 
-The page loads fonts and icons from external services, and the favicon/social preview image from a third-party image host. The profile photo is hosted locally in `img/`. An internet connection is required for fonts, icons and the favicon to display correctly.
+The page loads fonts and icons from external services. All images (profile photo, favicon and social preview) are hosted locally in `img/`. An internet connection is required for fonts and icons to display correctly.
 
 ## Deployment
 
