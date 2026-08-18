@@ -10,8 +10,7 @@
   <meta property="og:image" content="https://danielnavarro1600.github.io/img/logo.jpg">
   <meta property="og:type" content="website" />
   <link rel="canonical" href="https://danielnavarro1600.github.io" />
-  <link rel="icon" type="image/png" href="img/logo-circular.png">
-  <link rel="shortcut icon" type="image/png" href="img/logo-circular.png">
+  <link rel="icon" type="image/png" href="img/favicon.png">
   <meta name="theme-color" content="#0a0a0f" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1129,6 +1128,20 @@
       }
     }
   </style>
+
+  <noscript>
+    <style>
+      /* Sin JS no se añade la clase .visible: el contenido debe verse igual. */
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      /* Las barras se rellenan por JS; sin él quedarían a 0 y darían a entender
+         un nivel nulo. El nivel ya se indica en texto junto al nombre. */
+      .skill-bar { display: none; }
+    </style>
+  </noscript>
 </head>
 
 <body>
@@ -1237,11 +1250,12 @@
         <div class="timeline-role" lang="en">Finance & Technology Senior Analyst</div>
         <p class="timeline-desc">Consultor senior en proyectos de transformación financiera y tecnológica, liderando la definición funcional e implementación de soluciones Oracle EPM Cloud para grandes clientes del sector industrial.</p>
         <div class="timeline-bullets">
-          <div class="timeline-bullet">Diseño funcional e implementación de Oracle EPM Cloud para procesos de planificación y controlling (PR, Budget, Forecast y Real) en el ámbito de I+D e Inversiones para clientes de referencia como SEAT-CUPRA.</div>
+          <div class="timeline-bullet">Diseño funcional e implementación de Oracle EPM Cloud para procesos de planificación y controlling (PR, Budget, Forecast y Real) en el ámbito de I+D e Inversiones para uno de los 10 mayores grupos empresariales de España por facturación.</div>
           <div class="timeline-bullet">Estructuración del modelo dimensional: cubos, dimensiones, jerarquías, atributos y reglas de cálculo para procesos críticos de I+D e Inversiones.</div>
-          <div class="timeline-bullet">Definición y validación de reglas de negocio para activaciones, amortizaciones, subvenciones, retroactividad y efectos financieros bajo criterios IFRS, HB1 y Fiscal.</div>
+          <div class="timeline-bullet">Definición y validación de reglas de negocio para activaciones, amortizaciones y efectos financieros bajo criterios IFRS y fiscales.</div>
           <div class="timeline-bullet">Coordinación de integraciones funcionales entre Oracle EPM Cloud, SAP, Oracle Data Integrator (ODI), EPMAutomate y Data Exchange.</div>
           <div class="timeline-bullet">Diseño y optimización de Data Forms, Task Lists y flujos operativos; definición de salidas analíticas en Smart View, dashboards y Power BI.</div>
+          <div class="timeline-bullet">Adquisición de 10 certificaciones Oracle (6 especializadas en IA) para consolidar la base técnica en las plataformas del proyecto.</div>
         </div>
         <div class="timeline-tags">
           <span class="tag-chip">Oracle EPM Cloud</span>
@@ -1259,11 +1273,10 @@
         <div class="timeline-period">ENE 2025 — JUN 2025</div>
         <h3 class="timeline-company">Deloitte</h3>
         <div class="timeline-role" lang="en">Finance & Technology Analyst</div>
-        <p class="timeline-desc">Incorporación al equipo con foco en análisis funcional, levantamiento de requisitos y configuración inicial de soluciones EPM, obteniendo en paralelo 10 certificaciones Oracle.</p>
+        <p class="timeline-desc">Incorporación al equipo con foco en análisis funcional, levantamiento de requisitos y configuración inicial de soluciones EPM.</p>
         <div class="timeline-bullets">
           <div class="timeline-bullet">Análisis funcional de procesos financieros y traducción a diseño de solución en Oracle EPM Cloud.</div>
           <div class="timeline-bullet">Documentación técnico-funcional del proyecto y coordinación entre equipos de negocio y tecnología.</div>
-          <div class="timeline-bullet">Adquisición de 10 certificaciones Oracle (6 especializadas en IA) para consolidar base técnica en plataformas del proyecto.</div>
         </div>
         <div class="timeline-tags">
           <span class="tag-chip">Oracle EPM</span>
@@ -1483,8 +1496,8 @@
 
       <div class="project-card reveal">
         <div class="project-number">01 / Oracle EPM Cloud</div>
-        <h3 class="project-title">SEAT-CUPRA</h3>
-        <p class="project-desc">Rediseño y transformación de procesos de planificación y controlling en Oracle EPM Cloud para SEAT-Cupra. Diseño funcional completo, modelo dimensional, reglas de cálculo IFRS/HB1/Fiscal e integración con SAP y ODI.</p>
+        <h3 class="project-title">Transformación EPM a escala corporativa</h3>
+        <p class="project-desc">Rediseño y transformación de procesos de planificación y controlling en Oracle EPM Cloud para uno de los 10 mayores grupos empresariales de España por facturación. Diseño funcional completo, modelo dimensional, reglas de cálculo bajo criterios IFRS y fiscales, e integración con SAP y ODI.</p>
         <div class="project-tags">
           <span class="tag-chip">Oracle EPM Cloud</span>
           <span class="tag-chip">SAP</span>
