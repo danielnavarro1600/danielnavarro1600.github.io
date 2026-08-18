@@ -306,6 +306,15 @@
 
     .nav-links a:hover { color: var(--accent-ink); }
 
+    /* Sección actual según el scroll-spy. Además del color (que alguien con
+       baja visión al color no podría distinguir), un subrayado marca la
+       diferencia sin depender solo de él. */
+    .nav-links a[aria-current] {
+      color: var(--accent-ink);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
     .theme-toggle {
       background: none;
       border: 1px solid rgba(var(--on-ink-rgb),var(--o-border));
@@ -597,6 +606,14 @@
     /* =========================================================
        SECTION SHARED STYLES
     ========================================================= */
+    /* El nav es fijo (~88px de alto); sin esto, saltar a un ancla dejaba el
+       título justo debajo, tapado. La generosa esquina superior de .section
+       ya disimulaba el problema en la mayoría de los casos, pero no en #hero
+       ni en móvil. */
+    section[id] {
+      scroll-margin-top: 88px;
+    }
+
     .section {
       padding: var(--space-17) var(--space-14);
     }
@@ -1921,7 +1938,7 @@
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 40);
-  });
+  }, { passive: true });
 
   // ---- THEME TOGGLE ----
   function toggleTheme() {
@@ -1932,12 +1949,75 @@
   }
 
   // ---- HAMBURGER ----
-  function toggleMenu() {
-    const isOpen = document.getElementById('navLinks').classList.toggle('open');
+  // Un único punto para abrir/cerrar: toggleMenu(), el cierre al pulsar un
+  // enlace y Escape usaban antes tres copias de esta misma lógica.
+  function setMenuOpen(isOpen) {
+    const navLinks = document.getElementById('navLinks');
+    navLinks.classList.toggle('open', isOpen);
     const hamburger = document.getElementById('hamburger');
     hamburger.setAttribute('aria-expanded', isOpen);
     hamburger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+    // El botón va después de los enlaces en el DOM: al abrir con teclado, el
+    // foco se queda en él y un Tab siguiente saltaría fuera del menú, detrás
+    // del overlay a pantalla completa. Moverlo al primer enlace hace que la
+    // trampa de foco de abajo funcione de verdad.
+    if (isOpen) {
+      const firstLink = navLinks.querySelector('a[href], button:not([disabled])');
+      if (firstLink) firstLink.focus();
+    }
   }
+
+  function toggleMenu() {
+    setMenuOpen(!document.getElementById('navLinks').classList.contains('open'));
+  }
+
+  // Escape cierra el menú y devuelve el foco al botón que lo abrió;
+  // Tab/Shift+Tab quedan atrapados dentro mientras está abierto, para que
+  // no se pueda tabular "detrás" del menú a pantalla completa.
+  document.addEventListener('keydown', (e) => {
+    const navLinks = document.getElementById('navLinks');
+    if (!navLinks.classList.contains('open')) return;
+
+    if (e.key === 'Escape') {
+      setMenuOpen(false);
+      document.getElementById('hamburger').focus();
+      return;
+    }
+
+    if (e.key === 'Tab') {
+      const focusables = navLinks.querySelectorAll('a[href], button:not([disabled])');
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  // ---- SCROLL-SPY ----
+  // Marca en el nav en qué sección está el visitante; en una página de 7
+  // secciones no había ninguna señal de posición.
+  const navSectionLinks = new Map();
+  document.querySelectorAll('#navLinks a[href^="#"]').forEach(a => {
+    const section = document.getElementById(a.getAttribute('href').slice(1));
+    if (section) navSectionLinks.set(section, a);
+  });
+
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const activeLink = navSectionLinks.get(entry.target);
+      navSectionLinks.forEach(a => a.removeAttribute('aria-current'));
+      activeLink.setAttribute('aria-current', 'page');
+    });
+  }, { rootMargin: '-88px 0px -70% 0px', threshold: 0 });
+
+  navSectionLinks.forEach((_, section) => spyObserver.observe(section));
 
   // ---- INTERSECTION OBSERVER — REVEAL ----
   const revealEls = document.querySelectorAll('.reveal');
@@ -1969,12 +2049,7 @@
 
   // ---- SMOOTH ANCHOR (close menu on mobile) ----
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      document.getElementById('navLinks').classList.remove('open');
-      const hamburger = document.getElementById('hamburger');
-      hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.setAttribute('aria-label', 'Abrir menú');
-    });
+    anchor.addEventListener('click', () => setMenuOpen(false));
   });
 </script>
 
