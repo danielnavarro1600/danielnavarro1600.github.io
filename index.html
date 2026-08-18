@@ -16,10 +16,10 @@
       } catch (e) {}
     })();
   </script>
-  <title>Daniel Navarro Delgado — Finance &amp; Technology Senior Analyst</title>
-  <meta name="description" content="Finance &amp; Technology Senior Analyst at Deloitte. Oracle EPM Cloud, OCI &amp; AI specialist. 10x Oracle Certified, 6x AI Specialist. Barcelona." />
-  <meta property="og:title" content="Daniel Navarro Delgado — Finance &amp; Technology Senior Analyst" />
-  <meta property="og:description" content="Senior Analyst at Deloitte specializing in Oracle EPM Cloud, OCI and Applied AI." />
+  <title>Daniel Navarro Delgado — Finance &amp; Technology Consultant</title>
+  <meta name="description" content="Finance &amp; Technology Consultant at Deloitte specializing in Oracle EPM Cloud, OCI, financial transformation and Applied AI. 20x AI Certified and 10x Oracle Certified. Barcelona." />
+  <meta property="og:title" content="Daniel Navarro Delgado — Finance &amp; Technology Consultant" />
+  <meta property="og:description" content="Finance &amp; Technology Consultant at Deloitte specializing in Oracle EPM Cloud, OCI, financial transformation and Applied AI." />
   <meta property="og:image" content="https://danielnavarro1600.github.io/img/logo.jpg">
   <meta property="og:image:alt" content="Logotipo profesional de Daniel Navarro Delgado" />
   <meta property="og:type" content="website" />
@@ -27,8 +27,8 @@
   <meta property="og:locale" content="es_ES" />
   <meta property="og:site_name" content="Daniel Navarro Delgado" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Daniel Navarro Delgado — Finance &amp; Technology Senior Analyst" />
-  <meta name="twitter:description" content="Senior Analyst at Deloitte specializing in Oracle EPM Cloud, OCI and Applied AI." />
+  <meta name="twitter:title" content="Daniel Navarro Delgado — Finance &amp; Technology Consultant" />
+  <meta name="twitter:description" content="Finance &amp; Technology Consultant at Deloitte specializing in Oracle EPM Cloud, OCI, financial transformation and Applied AI." />
   <meta name="twitter:image" content="https://danielnavarro1600.github.io/img/logo.jpg" />
   <link rel="canonical" href="https://danielnavarro1600.github.io/" />
   <link rel="icon" type="image/png" href="img/favicon.png">
@@ -45,7 +45,7 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Daniel Navarro Delgado",
-    "jobTitle": "Finance & Technology Senior Analyst",
+    "jobTitle": "Finance & Technology Consultant",
     "worksFor": {
       "@type": "Organization",
       "name": "Deloitte"
@@ -69,13 +69,21 @@
     ],
     "knowsAbout": [
       "Oracle EPM Cloud",
-      "Oracle Cloud Infrastructure (OCI)",
+      "Oracle Cloud Infrastructure",
+      "Financial Transformation",
       "Applied AI",
-      "Financial Planning",
-      "IFRS",
-      "Consulting"
+      "Generative AI",
+      "AI Agents",
+      "Data Integration",
+      "Consulting",
+      "Anthropic Claude",
+      "OpenAI",
+      "Google AI",
+      "Microsoft 365 Copilot",
+      "AI-assisted development"
     ],
     "hasCredential": [
+      { "@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "Artificial Intelligence (20 certifications)" },
       { "@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "Oracle Cloud & AI (10 certifications)" },
       { "@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "Project Management & Consulting (10 certifications)" }
     ]
@@ -912,6 +920,29 @@
     }
     .cert-badge.ai-badge { background: rgba(100,100,220,0.1); color: #7878e0; }
 
+    /* Itinerario de IA: bloque a todo el ancho, por encima del grid de dos
+       columnas. Su lista se reparte en dos columnas para no encadenar veinte
+       filas seguidas; en movil vuelve a una sola (ver RESPONSIVE). */
+    .cert-block-wide { margin-bottom: var(--space-14); }
+    .cert-block-wide .cert-group-title { margin-bottom: var(--space-6); }
+
+    .cert-group-intro {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      max-width: 70ch;
+      margin-bottom: var(--space-10);
+    }
+
+    /* Rejilla en vez de columna: la canaleta la sigue poniendo .cert-list. */
+    .cert-list-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    /* Una celda de rejilla no se encoge por debajo de su contenido salvo que
+       se diga: sin esto, un nombre largo ensancha su columna y saca la lista
+       fuera del contenedor en pantallas estrechas. */
+    .cert-list-split > .cert-item { min-width: 0; }
+
     /* =========================================================
        PROJECTS
     ========================================================= */
@@ -1306,6 +1337,7 @@
       .section { padding: var(--space-15) var(--space-10); }
 
       .cert-grid,
+      .cert-list-split,
       .projects-grid,
       .skills-grid,
       .edu-grid { grid-template-columns: 1fr; }
@@ -1402,20 +1434,20 @@
     <div>
       <div class="hero-eyebrow"><span lang="en">Finance & Technology</span> · Deloitte · Barcelona</div>
       <h1 class="hero-name">Daniel<br><span>Navarro</span></h1>
-      <p class="hero-title" lang="en">Senior Analyst — Oracle EPM Cloud & Oracle AI Specialist</p>
+      <p class="hero-title" lang="en">Finance & Technology Consultant — Oracle EPM Cloud & Applied AI</p>
       <p class="hero-desc">
-        Conectando la planificación financiera, la tecnología empresarial y la IA aplicada para impulsar
-        la transformación a gran escala. Especialista en Oracle EPM Cloud, OCI e IA — con 10 certificaciones
-        Oracle y experiencia contrastada entregando soluciones de controlling complejas para grandes clientes
-        industriales en Deloitte.
+        Conectando la planificación financiera, la tecnología empresarial y la inteligencia artificial
+        aplicada para impulsar procesos de transformación. Especializado en Oracle EPM Cloud, OCI,
+        integración de datos y automatización, con experiencia en soluciones complejas de planificación
+        y controlling para grandes organizaciones.
       </p>
       <ul class="hero-tags">
         <li class="hero-tag">Oracle EPM Cloud</li>
         <li class="hero-tag">OCI</li>
-        <li class="hero-tag">Oracle AI</li>
+        <li class="hero-tag" lang="en">Applied AI</li>
+        <li class="hero-tag" lang="en">20× AI Certified</li>
         <li class="hero-tag" lang="en">10× Oracle Certified</li>
         <li class="hero-tag" lang="en">Finance & Technology</li>
-        <li class="hero-tag">Deloitte</li>
       </ul>
       <div class="hero-ctas">
         <a href="#experience" class="btn-primary">Ver experiencia</a>
@@ -1436,20 +1468,20 @@
       </div>
       <ul class="hero-stats">
         <li class="stat-card">
+          <div class="stat-number">40+</div>
+          <div class="stat-label">Certificaciones profesionales<br>en tecnología, consultoría e IA</div>
+        </li>
+        <li class="stat-card">
+          <div class="stat-number">20×</div>
+          <div class="stat-label">Certificaciones en IA<br>Anthropic · OpenAI · Google · Deloitte · Oracle</div>
+        </li>
+        <li class="stat-card">
           <div class="stat-number">10×</div>
           <div class="stat-label">Certificaciones Oracle<br>6 en Inteligencia Artificial</div>
         </li>
         <li class="stat-card">
-          <div class="stat-number">1.5+</div>
+          <div class="stat-number">2+</div>
           <div class="stat-label">Años en Deloitte<br><span lang="en">Finance & Technology</span></div>
-        </li>
-        <li class="stat-card">
-          <div class="stat-number">30+</div>
-          <div class="stat-label">Certificaciones profesionales<br>en tecnología y consultoría</div>
-        </li>
-        <li class="stat-card">
-          <div class="stat-number">5</div>
-          <div class="stat-label">Idiomas<br>ES · EN · CA · IT · DE</div>
         </li>
       </ul>
     </div>
@@ -1465,51 +1497,82 @@
 
     <ol class="timeline">
 
-      <!-- Deloitte Senior -->
+      <!-- Deloitte Consultant -->
       <li class="timeline-item active reveal">
         <div class="timeline-dot"></div>
-        <div class="timeline-period"><time datetime="2025-07">JUL 2025</time> — PRESENTE</div>
+        <div class="timeline-period"><time datetime="2026-07">JUL 2026</time> — PRESENTE</div>
         <h3 class="timeline-company">Deloitte</h3>
-        <div class="timeline-role" lang="en">Finance & Technology Senior Analyst</div>
-        <p class="timeline-desc">Consultor senior en proyectos de transformación financiera y tecnológica, liderando la definición funcional e implementación de soluciones Oracle EPM Cloud para grandes clientes del sector industrial.</p>
+        <div class="timeline-role" lang="en">Finance & Technology Consultant</div>
+        <p class="timeline-desc">Consultor en proyectos de transformación financiera y tecnológica, con foco en la evolución de soluciones Oracle EPM Cloud, la coordinación funcional y técnica y la aplicación práctica de inteligencia artificial en entornos de consultoría.</p>
         <ul class="timeline-bullets">
-          <li class="timeline-bullet">Diseño funcional e implementación de Oracle EPM Cloud para procesos de planificación y controlling (PR, Budget, Forecast y Real) en el ámbito de I+D e Inversiones para uno de los 10 mayores grupos empresariales de España por facturación.</li>
-          <li class="timeline-bullet">Estructuración del modelo dimensional: cubos, dimensiones, jerarquías, atributos y reglas de cálculo para procesos críticos de I+D e Inversiones.</li>
-          <li class="timeline-bullet">Definición y validación de reglas de negocio para activaciones, amortizaciones y efectos financieros bajo criterios IFRS y fiscales.</li>
-          <li class="timeline-bullet">Coordinación de integraciones funcionales entre Oracle EPM Cloud, SAP, Oracle Data Integrator (ODI), EPMAutomate y Data Exchange.</li>
-          <li class="timeline-bullet">Diseño y optimización de Data Forms, Task Lists y flujos operativos; definición de salidas analíticas en Smart View, dashboards y Power BI.</li>
-          <li class="timeline-bullet">Adquisición de 10 certificaciones Oracle (6 especializadas en IA) para consolidar la base técnica en las plataformas del proyecto.</li>
+          <li class="timeline-bullet">Evolución funcional y técnica de soluciones Oracle EPM Cloud para procesos de planificación, controlling, I+D e inversiones.</li>
+          <li class="timeline-bullet">Coordinación con equipos de negocio y tecnología para analizar necesidades, resolver incidencias y convertir requisitos financieros en soluciones implementables.</li>
+          <li class="timeline-bullet">Gestión y seguimiento de integraciones, metadatos, reglas de negocio, mappings y cargas de datos mediante Oracle EPM, ODI, Data Exchange y EPMAutomate.</li>
+          <li class="timeline-bullet">Impulso de mejoras de automatización, documentación y calidad de entrega, incorporando herramientas de IA cuando aportan valor al trabajo.</li>
+          <li class="timeline-bullet">Desarrollo de herramientas y materiales internos orientados a estructurar evaluaciones, conocimiento y procesos de trabajo.</li>
+          <li class="timeline-bullet">Consolidación de una especialización multiplataforma mediante 20 certificaciones de Inteligencia Artificial de Anthropic, OpenAI, Google, Deloitte y Oracle.</li>
         </ul>
         <ul class="timeline-tags">
           <li class="tag-chip" lang="en">Oracle EPM Cloud</li>
           <li class="tag-chip" lang="en">OCI</li>
-          <li class="tag-chip" lang="en">Essbase</li>
-          <li class="tag-chip" lang="en">ODI</li>
-          <li class="tag-chip" lang="en">Smart View</li>
-          <li class="tag-chip" lang="en">SQL</li>
+          <li class="tag-chip" lang="en">Applied AI</li>
+          <li class="tag-chip" lang="en">Consulting</li>
+          <li class="tag-chip" lang="en">Automation</li>
+          <li class="tag-chip" lang="en">Data Integration</li>
         </ul>
       </li>
 
-      <!-- Deloitte Analyst -->
+      <!-- Deloitte Senior Analyst -->
       <li class="timeline-item reveal reveal-delay-1">
         <div class="timeline-dot"></div>
-        <div class="timeline-period"><time datetime="2025-01">ENE 2025</time> — <time datetime="2025-06">JUN 2025</time></div>
+        <div class="timeline-period"><time datetime="2025-07">JUL 2025</time> — <time datetime="2026-06">JUN 2026</time></div>
         <h3 class="timeline-company">Deloitte</h3>
-        <div class="timeline-role" lang="en">Finance & Technology Analyst</div>
-        <p class="timeline-desc">Incorporación al equipo con foco en análisis funcional, levantamiento de requisitos y configuración inicial de soluciones EPM.</p>
+        <div class="timeline-role" lang="en">Finance & Technology Senior Analyst</div>
+        <p class="timeline-desc">Consultor senior en proyectos de transformación financiera y tecnológica, participando en la definición funcional e implementación de soluciones Oracle EPM Cloud para grandes organizaciones del sector industrial.</p>
         <ul class="timeline-bullets">
-          <li class="timeline-bullet">Análisis funcional de procesos financieros y traducción a diseño de solución en Oracle EPM Cloud.</li>
-          <li class="timeline-bullet">Documentación técnico-funcional del proyecto y coordinación entre equipos de negocio y tecnología.</li>
+          <li class="timeline-bullet">Diseño funcional e implementación de Oracle EPM Cloud para procesos de planificación y controlling (Budget, Forecast y Real) en el ámbito de I+D e Inversiones para uno de los 10 mayores grupos empresariales de España por facturación.</li>
+          <li class="timeline-bullet">Estructuración de modelos dimensionales mediante cubos, dimensiones, jerarquías, atributos y reglas de cálculo.</li>
+          <li class="timeline-bullet">Definición y validación de reglas de negocio para activaciones, amortizaciones y efectos financieros bajo criterios IFRS y fiscales.</li>
+          <li class="timeline-bullet">Coordinación funcional de integraciones entre Oracle EPM Cloud, SAP, Oracle Data Integrator (ODI), Data Exchange y EPMAutomate.</li>
+          <li class="timeline-bullet">Diseño y optimización de Data Forms, Task Lists, Smart View, dashboards y salidas analíticas.</li>
+          <li class="timeline-bullet">Obtención de 10 certificaciones Oracle, seis relacionadas con Inteligencia Artificial, para reforzar la base tecnológica aplicada al proyecto.</li>
         </ul>
         <ul class="timeline-tags">
-          <li class="tag-chip" lang="en">Oracle EPM</li>
-          <li class="tag-chip" lang="en">Business Analysis</li>
+          <li class="tag-chip" lang="en">Oracle EPM Cloud</li>
+          <li class="tag-chip" lang="en">Essbase</li>
+          <li class="tag-chip" lang="en">ODI</li>
+          <li class="tag-chip" lang="en">Smart View</li>
+          <li class="tag-chip" lang="en">IFRS</li>
           <li class="tag-chip" lang="en">Functional Design</li>
         </ul>
       </li>
 
-      <!-- CleverStrategy -->
+      <!-- Deloitte Analyst -->
       <li class="timeline-item reveal reveal-delay-2">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period"><time datetime="2025-01">ENE 2025</time> — <time datetime="2025-06">JUN 2025</time></div>
+        <h3 class="timeline-company">Deloitte</h3>
+        <div class="timeline-role" lang="en">Finance & Technology Analyst</div>
+        <p class="timeline-desc">Incorporación a proyectos de transformación financiera con foco en análisis funcional, levantamiento de requisitos, documentación y configuración inicial de soluciones Oracle EPM Cloud.</p>
+        <ul class="timeline-bullets">
+          <li class="timeline-bullet">Análisis de procesos financieros y traducción de necesidades de negocio a requisitos funcionales.</li>
+          <li class="timeline-bullet">Apoyo en el diseño y configuración de soluciones Oracle EPM Cloud para planificación y controlling.</li>
+          <li class="timeline-bullet">Elaboración y mantenimiento de documentación funcional y técnico-funcional.</li>
+          <li class="timeline-bullet">Validación de datos, formularios, reglas de negocio y resultados durante las distintas fases del proyecto.</li>
+          <li class="timeline-bullet">Coordinación con equipos de negocio y tecnología para realizar seguimiento de requisitos, incidencias y decisiones.</li>
+          <li class="timeline-bullet">Desarrollo de una base práctica en Oracle EPM, análisis de negocio y entrega de proyectos de transformación.</li>
+        </ul>
+        <ul class="timeline-tags">
+          <li class="tag-chip" lang="en">Oracle EPM</li>
+          <li class="tag-chip" lang="en">Business Analysis</li>
+          <li class="tag-chip" lang="en">Requirements Gathering</li>
+          <li class="tag-chip" lang="en">Functional Design</li>
+          <li class="tag-chip" lang="en">Documentation</li>
+        </ul>
+      </li>
+
+      <!-- CleverStrategy -->
+      <li class="timeline-item reveal reveal-delay-3">
         <div class="timeline-dot"></div>
         <div class="timeline-period"><time datetime="2024-07">JUL 2024</time> — <time datetime="2024-12">DIC 2024</time></div>
         <h3 class="timeline-company">CleverStrategy</h3>
@@ -1535,9 +1598,183 @@
 <!-- ===================== CERTIFICATIONS ===================== -->
 <section class="section" id="certifications">
   <div class="container">
-    <div class="section-label reveal">Credenciales verificadas</div>
-    <h2 class="section-title reveal">Certificaciones <span lang="en">Oracle & Project Management</span></h2>
-    <p class="section-subtitle reveal">20+ certificaciones profesionales en tecnología Oracle, inteligencia artificial, gestión de proyectos y metodologías de consultoría.</p>
+    <div class="section-label reveal">Credenciales y especialización</div>
+    <h2 class="section-title reveal">Certificaciones <span>& itinerarios</span></h2>
+    <p class="section-subtitle reveal">20 certificaciones en Inteligencia Artificial dentro de una preparación multidisciplinar que también incluye 10 certificaciones Oracle y 10 en gestión de proyectos y consultoría.</p>
+
+    <!-- AI Block (ancho completo) -->
+    <div class="cert-block-wide reveal">
+      <h3 class="cert-group-title">Inteligencia Artificial <span>— 20 Certificaciones</span></h3>
+      <p class="cert-group-intro">Itinerario multiplataforma que integra fundamentos, IA generativa, agentes, programación asistida, automatización, análisis de datos y aplicación empresarial. Incluye las seis certificaciones Oracle de IA, que forman parte también del itinerario Oracle.</p>
+      <ul class="cert-list cert-list-split">
+
+        <li class="cert-item">
+          <div class="cert-icon ai"><i class="fa-solid fa-comments" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">Claude 101</div>
+            <div class="cert-issuer" lang="en">Anthropic · <time datetime="2026-08">Aug 2026</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">Foundation</span>
+        </li>
+        <li class="cert-item">
+          <div class="cert-icon ai"><i class="fa-solid fa-code" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">Claude Code</div>
+            <div class="cert-issuer" lang="en">Anthropic · <time datetime="2026-08">Aug 2026</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">Coding</span>
+        </li>
+        <li class="cert-item">
+          <div class="cert-icon ai"><i class="fa-solid fa-users" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">Claude Cowork</div>
+            <div class="cert-issuer" lang="en">Anthropic · <time datetime="2026-08">Aug 2026</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">Applied AI</span>
+        </li>
+
+        <li class="cert-item">
+          <div class="cert-icon ai"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">AI Foundations</div>
+            <div class="cert-issuer" lang="en">OpenAI · <time datetime="2026-08">Aug 2026</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">Foundation</span>
+        </li>
+        <li class="cert-item">
+          <div class="cert-icon ai"><i class="fa-solid fa-gears" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">Applied AI</div>
+            <div class="cert-issuer" lang="en">OpenAI · <time datetime="2026-08">Aug 2026</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">Applied AI</span>
+        </li>
+        <li class="cert-item">
+          <div class="cert-icon ai"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">AI Agents and Workflows</div>
+            <div class="cert-issuer" lang="en">OpenAI · <time datetime="2026-08">Aug 2026</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">Agents</span>
+        </li>
+
+        <li class="cert-item">
+          <div class="cert-icon pm"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">AI Fundamentals</div>
+            <div class="cert-issuer" lang="en">Google · <time datetime="2026-04">Apr 2026</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">Foundation</span>
+        </li>
+        <li class="cert-item">
+          <div class="cert-icon pm"><i class="fa-solid fa-chart-bar" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">AI for Data Analysis</div>
+            <div class="cert-issuer" lang="en">Google · <time datetime="2026-04">Apr 2026</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">Data</span>
+        </li>
+        <li class="cert-item">
+          <div class="cert-icon pm"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">AI for Brainstorming and Planning</div>
+            <div class="cert-issuer" lang="en">Google · <time datetime="2026-04">Apr 2026</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">Applied AI</span>
+        </li>
+        <li class="cert-item">
+          <div class="cert-icon pm"><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">AI for Research and Insights</div>
+            <div class="cert-issuer" lang="en">Google · <time datetime="2026-04">Apr 2026</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">Research</span>
+        </li>
+
+        <li class="cert-item">
+          <div class="cert-icon deloitte"><i class="fa-solid fa-building" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name">Fundamentos de la IA</div>
+            <div class="cert-issuer" lang="en">Deloitte · <time datetime="2025-05">May 2025</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">Foundation</span>
+        </li>
+        <li class="cert-item">
+          <div class="cert-icon deloitte"><i class="fa-solid fa-building" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name">IA Generativa Aplicada a la Empresa</div>
+            <div class="cert-issuer" lang="en">Deloitte · <time datetime="2025-05">May 2025</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">GenAI</span>
+        </li>
+        <li class="cert-item">
+          <div class="cert-icon deloitte"><i class="fa-solid fa-building" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">Copilot Foundations I</div>
+            <div class="cert-issuer" lang="en">Deloitte · <time datetime="2026-06">Jun 2026</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">Copilot</span>
+        </li>
+        <li class="cert-item">
+          <div class="cert-icon deloitte"><i class="fa-solid fa-building" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">Copilot Foundations II</div>
+            <div class="cert-issuer" lang="en">Deloitte · <time datetime="2026-06">Jun 2026</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">Copilot</span>
+        </li>
+
+        <li class="cert-item">
+          <div class="cert-icon ai"><i class="fa-solid fa-robot" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">Oracle Certified AI Associate</div>
+            <div class="cert-issuer" lang="en">Oracle · <time datetime="2025-09">Sep 2025</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">Foundation</span>
+        </li>
+        <li class="cert-item">
+          <div class="cert-icon ai"><i class="fa-solid fa-microchip" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">OCI Generative AI Professional</div>
+            <div class="cert-issuer" lang="en">Oracle · <time datetime="2025-09">Sep 2025</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">GenAI</span>
+        </li>
+        <li class="cert-item">
+          <div class="cert-icon ai"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">Oracle Fusion AI Agent Studio Associate</div>
+            <div class="cert-issuer" lang="en">Oracle · <time datetime="2025-09">Sep 2025</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">Agents</span>
+        </li>
+        <li class="cert-item">
+          <div class="cert-icon oracle"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">Oracle AI in Enterprise Performance Management</div>
+            <div class="cert-issuer" lang="en">Oracle · <time datetime="2025-08">Aug 2025</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">AI + EPM</span>
+        </li>
+        <li class="cert-item">
+          <div class="cert-icon ai"><i class="fa-solid fa-database" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">Oracle AI Autonomous Database Professional</div>
+            <div class="cert-issuer" lang="en">Oracle · <time datetime="2025-12">Dec 2025</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">Database</span>
+        </li>
+        <li class="cert-item">
+          <div class="cert-icon ai"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-name" lang="en">OCI Certified Data Science Professional</div>
+            <div class="cert-issuer" lang="en">Oracle · <time datetime="2026-01">Jan 2026</time></div>
+          </div>
+          <span class="cert-badge ai-badge" lang="en">Data Science</span>
+        </li>
+
+      </ul>
+    </div>
 
     <div class="cert-grid">
       <!-- Oracle Block -->
@@ -1731,14 +1968,16 @@
       </li>
 
       <li class="project-card reveal reveal-delay-1">
-        <div class="project-number">02 / Oracle & AI</div>
-        <h3 class="project-title">10 Certificaciones Oracle — 6 en IA</h3>
-        <p class="project-desc">Itinerario de 4 meses completando 10 certificaciones Oracle, con 6 especializadas en Inteligencia Artificial: GenAI, AI Agents, Data Science, Autonomous Database y EPM+AI. Objetivo: integrar IA aplicada en proyectos cloud reales.</p>
+        <div class="project-number">02 / Inteligencia Artificial & Oracle</div>
+        <h3 class="project-title">20 Certificaciones en IA — 10 Certificaciones Oracle</h3>
+        <p class="project-desc">Itinerario multiplataforma de 20 certificaciones de Inteligencia Artificial de Anthropic, OpenAI, Google, Deloitte y Oracle: fundamentos, IA generativa, agentes, programación asistida, automatización y análisis de datos. Se apoya en las 10 certificaciones Oracle, seis de ellas de IA (GenAI, AI Agents, Data Science, Autonomous Database y EPM+AI). Objetivo: conectar estrategia, productividad y tecnología en proyectos de consultoría y transformación financiera.</p>
         <ul class="project-tags">
-          <li class="tag-chip" lang="en">GenAI</li>
+          <li class="tag-chip" lang="en">Anthropic Claude</li>
+          <li class="tag-chip" lang="en">OpenAI</li>
+          <li class="tag-chip" lang="en">Google AI</li>
           <li class="tag-chip" lang="en">AI Agents</li>
           <li class="tag-chip" lang="en">OCI</li>
-          <li class="tag-chip" lang="en">Data Science</li>
+          <li class="tag-chip" lang="en">GenAI</li>
         </ul>
       </li>
 
@@ -1849,6 +2088,16 @@
           <div class="skill-header"><span class="skill-name" lang="en">Power BI</span><span class="skill-level">Competente</span></div>
           <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
         </div>
+        <ul class="skill-chips">
+          <li class="skill-chip" lang="en">AI Agents</li>
+          <li class="skill-chip" lang="en">Workflow Automation</li>
+          <li class="skill-chip" lang="en">AI-assisted Development</li>
+          <li class="skill-chip" lang="en">Prompt Engineering</li>
+          <li class="skill-chip" lang="en">Anthropic Claude</li>
+          <li class="skill-chip" lang="en">ChatGPT</li>
+          <li class="skill-chip" lang="en">Google AI</li>
+          <li class="skill-chip" lang="en">Microsoft 365 Copilot</li>
+        </ul>
       </li>
 
       <li class="skill-group reveal reveal-delay-2">
@@ -1967,16 +2216,6 @@
         Italiano <span class="lang-level">B2</span>
       </li>
  
-      <!-- ALEMÁN -->
-      <li class="lang-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" class="lang-flag" aria-hidden="true">
-          <rect width="20" height="15" fill="#FFCE00"/>
-          <rect width="20" height="10" fill="#DD0000"/>
-          <rect width="20" height="5" fill="#000"/>
-        </svg>
-        Alemán <span class="lang-level">A2</span>
-      </li>
- 
     </ul>
   </div>
 </section>
@@ -1987,7 +2226,7 @@
   <div class="container">
     <div class="section-label reveal">Conectemos</div>
     <h2 class="contact-tagline reveal">¿Trabajamos <span>juntos</span>?</h2>
-    <p class="section-subtitle reveal">Abierto a conversaciones sobre proyectos Oracle EPM/OCI, oportunidades en transformación financiera y tecnológica, o simplemente a conectar con profesionales del sector.</p>
+    <p class="section-subtitle reveal">Abierto a conversaciones sobre Oracle EPM Cloud, OCI, inteligencia artificial aplicada, automatización y oportunidades de transformación financiera y tecnológica.</p>
 
     <ul class="contact-links reveal">
       <li><a href="https://www.linkedin.com/in/daniel-navarro-delgado" target="_blank" rel="noopener noreferrer" class="contact-link">
