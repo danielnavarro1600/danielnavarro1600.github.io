@@ -16,18 +16,27 @@
       } catch (e) {}
     })();
   </script>
-  <title>Daniel Navarro Delgado — Finance & Technology Senior Analyst</title>
-  <meta name="description" content="Finance & Technology Senior Analyst at Deloitte. Oracle EPM Cloud, OCI & AI specialist. 10x Oracle Certified, 6x AI Specialist. Barcelona." />
-  <meta property="og:title" content="Daniel Navarro Delgado — Finance & Technology Senior Analyst" />
+  <title>Daniel Navarro Delgado — Finance &amp; Technology Senior Analyst</title>
+  <meta name="description" content="Finance &amp; Technology Senior Analyst at Deloitte. Oracle EPM Cloud, OCI &amp; AI specialist. 10x Oracle Certified, 6x AI Specialist. Barcelona." />
+  <meta property="og:title" content="Daniel Navarro Delgado — Finance &amp; Technology Senior Analyst" />
   <meta property="og:description" content="Senior Analyst at Deloitte specializing in Oracle EPM Cloud, OCI and Applied AI." />
   <meta property="og:image" content="https://danielnavarro1600.github.io/img/logo.jpg">
+  <meta property="og:image:alt" content="Logotipo profesional de Daniel Navarro Delgado" />
   <meta property="og:type" content="website" />
-  <link rel="canonical" href="https://danielnavarro1600.github.io" />
+  <meta property="og:url" content="https://danielnavarro1600.github.io/" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="Daniel Navarro Delgado" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Daniel Navarro Delgado — Finance &amp; Technology Senior Analyst" />
+  <meta name="twitter:description" content="Senior Analyst at Deloitte specializing in Oracle EPM Cloud, OCI and Applied AI." />
+  <meta name="twitter:image" content="https://danielnavarro1600.github.io/img/logo.jpg" />
+  <link rel="canonical" href="https://danielnavarro1600.github.io/" />
   <link rel="icon" type="image/png" href="img/favicon.png">
   <meta name="theme-color" content="#0a0a0f" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Syne:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css" />
@@ -43,6 +52,7 @@
     },
     "url": "https://danielnavarro1600.github.io",
     "image": "https://danielnavarro1600.github.io/img/foto-perfil.jpg",
+    "email": "mailto:danielnavarrodelgado16@gmail.com",
     "sameAs": [
       "https://www.linkedin.com/in/daniel-navarro-delgado",
       "https://github.com/danielnavarro1600"
@@ -51,7 +61,24 @@
       "@type": "PostalAddress",
       "addressLocality": "Barcelona",
       "addressCountry": "ES"
-    }
+    },
+    "alumniOf": [
+      { "@type": "EducationalOrganization", "name": "Universitat Pompeu Fabra" },
+      { "@type": "EducationalOrganization", "name": "Università Milano-Bicocca" },
+      { "@type": "EducationalOrganization", "name": "Steinbeis University Berlin" }
+    ],
+    "knowsAbout": [
+      "Oracle EPM Cloud",
+      "Oracle Cloud Infrastructure (OCI)",
+      "Applied AI",
+      "Financial Planning",
+      "IFRS",
+      "Consulting"
+    ],
+    "hasCredential": [
+      { "@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "Oracle Cloud & AI (10 certifications)" },
+      { "@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "Project Management & Consulting (10 certifications)" }
+    ]
   }
   </script>
 
@@ -458,7 +485,7 @@
       letter-spacing: -0.01em;
       margin-bottom: var(--space-4);
     }
-    .hero-name em {
+    .hero-name span {
       font-style: italic;
       color: var(--accent-ink);
     }
@@ -673,7 +700,7 @@
       margin-bottom: var(--space-8);
       letter-spacing: -0.01em;
     }
-    .section-title em {
+    .section-title span {
       font-style: italic;
       color: var(--accent);
     }
@@ -1050,6 +1077,10 @@
       margin-bottom: var(--space-8);
       line-height: 1.5;
     }
+    /* <span> no es cursiva por defecto como lo era <em> */
+    .edu-degree span {
+      font-style: italic;
+    }
 
     .edu-note {
       font-size: var(--text-xs);
@@ -1163,7 +1194,7 @@
       max-width: 700px;
       margin-bottom: var(--space-8);
     }
-    .contact-tagline em { color: var(--accent-ink); font-style: italic; }
+    .contact-tagline span { color: var(--accent-ink); font-style: italic; }
 
     /* =========================================================
        FOOTER
@@ -1285,6 +1316,23 @@
       * {
         scroll-behavior: auto !important;
       }
+      /* Los desplazamientos y giros del hover (tarjetas que "flotan", la X
+         de la hamburguesa, la barra de proyecto que se despliega) seguían
+         animándose aunque activaras "reducir movimiento": la regla `all`
+         que se sustituyó por propiedades explícitas en la acción 6 nunca
+         estuvo cubierta aquí. El estado final del hover no cambia, solo
+         deja de animarse. */
+      nav,
+      .hamburger span,
+      .btn-primary,
+      .btn-ghost,
+      .cert-item,
+      .project-card,
+      .project-card::before,
+      .edu-card,
+      .contact-link {
+        transition: none;
+      }
     }
   </style>
 
@@ -1318,7 +1366,7 @@
     <a href="#education">Educación</a>
     <a href="#contact">Contacto</a>
     <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-pressed="false">
-      <i class="fa-solid fa-moon" id="themeIcon"></i>
+      <i class="fa-solid fa-moon" id="themeIcon" aria-hidden="true"></i>
       <span id="themeLabel">Oscuro</span>
     </button>
   </div>
@@ -1338,7 +1386,7 @@
   <div class="hero-container">
     <div>
       <div class="hero-eyebrow"><span lang="en">Finance & Technology</span> · Deloitte · Barcelona</div>
-      <h1 class="hero-name">Daniel<br><em>Navarro</em></h1>
+      <h1 class="hero-name">Daniel<br><span>Navarro</span></h1>
       <p class="hero-title" lang="en">Senior Analyst — Oracle EPM Cloud & Oracle AI Specialist</p>
       <p class="hero-desc">
         Conectando la planificación financiera, la tecnología empresarial y la IA aplicada para impulsar
@@ -1398,7 +1446,7 @@
 <section class="section section-alt" id="experience">
   <div class="container">
     <div class="section-label reveal">Trayectoria profesional</div>
-    <h2 class="section-title reveal">Experiencia <em>profesional</em></h2>
+    <h2 class="section-title reveal">Experiencia <span>profesional</span></h2>
     <p class="section-subtitle reveal">Consultor en transformación financiera y tecnológica, con foco en Oracle EPM Cloud, OCI e inteligencia artificial aplicada a finanzas y controlling.</p>
 
     <ol class="timeline">
@@ -1474,7 +1522,7 @@
 <section class="section" id="certifications">
   <div class="container">
     <div class="section-label reveal">Credenciales verificadas</div>
-    <h2 class="section-title reveal">Certificaciones <em>Oracle & Project Management</em></h2>
+    <h2 class="section-title reveal">Certificaciones <span>Oracle & Project Management</span></h2>
     <p class="section-subtitle reveal">20+ certificaciones profesionales en tecnología Oracle, inteligencia artificial, gestión de proyectos y metodologías de consultoría.</p>
 
     <div class="cert-grid">
@@ -1483,7 +1531,7 @@
         <h3 class="cert-group-title">Oracle Cloud <span>& AI</span> — 10 Certificaciones</h3>
         <ul class="cert-list">
           <li class="cert-item">
-            <div class="cert-icon ai"><i class="fa-solid fa-brain"></i></div>
+            <div class="cert-icon ai"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">OCI Certified Data Science Professional</div>
               <div class="cert-issuer">Oracle · <time datetime="2026-01">Jan 2026</time></div>
@@ -1491,7 +1539,7 @@
             <span class="cert-badge ai-badge">AI</span>
           </li>
           <li class="cert-item">
-            <div class="cert-icon ai"><i class="fa-solid fa-microchip"></i></div>
+            <div class="cert-icon ai"><i class="fa-solid fa-microchip" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">OCI Generative AI Professional</div>
               <div class="cert-issuer">Oracle · <time datetime="2025-09">Sep 2025</time></div>
@@ -1499,7 +1547,7 @@
             <span class="cert-badge ai-badge">AI</span>
           </li>
           <li class="cert-item">
-            <div class="cert-icon ai"><i class="fa-solid fa-robot"></i></div>
+            <div class="cert-icon ai"><i class="fa-solid fa-robot" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">Oracle Certified AI Associate</div>
               <div class="cert-issuer">Oracle · <time datetime="2025-09">Sep 2025</time></div>
@@ -1507,7 +1555,7 @@
             <span class="cert-badge ai-badge">AI</span>
           </li>
           <li class="cert-item">
-            <div class="cert-icon ai"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <div class="cert-icon ai"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">Oracle Fusion AI Agent Studio Associate</div>
               <div class="cert-issuer">Oracle · <time datetime="2025-09">Sep 2025</time></div>
@@ -1515,7 +1563,7 @@
             <span class="cert-badge ai-badge">AI</span>
           </li>
           <li class="cert-item">
-            <div class="cert-icon oracle"><i class="fa-solid fa-chart-line"></i></div>
+            <div class="cert-icon oracle"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">Oracle AI in Enterprise Performance Management</div>
               <div class="cert-issuer">Oracle · <time datetime="2025-08">Aug 2025</time></div>
@@ -1523,7 +1571,7 @@
             <span class="cert-badge ai-badge">AI + EPM</span>
           </li>
           <li class="cert-item">
-            <div class="cert-icon ai"><i class="fa-solid fa-database"></i></div>
+            <div class="cert-icon ai"><i class="fa-solid fa-database" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">Oracle AI Autonomous Database Professional</div>
               <div class="cert-issuer">Oracle · <time datetime="2025-12">Dec 2025</time></div>
@@ -1531,7 +1579,7 @@
             <span class="cert-badge ai-badge">AI</span>
           </li>
           <li class="cert-item">
-            <div class="cert-icon oracle"><i class="fa-solid fa-arrows-spin"></i></div>
+            <div class="cert-icon oracle"><i class="fa-solid fa-arrows-spin" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">Oracle Cloud EPM Data Integration Professional</div>
               <div class="cert-issuer">Oracle · <time datetime="2025-12">Dec 2025</time></div>
@@ -1539,7 +1587,7 @@
             <span class="cert-badge">EPM</span>
           </li>
           <li class="cert-item">
-            <div class="cert-icon oracle"><i class="fa-solid fa-server"></i></div>
+            <div class="cert-icon oracle"><i class="fa-solid fa-server" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">Oracle Data Platform Certified Associate</div>
               <div class="cert-issuer">Oracle · <time datetime="2025-12">Dec 2025</time></div>
@@ -1547,7 +1595,7 @@
             <span class="cert-badge">OCI</span>
           </li>
           <li class="cert-item">
-            <div class="cert-icon oracle"><i class="fa-solid fa-cloud"></i></div>
+            <div class="cert-icon oracle"><i class="fa-solid fa-cloud" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">Oracle Certified Associate (OCI Foundations)</div>
               <div class="cert-issuer">Oracle · <time datetime="2025-09">Sep 2025</time></div>
@@ -1555,7 +1603,7 @@
             <span class="cert-badge">OCI</span>
           </li>
           <li class="cert-item">
-            <div class="cert-icon oracle"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="cert-icon oracle"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">Oracle Guided Learning Administrator Associate</div>
               <div class="cert-issuer">Oracle · <time datetime="2025-12">Dec 2025</time></div>
@@ -1570,7 +1618,7 @@
         <h3 class="cert-group-title">Gestión de Proyectos <span>& Consultoría</span> — 10 Certificaciones</h3>
         <ul class="cert-list">
           <li class="cert-item">
-            <div class="cert-icon deloitte"><i class="fa-solid fa-building"></i></div>
+            <div class="cert-icon deloitte"><i class="fa-solid fa-building" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">The Deloitte Way — Project Management</div>
               <div class="cert-issuer">Deloitte · Internal</div>
@@ -1578,63 +1626,63 @@
             <span class="cert-badge">Internal</span>
           </li>
           <li class="cert-item">
-            <div class="cert-icon pm"><i class="fa-solid fa-lightbulb"></i></div>
+            <div class="cert-icon pm"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">Consulting Approach to Problem Solving</div>
               <div class="cert-issuer">Udemy · <time datetime="2026-03">Mar 2026</time></div>
             </div>
           </li>
           <li class="cert-item">
-            <div class="cert-icon pm"><i class="fa-solid fa-gear"></i></div>
+            <div class="cert-icon pm"><i class="fa-solid fa-gear" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">Service Management with ITIL® 4</div>
               <div class="cert-issuer">LinkedIn · <time datetime="2026-03">Mar 2026</time></div>
             </div>
           </li>
           <li class="cert-item">
-            <div class="cert-icon pm"><i class="fa-solid fa-code-branch"></i></div>
+            <div class="cert-icon pm"><i class="fa-solid fa-code-branch" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">Hybrid Project Management</div>
               <div class="cert-issuer">LinkedIn · <time datetime="2026-03">Mar 2026</time></div>
             </div>
           </li>
           <li class="cert-item">
-            <div class="cert-icon pm"><i class="fa-solid fa-diagram-project"></i></div>
+            <div class="cert-icon pm"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">Agile Project Management</div>
               <div class="cert-issuer">LinkedIn · <time datetime="2024-09">Sep 2024</time></div>
             </div>
           </li>
           <li class="cert-item">
-            <div class="cert-icon pm"><i class="fa-solid fa-rotate"></i></div>
+            <div class="cert-icon pm"><i class="fa-solid fa-rotate" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">Scrum Master Framework</div>
               <div class="cert-issuer">LinkedIn · <time datetime="2024-09">Sep 2024</time></div>
             </div>
           </li>
           <li class="cert-item">
-            <div class="cert-icon pm"><i class="fa-solid fa-chart-bar"></i></div>
+            <div class="cert-icon pm"><i class="fa-solid fa-chart-bar" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">Lean Six Sigma</div>
               <div class="cert-issuer">LinkedIn · <time datetime="2024-09">Sep 2024</time></div>
             </div>
           </li>
           <li class="cert-item">
-            <div class="cert-icon pm"><i class="fa-solid fa-list-check"></i></div>
+            <div class="cert-icon pm"><i class="fa-solid fa-list-check" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">Project Management</div>
               <div class="cert-issuer">LinkedIn · <time datetime="2024-05">May 2024</time></div>
             </div>
           </li>
           <li class="cert-item">
-            <div class="cert-icon pm"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+            <div class="cert-icon pm"><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">Business Analysis</div>
               <div class="cert-issuer">LinkedIn · <time datetime="2024-05">May 2024</time></div>
             </div>
           </li>
           <li class="cert-item">
-            <div class="cert-icon pm"><i class="fa-solid fa-handshake"></i></div>
+            <div class="cert-icon pm"><i class="fa-solid fa-handshake" aria-hidden="true"></i></div>
             <div>
               <div class="cert-name">Consulting: Client Relationship Management</div>
               <div class="cert-issuer">LinkedIn · <time datetime="2024-09">Sep 2024</time></div>
@@ -1650,7 +1698,7 @@
 <section class="section section-alt" id="projects">
   <div class="container">
     <div class="section-label reveal">Trabajo destacado</div>
-    <h2 class="section-title reveal">Proyectos <em>relevantes</em></h2>
+    <h2 class="section-title reveal">Proyectos <span>relevantes</span></h2>
     <p class="section-subtitle reveal">Iniciativas de alto impacto en consultoría, tecnología y desarrollo profesional.</p>
 
     <ul class="projects-grid">
@@ -1736,7 +1784,7 @@
 <section class="section" id="skills">
   <div class="container">
     <div class="section-label reveal">Stack técnico</div>
-    <h2 class="section-title reveal">Habilidades <em>técnicas</em></h2>
+    <h2 class="section-title reveal">Habilidades <span>técnicas</span></h2>
     <p class="section-subtitle reveal">Competencias consolidadas en tecnología Oracle, análisis financiero, herramientas BI y metodologías de consultoría.</p>
 
     <ul class="skills-grid">
@@ -1829,7 +1877,7 @@
 <section class="section section-alt" id="education">
   <div class="container">
     <div class="section-label reveal">Formación académica</div>
-    <h2 class="section-title reveal">Educación <em>& formación</em></h2>
+    <h2 class="section-title reveal">Educación <span>& formación</span></h2>
     <p class="section-subtitle reveal">Formación multidisciplinar en economía, psicología empresarial y negocios internacionales, con distinción académica en todas las etapas.</p>
 
     <ul class="edu-grid">
@@ -1837,24 +1885,24 @@
       <li class="edu-card reveal">
         <div class="edu-period"><time datetime="2019">2019</time> — <time datetime="2023">2023</time></div>
         <h3 class="edu-institution">Universitat Pompeu Fabra</h3>
-        <div class="edu-degree">Licenciatura en Economía<br><em>Barcelona</em></div>
-        <span class="edu-highlight"><i class="fa-solid fa-star"></i> TFG Premiado y Publicado</span>
+        <div class="edu-degree">Licenciatura en Economía<br><span>Barcelona</span></div>
+        <span class="edu-highlight"><i class="fa-solid fa-star" aria-hidden="true"></i> TFG Premiado y Publicado</span>
         <p class="edu-note">Tesis premiada sobre implicaciones distributivas de un impuesto al carbono. Nota: 9.7/10.</p>
       </li>
 
       <li class="edu-card reveal reveal-delay-1">
         <div class="edu-period"><time datetime="2021">2021</time> — <time datetime="2022">2022</time></div>
         <h3 class="edu-institution">Università Milano-Bicocca</h3>
-        <div class="edu-degree">Erasmus — International Business Economics<br><em>Milán, Italia</em></div>
-        <span class="edu-highlight"><i class="fa-solid fa-globe"></i> 29/30 · Magna Cum Laude</span>
+        <div class="edu-degree">Erasmus — International Business Economics<br><span>Milán, Italia</span></div>
+        <span class="edu-highlight"><i class="fa-solid fa-globe" aria-hidden="true"></i> 29/30 · Magna Cum Laude</span>
         <p class="edu-note">Materias: Global Management, Behavioral Economics, Data-Driven Decision Making.</p>
       </li>
 
       <li class="edu-card reveal reveal-delay-2">
         <div class="edu-period"><time datetime="2023">2023</time> — <time datetime="2025">2025</time></div>
         <h3 class="edu-institution">Steinbeis University Berlin</h3>
-        <div class="edu-degree">Máster en Psicología Empresarial y Organizativa<br><em>Schools of Next Practices (Berlin)</em></div>
-        <span class="edu-highlight"><i class="fa-solid fa-award"></i> Nota 1.3 — A</span>
+        <div class="edu-degree">Máster en Psicología Empresarial y Organizativa<br><span>Schools of Next Practices (Berlin)</span></div>
+        <span class="edu-highlight"><i class="fa-solid fa-award" aria-hidden="true"></i> Nota 1.3 — A</span>
         <p class="edu-note">Tesis: Impacto de chatbots de IA en el compromiso y bienestar de empleados.</p>
       </li>
 
@@ -1864,7 +1912,7 @@
  
       <!-- ESPAÑOL -->
       <li class="lang-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" class="lang-flag">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" class="lang-flag" aria-hidden="true">
           <rect width="20" height="15" fill="#c60b1e"/>
           <rect y="3.75" width="20" height="7.5" fill="#f1bf00"/>
         </svg>
@@ -1873,7 +1921,7 @@
  
       <!-- CATALÁN (Senyera) -->
       <li class="lang-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" class="lang-flag">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" class="lang-flag" aria-hidden="true">
           <rect width="20" height="15" fill="#FCDD09"/>
           <rect y="1.67" width="20" height="1.67" fill="#DA121A"/>
           <rect y="5" width="20" height="1.67" fill="#DA121A"/>
@@ -1885,7 +1933,7 @@
  
       <!-- INGLÉS (Union Jack) -->
       <li class="lang-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" class="lang-flag">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" class="lang-flag" aria-hidden="true">
           <rect width="20" height="15" fill="#012169"/>
           <path d="M0,0 L20,15 M20,0 L0,15" stroke="#fff" stroke-width="3"/>
           <path d="M0,0 L20,15 M20,0 L0,15" stroke="#C8102E" stroke-width="1.8"/>
@@ -1897,7 +1945,7 @@
  
       <!-- ITALIANO -->
       <li class="lang-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" class="lang-flag">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" class="lang-flag" aria-hidden="true">
           <rect width="20" height="15" fill="#CE2B37"/>
           <rect width="13.3" height="15" fill="#fff"/>
           <rect width="6.67" height="15" fill="#009246"/>
@@ -1907,7 +1955,7 @@
  
       <!-- ALEMÁN -->
       <li class="lang-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" class="lang-flag">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" class="lang-flag" aria-hidden="true">
           <rect width="20" height="15" fill="#FFCE00"/>
           <rect width="20" height="10" fill="#DD0000"/>
           <rect width="20" height="5" fill="#000"/>
@@ -1924,23 +1972,23 @@
   <div class="contact-grid-bg"></div>
   <div class="container" style="position:relative; z-index:2;">
     <div class="section-label reveal">Conectemos</div>
-    <h2 class="contact-tagline reveal">¿Trabajamos <em>juntos</em>?</h2>
+    <h2 class="contact-tagline reveal">¿Trabajamos <span>juntos</span>?</h2>
     <p class="section-subtitle reveal">Abierto a conversaciones sobre proyectos Oracle EPM/OCI, oportunidades en transformación financiera y tecnológica, o simplemente a conectar con profesionales del sector.</p>
 
-    <div class="contact-links reveal">
-      <a href="https://www.linkedin.com/in/daniel-navarro-delgado" target="_blank" class="contact-link">
-        <i class="fa-brands fa-linkedin"></i> LinkedIn
-      </a>
-      <a href="https://danielnavarro1600.github.io" target="_blank" class="contact-link">
-        <i class="fa-solid fa-globe"></i> <span lang="en">Website</span>
-      </a>
-      <a href="https://github.com/danielnavarro1600" target="_blank" class="contact-link">
-        <i class="fa-brands fa-github"></i> GitHub
-      </a>
-      <a href="mailto:danielnavarrodelgado16@gmail.com" class="contact-link">
-        <i class="fa-solid fa-envelope"></i> <span lang="en">Email</span>
-      </a>
-    </div>
+    <ul class="contact-links reveal">
+      <li><a href="https://www.linkedin.com/in/daniel-navarro-delgado" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn
+      </a></li>
+      <li><a href="https://danielnavarro1600.github.io" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <i class="fa-solid fa-globe" aria-hidden="true"></i> <span lang="en">Website</span>
+      </a></li>
+      <li><a href="https://github.com/danielnavarro1600" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
+      </a></li>
+      <li><a href="mailto:danielnavarrodelgado16@gmail.com" class="contact-link">
+        <i class="fa-solid fa-envelope" aria-hidden="true"></i> <span lang="en">Email</span>
+      </a></li>
+    </ul>
   </div>
 </section>
 
