@@ -21,7 +21,7 @@ No hay build, gestor de paquetes ni tests automatizados. La web ejecutable está
 ## Arquitectura
 
 - `index.html` contiene todo: HTML, un único bloque `<style>` y un único bloque `<script>` al final de `<body>`. No hay pipeline de CSS/JS — los cambios de estilo y comportamiento se editan directamente en este archivo.
-- **Tema claro/oscuro**: variables CSS en `:root` (tema claro, por defecto) sobrescritas bajo `[data-theme="dark"]`. `toggleTheme()` cambia el atributo `data-theme` de `<html>`. No hay persistencia (sin localStorage): el tema vuelve a claro al recargar.
+- **Tema claro/oscuro**: variables CSS en `:root` (tema claro, por defecto) sobrescritas bajo `[data-theme="dark"]`. `toggleTheme()` cambia el atributo `data-theme` de `<html>` y guarda la elección en `localStorage`. Si el visitante nunca ha elegido manualmente, se sigue `prefers-color-scheme` del sistema (incluso en vivo si cambia con la página abierta). Un script diminuto al principio del `<head>` aplica el tema antes de pintar la página, para evitar un destello del tema incorrecto al recargar.
 - **Secciones** (anclas de navegación): `#hero`, `#experience`, `#certifications`, `#projects`, `#skills`, `#education`, `#contact`, dentro de `<nav id="navbar">` y `<footer>`.
 - **Interactividad** (JS nativo, sin dependencias): scroll del navbar, menú hamburguesa móvil, animaciones de aparición con `IntersectionObserver` (`.reveal`), barras de habilidades animadas (`.skill-fill` con `data-width`), y anclas de scroll suave que cierran el menú móvil al pulsar.
 - **Dependencias externas** (CDN, en `<head>`): Google Fonts y Font Awesome. El logo/favicon (también usado como og:image) sigue alojado en ibb.co.
