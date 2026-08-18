@@ -55,10 +55,15 @@
       --text-muted: #6b6560;
       --border: rgba(0,0,0,0.08);
 
-      /* --- Color: acento --- */
-      --accent: #b8860b;
-      --accent-light: #d4a017;
-      --accent-rgb: 184,134,11;
+      /* --- Color: acento ---
+         Dos pares, porque el dorado convive con fondos claros y con las bandas
+         de tinta. Un solo valor no puede cumplir AA en ambos: sobre blanco pide
+         oscurecerlo, sobre tinta pide aclararlo. */
+      --accent: #7d5c07;            /* texto de acento sobre superficie clara */
+      --accent-light: #d4a017;      /* remates decorativos (gradientes, barras) */
+      --accent-ink: #d4a017;        /* acento sobre las bandas de tinta */
+      --accent-ink-hover: #e8b820;
+      --accent-rgb: 184,134,11;     /* solo tintes y bordes decorativos */
 
       /* --- Color: tinta (bandas siempre oscuras: nav, hero, contacto, pie) --- */
       --ink: #0a0a0f;
@@ -230,7 +235,7 @@
       transition: color var(--dur-fast);
     }
 
-    .nav-links a:hover { color: var(--accent-light); }
+    .nav-links a:hover { color: var(--accent-ink); }
 
     .theme-toggle {
       background: none;
@@ -247,8 +252,8 @@
       gap: var(--space-3);
     }
     .theme-toggle:hover {
-      border-color: var(--accent);
-      color: var(--accent-light);
+      border-color: var(--accent-ink);
+      color: var(--accent-ink);
     }
 
     .hamburger {
@@ -329,7 +334,7 @@
     .hero-eyebrow {
       font-family: var(--font-mono);
       font-size: var(--text-2xs);
-      color: var(--accent);
+      color: var(--accent-ink);
       letter-spacing: 0.18em;
       text-transform: uppercase;
       margin-bottom: var(--space-9);
@@ -340,7 +345,7 @@
     .hero-eyebrow::before {
       content: '';
       width: 32px; height: 1px;
-      background: var(--accent);
+      background: var(--accent-ink);
     }
 
     .hero-name {
@@ -354,7 +359,7 @@
     }
     .hero-name em {
       font-style: italic;
-      color: var(--accent-light);
+      color: var(--accent-ink);
     }
 
     .hero-title {
@@ -387,7 +392,7 @@
       padding: var(--space-3) var(--space-7);
       border: 1px solid rgba(var(--accent-rgb),var(--a-edge));
       border-radius: var(--radius-xs);
-      color: var(--accent-light);
+      color: var(--accent-ink);
       letter-spacing: 0.06em;
       transition: all var(--dur-fast);
     }
@@ -404,7 +409,7 @@
 
     .btn-primary {
       padding: var(--space-7) var(--space-12);
-      background: var(--accent);
+      background: var(--accent-ink);
       color: var(--ink);
       font-family: var(--font-ui);
       font-size: var(--text-sm);
@@ -417,7 +422,7 @@
       transition: all var(--dur-fast);
     }
     .btn-primary:hover {
-      background: var(--accent-light);
+      background: var(--accent-ink-hover);
       transform: translateY(-2px);
       box-shadow: 0 8px 32px rgba(var(--accent-rgb),var(--a-edge));
     }
@@ -474,7 +479,7 @@
       font-family: var(--font-display);
       font-size: var(--text-4xl);
       font-weight: 300;
-      color: var(--accent-light);
+      color: var(--accent-ink);
       line-height: 1;
       margin-bottom: var(--space-4);
     }
@@ -674,7 +679,7 @@
       background: var(--accent-glow);
       border: 1px solid rgba(var(--accent-rgb),var(--a-line));
       border-radius: var(--radius-xs);
-      color: var(--accent-light);
+      color: var(--accent);
       letter-spacing: 0.04em;
     }
 
@@ -908,7 +913,7 @@
     }
     .skill-chip:hover {
       border-color: var(--accent);
-      color: var(--accent-light);
+      color: var(--accent);
     }
 
     /* =========================================================
@@ -1038,6 +1043,9 @@
 
     #contact .section-title { color: var(--on-ink); }
     #contact .section-subtitle { color: rgba(var(--on-ink-rgb),var(--o-muted)); }
+    /* La sección vive sobre tinta: el acento de superficie clara no contrasta aquí. */
+    #contact .section-label { color: var(--accent-ink); }
+    #contact .section-label::before { background: var(--accent-ink); }
 
     .contact-links {
       display: flex;
@@ -1059,8 +1067,8 @@
       transition: all var(--dur-fast);
     }
     .contact-link:hover {
-      border-color: var(--accent);
-      color: var(--accent-light);
+      border-color: var(--accent-ink);
+      color: var(--accent-ink);
       background: var(--accent-glow);
       transform: translateY(-2px);
     }
@@ -1075,7 +1083,7 @@
       max-width: 700px;
       margin-bottom: var(--space-8);
     }
-    .contact-tagline em { color: var(--accent-light); font-style: italic; }
+    .contact-tagline em { color: var(--accent-ink); font-style: italic; }
 
     /* =========================================================
        FOOTER
