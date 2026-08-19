@@ -10,17 +10,29 @@ Personal portfolio website presenting my experience at the intersection of finan
 
 This is a lightweight, single-page website built without a framework or build process. The current version keeps the structure, styling and interactivity in one `index.html` file so it can be opened locally and deployed directly to GitHub Pages.
 
-The website includes:
+The website is organised as a single narrative: what I can solve, what I have built, where I have worked, what I studied, what I keep learning, how I work, and how to reach me.
 
-- Professional experience
-- Certifications
-- Selected projects
-- Technical and functional skills
-- Education and languages
-- Contact links
-- Responsive navigation
-- Light and dark themes
-- Scroll-based animations
+Sections and anchors:
+
+| Anchor | Section |
+| --- | --- |
+| `#hero` | Value proposition, portrait and headline figures |
+| `#skills` | Capabilities, the data-to-decision flow and the technical stack |
+| `#projects` | Client projects, internal initiatives and personal tools |
+| `#experience` | Career timeline |
+| `#education` | Degrees and languages |
+| `#certifications` | Filterable certification index (34 entries, three tracks) |
+| `#approach` | How I work |
+| `#contact` | Email and professional links |
+
+Features:
+
+- Light and dark themes with no flash on reload, following the system preference until the visitor chooses
+- Filterable certification index whose counts are derived from the DOM
+- Full keyboard navigation, visible focus states and AA contrast in both themes
+- Scroll-based reveals that respect `prefers-reduced-motion`
+- Readable print stylesheet
+- Metadata and structured data for search engines and social previews
 
 ## Technologies
 
@@ -79,10 +91,9 @@ The website is designed for static hosting with GitHub Pages. Publishing is hand
 
 ## Potential improvements
 
-- Improve accessibility and keyboard navigation
-- Review metadata and social sharing previews
-- Optimize externally hosted images
-- Standardize the language across all sections
+- Link the FP&A assessment tool to its direct GitHub Pages URL (the card currently points to the GitHub profile)
+- Serve a smaller, pre-cropped portrait to reduce the image payload
+- Self-host the fonts and icons to remove the CDN dependency
 - Separate CSS and JavaScript if the project becomes harder to maintain
 - Add automated checks only if the project grows beyond the current static setup
 

@@ -21,12 +21,14 @@ No hay build, gestor de paquetes ni tests automatizados. La web ejecutable está
 ## Arquitectura
 
 - `index.html` contiene todo: HTML, un único bloque `<style>` y un único bloque `<script>` al final de `<body>`. No hay pipeline de CSS/JS — los cambios de estilo y comportamiento se editan directamente en este archivo.
-- **Tema claro/oscuro**: variables CSS en `:root` (tema claro, por defecto) sobrescritas bajo `[data-theme="dark"]`. `toggleTheme()` cambia el atributo `data-theme` de `<html>` y guarda la elección en `localStorage`. Si el visitante nunca ha elegido manualmente, se sigue `prefers-color-scheme` del sistema (incluso en vivo si cambia con la página abierta). Un script diminuto al principio del `<head>` aplica el tema antes de pintar la página, para evitar un destello del tema incorrecto al recargar.
-- **Secciones** (anclas de navegación): `#hero`, `#experience`, `#certifications`, `#projects`, `#skills`, `#education`, `#contact`, dentro de `<nav id="navbar">` y `<footer>`.
-- **Interactividad** (JS nativo, sin dependencias): scroll del navbar, menú hamburguesa móvil, animaciones de aparición con `IntersectionObserver` (`.reveal`), barras de habilidades animadas (`.skill-fill` con `data-width`), y anclas de scroll suave que cierran el menú móvil al pulsar.
-- **Dependencias externas** (CDN, en `<head>`): Google Fonts y Font Awesome. El logo/favicon (también usado como og:image) sigue alojado en ibb.co.
-- **Assets locales**: la fotografía de perfil de la sección hero está en `img/foto-perfil.jpg` y se sirve desde el propio repositorio (no depende de conexión externa).
-- Idioma del contenido: español (`<html lang="es">`); algunos metadatos (`title`, `og:`) están en inglés.
+- **Sistema de diseño**: tokens CSS en `:root` (color, tipografía, espaciado `--s1`…`--s10`, forma, movimiento). Tipografías: `Instrument Serif` (display), `Manrope` (interfaz y texto), `JetBrains Mono` (rótulos, fechas y cifras). Acento verde jade; el contraste AA está verificado en los dos temas.
+- **Tema claro/oscuro**: `:root` define el tema claro y `[data-theme="dark"]` solo redefine lo que cambia. `toggleTheme()` cambia el atributo `data-theme` de `<html>` y guarda la elección en `localStorage`. Si el visitante nunca ha elegido manualmente, se sigue `prefers-color-scheme` del sistema (incluso en vivo si cambia con la página abierta). Un script diminuto al principio del `<head>` aplica el tema antes de pintar la página, para evitar un destello del tema incorrecto al recargar.
+- **Banda de cierre**: `.band` (Método + Contacto + pie) es oscura en los dos temas a propósito, con su propio juego de tokens `--band-*`.
+- **Secciones** (anclas de navegación): `#hero`, `#skills` (Capacidades), `#projects` (Trabajo), `#experience` (Trayectoria), `#education` (Formación), `#certifications`, `#approach` (Método) y `#contact`. La barra `<nav class="nav" id="navbar">` enlaza cinco de ellas; el resto se alcanzan al desplazarse.
+- **Interactividad** (JS nativo, sin dependencias): estado y barra de progreso del navbar (un solo listener de scroll con `requestAnimationFrame`), medida real de `--nav-h`, menú móvil con trampa de foco, Escape y bloqueo del scroll de fondo, marcado de la sección activa (`aria-current`), aparición al hacer scroll con `IntersectionObserver` (`.reveal`) e índice de certificaciones filtrable.
+- **Índice de certificaciones**: cada certificación aparece una sola vez en `#certIndex`, etiquetada con `data-track` (`ia`, `oracle`, `gestion`; admite varios itinerarios). Los recuentos de los filtros, el total por emisor y la cifra del hero se calculan desde el DOM, así que añadir o quitar una entrada en el HTML actualiza todas las cifras sin tocar ningún número a mano. La barra de filtros nace con `hidden` y solo la muestra el JS.
+- **Dependencias externas** (CDN, en `<head>`): Google Fonts y Font Awesome. Todas las imágenes (retrato, favicon y og:image) se sirven desde `img/` en el propio repositorio.
+- Idioma del contenido: español (`<html lang="es">`), con `lang="en"` en los términos y títulos que están en inglés.
 
 ## Reglas de trabajo
 
