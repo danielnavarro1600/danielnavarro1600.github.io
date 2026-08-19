@@ -177,6 +177,16 @@
       --dur-2: 0.32s;
       --dur-3: 0.75s;
 
+      /* Cromo de la barra de navegación: por defecto sigue al tema; sobre
+         el hero (siempre oscuro) se cambia a tinta con .over-hero. */
+      --nav-panel: var(--bg);
+      --nav-hairline: var(--line);
+      --nav-border: var(--line-2);
+      --nav-fg: var(--ink);
+      --nav-fg-2: var(--ink-2);
+      --nav-accent: var(--accent);
+      --nav-tint: var(--tint);
+
       /* Medidas de página */
       --wrap: 1220px;
       --gutter: clamp(1.25rem, 5vw, 3.5rem);
@@ -438,17 +448,33 @@
       inset: 0;
       z-index: -1;
       pointer-events: none;
-      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      background: color-mix(in srgb, var(--nav-panel) 92%, transparent);
       backdrop-filter: blur(18px) saturate(1.4);
-      box-shadow: 0 1px 0 var(--line);
+      box-shadow: 0 1px 0 var(--nav-hairline);
       opacity: 0;
       transition: opacity var(--dur-2) var(--ease);
     }
     .nav.scrolled::before { opacity: 1; }
     /* Respaldo para navegadores sin color-mix */
     @supports not (background: color-mix(in srgb, red 50%, blue)) {
-      .nav::before { background: var(--bg); }
+      .nav::before { background: var(--nav-panel); }
     }
+
+    /* Mientras la barra flota sobre el hero adopta los colores de tinta.
+       La clase la pone el JS comparando el scroll con el alto del hero, no
+       el umbral de .scrolled: si dependiera de ese umbral, la barra se
+       aclararía a los 40px y quedaría en claro sobre un hero oscuro. */
+    .nav.over-hero {
+      --nav-panel: var(--band-bg);
+      --nav-hairline: var(--band-line);
+      --nav-border: var(--band-line-2);
+      --nav-fg: var(--band-ink);
+      --nav-fg-2: var(--band-ink-2);
+      --nav-accent: var(--band-accent);
+      --nav-tint: rgba(212,160,23,0.10);
+    }
+    /* El anillo de foco tiene que verse sobre el fondo que toque */
+    .nav :focus-visible { outline-color: var(--nav-accent); }
 
     /* Barra de progreso de lectura: en una página larga da una señal
        real de "cuánto queda", no es decoración. */
@@ -456,7 +482,7 @@
       position: absolute;
       left: 0; bottom: 0;
       height: 2px; width: 100%;
-      background: var(--accent);
+      background: var(--nav-accent);
       transform: scaleX(0);
       transform-origin: 0 50%;
       opacity: 0;
@@ -474,10 +500,11 @@
       letter-spacing: 0.14em;
       flex-shrink: 0;
     }
+    .nav-logo { color: var(--nav-fg); }
     .nav-logo span {
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: var(--accent);
+      background: var(--nav-accent);
     }
 
     .nav-links {
@@ -487,16 +514,16 @@
     }
     .nav-links a {
       position: relative;
-      font-size: var(--fs-xs);
+      font-size: 1rem;
       font-weight: 600;
-      color: var(--ink-2);
+      color: var(--nav-fg-2);
       padding-block: var(--s1);
       white-space: nowrap;
       transition: color var(--dur-1) var(--ease);
     }
     /* Contacto hace de llamada a la acción sin ocupar un botón aparte:
        con siete secciones en la barra ya no quedaba sitio para los dos. */
-    .nav-link-cta { color: var(--accent) !important; }
+    .nav-link-cta { color: var(--nav-accent) !important; }
     .nav-link-cta::after { transform: scaleX(1) !important; opacity: 0.35; }
     .nav-link-cta:hover::after { opacity: 1; }
     .nav-links a::after {
@@ -504,15 +531,15 @@
       position: absolute;
       left: 0; right: 0; bottom: -3px;
       height: 1px;
-      background: var(--accent);
+      background: var(--nav-accent);
       transform: scaleX(0);
       transform-origin: 0 50%;
       transition: transform var(--dur-2) var(--ease);
     }
-    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover { color: var(--nav-fg); }
     .nav-links a:hover::after,
     .nav-links a[aria-current="page"]::after { transform: scaleX(1); }
-    .nav-links a[aria-current="page"] { color: var(--ink); }
+    .nav-links a[aria-current="page"] { color: var(--nav-fg); }
 
     .nav-tools { display: flex; align-items: center; gap: var(--s3); flex-shrink: 0; }
 
@@ -521,13 +548,13 @@
       align-items: center;
       justify-content: center;
       width: 38px; height: 38px;
-      border: 1px solid var(--line-2);
+      border: 1px solid var(--nav-border);
       border-radius: 50%;
-      color: var(--ink-2);
+      color: var(--nav-fg-2);
       transition: color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease),
                   background var(--dur-1) var(--ease);
     }
-    .icon-btn:hover { color: var(--accent); border-color: var(--accent); background: var(--tint); }
+    .icon-btn:hover { color: var(--nav-accent); border-color: var(--nav-accent); background: var(--nav-tint); }
 
     .hamburger {
       display: none;
@@ -535,14 +562,14 @@
       justify-content: center;
       gap: 5px;
       width: 38px; height: 38px;
-      border: 1px solid var(--line-2);
+      border: 1px solid var(--nav-border);
       border-radius: 50%;
     }
     .hamburger span {
       display: block;
       width: 16px; height: 1.5px;
       margin-inline: auto;
-      background: var(--ink);
+      background: var(--nav-fg);
       border-radius: 2px;
       transition: transform var(--dur-2) var(--ease), opacity var(--dur-1) var(--ease);
     }
@@ -554,9 +581,29 @@
        5. HERO
        ========================================================= */
     .hero {
+      /* Oscuro en los dos temas, igual que la banda de cierre: la pagina
+         abre y cierra sobre tinta y el contenido queda en medio. */
+      --bg: var(--band-bg);
+      --bg-alt: var(--band-bg);
+      --surface: #16161e;
+      --surface-2: #1b1b24;
+      --ink: var(--band-ink);
+      --ink-2: var(--band-ink-2);
+      --line: var(--band-line);
+      --line-2: var(--band-line-2);
+      --accent: var(--band-accent);
+      --accent-hi: #e8b820;
+      --accent-on: #14100a;
+      --accent-rgb: 212,160,23;
+      --tint: rgba(212,160,23,0.10);
+      --tint-2: rgba(212,160,23,0.18);
+      --wash: rgba(196,128,48,0.12);
+      background: var(--band-bg);
+      color: var(--band-ink);
+
       position: relative;
       overflow: hidden;
-      padding-block: calc(var(--nav-h) + clamp(2rem, 5vw, 4.5rem)) clamp(0rem, 2vw, 2rem);
+      padding-block: calc(var(--nav-h) + clamp(1.75rem, 4vw, 3.25rem)) clamp(0rem, 1.5vw, 1.5rem);
     }
 
     /* Fondo: rejilla fina + dos lavados suaves. Todo decorativo. */
@@ -606,20 +653,20 @@
       position: absolute;
       left: 0; right: 0; bottom: 8%;
       width: 100%; height: 240px;
-      opacity: 0.5;
+      opacity: 0.9;
     }
     .hero-plot path {
       fill: none;
       stroke: var(--accent);
-      stroke-width: 1.25;
+      stroke-width: 1.6;
       stroke-linecap: round;
       stroke-dasharray: 6 10;
-      opacity: 0.4;
+      opacity: 0.6;
       animation: trace 26s linear infinite;
     }
     .hero-plot .plot-solid {
       stroke-dasharray: none;
-      opacity: 0.22;
+      opacity: 0.34;
       animation: none;
     }
     @keyframes trace { to { stroke-dashoffset: -320; } }
@@ -646,7 +693,7 @@
       border: 1px solid var(--tint-2);
       border-radius: var(--r-pill);
       background: var(--tint);
-      margin-bottom: var(--s5);
+      margin-bottom: var(--s4);
     }
     .hero-status b {
       width: 7px; height: 7px;
@@ -690,7 +737,7 @@
       font-size: var(--fs-display);
       line-height: 0.86;
       letter-spacing: -0.03em;
-      margin-bottom: var(--s5);
+      margin-bottom: var(--s4);
     }
     .hero-name em {
       display: block;
@@ -710,31 +757,50 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--ink-2);
-      /* En em del propio span (0.19em del padre): 2.6em equivalen a ~0.5
-         del cuerpo del apellido, así que la alzada se mantiene proporcional
-         en cualquier tamaño de pantalla. */
-      vertical-align: 2.6em;
-      margin-left: 0.4em;
+      /* Comparte línea base con el apellido: apoyados en el mismo suelo. */
+      vertical-align: baseline;
+      margin-left: 0.5em;
       white-space: nowrap;
     }
 
-    .hero-role {
-      font-size: clamp(1.05rem, 1.6vw, 1.35rem);
-      font-weight: 600;
-      line-height: 1.35;
+    /* El cargo va inmediatamente bajo el nombre, en monoespaciada de acento:
+       se lee como una credencial y no compite con la frase de valor. */
+    .hero-position {
+      display: flex;
+      align-items: center;
+      gap: var(--s3);
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      letter-spacing: 0.06em;
+      color: var(--accent);
       margin-bottom: var(--s4);
-      max-width: 30ch;
+    }
+    .hero-position::before {
+      content: "";
+      width: 22px; height: 1px;
+      flex-shrink: 0;
+      background: currentColor;
+      opacity: 0.6;
+    }
+
+    .hero-role {
+      font-size: var(--fs-lede);
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--ink);
+      margin-bottom: var(--s3);
+      max-width: 42ch;
     }
     .hero-lede {
       font-size: var(--fs-lede);
       line-height: 1.62;
       color: var(--ink-2);
       max-width: 54ch;
-      margin-bottom: var(--s5);
+      margin-bottom: var(--s4);
     }
     .hero-lede b { color: var(--ink); font-weight: 600; }
 
-    .hero-ctas { display: flex; flex-wrap: wrap; gap: var(--s3); margin-bottom: var(--s5); }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: var(--s3); margin-bottom: var(--s4); }
 
     .hero-tags { display: flex; flex-wrap: wrap; gap: var(--s2); }
 
@@ -787,12 +853,12 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 0;
-      margin-top: clamp(2rem, 4.5vw, 3.5rem);
+      margin-top: clamp(1.25rem, 3vw, 2.25rem);
       border-top: 1px solid var(--line-2);
       border-bottom: 1px solid var(--line);
     }
     .ledger li {
-      padding: var(--s5) var(--s4) var(--s5) 0;
+      padding: var(--s4) var(--s4) var(--s4) 0;
       border-left: 1px solid var(--line);
       padding-left: var(--s4);
     }
@@ -808,8 +874,8 @@
       margin-bottom: var(--s2);
     }
     .ledger-label {
-      font-size: var(--fs-xs);
-      line-height: 1.45;
+      font-size: var(--fs-sm);
+      line-height: 1.5;
       color: var(--ink-2);
     }
     .ledger-label b { display: block; color: var(--ink); font-weight: 600; }
@@ -1066,18 +1132,24 @@
     }
     .case-more summary::-webkit-details-marker { display: none; }
     .case-more summary::before {
-      content: "+";
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      content: "";
+      display: inline-block;
       width: 20px; height: 20px;
       flex-shrink: 0;
       border: 1px solid currentColor;
       border-radius: 50%;
-      font-size: 0.8rem;
-      line-height: 1;
+      /* Dos barras cruzadas: la vertical se encoge a cero al abrir, y el
+         mas se convierte en menos. Sin caracteres, no hay riesgo de que la
+         fuente no cubra el glifo. */
+      background-image:
+        linear-gradient(currentColor, currentColor),
+        linear-gradient(currentColor, currentColor);
+      background-size: 8px 1px, 1px 8px;
+      background-position: center, center;
+      background-repeat: no-repeat;
+      transition: background-size var(--dur-2) var(--ease);
     }
-    .case-more[open] summary::before { content: "2"; }
+    .case-more[open] summary::before { background-size: 8px 1px, 1px 0; }
     .case-more ul { margin-top: var(--s4); display: grid; gap: var(--s2); }
     .case-more li {
       position: relative;
@@ -1095,24 +1167,6 @@
       opacity: 0.7;
     }
     .case-more li strong { color: var(--ink); font-weight: 600; }
-
-    .case-note {
-      margin-top: var(--s4);
-      font-size: var(--fs-xs);
-      color: var(--ink-2);
-    }
-
-    .work-link {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--s2);
-      margin-top: var(--s4);
-      font-size: var(--fs-xs);
-      font-weight: 700;
-      color: var(--accent);
-      transition: gap var(--dur-1) var(--ease);
-    }
-    .work-link:hover { gap: 0.75rem; }
 
     /* =========================================================
        8. TRAYECTORIA
@@ -1406,14 +1460,14 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: var(--s5);
     }
-    .method-item { padding-top: var(--s4); border-top: 1px solid var(--band-line-2); }
+    .method-item { padding-top: var(--s4); border-top: 1px solid var(--line-2); }
     .method-idx {
       display: block;
       font-family: var(--font-mono);
       font-size: var(--fs-micro);
       text-transform: uppercase;
       letter-spacing: 0.14em;
-      color: var(--band-accent);
+      color: var(--accent);
       margin-bottom: var(--s3);
       font-variant-numeric: tabular-nums;
     }
@@ -1425,25 +1479,8 @@
       letter-spacing: -0.01em;
       margin-bottom: var(--s3);
     }
-    .method-item p { font-size: var(--fs-sm); color: var(--band-ink-2); }
+    .method-item p { font-size: var(--fs-sm); color: var(--ink-2); }
 
-    /* El criterio sobre IA cierra el ciclo sin convertirse en un quinto paso:
-       no es una fase de trabajo, es una decisión que se toma dentro de todas. */
-    .method-note {
-      display: flex;
-      align-items: flex-start;
-      gap: var(--s3);
-      max-width: 76ch;
-      margin-top: clamp(2rem, 4vw, 3rem);
-      padding-top: var(--s5);
-      border-top: 1px dashed var(--band-line-2);
-      font-size: var(--fs-sm);
-      color: var(--band-ink-2);
-    }
-    .method-note i { color: var(--band-accent); margin-top: 4px; }
-    .method-note b { color: var(--band-ink); font-weight: 700; }
-
-    .contact { border-top: 1px solid var(--band-line); }
     .contact-inner {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
@@ -1547,8 +1584,22 @@
         background: var(--bg);
         z-index: 101;
       }
-      .nav-links.open { display: flex; }
-      .nav-links a { font-size: 1.35rem; font-weight: 600; color: var(--ink); }
+      .nav-links.open {
+        display: flex;
+        --nav-fg: var(--ink);
+        --nav-fg-2: var(--ink-2);
+        --nav-accent: var(--accent);
+      }
+      /* .nav-tools va después de .nav-links en el DOM: con el panel abierto,
+         la X debe verse sobre el panel del tema, no sobre tinta. */
+      .nav-links.open ~ .nav-tools {
+        --nav-fg: var(--ink);
+        --nav-fg-2: var(--ink-2);
+        --nav-border: var(--line-2);
+        --nav-accent: var(--accent);
+        --nav-tint: var(--tint);
+      }
+      .nav-links a { font-size: 1.35rem; font-weight: 600; color: var(--nav-fg); }
       .nav-links a::after { left: 50%; right: 50%; }
       .nav-links a:hover::after,
       .nav-links a[aria-current="page"]::after { left: 0; right: 0; transform: scaleX(1); }
@@ -1646,6 +1697,9 @@
     <style>
       /* Sin JS no se añade .visible: el contenido debe verse igual. */
       .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      /* Tampoco se añaden .scrolled ni .over-hero: se fija el fondo de la
+         barra para que sus enlaces se lean sobre cualquier sección. */
+      .nav::before { opacity: 1 !important; }
     </style>
   </noscript>
 </head>
@@ -1655,7 +1709,7 @@
 <a href="#main" class="skip-link">Saltar al contenido</a>
 
 <!-- ============================ NAV ============================ -->
-<nav class="nav" id="navbar">
+<nav class="nav over-hero" id="navbar">
   <span class="nav-progress" id="navProgress" aria-hidden="true"></span>
 
   <a href="#hero" class="nav-logo">DN<span aria-hidden="true"></span></a>
@@ -1703,10 +1757,11 @@
         <ul class="hero-meta">
           <li>Barcelona</li>
           <li>Deloitte</li>
-          <li lang="en">Finance &amp; Technology</li>
         </ul>
 
         <h1 class="hero-name">Daniel<em>Navarro<span>Delgado</span></em></h1>
+
+        <p class="hero-position" lang="en">Finance &amp; Technology Consultant</p>
 
         <p class="hero-role">Transformación financiera, Oracle EPM e inteligencia artificial aplicada</p>
 
@@ -2042,8 +2097,6 @@
           </ul>
         </details>
 
-        <p class="case-note">Solución interna: no dispone de enlace público.</p>
-
         <ul class="tags">
           <li class="chip">Evaluación de madurez</li>
           <li class="chip">Arquitectura multidominio</li>
@@ -2192,37 +2245,6 @@
         <ul class="tags">
           <li class="chip">Educación financiera</li>
           <li class="chip" lang="en">Public Speaking</li>
-        </ul>
-      </li>
-
-      <li class="card work-card reveal">
-        <div class="work-top">
-          <span class="work-idx">06</span>
-          <span class="work-kind">Proyecto propio</span>
-        </div>
-        <h3>Esta web</h3>
-        <dl class="work-facts">
-          <div>
-            <dt>Qué es</dt>
-            <dd>Sitio estático sin framework ni build: un solo archivo HTML con su CSS y su
-              JavaScript, desplegado automáticamente en GitHub Pages con GitHub Actions.</dd>
-          </div>
-          <div>
-            <dt>Criterios</dt>
-            <dd>Tema claro y oscuro, navegación completa por teclado, respeto de
-              <span lang="en">prefers-reduced-motion</span>, metadatos para buscadores y una versión
-              legible al imprimir.</dd>
-          </div>
-        </dl>
-        <a class="work-link" href="https://github.com/danielnavarro1600" target="_blank" rel="noopener noreferrer">
-          Ver en GitHub <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-        </a>
-        <ul class="tags">
-          <li class="chip" lang="en">HTML</li>
-          <li class="chip" lang="en">CSS</li>
-          <li class="chip" lang="en">JavaScript</li>
-          <li class="chip" lang="en">GitHub Actions</li>
-          <li class="chip">Accesibilidad</li>
         </ul>
       </li>
 
@@ -2686,67 +2708,60 @@
   </div>
 </section>
 
-<!-- ==================== BANDA DE CIERRE: MÉTODO ==================== -->
-<div class="band">
-
-  <section class="section" id="approach">
-    <div class="wrap">
-      <div class="head head--wide reveal">
-        <p class="eyebrow">06 — Método</p>
-        <h2 class="title">Cómo <em>trabajo</em></h2>
-        <p class="lede">
-          El mismo ciclo, tanto si el entregable es un modelo de planificación como si es una
-          herramienta. Es corto a propósito: casi nadie sabe describir lo que necesita hasta que
-          puede verlo funcionando.
-        </p>
-      </div>
-
-      <ul class="method stagger">
-        <li class="method-item reveal">
-          <span class="method-idx">01 — Entender</span>
-          <h3>Traducir la necesidad en una mejora concreta</h3>
-          <p>
-            Antes de configurar o programar nada, entender cómo planifica, cierra y decide una
-            organización. Buena parte del valor está en que finanzas y sistemas entiendan lo mismo
-            cuando hablan del mismo dato.
-          </p>
-        </li>
-        <li class="method-item reveal">
-          <span class="method-idx">02 — Construir</span>
-          <h3>De forma incremental y controlada</h3>
-          <p>
-            Una primera versión utilizable antes que una versión completa sobre el papel. Es más
-            fácil corregir algo que se puede tocar que discutir sobre un documento de requisitos.
-          </p>
-        </li>
-        <li class="method-item reveal">
-          <span class="method-idx">03 — Probar</span>
-          <h3>Funcionalidad, legibilidad y casos límite</h3>
-          <p>
-            Una herramienta que falla en una demo deja de ser útil aunque el modelo que hay detrás
-            sea correcto. Y un dato que llega bien no siempre significa que llegue completo.
-          </p>
-        </li>
-        <li class="method-item reveal">
-          <span class="method-idx">04 — Compartir</span>
-          <h3>Publicar, documentar y recoger comentarios</h3>
-          <p>
-            Lo que solo sabe una persona no es una solución, es una dependencia. Documentar y
-            enseñar a usarlo forma parte de la entrega, no es un extra al final.
-          </p>
-        </li>
-      </ul>
-
-      <p class="method-note reveal">
-        <i class="fa-solid fa-bolt" aria-hidden="true"></i>
-        <span><b>Sobre la IA:</b> certificarme en cinco plataformas distintas sirve sobre todo para
-        saber cuándo no recurrir a ellas. Entra cuando reduce trabajo manual o mejora la calidad de
-        la entrega; no como argumento de venta.</span>
+<!-- ============================ MÉTODO ============================ -->
+<section class="section" id="approach">
+  <div class="wrap">
+    <div class="head head--wide reveal">
+      <p class="eyebrow">06 — Método</p>
+      <h2 class="title">Cómo <em>trabajo</em></h2>
+      <p class="lede">
+        El mismo ciclo, tanto si el entregable es un modelo de planificación como si es una
+        herramienta. Es corto a propósito: casi nadie sabe describir lo que necesita hasta que
+        puede verlo funcionando.
       </p>
     </div>
-  </section>
 
-  <!-- ========================== CONTACTO ========================== -->
+    <ul class="method stagger">
+      <li class="method-item reveal">
+        <span class="method-idx">01 — Entender</span>
+        <h3>Traducir la necesidad en una mejora concreta</h3>
+        <p>
+          Antes de configurar o programar nada, entender cómo planifica, cierra y decide una
+          organización. Buena parte del valor está en que finanzas y sistemas entiendan lo mismo
+          cuando hablan del mismo dato.
+        </p>
+      </li>
+      <li class="method-item reveal">
+        <span class="method-idx">02 — Construir</span>
+        <h3>De forma incremental y controlada</h3>
+        <p>
+          Una primera versión utilizable antes que una versión completa sobre el papel. Es más
+          fácil corregir algo que se puede tocar que discutir sobre un documento de requisitos.
+        </p>
+      </li>
+      <li class="method-item reveal">
+        <span class="method-idx">03 — Probar</span>
+        <h3>Funcionalidad, legibilidad y casos límite</h3>
+        <p>
+          Una herramienta que falla en una demo deja de ser útil aunque el modelo que hay detrás
+          sea correcto. Y un dato que llega bien no siempre significa que llegue completo.
+        </p>
+      </li>
+      <li class="method-item reveal">
+        <span class="method-idx">04 — Compartir</span>
+        <h3>Publicar, documentar y recoger comentarios</h3>
+        <p>
+          Lo que solo sabe una persona no es una solución, es una dependencia. Documentar y
+          enseñar a usarlo forma parte de la entrega, no es un extra al final.
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== BANDA DE CIERRE: CONTACTO ==================== -->
+<div class="band">
+
   <section class="section contact" id="contact">
     <div class="wrap">
       <div class="contact-inner">
@@ -2816,6 +2831,7 @@
   // ---- BARRA DE NAVEGACIÓN ----
   const navbar = document.getElementById('navbar');
   const navProgress = document.getElementById('navProgress');
+  const hero = document.getElementById('hero');
 
   // Un solo listener de scroll para las dos cosas que dependen de él, y el
   // trabajo real aplazado a un frame: leer scrollY en cada evento es barato,
@@ -2825,6 +2841,9 @@
     scrollQueued = false;
     const y = window.scrollY;
     navbar.classList.toggle('scrolled', y > 40);
+    // El hero es oscuro en los dos temas: mientras la barra flota sobre él
+    // usa los colores de tinta, y vuelve a los del tema al dejarlo atrás.
+    navbar.classList.toggle('over-hero', y < heroSwitchPoint);
 
     const scrollable = document.documentElement.scrollHeight - window.innerHeight;
     const ratio = scrollable > 0 ? Math.min(y / scrollable, 1) : 0;
@@ -2852,11 +2871,19 @@
   // La usa scroll-padding-top (CSS) para que saltar a un ancla no deje el
   // título ni tapado ni con un hueco de más. Medida, no adivinada: cambia
   // entre escritorio y móvil, y al terminar de cargar las fuentes.
+  // El punto en el que la barra deja de estar sobre el hero se mide, no se
+  // adivina: depende del alto real del hero, que cambia con el ancho de la
+  // ventana y al terminar de cargar las fuentes.
+  let heroSwitchPoint = 0;
+
   function setNavHeight() {
     document.documentElement.style.setProperty('--nav-h', navbar.offsetHeight + 'px');
+    heroSwitchPoint = hero ? Math.max(hero.offsetHeight - navbar.offsetHeight, 0) : 0;
+    navbar.classList.toggle('over-hero', window.scrollY < heroSwitchPoint);
   }
   setNavHeight();
   window.addEventListener('resize', setNavHeight, { passive: true });
+  window.addEventListener('load', setNavHeight);
   if (document.fonts) document.fonts.ready.then(setNavHeight);
 
   // ---- TEMA ----
