@@ -18,7 +18,7 @@ Sections and anchors:
 | --- | --- |
 | `#hero` | Value proposition, portrait and headline figures |
 | `#skills` | Capabilities, the data-to-decision flow and the technical stack |
-| `#projects` | Client projects, internal initiatives and personal tools |
+| `#projects` | Two case studies plus shorter internal, outreach and personal work |
 | `#experience` | Career timeline |
 | `#education` | Degrees and languages |
 | `#certifications` | Filterable certification index (34 entries, three tracks) |
@@ -91,7 +91,6 @@ The website is designed for static hosting with GitHub Pages. Publishing is hand
 
 ## Potential improvements
 
-- Link the FP&A assessment tool to its direct GitHub Pages URL (the card currently points to the GitHub profile)
 - Serve a smaller, pre-cropped portrait to reduce the image payload
 - Self-host the fonts and icons to remove the CDN dependency
 - Separate CSS and JavaScript if the project becomes harder to maintain
