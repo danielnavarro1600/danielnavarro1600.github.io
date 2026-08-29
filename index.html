@@ -156,9 +156,9 @@
       --fs-h3: clamp(1.12rem, 1.7vw, 1.35rem);
       --fs-lede: clamp(1.02rem, 1.35vw, 1.24rem);
       --fs-body: 1rem;
-      --fs-sm: 0.92rem;
-      --fs-xs: 0.84rem;
-      --fs-micro: 0.75rem;
+      --fs-sm: 0.97rem;
+      --fs-xs: 0.9rem;
+      --fs-micro: 0.82rem;
 
       /* Espaciado */
       --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px; --s5: 24px;
@@ -973,7 +973,7 @@
     .section:not(.section--alt) .flow-step::after { background: var(--surface-2); }
     .flow-step h4 {
       font-family: var(--font-sans);
-      font-size: 1.02rem;
+      font-size: 1.06rem;
       font-weight: 700;
       letter-spacing: -0.005em;
       margin-bottom: var(--s2);
@@ -1095,7 +1095,7 @@
       color: var(--ink-2);
       padding-top: 3px;
     }
-    .work-facts dd { font-size: 0.98rem; color: var(--ink-2); line-height: 1.6; }
+    .work-facts dd { font-size: 1.02rem; color: var(--ink-2); line-height: 1.6; }
     .work-facts dd b { color: var(--ink); font-weight: 600; }
     .work-card .tags { margin-top: auto; padding-top: var(--s4); }
     /* Caso de estudio destacado: ocupa toda la fila y despliega el detalle
@@ -1130,7 +1130,7 @@
       color: var(--accent);
       margin-bottom: var(--s2);
     }
-    .case-facts dd { font-size: 0.98rem; color: var(--ink-2); line-height: 1.6; }
+    .case-facts dd { font-size: 1.02rem; color: var(--ink-2); line-height: 1.6; }
     .case-facts dd b { color: var(--ink); font-weight: 600; }
 
     .case-more { border-top: 1px solid var(--line); padding-top: var(--s4); }
@@ -1170,7 +1170,7 @@
     .case-more li {
       position: relative;
       padding-left: var(--s5);
-      font-size: 0.98rem;
+      font-size: 1.02rem;
       color: var(--ink-2);
       line-height: 1.6;
       max-width: 80ch;
@@ -1238,7 +1238,7 @@
     }
     .tl-desc {
       color: var(--ink-2);
-      font-size: 1.02rem;
+      font-size: 1.06rem;
       line-height: 1.6;
       margin-bottom: var(--s5);
       max-width: 72ch;
@@ -1248,7 +1248,7 @@
       position: relative;
       padding-left: var(--s5);
       padding-block: 0.35rem;
-      font-size: 1.02rem;
+      font-size: 1.06rem;
       line-height: 1.6;
       color: var(--ink-2);
       max-width: 74ch;
@@ -1427,6 +1427,10 @@
       border-bottom: 1px solid var(--line);
     }
     .cert-item:last-child { border-bottom: 0; }
+    /* Sin esto, el atributo hidden no surte efecto sobre las fichas:
+       `display: grid` de la línea de arriba es estilo de autor y prevalece
+       sobre el `[hidden] { display: none }` del navegador. */
+    .cert-item[hidden], .cert-group[hidden] { display: none; }
     .cert-name { font-size: var(--fs-sm); line-height: 1.4; }
     .cert-meta {
       display: flex;
@@ -1595,10 +1599,13 @@
        una sola vista. Solo afecta al hero a dos columnas: en móvil el
        contenido es alto de por sí y esta regla no entra. */
     @media (min-width: 841px) and (max-height: 900px) {
-      .hero-lede { line-height: 1.5; }
+      .hero-lede { line-height: 1.45; }
       .hero-role { font-size: var(--fs-body); }
-      .hero .btn { padding: 0.72rem 1.35rem; }
-      .hero-tags .chip { padding: 0.22rem 0.55rem; }
+      .hero-name { line-height: 0.82; }
+      .hero-top { margin-bottom: clamp(0.5rem, 1.4vh, 0.9rem); }
+      .hero .btn { padding: 0.7rem 1.3rem; }
+      .hero-tags .chip { padding: 0.2rem 0.55rem; }
+      .ledger li { padding-block: clamp(0.5rem, 1.3vh, 0.85rem); }
       .ledger-label { line-height: 1.4; }
       .hero-caption { display: none; }
     }
@@ -3112,12 +3119,6 @@
     });
     if (heroTotal) heroTotal.textContent = items.length;
 
-    // Recuento por emisor, por si el HTML y la lista se desalinean.
-    groups.forEach(group => {
-      const badge = group.querySelector('[data-group-count]');
-      if (badge) badge.textContent = group.querySelectorAll('.cert-item').length;
-    });
-
     function apply(filter) {
       filters.forEach(btn => btn.setAttribute('aria-pressed', String(btn.dataset.filter === filter)));
 
@@ -3128,9 +3129,14 @@
         if (visible) shown++;
       });
       // Un grupo sin entradas visibles se oculta entero: si no, quedaría un
-      // encabezado de emisor colgando sin nada debajo.
+      // encabezado de emisor colgando sin nada debajo. El recuento del
+      // encabezado cuenta solo lo visible, para que cuadre con lo listado.
       groups.forEach(group => {
-        group.hidden = ![...group.querySelectorAll('.cert-item')].some(i => !i.hidden);
+        const deGrupo = [...group.querySelectorAll('.cert-item')];
+        const visiblesAqui = deGrupo.filter(i => !i.hidden).length;
+        group.hidden = visiblesAqui === 0;
+        const badge = group.querySelector('[data-group-count]');
+        if (badge) badge.textContent = visiblesAqui;
       });
 
       const label = filters.find(b => b.dataset.filter === filter);
