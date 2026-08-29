@@ -151,14 +151,14 @@
       --font-sans: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
       --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
 
-      --fs-display: clamp(3.2rem, 9.5vw, 7.2rem);
+      --fs-display: clamp(2.8rem, min(9.5vw, 10.5vh), 7rem);
       --fs-h2: clamp(2.1rem, 5.2vw, 3.7rem);
       --fs-h3: clamp(1.12rem, 1.7vw, 1.35rem);
       --fs-lede: clamp(1.02rem, 1.35vw, 1.24rem);
       --fs-body: 1rem;
-      --fs-sm: 0.875rem;
-      --fs-xs: 0.795rem;
-      --fs-micro: 0.7rem;
+      --fs-sm: 0.92rem;
+      --fs-xs: 0.84rem;
+      --fs-micro: 0.75rem;
 
       /* Espaciado */
       --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px; --s5: 24px;
@@ -603,8 +603,13 @@
 
       position: relative;
       overflow: hidden;
-      padding-block: calc(var(--nav-h) + clamp(1.75rem, 4vw, 3.25rem)) clamp(0rem, 1.5vw, 1.5rem);
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      padding-block: calc(var(--nav-h) + clamp(1.25rem, 3.5vh, 2.75rem)) clamp(0.75rem, 2vh, 1.75rem);
     }
+    .hero > .wrap { display: flex; flex-direction: column; flex: 1 1 auto; }
 
     /* Fondo: rejilla fina + dos lavados suaves. Todo decorativo. */
     .hero-bg {
@@ -674,6 +679,8 @@
     .hero-inner {
       position: relative;
       z-index: 1;
+      flex: 1 1 auto;
+      align-content: center;
       display: grid;
       grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
       gap: clamp(2.5rem, 6vw, 5.5rem);
@@ -693,7 +700,6 @@
       border: 1px solid var(--tint-2);
       border-radius: var(--r-pill);
       background: var(--tint);
-      margin-bottom: var(--s4);
     }
     .hero-status b {
       width: 7px; height: 7px;
@@ -708,6 +714,15 @@
       100% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0); }
     }
 
+    /* Estado y datos de contexto en una sola fila. En móvil vuelven a
+       apilarse solos por el flex-wrap. */
+    .hero-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--s3) var(--s5);
+      margin-bottom: clamp(0.75rem, 2vh, 1.25rem);
+    }
     .hero-meta {
       display: flex;
       flex-wrap: wrap;
@@ -718,7 +733,6 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--ink-2);
-      margin-bottom: var(--s3);
     }
     .hero-meta li { display: flex; align-items: center; gap: var(--s3); }
     /* El separador va DETRÁS de cada elemento, no delante del siguiente: al
@@ -737,7 +751,7 @@
       font-size: var(--fs-display);
       line-height: 0.86;
       letter-spacing: -0.03em;
-      margin-bottom: var(--s4);
+      margin-bottom: clamp(0.75rem, 2vh, 1.25rem);
     }
     .hero-name em {
       display: block;
@@ -773,7 +787,7 @@
       font-size: var(--fs-sm);
       letter-spacing: 0.06em;
       color: var(--accent);
-      margin-bottom: var(--s4);
+      margin-bottom: clamp(0.6rem, 1.6vh, 1rem);
     }
     .hero-position::before {
       content: "";
@@ -788,7 +802,7 @@
       font-weight: 700;
       line-height: 1.4;
       color: var(--ink);
-      margin-bottom: var(--s3);
+      margin-bottom: clamp(0.5rem, 1.4vh, 0.85rem);
       max-width: 42ch;
     }
     .hero-lede {
@@ -796,11 +810,11 @@
       line-height: 1.62;
       color: var(--ink-2);
       max-width: 54ch;
-      margin-bottom: var(--s4);
+      margin-bottom: clamp(0.75rem, 2vh, 1.25rem);
     }
     .hero-lede b { color: var(--ink); font-weight: 600; }
 
-    .hero-ctas { display: flex; flex-wrap: wrap; gap: var(--s3); margin-bottom: var(--s4); }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: var(--s3); margin-bottom: clamp(0.75rem, 2vh, 1.25rem); }
 
     .hero-tags { display: flex; flex-wrap: wrap; gap: var(--s2); }
 
@@ -853,19 +867,21 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 0;
-      margin-top: clamp(1.25rem, 3vw, 2.25rem);
+      flex: 0 0 auto;
+      margin-top: auto;
+      padding-top: clamp(1.25rem, 3vh, 2.25rem);
       border-top: 1px solid var(--line-2);
       border-bottom: 1px solid var(--line);
     }
     .ledger li {
-      padding: var(--s4) var(--s4) var(--s4) 0;
+      padding: clamp(0.6rem, 1.6vh, 1rem) var(--s4) clamp(0.6rem, 1.6vh, 1rem) 0;
       border-left: 1px solid var(--line);
       padding-left: var(--s4);
     }
     .ledger li:first-child { border-left: 0; padding-left: 0; }
     .ledger-num {
       font-family: var(--font-mono);
-      font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+      font-size: clamp(1.5rem, min(3.4vw, 4.6vh), 2.6rem);
       font-weight: 500;
       line-height: 1;
       letter-spacing: -0.02em;
@@ -957,13 +973,13 @@
     .section:not(.section--alt) .flow-step::after { background: var(--surface-2); }
     .flow-step h4 {
       font-family: var(--font-sans);
-      font-size: var(--fs-sm);
+      font-size: 1.02rem;
       font-weight: 700;
       letter-spacing: -0.005em;
       margin-bottom: var(--s2);
       line-height: 1.3;
     }
-    .flow-step p { font-size: var(--fs-xs); color: var(--ink-2); line-height: 1.55; }
+    .flow-step p { font-size: var(--fs-sm); color: var(--ink-2); line-height: 1.6; }
     .flow-kicker {
       display: block;
       font-family: var(--font-mono);
@@ -980,7 +996,7 @@
       margin-top: var(--s5);
       padding-top: var(--s5);
       border-top: 1px dashed var(--line-2);
-      font-size: var(--fs-xs);
+      font-size: var(--fs-sm);
       color: var(--ink-2);
     }
     .flow-layer i { color: var(--accent); margin-top: 3px; }
@@ -1069,7 +1085,7 @@
       margin-bottom: var(--s4);
     }
     .work-facts { margin-bottom: var(--s4); }
-    .work-facts div { display: grid; grid-template-columns: 92px 1fr; gap: var(--s3); padding-block: 0.4rem; }
+    .work-facts div { display: grid; grid-template-columns: 104px 1fr; gap: var(--s3); padding-block: 0.45rem; }
     .work-facts div + div { border-top: 1px solid var(--line); }
     .work-facts dt {
       font-family: var(--font-mono);
@@ -1079,7 +1095,7 @@
       color: var(--ink-2);
       padding-top: 3px;
     }
-    .work-facts dd { font-size: var(--fs-sm); color: var(--ink-2); line-height: 1.55; }
+    .work-facts dd { font-size: 0.98rem; color: var(--ink-2); line-height: 1.6; }
     .work-facts dd b { color: var(--ink); font-weight: 600; }
     .work-card .tags { margin-top: auto; padding-top: var(--s4); }
     /* Caso de estudio destacado: ocupa toda la fila y despliega el detalle
@@ -1114,7 +1130,7 @@
       color: var(--accent);
       margin-bottom: var(--s2);
     }
-    .case-facts dd { font-size: var(--fs-sm); color: var(--ink-2); line-height: 1.6; }
+    .case-facts dd { font-size: 0.98rem; color: var(--ink-2); line-height: 1.6; }
     .case-facts dd b { color: var(--ink); font-weight: 600; }
 
     .case-more { border-top: 1px solid var(--line); padding-top: var(--s4); }
@@ -1154,8 +1170,9 @@
     .case-more li {
       position: relative;
       padding-left: var(--s5);
-      font-size: var(--fs-sm);
+      font-size: 0.98rem;
       color: var(--ink-2);
+      line-height: 1.6;
       max-width: 80ch;
     }
     .case-more li::before {
@@ -1219,20 +1236,29 @@
       letter-spacing: -0.01em;
       margin-bottom: var(--s3);
     }
-    .tl-desc { color: var(--ink-2); font-size: var(--fs-sm); margin-bottom: var(--s4); max-width: 68ch; }
-    .tl-list { margin-bottom: var(--s4); }
+    .tl-desc {
+      color: var(--ink-2);
+      font-size: 1.02rem;
+      line-height: 1.6;
+      margin-bottom: var(--s5);
+      max-width: 72ch;
+    }
+    .tl-list { margin-bottom: var(--s5); }
     .tl-list li {
       position: relative;
       padding-left: var(--s5);
-      padding-block: 0.3rem;
-      font-size: var(--fs-sm);
+      padding-block: 0.35rem;
+      font-size: 1.02rem;
+      line-height: 1.6;
       color: var(--ink-2);
       max-width: 74ch;
+      break-inside: avoid;
+      -webkit-column-break-inside: avoid;
     }
     .tl-list li::before {
       content: "";
       position: absolute;
-      left: 0; top: 0.85em;
+      left: 0; top: 0.95em;
       width: 10px; height: 1px;
       background: var(--accent);
       opacity: 0.7;
@@ -1565,6 +1591,26 @@
     /* =========================================================
        13. RESPONSIVE
        ========================================================= */
+    /* En ventanas bajas el hero se ciñe un punto más para seguir cabiendo de
+       una sola vista. Solo afecta al hero a dos columnas: en móvil el
+       contenido es alto de por sí y esta regla no entra. */
+    @media (min-width: 841px) and (max-height: 900px) {
+      .hero-lede { line-height: 1.5; }
+      .hero-role { font-size: var(--fs-body); }
+      .hero .btn { padding: 0.72rem 1.35rem; }
+      .hero-tags .chip { padding: 0.22rem 0.55rem; }
+      .ledger-label { line-height: 1.4; }
+      .hero-caption { display: none; }
+    }
+
+    /* Con el cronograma a dos columnas, la lista de logros ocupaba poco más
+       de media fila. Repartida en dos columnas llena el ancho disponible y
+       cada columna mantiene una medida de lectura cómoda. */
+    @media (min-width: 1081px) {
+      .tl-list { columns: 2; column-gap: var(--s7); }
+      .tl-list li { max-width: none; }
+    }
+
     @media (max-width: 1080px) {
       .cert-index { columns: 2; }
       .pillars, .method, .stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1636,6 +1682,10 @@
       .ledger li:nth-child(odd) { border-left: 0; padding-left: 0; }
       .ledger li:nth-child(n+3) { border-top: 1px solid var(--line); }
       .work { grid-template-columns: 1fr; }
+      /* "Iniciativa interna · Deloitte" en una sola línea fijaba el ancho
+         mínimo de la tarjeta y desbordaba la rejilla en móvil. */
+      .work-top { flex-wrap: wrap; }
+      .work-kind { white-space: normal; }
       .pillars, .method { grid-template-columns: 1fr; }
       .contact-inner { grid-template-columns: 1fr; }
       .flow { grid-template-columns: 1fr; row-gap: var(--s5); }
@@ -1676,6 +1726,7 @@
     @media print {
       .nav, .skip-link, .hero-bg, .hero-figure, .cert-toolbar, .nav-progress { display: none !important; }
       body { background: #fff; color: #000; font-size: 11pt; }
+      .hero { min-height: 0; display: block; }
       .band, .footer { background: #fff !important; color: #000 !important; }
       .band .lede, .method-item p, .contact-lede, .footer { color: #333 !important; }
       .band::before { display: none; }
@@ -1752,12 +1803,13 @@
   <div class="wrap">
     <div class="hero-inner">
       <div>
-        <p class="hero-status"><b aria-hidden="true"></b> Abierto a conversaciones</p>
-
-        <ul class="hero-meta">
-          <li>Barcelona</li>
-          <li>Deloitte</li>
-        </ul>
+        <div class="hero-top">
+          <p class="hero-status"><b aria-hidden="true"></b> Abierto a conversaciones</p>
+          <ul class="hero-meta">
+            <li>Barcelona</li>
+            <li>Deloitte</li>
+          </ul>
+        </div>
 
         <h1 class="hero-name">Daniel<em>Navarro<span>Delgado</span></em></h1>
 
@@ -2457,7 +2509,7 @@
           <path d="M10,0 V15 M0,7.5 H20" stroke="#fff" stroke-width="5"/>
           <path d="M10,0 V15 M0,7.5 H20" stroke="#C8102E" stroke-width="3"/>
         </svg>
-        Inglés <span class="lang-level">C1 profesional</span>
+        Inglés <span class="lang-level">C1</span>
       </li>
       <li class="lang">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" class="lang-flag" aria-hidden="true">
