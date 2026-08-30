@@ -18,14 +18,14 @@
   </script>
 
   <title>Daniel Navarro Delgado — Consultor de transformación financiera y tecnológica</title>
-  <meta name="description" content="Transformación financiera en Deloitte (Barcelona): planificación y controlling en Oracle EPM Cloud, integración de datos, desarrollo de soluciones digitales e inteligencia artificial aplicada." />
+  <meta name="description" content="Transformación financiera en Deloitte (Barcelona): diseño y evolución de modelos de planificación y controlling en Oracle EPM Cloud, integración de datos, automatización y herramientas digitales para equipos financieros." />
   <meta name="author" content="Daniel Navarro Delgado" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0a0a0f" media="(prefers-color-scheme: dark)" />
 
   <meta property="og:title" content="Daniel Navarro Delgado — Consultor de transformación financiera y tecnológica" />
-  <meta property="og:description" content="Planificación y controlling en Oracle EPM Cloud, integración de datos, desarrollo de soluciones digitales e inteligencia artificial aplicada. Deloitte · Barcelona." />
+  <meta property="og:description" content="Modelos de planificación y controlling en Oracle EPM Cloud, integración de datos, automatización y herramientas digitales para equipos financieros. Deloitte · Barcelona." />
   <meta property="og:image" content="https://danielnavarro1600.github.io/img/logo.jpg" />
   <meta property="og:image:alt" content="Logotipo profesional de Daniel Navarro Delgado" />
   <meta property="og:type" content="profile" />
@@ -34,7 +34,7 @@
   <meta property="og:site_name" content="Daniel Navarro Delgado" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Daniel Navarro Delgado — Consultor de transformación financiera y tecnológica" />
-  <meta name="twitter:description" content="Oracle EPM Cloud, integración de datos, desarrollo de soluciones e inteligencia artificial aplicada. Deloitte · Barcelona." />
+  <meta name="twitter:description" content="Oracle EPM Cloud, integración de datos, automatización y desarrollo de herramientas para equipos financieros. Deloitte · Barcelona." />
   <meta name="twitter:image" content="https://danielnavarro1600.github.io/img/logo.jpg" />
 
   <link rel="canonical" href="https://danielnavarro1600.github.io/" />
@@ -1466,6 +1466,14 @@
       background: var(--band-bg);
       color: var(--band-ink);
       overflow: hidden;
+      /* La pagina abre y cierra sobre tinta ocupando la pantalla completa,
+         igual que el hero. Es min-height: si el contenido crece, la banda
+         crece con el y nunca se recorta. */
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .band::before {
       content: "";
@@ -1733,7 +1741,7 @@
     @media print {
       .nav, .skip-link, .hero-bg, .hero-figure, .cert-toolbar, .nav-progress { display: none !important; }
       body { background: #fff; color: #000; font-size: 11pt; }
-      .hero { min-height: 0; display: block; }
+      .hero, .band { min-height: 0; display: block; }
       .band, .footer { background: #fff !important; color: #000 !important; }
       .band .lede, .method-item p, .contact-lede, .footer { color: #333 !important; }
       .band::before { display: none; }
@@ -1872,8 +1880,8 @@
         <div class="ledger-label"><b>Roles en Deloitte</b>de analista a consultor desde enero de 2025</div>
       </li>
       <li>
-        <div class="ledger-num">4</div>
-        <div class="ledger-label"><b>Dominios financieros</b>cubiertos por el acelerador de evaluación de madurez</div>
+        <div class="ledger-num">9</div>
+        <div class="ledger-label"><b>Dominios financieros</b>que incorporé al acelerador de evaluación de madurez</div>
       </li>
       <li>
         <div class="ledger-num" id="certTotalHero">34</div>
@@ -1921,7 +1929,7 @@
         <h3>Modelar y mover los datos</h3>
         <p>
           Modelos dimensionales en Oracle EPM Cloud —cubos, jerarquías y reglas de cálculo— e
-          integraciones con SAP, ODI, Data Exchange y EPMAutomate: cargas, mapeos, metadatos y
+          integraciones con SAP, ODI, Data Exchange y EPM Automate: cargas, mapeos, metadatos y
           el diagnóstico de por qué una cifra no cuadra.
         </p>
         <ul class="tags">
@@ -1950,8 +1958,8 @@
         <span class="pillar-icon"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
         <h3>Explicarla para que se use</h3>
         <p>
-          Documentación funcional, guías de referencia que acortan la incorporación de gente
-          nueva, presentaciones ejecutivas y demos navegadas. Una solución que nadie sabe usar
+          Documentación funcional, guías de usuario y de administración que se entregan al
+          cliente, presentaciones ejecutivas y demos navegadas. Una solución que nadie sabe usar
           todavía no está terminada.
         </p>
         <ul class="tags">
@@ -1973,7 +1981,7 @@
         <li class="flow-step">
           <span class="flow-kicker">Integración</span>
           <h4>Metadatos, mappings y cargas</h4>
-          <p>ODI, Data Exchange y EPMAutomate para que los datos lleguen completos y trazables.</p>
+          <p>ODI, Data Exchange y EPM Automate para que los datos lleguen completos y trazables.</p>
         </li>
         <li class="flow-step">
           <span class="flow-kicker">Modelo</span>
@@ -2001,7 +2009,7 @@
         <div class="stack-row"><span lang="en">Oracle Cloud Infrastructure</span><span class="stack-level">Avanzado</span></div>
         <div class="stack-row"><span lang="en">Smart View &amp; Essbase</span><span class="stack-level">Competente</span></div>
         <div class="stack-row"><span lang="en">Oracle Data Integrator (ODI)</span><span class="stack-level">Competente</span></div>
-        <div class="stack-row"><span lang="en">EPMAutomate &amp; Data Exchange</span><span class="stack-level">Competente</span></div>
+        <div class="stack-row"><span lang="en">EPM Automate &amp; Data Exchange</span><span class="stack-level">Competente</span></div>
         <ul class="tags">
           <li class="pill" lang="en">Hyperion Planning</li>
           <li class="pill" lang="en">EPBCS</li>
@@ -2113,9 +2121,9 @@
         <h3>De una metodología en hojas de cálculo a una herramienta de diagnóstico</h3>
         <p class="case-lede">
           Una metodología para evaluar la <b>madurez de la función financiera</b> vivía repartida
-          en hojas de cálculo. Participé de forma central en convertirla en una aplicación web
-          que un equipo puede recorrer en una conversación con cliente sin perder el rigor del
-          modelo que hay detrás.
+          en hojas de cálculo. Desarrollé la aplicación web que la sustituye: un equipo puede
+          recorrerla en una conversación con cliente sin perder el rigor del modelo que hay
+          detrás.
         </p>
 
         <dl class="case-facts">
@@ -2132,14 +2140,18 @@
           </div>
           <div>
             <dt>Mi aportación</dt>
-            <dd>Interpretación y estructuración funcional del modelo, diseño de la experiencia y
-              desarrollo: navegación por dominios, radares comparativos, mapa de calor de madurez,
-              brechas frente al objetivo, prioridades e <b>iniciativas conectadas al diagnóstico</b>.</dd>
+            <dd><b>Desarrollo completo de la herramienta</b>: interpretación y estructuración
+              funcional del modelo, diseño de la experiencia de uso e incorporación de los nueve
+              dominios, con navegación, radares comparativos, mapa de calor de madurez, brechas
+              frente al objetivo, prioridades e <b>iniciativas conectadas al diagnóstico</b>. El
+              contenido metodológico lo desarrolló el equipo.</dd>
           </div>
           <div>
             <dt>Alcance</dt>
-            <dd>De un primer dominio a una <b>arquitectura multidominio</b> que cubre planificación
-              y análisis financiero, controlling, procesos transaccionales y finanzas de negocio.</dd>
+            <dd>De un primer dominio a una <b>arquitectura multidominio de nueve dominios
+              financieros</b>, todos incorporados a la herramienta: planificación y análisis
+              financiero, controlling, procesos transaccionales y finanzas de negocio, entre
+              otros.</dd>
           </div>
         </dl>
 
@@ -2150,9 +2162,9 @@
             <li><strong>Control de versiones con Git y GitHub</strong>, con ramas separadas para desarrollo y publicación, y paso a la rama principal solo de versiones estables.</li>
             <li><strong>Publicación con GitHub Pages</strong>, resolviendo también lo que rodea a un despliegue: caché, actualización de versiones y continuidad entre sesiones.</li>
             <li><strong>Persistencia compartida con Firebase</strong>, para pasar de datos guardados en un navegador a escenarios que varias personas pueden continuar.</li>
-            <li><strong>Estructura de datos parametrizable</strong>, de modo que incorporar un dominio nuevo no obligue a rehacer la herramienta.</li>
+            <li><strong>Industrialización del alta de dominios</strong>: una estructura de datos parametrizable que permite incorporar un dominio nuevo sin rehacer la herramienta.</li>
             <li><strong>Pruebas de funcionamiento y de casos límite</strong> antes de cada entrega.</li>
-            <li><strong>Presentación ejecutiva y demo navegada.</strong> Al ser una herramienta interactiva, recorrerla explica su valor mucho mejor que una serie de capturas.</li>
+            <li><strong>Presentación ejecutiva y demo navegada</strong>, ya utilizadas en conversaciones con cliente. Al ser una herramienta interactiva, recorrerla explica su valor mucho mejor que una serie de capturas.</li>
           </ul>
         </details>
 
@@ -2197,9 +2209,17 @@
           <div>
             <dt>Mi aportación</dt>
             <dd>Trabajé en el diseño funcional del modelo dimensional y de las reglas de cálculo
-              —activaciones, amortizaciones y efectos financieros bajo <b>criterios IFRS y
-              fiscales</b>—, en la coordinación funcional de las integraciones y en la validación
-              de los datos cargados.</dd>
+              —alrededor de un centenar, para activaciones, amortizaciones y efectos financieros bajo
+              <b>criterios IFRS y fiscales</b>—, en la coordinación funcional de más de una decena
+              de integraciones y de entre treinta y cuarenta mapeos, y en la validación de los datos
+              cargados.</dd>
+          </div>
+          <div>
+            <dt>Resultados</dt>
+            <dd><b>Reducciones del tiempo de proceso del 80 % y del 90 %</b> en dos cubos de cálculo,
+              y una automatización del cálculo de amortizaciones que eliminó una carga manual
+              equivalente a <b>dos personas a tiempo completo</b>. El rediseño de las reglas y del
+              proceso de cálculo fiscal redujo además los errores recurrentes.</dd>
           </div>
           <div>
             <dt>Diagnóstico</dt>
@@ -2213,7 +2233,7 @@
           <summary>Con qué se trabajó</summary>
           <ul>
             <li><strong>Oracle EPM Cloud e Hyperion Planning</strong>, con Essbase como motor de cálculo del modelo.</li>
-            <li><strong>Integraciones</strong> con SAP y otras fuentes de negocio mediante ODI, FDMEE, Data Exchange y EPMAutomate.</li>
+            <li><strong>Integraciones</strong> con SAP y otras fuentes de negocio mediante ODI, FDMEE, Data Exchange y EPM Automate.</li>
             <li><strong>Cargas de datos y metadatos</strong>, reglas de negocio, mapeos y revisión de logs de ejecución para localizar el origen de una diferencia.</li>
             <li><strong>Validación en entornos de prueba</strong> antes de cada actualización en productivo.</li>
             <li><strong>Salidas analíticas</strong>: Data Forms, Task Lists, Smart View y dashboards para quien tiene que decidir.</li>
@@ -2236,24 +2256,24 @@
           <span class="work-idx">03</span>
           <span class="work-kind">Documentación interna</span>
         </div>
-        <h3>Guía de referencia de controlling</h3>
+        <h3>Guías de usuario y administración de Oracle EPM</h3>
         <dl class="work-facts">
           <div>
             <dt>Contexto</dt>
-            <dd>Una función de controlling con su propio vocabulario, procesos y sistemas: cada
-              persona que se incorporaba tardaba en orientarse.</dd>
+            <dd>Una solución de planificación y controlling no se sostiene sola: el equipo y los
+              usuarios del cliente necesitan saber cómo operarla y cómo administrarla.</dd>
           </div>
           <div>
             <dt>Aportación</dt>
-            <dd>Elaboré y mantuve una <b>guía transversal</b> de procesos, conceptos, vocabulario y
-              aspectos técnicos, pensada para acortar la curva de aprendizaje de quien llega nuevo
-              al equipo o al proyecto.</dd>
+            <dd>Elaboré las <b>guías de usuario y de administración</b> de la solución Oracle EPM,
+              entregadas al equipo y al cliente, con los procesos, la operativa diaria y los aspectos
+              técnicos necesarios para trabajar con ella de forma autónoma.</dd>
           </div>
         </dl>
         <ul class="tags">
           <li class="chip">Documentación funcional</li>
-          <li class="chip">Onboarding</li>
-          <li class="chip">Controlling</li>
+          <li class="chip">Entregable a cliente</li>
+          <li class="chip" lang="en">Oracle EPM</li>
         </ul>
       </li>
 
@@ -2272,8 +2292,8 @@
           <div>
             <dt>Aportación</dt>
             <dd>Preparé e impartí una sesión con materiales propios, comparando Claude, ChatGPT y
-              Gemini sobre casos reales de consultoría. Recibió muy buen feedback e interés por
-              parte del equipo.</dd>
+              Gemini sobre casos reales de consultoría: cuándo cada herramienta ayuda de verdad en el
+              trabajo diario y cuándo no compensa.</dd>
           </div>
         </dl>
         <ul class="tags">
@@ -2340,10 +2360,10 @@
           </p>
           <ul class="tl-list">
             <li>Evolución funcional y técnica de soluciones <strong>Oracle EPM Cloud</strong> para procesos de planificación, controlling, I+D e inversiones.</li>
-            <li>Participación central en la construcción de un <strong>acelerador digital de evaluación de madurez financiera</strong>: diseño funcional, desarrollo, despliegue y preparación de demos.</li>
-            <li>Coordinación con equipos de negocio y tecnología para analizar necesidades, resolver incidencias y convertir requisitos financieros en soluciones implementables.</li>
-            <li>Gestión y seguimiento de integraciones, metadatos, reglas de negocio, mapeos y cargas de datos mediante Oracle EPM, ODI, Data Exchange y EPMAutomate.</li>
-            <li>Impulso de mejoras de <strong>automatización, documentación y calidad de entrega</strong>, incorporando herramientas de IA cuando aportan valor al trabajo.</li>
+            <li><strong>Desarrollo de un acelerador digital de evaluación de madurez financiera</strong>: interpretación funcional del modelo, incorporación de nueve dominios, despliegue e industrialización del alta de nuevos dominios.</li>
+            <li><strong>Interlocución directa con el cliente</strong> en reuniones de seguimiento, y coordinación con equipos de negocio y tecnología para convertir requisitos financieros en soluciones implementables.</li>
+            <li>Gestión y seguimiento de integraciones, metadatos, reglas de negocio, mapeos y cargas de datos mediante Oracle EPM, ODI, Data Exchange y EPM Automate.</li>
+            <li><strong>Revisión y soporte técnico</strong> al trabajo de compañeros del equipo, y mejoras de <strong>automatización y calidad de entrega</strong> incorporando herramientas de IA cuando aportan valor real.</li>
             <li>Consolidación de una especialización multiplataforma mediante <strong>20 certificaciones de inteligencia artificial</strong> de Anthropic, OpenAI, Google, Deloitte y Oracle, aplicadas a proyectos reales.</li>
           </ul>
           <ul class="tags">
@@ -2364,6 +2384,7 @@
         </div>
         <div>
           <p class="tl-role" lang="en">Finance &amp; Technology Senior Analyst</p>
+          <span class="edu-mark"><i class="fa-solid fa-award" aria-hidden="true"></i> FY26 · Supera expectativas</span>
           <p class="tl-desc">
             Consultor senior en proyectos de transformación financiera y tecnológica, participando en
             la definición funcional e implementación de soluciones Oracle EPM Cloud para grandes
@@ -2372,11 +2393,14 @@
           <ul class="tl-list">
             <li>Diseño funcional e implementación de <strong>Oracle EPM Cloud</strong> para procesos de planificación y controlling (Budget, Forecast y Real) en el ámbito de I+D e inversiones para uno de los 10 mayores grupos empresariales de España por facturación.</li>
             <li>Estructuración de modelos dimensionales mediante cubos, dimensiones, jerarquías, atributos y reglas de cálculo.</li>
-            <li>Definición y validación de reglas de negocio para activaciones, amortizaciones y efectos financieros bajo <strong>criterios IFRS y fiscales</strong>.</li>
-            <li>Coordinación funcional de integraciones entre Oracle EPM Cloud, SAP, Oracle Data Integrator (ODI), Data Exchange y EPMAutomate.</li>
+            <li>Definición y validación de <strong>alrededor de un centenar de reglas de negocio</strong> para activaciones, amortizaciones y efectos financieros bajo criterios IFRS y fiscales.</li>
+            <li><strong>Optimización del rendimiento</strong> de dos cubos de cálculo, con reducciones del tiempo de proceso del 80 % y del 90 %.</li>
+            <li><strong>Automatización del cálculo de amortizaciones</strong>, que eliminó una carga manual equivalente a dos personas a tiempo completo, y rediseño del proceso de cálculo fiscal para reducir errores recurrentes.</li>
+            <li>Coordinación funcional de <strong>más de una decena de integraciones</strong> y de entre treinta y cuarenta mapeos entre Oracle EPM Cloud, SAP, Oracle Data Integrator (ODI), Data Exchange y EPM Automate.</li>
             <li>Diseño y optimización de Data Forms, Task Lists, Smart View, dashboards y salidas analíticas.</li>
             <li>Diagnóstico de incidencias de carga revisando <strong>reglas, mapeos y logs de ejecución</strong> hasta localizar el registro que no cuadraba.</li>
-            <li>Elaboración de documentación funcional y de una guía de referencia transversal de controlling para acortar la incorporación de nuevas personas.</li>
+            <li>Elaboración de la documentación funcional y de las <strong>guías de usuario y de administración de Oracle EPM</strong> entregadas al equipo y al cliente.</li>
+            <li>Evaluación anual FY26 con calificación de <strong>supera expectativas</strong> y la máxima valoración —4,0, excelente— en las cuatro competencias técnicas, en pensamiento analítico y crítico y en desarrollo de personas.</li>
             <li>Obtención de <strong>10 certificaciones Oracle</strong>, seis relacionadas con inteligencia artificial, para reforzar la base tecnológica aplicada al proyecto.</li>
           </ul>
           <ul class="tags">
@@ -2860,6 +2884,22 @@
               <span lang="en">Email</span>
               <small>Respuesta directa</small>
               <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a class="contact-link" href="cv/cv-daniel-navarro-delgado.pdf" download>
+              <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
+              <span>Currículum</span>
+              <small>PDF, dos páginas</small>
+              <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a class="contact-link" href="cv/cv-daniel-navarro-delgado-en.pdf" download>
+              <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
+              <span lang="en">CV in English</span>
+              <small>PDF, two pages</small>
+              <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
             </a>
           </li>
         </ul>
