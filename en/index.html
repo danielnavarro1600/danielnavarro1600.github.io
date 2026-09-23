@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    /* Se ejecuta antes de que se aplique el CSS, para que un visitante que
+       eligió tema oscuro no vea un destello en claro al recargar. El resto
+       de la lógica del tema (etiqueta, aria-pressed...) vive en
+       assets/site.js, junto con el resto del script. */
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) {}
+    })();
+  </script>
+
+  <title>Daniel Navarro Delgado — Finance &amp; Technology Consultant</title>
+  <meta name="description" content="Finance transformation at Deloitte (Barcelona): design and evolution of planning and controlling models on Oracle EPM Cloud, data integration, automation and digital tools for finance teams." />
+  <meta name="author" content="Daniel Navarro Delgado" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0a0a0f" media="(prefers-color-scheme: dark)" />
+
+  <meta property="og:title" content="Daniel Navarro Delgado — Finance &amp; Technology Consultant" />
+  <meta property="og:description" content="Planning and controlling models on Oracle EPM Cloud, data integration, automation and digital tools for finance teams. Deloitte · Barcelona." />
+  <!-- Imagen para compartir en redes: 1200×630, la proporción que LinkedIn,
+       WhatsApp y X muestran sin recortar. Versión con el texto en inglés. -->
+  <meta property="og:image" content="https://danielnavarro1600.github.io/img/og-image-en.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Portrait of Daniel Navarro Delgado next to his name and role, Finance &amp; Technology Consultant: finance transformation, Oracle EPM and applied artificial intelligence." />
+  <meta property="og:type" content="profile" />
+  <meta property="og:url" content="https://danielnavarro1600.github.io/en/" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:locale:alternate" content="es_ES" />
+  <meta property="og:site_name" content="Daniel Navarro Delgado" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Daniel Navarro Delgado — Finance &amp; Technology Consultant" />
+  <meta name="twitter:description" content="Oracle EPM Cloud, data integration, automation and tool development for finance teams. Deloitte · Barcelona." />
+  <meta name="twitter:image" content="https://danielnavarro1600.github.io/img/og-image-en.jpg" />
+  <meta name="twitter:image:alt" content="Portrait of Daniel Navarro Delgado next to his name and role, Finance &amp; Technology Consultant: finance transformation, Oracle EPM and applied artificial intelligence." />
+
+  <link rel="canonical" href="https://danielnavarro1600.github.io/en/" />
+  <!-- La misma página en cada idioma, para que los buscadores muestren la
+       versión que corresponde a quien busca. -->
+  <link rel="alternate" hreflang="es" href="https://danielnavarro1600.github.io/" />
+  <link rel="alternate" hreflang="en" href="https://danielnavarro1600.github.io/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://danielnavarro1600.github.io/" />
+  <link rel="icon" type="image/png" href="../img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Daniel Navarro Delgado",
+    "jobTitle": "Finance & Technology Consultant",
+    "description": "Finance transformation professional specialising in Oracle EPM, data integration, digital solution development and applied artificial intelligence.",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Deloitte"
+    },
+    "url": "https://danielnavarro1600.github.io/en/",
+    "image": "https://danielnavarro1600.github.io/img/foto-perfil.jpg",
+    "email": "mailto:danielnavarrodelgado16@gmail.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/daniel-navarro-delgado",
+      "https://github.com/danielnavarro1600"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Barcelona",
+      "addressCountry": "ES"
+    },
+    "knowsLanguage": ["es", "ca", "en", "it"],
+    "alumniOf": [
+      { "@type": "EducationalOrganization", "name": "Universitat Pompeu Fabra" },
+      { "@type": "EducationalOrganization", "name": "Università Milano-Bicocca" },
+      { "@type": "EducationalOrganization", "name": "Steinbeis University Berlin" }
+    ],
+    "knowsAbout": [
+      "Oracle EPM Cloud",
+      "Hyperion Planning",
+      "Essbase",
+      "Oracle Data Integrator",
+      "FDMEE",
+      "Oracle Cloud Infrastructure",
+      "Financial Transformation",
+      "Financial Planning and Controlling",
+      "Variance Analysis",
+      "Product Profitability",
+      "Data Integration",
+      "Applied AI",
+      "Generative AI",
+      "Web Development",
+      "Consulting"
+    ],
+    "hasCredential": [
+      { "@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "Artificial intelligence (20 certifications)" },
+      { "@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "Oracle Cloud & AI (10 certifications)" },
+      { "@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "Project management and consulting (10 certifications)" }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="../assets/site.css" />
+
+  <noscript>
+    <style>
+      /* Sin JS no se añade .visible: el contenido debe verse igual. */
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      /* Tampoco se añaden .scrolled ni .over-hero: se fija el fondo de la
+         barra para que sus enlaces se lean sobre cualquier sección. */
+      .nav::before { opacity: 1 !important; }
+    </style>
+  </noscript>
+</head>
+
+<body>
+
+<!-- Versión en inglés de index.html: misma estructura, clases, IDs e iconos.
+     Cualquier cambio de contenido (textos, puestos, certificaciones...) se
+     hace en las dos páginas. El diseño y el comportamiento son compartidos
+     (../assets/site.css y ../assets/site.js). -->
+
+<!-- ============================ ICONOS ============================ -->
+<!-- Iconos propios, dibujados en una rejilla de 24×24. Cada uno se usa con
+     <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-…"/></svg>;
+     el color y el grosor del trazo los pone .icon en el CSS. LinkedIn y
+     GitHub son marcas y van rellenas. -->
+<svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 4v16M5.5 13.5 12 20l6.5-6.5"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h16M13.5 5.5 20 12l-6.5 6.5"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 13.5A9 9 0 1 1 10.5 3a7.5 7.5 0 0 0 10.5 10.5z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.64 5.64l1.77 1.77M16.6 16.6l1.77 1.77M5.64 18.36l1.77-1.77M16.6 7.4l1.77-1.77"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 3.5V20h16.5M8 15.5l3.5-4.5 3 3 5-6.5"/></symbol>
+  <symbol id="i-data" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.5"/><path d="M4.5 5.5v13c0 1.38 3.36 2.5 7.5 2.5s7.5-1.12 7.5-2.5v-13M4.5 12c0 1.38 3.36 2.5 7.5 2.5s7.5-1.12 7.5-2.5"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-4.5 3.5V17H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM7.5 9.5h9M7.5 13h5.5"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.5 4.5 13.5H12l-1 8 8.5-11H12l1-8z"/></symbol>
+  <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5"/><path d="M8.5 13.3 7 21.5l5-2.5 5 2.5-1.5-8.2"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.47 6.1 6.57.46-5.05 4.24 1.59 6.39L12 16.7l-5.58 3.49 1.59-6.39-5.05-4.24 6.57-.46L12 3z"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5zM14 3v5h5M8.5 13h7M8.5 16.5h5"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" fill-rule="evenodd" d="M4.5 2h15A2.5 2.5 0 0 1 22 4.5v15a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 19.5v-15A2.5 2.5 0 0 1 4.5 2zM8.2 7.2a1.6 1.6 0 1 1-3.2 0 1.6 1.6 0 0 1 3.2 0zM5.1 9.8h3v8.4h-3zM10 9.8h2.8v1.3c.5-.9 1.6-1.5 3-1.5 2.4 0 3.1 1.5 3.1 3.8v4.8h-2.9v-4.3c0-1.1-.3-1.9-1.4-1.9s-1.8.8-1.8 2v4.2H10z"/></symbol>
+  <symbol id="i-github" viewBox="-2 -2 20 20"><path fill="currentColor" stroke="none" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
+</svg>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- ============================ NAV ============================ -->
+<nav class="nav over-hero" id="navbar">
+  <span class="nav-progress" id="navProgress" aria-hidden="true"></span>
+
+  <a href="#hero" class="nav-logo">DN<span aria-hidden="true"></span></a>
+
+  <div class="nav-links" id="navLinks">
+    <a href="#skills">Capabilities</a>
+    <a href="#projects">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#approach">Approach</a>
+    <a href="#contact" class="nav-link-cta">Contact</a>
+  </div>
+
+  <div class="nav-tools">
+    <a class="icon-btn lang-switch" href="../" hreflang="es" lang="es">ES<span class="sr-only"> · Versión en español</span></a>
+    <button class="icon-btn" id="themeToggle" onclick="toggleTheme()" aria-pressed="false" data-label-dark="Switch to dark theme" data-label-light="Switch to light theme">
+      <svg class="icon theme-moon" aria-hidden="true" focusable="false"><use href="#i-moon"/></svg>
+      <svg class="icon theme-sun" aria-hidden="true" focusable="false"><use href="#i-sun"/></svg>
+      <span class="sr-only" id="themeLabel">Switch to dark theme</span>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu" data-label-open="Open menu" data-label-close="Close menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ============================ HERO ============================ -->
+<section class="hero" id="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-grid"></div>
+    <div class="hero-wash hero-wash-1"></div>
+    <div class="hero-wash hero-wash-2"></div>
+    <svg class="hero-plot" viewBox="0 0 1200 240" preserveAspectRatio="none" focusable="false">
+      <path class="plot-solid" d="M0,190 L150,168 L300,178 L450,132 L600,144 L750,96 L900,104 L1050,58 L1200,40" />
+      <path d="M0,214 L150,206 L300,196 L450,182 L600,166 L750,142 L900,126 L1050,96 L1200,72" />
+    </svg>
+  </div>
+
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-top">
+          <p class="hero-status"><b aria-hidden="true"></b> Open to conversations</p>
+          <ul class="hero-meta">
+            <li>Barcelona</li>
+            <li>Deloitte</li>
+          </ul>
+        </div>
+
+        <h1 class="hero-name">Daniel <em>Navarro<span> Delgado</span></em></h1>
+
+        <p class="hero-position">Finance &amp; Technology Consultant</p>
+
+        <p class="hero-role">Finance transformation, Oracle EPM and applied artificial intelligence</p>
+
+        <p class="hero-lede">
+          I understand a finance need, translate it into a <b>functional structure</b>, build it
+          on <b>enterprise systems and data</b> and leave it tested, documented and ready to
+          use.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#projects" class="btn btn--solid">See my work <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg></a>
+          <a href="#contact" class="btn btn--ghost">Get in touch</a>
+          <a href="../cv/cv-daniel-navarro-delgado-en.pdf" class="hero-cv" download>
+            <span class="hero-cv-label">Download CV</span>
+            <span class="hero-cv-meta">PDF</span>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>
+          </a>
+        </div>
+
+        <ul class="hero-tags">
+          <li class="chip">Oracle EPM Cloud</li>
+          <li class="chip">Essbase</li>
+          <li class="chip">ODI</li>
+          <li class="chip">Data integration</li>
+          <li class="chip">Solution development</li>
+          <li class="chip">Applied AI</li>
+        </ul>
+      </div>
+
+      <figure class="hero-figure">
+        <div class="hero-photo">
+          <img
+            src="../img/foto-perfil.jpg"
+            alt="Portrait of Daniel Navarro Delgado"
+            width="528" height="660"
+            fetchpriority="high"
+            decoding="async" />
+        </div>
+        <figcaption class="hero-caption">
+          <span>Daniel Navarro Delgado</span>
+          <span>Barcelona</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <!-- Cifras: cada una se sostiene con lo que aparece más abajo en la página.
+         VERIFICAR: 34 es el total sin duplicar de las certificaciones listadas en
+         #certifications (20 IA + 10 Oracle + 10 gestión, con 6 certificaciones
+         Oracle de IA contadas en dos itinerarios). El JS lo recalcula desde el
+         índice al cargar, así que basta con añadir o quitar entradas allí. -->
+    <ul class="ledger">
+      <li>
+        <div class="ledger-num">3</div>
+        <div class="ledger-label"><b>Roles at Deloitte</b> from analyst to consultant since January 2025</div>
+      </li>
+      <li>
+        <div class="ledger-num">9</div>
+        <div class="ledger-label"><b>Finance domains</b> that I built into the maturity assessment accelerator</div>
+      </li>
+      <li>
+        <div class="ledger-num" id="certTotalHero">34</div>
+        <div class="ledger-label"><b>Certifications</b> 20 of them in artificial intelligence</div>
+      </li>
+      <li>
+        <div class="ledger-num">3</div>
+        <div class="ledger-label"><b>Degrees</b> economics, international business and business psychology</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ======================== CAPACIDADES ======================== -->
+<section class="section section--alt" id="skills">
+  <div class="wrap">
+    <div class="head head--wide reveal">
+      <p class="eyebrow">01 — Capabilities</p>
+      <h2 class="title">What I can <em>solve</em></h2>
+      <p class="lede">
+        Not four separate specialities, but a single path: understand the finance process,
+        model and move its data, build the solution and explain it so that someone else can
+        use it.
+      </p>
+    </div>
+
+    <ul class="pillars stagger">
+      <li class="card pillar reveal">
+        <span class="pillar-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chart"/></svg></span>
+        <h3>Understand the finance process</h3>
+        <p>
+          Planning, budgeting, forecasting and actuals; variance analysis, product
+          profitability and financial management of R&amp;D and investments. Before touching a
+          system, the job is to understand how an organisation plans and decides.
+        </p>
+        <ul class="tags">
+          <li class="chip">Planning</li>
+          <li class="chip">Controlling</li>
+          <li class="chip">IFRS</li>
+        </ul>
+      </li>
+
+      <li class="card pillar reveal">
+        <span class="pillar-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-data"/></svg></span>
+        <h3>Model and move the data</h3>
+        <p>
+          Dimensional models on Oracle EPM Cloud —cubes, hierarchies and calculation rules— and
+          integrations with SAP, ODI, Data Exchange and EPM Automate: loads, mappings, metadata
+          and working out why a figure does not reconcile.
+        </p>
+        <ul class="tags">
+          <li class="chip">Oracle EPM Cloud</li>
+          <li class="chip">ODI</li>
+          <li class="chip">FDMEE</li>
+        </ul>
+      </li>
+
+      <li class="card pillar reveal">
+        <span class="pillar-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-cube"/></svg></span>
+        <h3>Build the solution</h3>
+        <p>
+          When the answer is not another spreadsheet, I build it: interface, data
+          visualisation, version control, deployment and shared persistence, so that several
+          people can carry on the same work.
+        </p>
+        <ul class="tags">
+          <li class="chip">JavaScript</li>
+          <li class="chip">Git</li>
+          <li class="chip">Firebase</li>
+        </ul>
+      </li>
+
+      <li class="card pillar reveal">
+        <span class="pillar-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chat"/></svg></span>
+        <h3>Explain it so it gets used</h3>
+        <p>
+          Functional documentation, user and administration guides delivered to the client,
+          executive presentations and guided demos. A solution that nobody knows how to use is
+          not finished yet.
+        </p>
+        <ul class="tags">
+          <li class="chip">Documentation</li>
+          <li class="chip">Presentations</li>
+          <li class="chip">Internal training</li>
+        </ul>
+      </li>
+    </ul>
+
+    <div class="flow-block reveal">
+      <h3 class="flow-title">From source data to the finance decision</h3>
+      <ol class="flow">
+        <li class="flow-step">
+          <span class="flow-kicker">Source</span>
+          <h4>Business systems</h4>
+          <p>SAP and the organisation's other finance and operational sources.</p>
+        </li>
+        <li class="flow-step">
+          <span class="flow-kicker">Integration</span>
+          <h4>Metadata, mappings and loads</h4>
+          <p>ODI, Data Exchange and EPM Automate, so that data arrives complete and traceable.</p>
+        </li>
+        <li class="flow-step">
+          <span class="flow-kicker">Model</span>
+          <h4>Oracle EPM Cloud</h4>
+          <p>Cubes, dimensions, hierarchies and business rules that represent how the company plans.</p>
+        </li>
+        <li class="flow-step">
+          <span class="flow-kicker">Output</span>
+          <h4>Budget, forecast and reporting</h4>
+          <p>Data Forms, Task Lists, Smart View and dashboards for whoever has to decide.</p>
+        </li>
+      </ol>
+      <p class="flow-layer">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-bolt"/></svg>
+        <span><b>Automation and applied AI, at any of the four steps</b> — where they reduce
+        manual work, improve documentation or raise the quality of the deliverable. Not where
+        they only look good.</span>
+      </p>
+    </div>
+
+    <div class="stack reveal">
+      <div class="stack-group">
+        <h3>Oracle &amp; EPM</h3>
+        <div class="stack-row"><span>Oracle EPM Cloud (Planning)</span><span class="stack-level">Advanced</span></div>
+        <div class="stack-row"><span>Oracle Cloud Infrastructure</span><span class="stack-level">Advanced</span></div>
+        <div class="stack-row"><span>Smart View &amp; Essbase</span><span class="stack-level">Proficient</span></div>
+        <div class="stack-row"><span>Oracle Data Integrator (ODI)</span><span class="stack-level">Proficient</span></div>
+        <div class="stack-row"><span>EPM Automate &amp; Data Exchange</span><span class="stack-level">Proficient</span></div>
+        <ul class="tags">
+          <li class="pill">Hyperion Planning</li>
+          <li class="pill">EPBCS</li>
+          <li class="pill">FDMEE</li>
+        </ul>
+      </div>
+
+      <div class="stack-group">
+        <h3>Data and analytics</h3>
+        <div class="stack-row"><span>SQL &amp; Database Management</span><span class="stack-level">Advanced</span></div>
+        <div class="stack-row"><span>OCI Data Science</span><span class="stack-level">Proficient</span></div>
+        <div class="stack-row"><span>Python (Data &amp; ML)</span><span class="stack-level">Proficient</span></div>
+        <div class="stack-row"><span>Power BI</span><span class="stack-level">Proficient</span></div>
+        <ul class="tags">
+          <li class="pill">Loads and mappings</li>
+          <li class="pill">Metadata</li>
+          <li class="pill">Data validation</li>
+          <li class="pill">SAP S/4HANA (FI)</li>
+        </ul>
+      </div>
+
+      <div class="stack-group">
+        <h3>Applied AI</h3>
+        <div class="stack-row"><span>Generative AI &amp; Prompt Engineering</span><span class="stack-level">Advanced</span></div>
+        <ul class="tags">
+          <li class="pill">AI Agents</li>
+          <li class="pill">Anthropic Claude</li>
+          <li class="pill">ChatGPT</li>
+          <li class="pill">Google AI</li>
+          <li class="pill">Microsoft 365 Copilot</li>
+          <li class="pill">AI-assisted development</li>
+        </ul>
+      </div>
+
+      <div class="stack-group">
+        <h3>Development and deployment</h3>
+        <ul class="tags">
+          <li class="pill">HTML</li>
+          <li class="pill">CSS</li>
+          <li class="pill">JavaScript</li>
+          <li class="pill">Git</li>
+          <li class="pill">GitHub</li>
+          <li class="pill">GitHub Pages</li>
+          <li class="pill">Firebase Realtime Database</li>
+          <li class="pill">Data visualisation</li>
+          <li class="pill">Interface design</li>
+        </ul>
+      </div>
+
+      <div class="stack-group">
+        <h3>Finance and management control</h3>
+        <ul class="tags">
+          <li class="pill">Financial Planning</li>
+          <li class="pill">Budgeting</li>
+          <li class="pill">Forecasting</li>
+          <li class="pill">Controlling</li>
+          <li class="pill">Variance analysis</li>
+          <li class="pill">Product profitability</li>
+          <li class="pill">R&amp;D and investments</li>
+          <li class="pill">IFRS</li>
+          <li class="pill">Financial Modelling</li>
+          <li class="pill">Econometrics</li>
+        </ul>
+      </div>
+
+      <div class="stack-group">
+        <h3>Methods and consulting</h3>
+        <ul class="tags">
+          <li class="pill">Business Analysis</li>
+          <li class="pill">Agile</li>
+          <li class="pill">Scrum</li>
+          <li class="pill">ITIL 4</li>
+          <li class="pill">Lean Six Sigma</li>
+          <li class="pill">Jira</li>
+          <li class="pill">Functional documentation</li>
+          <li class="pill">Executive presentations</li>
+          <li class="pill">Stakeholder Management</li>
+          <li class="pill">Business Psychology</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================== TRABAJO ========================== -->
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="head head--wide reveal">
+      <p class="eyebrow">02 — Work</p>
+      <h2 class="title">What I have <em>built</em></h2>
+      <p class="lede">
+        Two case studies and a few shorter pieces of work. Each card states what kind of work
+        it is and which part was mine, so that team work is not mistaken for my own.
+      </p>
+    </div>
+
+    <ul class="work stagger">
+
+      <!-- NOTA DE PUBLICACIÓN: el acelerador se describe por lo que hace, sin su
+           nombre interno de producto ni detalle de la metodología, por tratarse de
+           un activo interno. Si la denominación está autorizada para uso público,
+           puede añadirse en el título y en la etiqueta. -->
+      <li class="card work-card work-card--feature reveal">
+        <div class="work-top">
+          <span class="work-idx">Case 01</span>
+          <span class="work-kind">Internal initiative · Deloitte</span>
+        </div>
+        <h3>From a spreadsheet methodology to a diagnostic tool</h3>
+        <p class="case-lede">
+          A methodology for assessing the <b>maturity of the finance function</b> lived scattered
+          across spreadsheets. I developed the web application that replaces it: a team can walk
+          through it in a client conversation without losing the rigour of the model behind it.
+        </p>
+
+        <dl class="case-facts">
+          <div>
+            <dt>Context</dt>
+            <dd>The model assesses finance capabilities and sub-capabilities across three levers
+              —<b>processes, technology and organisation</b>— with maturity levels from 1 to 5,
+              key questions, evidence and associated initiatives.</dd>
+          </div>
+          <div>
+            <dt>Challenge</dt>
+            <dd>Keep that methodological richness without overwhelming the person using it. A
+              spreadsheet holds the information, but you cannot navigate it in front of anyone.</dd>
+          </div>
+          <div>
+            <dt>My contribution</dt>
+            <dd><b>Full development of the tool</b>: functional interpretation and structuring of
+              the model, user-experience design and the incorporation of the nine domains, with
+              navigation, comparative radar charts, a maturity heatmap, gaps against the target,
+              priorities and <b>initiatives linked to the diagnosis</b>. The methodological content
+              was developed by the team.</dd>
+          </div>
+          <div>
+            <dt>Scope</dt>
+            <dd>From a first domain to a <b>multi-domain architecture of nine finance
+              domains</b>, all built into the tool: financial planning and analysis, controlling,
+              transactional processes and business finance, among others.</dd>
+          </div>
+        </dl>
+
+        <details class="case-more">
+          <summary>How it was built</summary>
+          <ul>
+            <li><strong>Short iterations.</strong> A first usable version before a complete version on paper; then improvements in robustness, functionality and design before each review.</li>
+            <li><strong>Version control with Git and GitHub</strong>, with separate branches for development and publishing, and only stable versions merged into the main branch.</li>
+            <li><strong>Publishing with GitHub Pages</strong>, also solving everything around a deployment: caching, version updates and continuity between sessions.</li>
+            <li><strong>Shared persistence with Firebase</strong>, to move from data stored in a single browser to scenarios that several people can carry on.</li>
+            <li><strong>Industrialised domain onboarding</strong>: a parameterisable data structure that allows a new domain to be added without rebuilding the tool.</li>
+            <li><strong>Functional and edge-case testing</strong> before every delivery.</li>
+            <li><strong>Executive presentation and guided demo</strong>, already used in client conversations. Because it is an interactive tool, walking through it explains its value far better than a set of screenshots.</li>
+          </ul>
+        </details>
+
+        <ul class="tags">
+          <li class="chip">Maturity assessment</li>
+          <li class="chip">Multi-domain architecture</li>
+          <li class="chip">JavaScript</li>
+          <li class="chip">Git</li>
+          <li class="chip">GitHub Pages</li>
+          <li class="chip">Firebase</li>
+          <li class="chip">Data visualisation</li>
+          <li class="chip">Applied AI</li>
+        </ul>
+      </li>
+
+      <li class="card work-card work-card--feature reveal">
+        <div class="work-top">
+          <span class="work-idx">Case 02</span>
+          <span class="work-kind">Client project · Deloitte</span>
+        </div>
+        <h3>Planning and controlling for an industrial group, moving to Oracle EPM Cloud</h3>
+        <p class="case-lede">
+          One of <b>Spain's ten largest business groups by revenue</b> ran its planning and
+          controlling on an earlier platform. The project moved those processes to Oracle EPM
+          Cloud without losing the business logic behind each figure.
+        </p>
+
+        <dl class="case-facts">
+          <div>
+            <dt>Context</dt>
+            <dd>Long-range planning scenarios, budget, forecast and actuals, covering margins,
+              prices, variance analysis, product profitability and <b>financial management of
+              R&amp;D and investments</b>.</dd>
+          </div>
+          <div>
+            <dt>Challenge</dt>
+            <dd>A model like this is not migrated by copying structures. You have to understand
+              what each dimension and each rule represents before rebuilding it, or the new system
+              returns numbers nobody recognises.</dd>
+          </div>
+          <div>
+            <dt>My contribution</dt>
+            <dd>I worked on the functional design of the dimensional model and the calculation
+              rules (around one hundred of them, for capitalisations, depreciation and financial
+              effects under <b>IFRS and tax criteria</b>), on the functional coordination of more
+              than ten integrations and between thirty and forty mappings, and on validating the
+              loaded data.</dd>
+          </div>
+          <div>
+            <dt>Results</dt>
+            <dd><b>Processing-time reductions of 80% and 90%</b> in two calculation cubes, and an
+              automated depreciation calculation that removed manual effort equivalent to
+              <b>two full-time employees</b>. The redesign of the rules and of the tax calculation
+              process also reduced recurring errors.</dd>
+          </div>
+          <div>
+            <dt>Diagnosis</dt>
+            <dd>When a figure does not reconcile, the job is to trace it: which rule ran, with
+              which period and scenario, which records were rejected and at what point the mapping
+              stopped transforming what it should.</dd>
+          </div>
+        </dl>
+
+        <details class="case-more">
+          <summary>What we worked with</summary>
+          <ul>
+            <li><strong>Oracle EPM Cloud and Hyperion Planning</strong>, with Essbase as the calculation engine of the model.</li>
+            <li><strong>Integrations</strong> with SAP and other business sources through ODI, FDMEE, Data Exchange and EPM Automate.</li>
+            <li><strong>Data and metadata loads</strong>, business rules, mappings and review of execution logs to locate the source of a difference.</li>
+            <li><strong>Validation in test environments</strong> before every production update.</li>
+            <li><strong>Analytical outputs</strong>: Data Forms, Task Lists, Smart View and dashboards for whoever has to decide.</li>
+          </ul>
+        </details>
+
+        <ul class="tags">
+          <li class="chip">Oracle EPM Cloud</li>
+          <li class="chip">Hyperion Planning</li>
+          <li class="chip">Essbase</li>
+          <li class="chip">ODI</li>
+          <li class="chip">FDMEE</li>
+          <li class="chip">SAP</li>
+          <li class="chip">IFRS</li>
+        </ul>
+      </li>
+
+      <li class="card work-card reveal">
+        <div class="work-top">
+          <span class="work-idx">03</span>
+          <span class="work-kind">Internal documentation</span>
+        </div>
+        <h3>Oracle EPM user and administration guides</h3>
+        <dl class="work-facts">
+          <div>
+            <dt>Context</dt>
+            <dd>A planning and controlling solution does not run itself: the team and the client's
+              users need to know how to operate it and how to administer it.</dd>
+          </div>
+          <div>
+            <dt>Contribution</dt>
+            <dd>I wrote the <b>user and administration guides</b> for the Oracle EPM solution,
+              delivered to the team and the client, covering the processes, day-to-day operation
+              and the technical aspects needed to work with it independently.</dd>
+          </div>
+        </dl>
+        <ul class="tags">
+          <li class="chip">Functional documentation</li>
+          <li class="chip">Client deliverable</li>
+          <li class="chip">Oracle EPM</li>
+        </ul>
+      </li>
+
+      <li class="card work-card reveal">
+        <div class="work-top">
+          <span class="work-idx">04</span>
+          <span class="work-kind">Internal initiative · Deloitte</span>
+        </div>
+        <h3>AI adoption session for the team</h3>
+        <dl class="work-facts">
+          <div>
+            <dt>Context</dt>
+            <dd>A team of <b>around 15 people</b>, curious about generative AI but with no shared
+              reference on when to use it in their daily work.</dd>
+          </div>
+          <div>
+            <dt>Contribution</dt>
+            <dd>I prepared and delivered a session with my own materials, comparing Claude, ChatGPT
+              and Gemini on real consulting cases: when each tool genuinely helps in day-to-day work
+              and when it is not worth it.</dd>
+          </div>
+        </dl>
+        <ul class="tags">
+          <li class="chip">Claude</li>
+          <li class="chip">ChatGPT</li>
+          <li class="chip">Gemini</li>
+          <li class="chip">Prompt Engineering</li>
+        </ul>
+      </li>
+
+      <li class="card work-card reveal">
+        <div class="work-top">
+          <span class="work-idx">05</span>
+          <span class="work-kind">Outreach</span>
+        </div>
+        <h3>Personal finance workshop at a secondary school</h3>
+        <dl class="work-facts">
+          <div>
+            <dt>Context</dt>
+            <dd>Teenagers with no prior financial education, in a workshop format.</dd>
+          </div>
+          <div>
+            <dt>Outcome</dt>
+            <dd>Students and school asked to repeat the experience. Explaining financial concepts
+              to someone starting from scratch is the same muscle I use when presenting a model to
+              the business.</dd>
+          </div>
+        </dl>
+        <ul class="tags">
+          <li class="chip">Financial education</li>
+          <li class="chip">Public Speaking</li>
+        </ul>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<!-- ========================= TRAYECTORIA ========================= -->
+<section class="section section--alt" id="experience">
+  <div class="wrap">
+    <div class="head head--wide reveal">
+      <p class="eyebrow">03 — Experience</p>
+      <h2 class="title">The path <em>so far</em></h2>
+      <p class="lede">
+        From analyst to consultant on finance and technology transformation projects, with a
+        steady increase in functional, technical and coordination responsibility.
+      </p>
+    </div>
+
+    <ol class="timeline">
+
+      <!-- Los tres puestos en Deloitte forman una sola entrada: a la izquierda,
+           la empresa y el periodo total (fijos al desplazarse, en escritorio);
+           a la derecha, los puestos del más reciente al más antiguo, unidos
+           por un riel. Si se añade un puesto, actualizar también «3 roles». -->
+      <li class="tl-item tl-item--group">
+        <div class="tl-aside reveal">
+          <p class="tl-period"><time datetime="2025-01">Jan 2025</time> — Present</p>
+          <h3 class="tl-company">Deloitte</h3>
+          <p class="tl-count">3 roles</p>
+        </div>
+        <ol class="tl-roles">
+
+          <li class="tl-role-item tl-role-item--now reveal">
+            <p class="tl-period"><span><time datetime="2026-07">Jul 2026</time> — Present</span> <span class="tl-now">Current role</span></p>
+            <h4 class="tl-role">Finance &amp; Technology Consultant</h4>
+            <p class="tl-desc">
+              Consultant on finance and technology transformation projects, focused on the
+              evolution of Oracle EPM Cloud solutions, functional and technical coordination and
+              the practical application of artificial intelligence in consulting.
+            </p>
+            <ul class="tl-list">
+              <li>Functional and technical evolution of <strong>Oracle EPM Cloud</strong> solutions for planning, controlling, R&amp;D and investment processes.</li>
+              <li><strong>Development of a digital accelerator for finance maturity assessment</strong>: functional interpretation of the model, incorporation of nine domains, deployment and industrialisation of new-domain onboarding.</li>
+              <li><strong>Direct client interaction</strong> in progress meetings, and coordination with business and technology teams to turn finance requirements into implementable solutions.</li>
+              <li>Management and follow-up of integrations, metadata, business rules, mappings and data loads using Oracle EPM, ODI, Data Exchange and EPM Automate.</li>
+              <li><strong>Technical review and support</strong> for the work of team colleagues, and improvements in <strong>automation and delivery quality</strong>, bringing in AI tools where they add real value.</li>
+              <li>A multi-platform specialisation built through <strong>20 artificial intelligence certifications</strong> from Anthropic, OpenAI, Google, Deloitte and Oracle, applied to real projects.</li>
+            </ul>
+            <ul class="tags">
+              <li class="chip">Oracle EPM Cloud</li>
+              <li class="chip">Solution development</li>
+              <li class="chip">Applied AI</li>
+              <li class="chip">Data integration</li>
+              <li class="chip">Automation</li>
+              <li class="chip">Consulting</li>
+            </ul>
+          </li>
+
+          <li class="tl-role-item reveal">
+            <p class="tl-period"><span><time datetime="2025-07">Jul 2025</time> — <time datetime="2026-06">Jun 2026</time></span></p>
+            <h4 class="tl-role">Finance &amp; Technology Senior Analyst</h4>
+            <span class="edu-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-award"/></svg> FY26 · Exceeds expectations</span>
+            <p class="tl-desc">
+              Senior consultant on finance and technology transformation projects, taking part in
+              the functional definition and implementation of Oracle EPM Cloud solutions for large
+              organisations in the industrial sector.
+            </p>
+            <ul class="tl-list">
+              <li>Functional design and implementation of <strong>Oracle EPM Cloud</strong> for planning and controlling processes (Budget, Forecast and Actuals) in R&amp;D and investments for one of Spain's ten largest business groups by revenue.</li>
+              <li>Structuring of dimensional models through cubes, dimensions, hierarchies, attributes and calculation rules.</li>
+              <li>Definition and validation of <strong>around one hundred business rules</strong> for capitalisations, depreciation and financial effects under IFRS and tax criteria.</li>
+              <li><strong>Performance tuning</strong> of two calculation cubes, with processing-time reductions of 80% and 90%.</li>
+              <li><strong>Automation of the depreciation calculation</strong>, removing manual effort equivalent to two full-time employees, and a redesign of the tax calculation process to reduce recurring errors.</li>
+              <li>Functional coordination of <strong>more than ten integrations</strong> and between thirty and forty mappings across Oracle EPM Cloud, SAP, Oracle Data Integrator (ODI), Data Exchange and EPM Automate.</li>
+              <li>Design and optimisation of Data Forms, Task Lists, Smart View, dashboards and analytical outputs.</li>
+              <li>Troubleshooting of load issues by reviewing <strong>rules, mappings and execution logs</strong> until the record that did not reconcile was found.</li>
+              <li>Authoring of the functional documentation and of the <strong>Oracle EPM user and administration guides</strong> delivered to the team and the client.</li>
+              <li>FY26 annual review rated <strong>exceeds expectations</strong>, with the highest score —4.0, excellent— in the four technical competencies, in analytical and critical thinking and in developing people.</li>
+              <li><strong>10 Oracle certifications</strong> earned, six of them related to artificial intelligence, to strengthen the technology base applied to the project.</li>
+            </ul>
+            <ul class="tags">
+              <li class="chip">Oracle EPM Cloud</li>
+              <li class="chip">Essbase</li>
+              <li class="chip">ODI</li>
+              <li class="chip">FDMEE</li>
+              <li class="chip">Smart View</li>
+              <li class="chip">IFRS</li>
+            </ul>
+          </li>
+
+          <li class="tl-role-item reveal">
+            <p class="tl-period"><span><time datetime="2025-01">Jan 2025</time> — <time datetime="2025-06">Jun 2025</time></span></p>
+            <h4 class="tl-role">Finance &amp; Technology Analyst</h4>
+            <p class="tl-desc">
+              Joined finance transformation projects with a focus on functional analysis,
+              requirements gathering, documentation and the initial configuration of Oracle EPM
+              Cloud solutions.
+            </p>
+            <ul class="tl-list">
+              <li>Analysis of finance processes and translation of business needs into functional requirements.</li>
+              <li>Support in the design and configuration of Oracle EPM Cloud solutions for planning and controlling.</li>
+              <li>Preparation and maintenance of functional and techno-functional documentation.</li>
+              <li>Validation of data, forms, business rules and results across the different project phases.</li>
+              <li>Coordination with business and technology teams to follow up requirements, issues and decisions.</li>
+            </ul>
+            <ul class="tags">
+              <li class="chip">Oracle EPM</li>
+              <li class="chip">Business Analysis</li>
+              <li class="chip">Requirements Gathering</li>
+              <li class="chip">Documentation</li>
+            </ul>
+          </li>
+
+        </ol>
+      </li>
+
+      <li class="tl-item reveal">
+        <div class="tl-aside">
+          <p class="tl-period"><time datetime="2024-07">Jul 2024</time> — <time datetime="2024-12">Dec 2024</time></p>
+          <h3 class="tl-company">CleverStrategy</h3>
+        </div>
+        <div>
+          <p class="tl-role">IT Business Consultant</p>
+          <p class="tl-desc">
+            IT business consulting focused on digital transformation and artificial intelligence
+            applications for companies.
+          </p>
+          <ul class="tl-list">
+            <li>Development and implementation of <strong>churn prediction</strong> algorithms and Customer Lifetime Value (CLV) optimisation.</li>
+            <li>Creation of a confusion-matrix calculator to support decision-making and the ROI calculation of AI projects.</li>
+            <li>Design of materials for client acquisition and business relationship development.</li>
+          </ul>
+          <ul class="tags">
+            <li class="chip">Python</li>
+            <li class="chip">Power BI</li>
+            <li class="chip">Machine Learning</li>
+            <li class="chip">Agile</li>
+          </ul>
+        </div>
+      </li>
+
+    </ol>
+  </div>
+</section>
+
+<!-- ========================== FORMACIÓN ========================== -->
+<section class="section" id="education">
+  <div class="wrap">
+    <div class="head head--wide reveal">
+      <p class="eyebrow">04 — Education</p>
+      <h2 class="title">Economics, business and <em>psychology</em></h2>
+      <p class="lede">
+        An unusual foundation for a technical profile: understanding the numbers, the
+        international context and also the people who, in the end, have to work with the system.
+      </p>
+    </div>
+
+    <ul class="edu stagger">
+
+      <li class="card edu-card reveal">
+        <p class="edu-period"><time datetime="2019">2019</time> — <time datetime="2023">2023</time></p>
+        <h3>Universitat Pompeu Fabra</h3>
+        <p class="edu-degree">BSc in Economics</p>
+        <p class="edu-place">Barcelona</p>
+        <span class="edu-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-star"/></svg> Award-winning, published thesis</span>
+        <p class="edu-note">Thesis on the distributional implications of a carbon tax. Grade: 9.7/10.</p>
+      </li>
+
+      <li class="card edu-card reveal">
+        <p class="edu-period"><time datetime="2021">2021</time> — <time datetime="2022">2022</time></p>
+        <h3>Università Milano-Bicocca</h3>
+        <p class="edu-degree">Erasmus — International Business Economics</p>
+        <p class="edu-place">Milan, Italy</p>
+        <span class="edu-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-globe"/></svg> 29/30 · Magna Cum Laude</span>
+        <p class="edu-note">Courses: Global Management, Behavioral Economics, Data-Driven Decision Making.</p>
+      </li>
+
+      <li class="card edu-card reveal">
+        <p class="edu-period"><time datetime="2023">2023</time> — <time datetime="2025">2025</time></p>
+        <h3>Steinbeis University Berlin</h3>
+        <p class="edu-degree">MSc in Business and Organisational Psychology</p>
+        <p class="edu-place">Schools of Next Practices, Berlin</p>
+        <span class="edu-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-award"/></svg> Grade 1.3 (A)</span>
+        <p class="edu-note">Thesis: the impact of AI chatbots on employee engagement and wellbeing.</p>
+      </li>
+
+    </ul>
+
+    <ul class="langs reveal">
+      <li class="lang">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" class="lang-flag" aria-hidden="true">
+          <rect width="20" height="15" fill="#c60b1e"/>
+          <rect y="3.75" width="20" height="7.5" fill="#f1bf00"/>
+        </svg>
+        Spanish <span class="lang-level">Native</span>
+      </li>
+      <li class="lang">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" class="lang-flag" aria-hidden="true">
+          <rect width="20" height="15" fill="#FCDD09"/>
+          <rect y="1.67" width="20" height="1.67" fill="#DA121A"/>
+          <rect y="5" width="20" height="1.67" fill="#DA121A"/>
+          <rect y="8.33" width="20" height="1.67" fill="#DA121A"/>
+          <rect y="11.67" width="20" height="1.67" fill="#DA121A"/>
+        </svg>
+        Catalan <span class="lang-level">Native</span>
+      </li>
+      <li class="lang">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" class="lang-flag" aria-hidden="true">
+          <rect width="20" height="15" fill="#012169"/>
+          <path d="M0,0 L20,15 M20,0 L0,15" stroke="#fff" stroke-width="3"/>
+          <path d="M0,0 L20,15 M20,0 L0,15" stroke="#C8102E" stroke-width="1.8"/>
+          <path d="M10,0 V15 M0,7.5 H20" stroke="#fff" stroke-width="5"/>
+          <path d="M10,0 V15 M0,7.5 H20" stroke="#C8102E" stroke-width="3"/>
+        </svg>
+        English <span class="lang-level">C1</span>
+      </li>
+      <li class="lang">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" class="lang-flag" aria-hidden="true">
+          <rect width="20" height="15" fill="#CE2B37"/>
+          <rect width="13.3" height="15" fill="#fff"/>
+          <rect width="6.67" height="15" fill="#009246"/>
+        </svg>
+        Italian <span class="lang-level">B2</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ======================= CERTIFICACIONES ======================= -->
+<section class="section section--alt" id="certifications">
+  <div class="wrap">
+    <div class="head head--wide reveal">
+      <p class="eyebrow">05 — Continuous learning</p>
+      <h2 class="title">Certifications, <em>by track</em></h2>
+      <p class="lede">
+        Three tracks that reinforce each other: artificial intelligence, Oracle technology and
+        project management. Filter the index to see only what interests you.
+      </p>
+    </div>
+
+    <!-- La barra de filtros la activa el JS: sin JS no aparecen controles
+         muertos y el índice completo se ve igualmente. -->
+    <div class="cert-toolbar reveal" id="certToolbar" hidden>
+      <button type="button" class="filter" data-filter="all" aria-pressed="true">All <i></i></button>
+      <button type="button" class="filter" data-filter="ia" aria-pressed="false">Artificial intelligence <i></i></button>
+      <button type="button" class="filter" data-filter="oracle" aria-pressed="false">Oracle Cloud <i></i></button>
+      <button type="button" class="filter" data-filter="gestion" aria-pressed="false">Management and consulting <i></i></button>
+      <p class="cert-count" id="certCount" role="status" aria-live="polite" data-one="certification" data-many="certifications"></p>
+    </div>
+
+    <!-- Fuente única de la verdad: cada certificación aparece una sola vez.
+         data-track admite varios itinerarios (las seis de Oracle sobre IA
+         pertenecen a "ia" y a "oracle" a la vez). Los recuentos de los
+         filtros se calculan desde aquí, así que no pueden desincronizarse. -->
+    <div class="cert-index reveal" id="certIndex">
+
+      <div class="cert-group">
+        <div class="cert-issuer">
+          <h3>Oracle</h3>
+          <span data-group-count>10</span>
+        </div>
+        <ul>
+          <li class="cert-item" data-track="ia oracle">
+            <span class="cert-name">OCI Certified Data Science Professional</span>
+            <span class="cert-meta"><span class="cert-topic">Data Science</span> · <time datetime="2026-01">Jan 2026</time></span>
+          </li>
+          <li class="cert-item" data-track="ia oracle">
+            <span class="cert-name">Oracle AI Autonomous Database Professional</span>
+            <span class="cert-meta"><span class="cert-topic">Databases</span> · <time datetime="2025-12">Dec 2025</time></span>
+          </li>
+          <li class="cert-item" data-track="oracle">
+            <span class="cert-name">Oracle Cloud EPM Data Integration Professional</span>
+            <span class="cert-meta"><span class="cert-topic">EPM</span> · <time datetime="2025-12">Dec 2025</time></span>
+          </li>
+          <li class="cert-item" data-track="oracle">
+            <span class="cert-name">Oracle Data Platform Certified Associate</span>
+            <span class="cert-meta"><span class="cert-topic">Data</span> · <time datetime="2025-12">Dec 2025</time></span>
+          </li>
+          <li class="cert-item" data-track="oracle">
+            <span class="cert-name">Oracle Guided Learning Administrator Associate</span>
+            <span class="cert-meta"><span class="cert-topic">Adoption</span> · <time datetime="2025-12">Dec 2025</time></span>
+          </li>
+          <li class="cert-item" data-track="ia oracle">
+            <span class="cert-name">Oracle Certified AI Associate</span>
+            <span class="cert-meta"><span class="cert-topic">Foundations</span> · <time datetime="2025-09">Sep 2025</time></span>
+          </li>
+          <li class="cert-item" data-track="ia oracle">
+            <span class="cert-name">OCI Generative AI Professional</span>
+            <span class="cert-meta"><span class="cert-topic">Generative AI</span> · <time datetime="2025-09">Sep 2025</time></span>
+          </li>
+          <li class="cert-item" data-track="ia oracle">
+            <span class="cert-name">Oracle Fusion AI Agent Studio Associate</span>
+            <span class="cert-meta"><span class="cert-topic">Agents</span> · <time datetime="2025-09">Sep 2025</time></span>
+          </li>
+          <li class="cert-item" data-track="oracle">
+            <span class="cert-name">Oracle Certified Associate (OCI Foundations)</span>
+            <span class="cert-meta"><span class="cert-topic">OCI</span> · <time datetime="2025-09">Sep 2025</time></span>
+          </li>
+          <li class="cert-item" data-track="ia oracle">
+            <span class="cert-name">Oracle AI in Enterprise Performance Management</span>
+            <span class="cert-meta"><span class="cert-topic">AI + EPM</span> · <time datetime="2025-08">Aug 2025</time></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="cert-group">
+        <div class="cert-issuer">
+          <h3>LinkedIn Learning</h3>
+          <span data-group-count>8</span>
+        </div>
+        <ul>
+          <li class="cert-item" data-track="gestion">
+            <span class="cert-name">Service Management with ITIL® 4</span>
+            <span class="cert-meta"><time datetime="2026-03">Mar 2026</time></span>
+          </li>
+          <li class="cert-item" data-track="gestion">
+            <span class="cert-name">Hybrid Project Management</span>
+            <span class="cert-meta"><time datetime="2026-03">Mar 2026</time></span>
+          </li>
+          <li class="cert-item" data-track="gestion">
+            <span class="cert-name">Agile Project Management</span>
+            <span class="cert-meta"><time datetime="2024-09">Sep 2024</time></span>
+          </li>
+          <li class="cert-item" data-track="gestion">
+            <span class="cert-name">Scrum Master Framework</span>
+            <span class="cert-meta"><time datetime="2024-09">Sep 2024</time></span>
+          </li>
+          <li class="cert-item" data-track="gestion">
+            <span class="cert-name">Lean Six Sigma</span>
+            <span class="cert-meta"><time datetime="2024-09">Sep 2024</time></span>
+          </li>
+          <li class="cert-item" data-track="gestion">
+            <span class="cert-name">Consulting: Client Relationship Management</span>
+            <span class="cert-meta"><time datetime="2024-09">Sep 2024</time></span>
+          </li>
+          <li class="cert-item" data-track="gestion">
+            <span class="cert-name">Project Management</span>
+            <span class="cert-meta"><time datetime="2024-05">May 2024</time></span>
+          </li>
+          <li class="cert-item" data-track="gestion">
+            <span class="cert-name">Business Analysis</span>
+            <span class="cert-meta"><time datetime="2024-05">May 2024</time></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="cert-group">
+        <div class="cert-issuer">
+          <h3>Deloitte</h3>
+          <span data-group-count>5</span>
+        </div>
+        <ul>
+          <li class="cert-item" data-track="ia">
+            <span class="cert-name">Copilot Foundations I</span>
+            <span class="cert-meta"><span class="cert-topic">Copilot</span> · <time datetime="2026-06">Jun 2026</time></span>
+          </li>
+          <li class="cert-item" data-track="ia">
+            <span class="cert-name">Copilot Foundations II</span>
+            <span class="cert-meta"><span class="cert-topic">Copilot</span> · <time datetime="2026-06">Jun 2026</time></span>
+          </li>
+          <li class="cert-item" data-track="ia">
+            <span class="cert-name" lang="es">Fundamentos de la IA</span>
+            <span class="cert-meta"><span class="cert-topic">Foundations</span> · <time datetime="2025-05">May 2025</time></span>
+          </li>
+          <li class="cert-item" data-track="ia">
+            <span class="cert-name" lang="es">IA Generativa Aplicada a la Empresa</span>
+            <span class="cert-meta"><span class="cert-topic">Generative AI</span> · <time datetime="2025-05">May 2025</time></span>
+          </li>
+          <li class="cert-item" data-track="gestion">
+            <span class="cert-name">The Deloitte Way — Project Management</span>
+            <span class="cert-meta"><span class="cert-topic">Internal</span></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="cert-group">
+        <div class="cert-issuer">
+          <h3>Google</h3>
+          <span data-group-count>4</span>
+        </div>
+        <ul>
+          <li class="cert-item" data-track="ia">
+            <span class="cert-name">AI Fundamentals</span>
+            <span class="cert-meta"><span class="cert-topic">Foundations</span> · <time datetime="2026-04">Apr 2026</time></span>
+          </li>
+          <li class="cert-item" data-track="ia">
+            <span class="cert-name">AI for Data Analysis</span>
+            <span class="cert-meta"><span class="cert-topic">Data</span> · <time datetime="2026-04">Apr 2026</time></span>
+          </li>
+          <li class="cert-item" data-track="ia">
+            <span class="cert-name">AI for Brainstorming and Planning</span>
+            <span class="cert-meta"><span class="cert-topic">Applied AI</span> · <time datetime="2026-04">Apr 2026</time></span>
+          </li>
+          <li class="cert-item" data-track="ia">
+            <span class="cert-name">AI for Research and Insights</span>
+            <span class="cert-meta"><span class="cert-topic">Research</span> · <time datetime="2026-04">Apr 2026</time></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="cert-group">
+        <div class="cert-issuer">
+          <h3>Anthropic</h3>
+          <span data-group-count>3</span>
+        </div>
+        <ul>
+          <li class="cert-item" data-track="ia">
+            <span class="cert-name">Claude 101</span>
+            <span class="cert-meta"><span class="cert-topic">Foundations</span> · <time datetime="2026-08">Aug 2026</time></span>
+          </li>
+          <li class="cert-item" data-track="ia">
+            <span class="cert-name">Claude Code</span>
+            <span class="cert-meta"><span class="cert-topic">Coding</span> · <time datetime="2026-08">Aug 2026</time></span>
+          </li>
+          <li class="cert-item" data-track="ia">
+            <span class="cert-name">Claude Cowork</span>
+            <span class="cert-meta"><span class="cert-topic">Applied AI</span> · <time datetime="2026-08">Aug 2026</time></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="cert-group">
+        <div class="cert-issuer">
+          <h3>OpenAI</h3>
+          <span data-group-count>3</span>
+        </div>
+        <ul>
+          <li class="cert-item" data-track="ia">
+            <span class="cert-name">AI Foundations</span>
+            <span class="cert-meta"><span class="cert-topic">Foundations</span> · <time datetime="2026-08">Aug 2026</time></span>
+          </li>
+          <li class="cert-item" data-track="ia">
+            <span class="cert-name">Applied AI</span>
+            <span class="cert-meta"><span class="cert-topic">Applied AI</span> · <time datetime="2026-08">Aug 2026</time></span>
+          </li>
+          <li class="cert-item" data-track="ia">
+            <span class="cert-name">AI Agents and Workflows</span>
+            <span class="cert-meta"><span class="cert-topic">Agents</span> · <time datetime="2026-08">Aug 2026</time></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="cert-group">
+        <div class="cert-issuer">
+          <h3>Udemy</h3>
+          <span data-group-count>1</span>
+        </div>
+        <ul>
+          <li class="cert-item" data-track="gestion">
+            <span class="cert-name">Consulting Approach to Problem Solving</span>
+            <span class="cert-meta"><time datetime="2026-03">Mar 2026</time></span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p class="cert-note reveal">
+      The six Oracle certifications focused on artificial intelligence belong to two tracks at
+      once, so they appear under both the AI filter and the Oracle filter. In the index they are
+      listed only once.
+    </p>
+  </div>
+</section>
+
+<!-- ============================ MÉTODO ============================ -->
+<section class="section" id="approach">
+  <div class="wrap">
+    <div class="head head--wide reveal">
+      <p class="eyebrow">06 — Approach</p>
+      <h2 class="title">How I <em>work</em></h2>
+      <p class="lede">
+        The same cycle, whether the deliverable is a planning model or a tool. It is short on
+        purpose: hardly anyone can describe what they need until they can see it working.
+      </p>
+    </div>
+
+    <ul class="method stagger">
+      <li class="method-item reveal">
+        <span class="method-idx">01 — Understand</span>
+        <h3>Turn the need into a concrete improvement</h3>
+        <p>
+          Before configuring or coding anything, understand how an organisation plans, closes
+          and decides. Much of the value lies in finance and systems meaning the same thing when
+          they talk about the same figure.
+        </p>
+      </li>
+      <li class="method-item reveal">
+        <span class="method-idx">02 — Build</span>
+        <h3>Incrementally and under control</h3>
+        <p>
+          A first usable version before a complete version on paper. It is easier to correct
+          something you can touch than to argue over a requirements document.
+        </p>
+      </li>
+      <li class="method-item reveal">
+        <span class="method-idx">03 — Test</span>
+        <h3>Functionality, readability and edge cases</h3>
+        <p>
+          A tool that fails in a demo stops being useful even if the model behind it is right.
+          And data that arrives correctly does not always arrive complete.
+        </p>
+      </li>
+      <li class="method-item reveal">
+        <span class="method-idx">04 — Share</span>
+        <h3>Publish, document and gather feedback</h3>
+        <p>
+          What only one person knows is not a solution, it is a dependency. Documenting and
+          teaching people to use it is part of the delivery, not an extra at the end.
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== BANDA DE CIERRE: CONTACTO ==================== -->
+<div class="band">
+
+  <section class="section contact" id="contact">
+    <div class="wrap">
+      <div class="contact-inner">
+        <div class="reveal">
+          <p class="eyebrow">07 — Contact</p>
+          <h2 class="contact-title">Shall we talk about your <em>project</em>?</h2>
+          <p class="contact-lede">
+            Open to conversations about Oracle EPM Cloud, data integration, automation, applied
+            artificial intelligence, and finance and technology transformation projects.
+          </p>
+          <a href="mailto:danielnavarrodelgado16@gmail.com" class="contact-mail">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>
+            danielnavarrodelgado16@gmail.com
+          </a>
+        </div>
+
+        <ul class="contact-links reveal">
+          <li>
+            <a class="contact-link" href="https://www.linkedin.com/in/daniel-navarro-delgado" target="_blank" rel="noopener noreferrer">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg>
+              <span>LinkedIn</span>
+              <small>Career and posts</small>
+              <svg class="icon contact-go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
+            </a>
+          </li>
+          <li>
+            <a class="contact-link" href="https://github.com/danielnavarro1600" target="_blank" rel="noopener noreferrer">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg>
+              <span>GitHub</span>
+              <small>Projects and tools</small>
+              <svg class="icon contact-go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
+            </a>
+          </li>
+          <li>
+            <a class="contact-link" href="mailto:danielnavarrodelgado16@gmail.com">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>
+              <span>Email</span>
+              <small>Direct reply</small>
+              <svg class="icon contact-go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
+            </a>
+          </li>
+          <li>
+            <a class="contact-link" href="../cv/cv-daniel-navarro-delgado-en.pdf" download>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-file"/></svg>
+              <span>CV</span>
+              <small>PDF, two pages</small>
+              <svg class="icon contact-go" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>
+            </a>
+          </li>
+          <li>
+            <a class="contact-link" href="../cv/cv-daniel-navarro-delgado.pdf" download hreflang="es">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-file"/></svg>
+              <span>CV in Spanish</span>
+              <small>PDF, two pages</small>
+              <svg class="icon contact-go" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<!-- ============================ PIE ============================ -->
+<footer class="footer">
+  <div class="wrap">
+    <p><b>Daniel Navarro Delgado</b> — Finance and technology transformation consultant</p>
+    <p class="footer-meta">Barcelona · <span id="footerYear">2026</span> · <a href="#hero">Back to top</a></p>
+  </div>
+</footer>
+
+<!-- ============================ JS ============================ -->
+<script src="../assets/site.js"></script>
+
+</body>
+</html>

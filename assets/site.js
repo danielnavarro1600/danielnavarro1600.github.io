@@ -9,6 +9,17 @@
 const footerYear = document.getElementById('footerYear');
 if (footerYear) footerYear.textContent = new Date().getFullYear();
 
+// ---- SELECTOR DE IDIOMA EN LOCAL ----
+// En la web publicada, "en/" o "../" llevan a la portada de cada idioma. Al
+// abrir el archivo con doble clic (file://) no hay servidor que añada el
+// index.html, y el navegador mostraría una carpeta: se completa la ruta.
+if (location.protocol === 'file:') {
+  document.querySelectorAll('a.lang-switch').forEach(a => {
+    const href = a.getAttribute('href');
+    if (href.endsWith('/')) a.setAttribute('href', href + 'index.html');
+  });
+}
+
 // ---- BARRA DE NAVEGACIÓN ----
 const navbar = document.getElementById('navbar');
 const navProgress = document.getElementById('navProgress');

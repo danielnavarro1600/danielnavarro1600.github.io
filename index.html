@@ -6,8 +6,8 @@
   <script>
     /* Se ejecuta antes de que se aplique el CSS, para que un visitante que
        eligió tema oscuro no vea un destello en claro al recargar. El resto
-       de la lógica del tema (icono, aria-pressed...) vive al final de la
-       página, junto con el resto del script. */
+       de la lógica del tema (etiqueta, aria-pressed...) vive en
+       assets/site.js, junto con el resto del script. */
     (function () {
       try {
         var stored = localStorage.getItem('theme');
@@ -35,6 +35,7 @@
   <meta property="og:type" content="profile" />
   <meta property="og:url" content="https://danielnavarro1600.github.io/" />
   <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_GB" />
   <meta property="og:site_name" content="Daniel Navarro Delgado" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Daniel Navarro Delgado — Consultor de transformación financiera y tecnológica" />
@@ -43,6 +44,11 @@
   <meta name="twitter:image:alt" content="Retrato de Daniel Navarro Delgado junto a su nombre y su cargo, Finance &amp; Technology Consultant: transformación financiera, Oracle EPM e inteligencia artificial aplicada." />
 
   <link rel="canonical" href="https://danielnavarro1600.github.io/" />
+  <!-- La misma página en cada idioma, para que los buscadores muestren la
+       versión que corresponde a quien busca. -->
+  <link rel="alternate" hreflang="es" href="https://danielnavarro1600.github.io/" />
+  <link rel="alternate" hreflang="en" href="https://danielnavarro1600.github.io/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://danielnavarro1600.github.io/" />
   <link rel="icon" type="image/png" href="img/favicon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -161,6 +167,7 @@
   </div>
 
   <div class="nav-tools">
+    <a class="icon-btn lang-switch" href="en/" hreflang="en" lang="en">EN<span class="sr-only"> · English version</span></a>
     <button class="icon-btn" id="themeToggle" onclick="toggleTheme()" aria-pressed="false" data-label-dark="Activar tema oscuro" data-label-light="Activar tema claro">
       <svg class="icon theme-moon" aria-hidden="true" focusable="false"><use href="#i-moon"/></svg>
       <svg class="icon theme-sun" aria-hidden="true" focusable="false"><use href="#i-sun"/></svg>

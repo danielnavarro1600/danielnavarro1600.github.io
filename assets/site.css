@@ -483,6 +483,16 @@ p, li, dd { text-wrap: pretty; }
 .theme-sun, [data-theme="dark"] .theme-moon { display: none; }
 [data-theme="dark"] .theme-sun { display: inline-block; }
 
+/* Selector de idioma: el mismo círculo que el botón de tema, con el código
+   del otro idioma (EN / ES) en monoespaciada en lugar de un icono. */
+.lang-switch {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
 .hamburger {
   display: none;
   flex-direction: column;
