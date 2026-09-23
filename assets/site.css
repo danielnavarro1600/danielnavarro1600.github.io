@@ -1,0 +1,1865 @@
+/* Estilos compartidos por las dos versiones de la web: la española
+   (index.html) y la inglesa (en/index.html). Cualquier cambio de diseño
+   se hace aquí, una sola vez, y llega a las dos páginas. */
+
+/* =========================================================
+   0. TOKENS
+   Un único sistema para los dos temas. El tema claro vive en
+   :root; el oscuro solo redefine los valores que cambian.
+   ========================================================= */
+:root {
+  color-scheme: light;
+
+  /* Superficies y texto: papel cálido sobre tinta, la base de color
+     que ya tenía la web anterior. */
+  --bg: #f7f5f0;
+  --bg-alt: #eeebe3;
+  --surface: #ffffff;
+  --surface-2: #fbf9f5;
+  --ink: #100e0a;
+  --ink-2: #6b6157;
+  --line: rgba(16,14,10,0.10);
+  --line-2: rgba(16,14,10,0.18);
+
+  /* Acento dorado. Dos valores porque el mismo oro no puede cumplir AA
+     sobre papel y lucir sobre tinta: sobre superficie clara se oscurece
+     (--accent), y el oro pleno queda para tintes y remates (--accent-rgb). */
+  --accent: #7d5c07;
+  --accent-hi: #634905;
+  --accent-on: #ffffff;
+  --accent-rgb: 184,134,11;
+  --tint: rgba(184,134,11,0.10);
+  --tint-2: rgba(184,134,11,0.20);
+
+  /* Tinte secundario: solo para lavados de fondo, nunca para texto */
+  --wash: rgba(150,96,32,0.10);
+
+  /* Banda de cierre: oscura en los dos temas, a propósito */
+  --band-bg: #0a0a0f;
+  --band-ink: #f0ede8;
+  --band-ink-2: #948d83;
+  --band-accent: #d4a017;
+  --band-line: rgba(255,255,255,0.10);
+  --band-line-2: rgba(255,255,255,0.2);
+
+  --shadow: 0 1px 2px rgba(16,14,10,0.04), 0 10px 30px rgba(16,14,10,0.07);
+  --shadow-lg: 0 2px 4px rgba(16,14,10,0.05), 0 24px 60px rgba(16,14,10,0.11);
+
+  /* Tipografía */
+  --font-display: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+
+  --fs-display: clamp(2.8rem, min(9.5vw, 10.5vh), 7rem);
+  --fs-h2: clamp(2.1rem, 5.2vw, 3.7rem);
+  --fs-h3: clamp(1.12rem, 1.7vw, 1.35rem);
+  --fs-lede: clamp(1.02rem, 1.35vw, 1.24rem);
+  --fs-body: 1rem;
+  --fs-sm: 0.97rem;
+  --fs-xs: 0.9rem;
+  --fs-micro: 0.82rem;
+
+  /* Espaciado */
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px; --s5: 24px;
+  --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px; --s10: 128px;
+
+  /* Forma */
+  --r-xs: 3px;
+  --r-sm: 7px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --r-pill: 999px;
+
+  /* Movimiento */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur-1: 0.18s;
+  --dur-2: 0.32s;
+  --dur-3: 0.75s;
+
+  /* Cromo de la barra de navegación: por defecto sigue al tema; sobre
+     el hero (siempre oscuro) se cambia a tinta con .over-hero. */
+  --nav-panel: var(--bg);
+  --nav-hairline: var(--line);
+  --nav-border: var(--line-2);
+  --nav-fg: var(--ink);
+  --nav-fg-2: var(--ink-2);
+  --nav-accent: var(--accent);
+  --nav-tint: var(--tint);
+
+  /* Medidas de página */
+  --wrap: 1220px;
+  --gutter: clamp(1.25rem, 5vw, 3.5rem);
+  --nav-h: 72px;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0a0a0f;
+  --bg-alt: #0e0e15;
+  --surface: #16161e;
+  --surface-2: #1b1b24;
+  --ink: #f0ede8;
+  --ink-2: #938c82;
+  --line: rgba(240,237,232,0.10);
+  --line-2: rgba(240,237,232,0.20);
+
+  --accent: #d4a017;
+  --accent-hi: #e8b820;
+  --accent-on: #14100a;
+  --accent-rgb: 212,160,23;
+  --tint: rgba(212,160,23,0.10);
+  --tint-2: rgba(212,160,23,0.18);
+
+  --wash: rgba(196,128,48,0.12);
+
+  --shadow: 0 1px 2px rgba(0,0,0,0.5), 0 10px 30px rgba(0,0,0,0.35);
+  --shadow-lg: 0 2px 4px rgba(0,0,0,0.5), 0 24px 60px rgba(0,0,0,0.45);
+}
+
+/* =========================================================
+   1. RESET Y BASE
+   ========================================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  /* Un ancla no debe quedar tapada por la barra fija. La altura real
+     la mide el JS y la escribe en --nav-h. */
+  scroll-padding-top: calc(var(--nav-h) + 1.5rem);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  background: var(--bg);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "kern" 1;
+  transition: background var(--dur-2) var(--ease), color var(--dur-2) var(--ease);
+}
+
+a { color: inherit; text-decoration: none; }
+img, svg { max-width: 100%; display: block; }
+ul, ol { list-style: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+h1, h2, h3, h4 { font-weight: 400; line-height: 1.06; }
+strong { font-weight: 700; }
+::selection { background: var(--tint-2); color: var(--ink); }
+
+/* Titulares repartidos en líneas de largo parecido y párrafos sin una
+   palabra suelta en la última línea. Un navegador que no conoce
+   text-wrap lo ignora y corta las líneas como siempre. */
+h1, h2, h3, h4, .hero-role { text-wrap: balance; }
+p, li, dd { text-wrap: pretty; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--r-xs);
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: -120px; left: var(--s4);
+  z-index: 300;
+  padding: var(--s3) var(--s5);
+  background: var(--accent);
+  color: var(--accent-on);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  border-radius: var(--r-sm);
+  transition: top var(--dur-1) var(--ease);
+}
+.skip-link:focus { top: var(--s4); }
+
+/* =========================================================
+   2. UTILIDADES DE COMPOSICIÓN
+   ========================================================= */
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section { padding-block: clamp(4.5rem, 9vw, 8.5rem); position: relative; }
+.section--alt { background: var(--bg-alt); }
+
+/* Cabecera de sección: marca monoespaciada + titular editorial */
+.head { max-width: 62ch; margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
+.head--wide { max-width: 76ch; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--s4);
+}
+.eyebrow::before {
+  content: "";
+  width: 28px; height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  letter-spacing: -0.015em;
+  margin-bottom: var(--s4);
+}
+.title em { font-style: italic; color: var(--accent); }
+
+.lede {
+  font-size: var(--fs-lede);
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 62ch;
+}
+
+/* Reveal al hacer scroll. Sin JS, .visible nunca llega: el noscript
+   del <head> deja todo visible. */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity var(--dur-3) var(--ease), transform var(--dur-3) var(--ease);
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* Escalonado por posición: evita repartir clases de retardo por el HTML */
+.stagger > *:nth-child(2) { transition-delay: 0.06s; }
+.stagger > *:nth-child(3) { transition-delay: 0.12s; }
+.stagger > *:nth-child(4) { transition-delay: 0.18s; }
+.stagger > *:nth-child(5) { transition-delay: 0.24s; }
+.stagger > *:nth-child(6) { transition-delay: 0.30s; }
+.stagger > *:nth-child(7) { transition-delay: 0.36s; }
+
+/* =========================================================
+   3. COMPONENTES BASE: ICONOS, BOTONES, CHIPS, TARJETAS
+   ========================================================= */
+/* Iconos: SVG propios, definidos una sola vez en el sprite del principio
+   de <body> y usados con <svg class="icon"><use href="#i-…"/></svg>.
+   Toman el color del texto que los rodea; las marcas de LinkedIn y
+   GitHub traen su propio relleno en el sprite. El dibujo deja margen
+   dentro de su rejilla de 24×24: a 1.2em ocupa lo mismo que la letra. */
+.icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.icon {
+  display: inline-block;
+  width: 1.2em; height: 1.2em;
+  flex-shrink: 0;
+  vertical-align: -0.25em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  padding: 0.85rem 1.6rem;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  border-radius: var(--r-pill);
+  border: 1px solid transparent;
+  transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease),
+              border-color var(--dur-1) var(--ease), transform var(--dur-1) var(--ease),
+              box-shadow var(--dur-1) var(--ease);
+}
+.btn .icon { font-size: 0.9em; }
+.btn--solid { background: var(--accent); color: var(--accent-on); }
+.btn--solid:hover { background: var(--accent-hi); transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn--ghost { border-color: var(--line-2); color: var(--ink); }
+.btn--ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+/* Chip monoespaciado de acento (etiquetas técnicas, itinerarios) */
+.chip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.05em;
+  padding: 0.28rem 0.6rem;
+  border-radius: var(--r-xs);
+  background: var(--tint);
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+/* Chip neutro contorneado (stack, idiomas) */
+.pill {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  padding: 0.34rem 0.8rem;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-pill);
+  color: var(--ink-2);
+  transition: border-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+}
+.pill:hover { border-color: var(--accent); color: var(--accent); }
+
+.tags { display: flex; flex-wrap: wrap; gap: var(--s2); }
+
+/* Tarjeta base con marcas de esquina: un rasgo de identidad que
+   aparece al pasar el ratón, sin mover ni ensuciar el contenido. */
+.card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: clamp(1.4rem, 2.4vw, 2rem);
+  transition: border-color var(--dur-2) var(--ease), transform var(--dur-2) var(--ease),
+              box-shadow var(--dur-2) var(--ease);
+}
+.card::before, .card::after {
+  content: "";
+  position: absolute;
+  width: 12px; height: 12px;
+  border: 1px solid var(--accent);
+  opacity: 0;
+  transition: opacity var(--dur-2) var(--ease);
+  pointer-events: none;
+}
+.card::before { top: 10px; left: 10px; border-right: 0; border-bottom: 0; border-radius: 3px 0 0 0; }
+.card::after { bottom: 10px; right: 10px; border-left: 0; border-top: 0; border-radius: 0 0 3px 0; }
+.card:hover { border-color: var(--line-2); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.card:hover::before, .card:hover::after { opacity: 0.6; }
+
+/* =========================================================
+   4. NAVEGACIÓN
+   ========================================================= */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s5);
+  padding: var(--s4) var(--gutter);
+  transition: background var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease),
+              backdrop-filter var(--dur-2) var(--ease);
+}
+/* El fondo difuminado vive en un pseudoelemento, NO en .nav.
+   backdrop-filter convierte a su elemento en bloque contenedor de los
+   descendientes position:fixed: si estuviera en .nav, el panel del menú
+   móvil (inset: 0) se posicionaría contra la barra de 74px en lugar de
+   contra la ventana, y quedaría desbordado y transparente. */
+.nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--nav-panel) 92%, transparent);
+  backdrop-filter: blur(18px) saturate(1.4);
+  box-shadow: 0 1px 0 var(--nav-hairline);
+  opacity: 0;
+  transition: opacity var(--dur-2) var(--ease);
+}
+.nav.scrolled::before { opacity: 1; }
+/* Respaldo para navegadores sin color-mix */
+@supports not (background: color-mix(in srgb, red 50%, blue)) {
+  .nav::before { background: var(--nav-panel); }
+}
+
+/* Mientras la barra flota sobre el hero adopta los colores de tinta.
+   La clase la pone el JS comparando el scroll con el alto del hero, no
+   el umbral de .scrolled: si dependiera de ese umbral, la barra se
+   aclararía a los 40px y quedaría en claro sobre un hero oscuro. */
+.nav.over-hero {
+  --nav-panel: var(--band-bg);
+  --nav-hairline: var(--band-line);
+  --nav-border: var(--band-line-2);
+  --nav-fg: var(--band-ink);
+  --nav-fg-2: var(--band-ink-2);
+  --nav-accent: var(--band-accent);
+  --nav-tint: rgba(212,160,23,0.10);
+}
+/* El anillo de foco tiene que verse sobre el fondo que toque */
+.nav :focus-visible { outline-color: var(--nav-accent); }
+
+/* Barra de progreso de lectura: en una página larga da una señal
+   real de "cuánto queda", no es decoración. */
+.nav-progress {
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 2px; width: 100%;
+  background: var(--nav-accent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  opacity: 0;
+  transition: opacity var(--dur-2) var(--ease);
+}
+.nav.scrolled .nav-progress { opacity: 0.85; }
+
+.nav-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  flex-shrink: 0;
+}
+.nav-logo { color: var(--nav-fg); }
+.nav-logo span {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--nav-accent);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(var(--s3), 1.7vw, var(--s5));
+}
+.nav-links a {
+  position: relative;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--nav-fg-2);
+  padding-block: var(--s1);
+  white-space: nowrap;
+  transition: color var(--dur-1) var(--ease);
+}
+/* Contacto hace de llamada a la acción sin ocupar un botón aparte:
+   con siete secciones en la barra ya no quedaba sitio para los dos. */
+.nav-link-cta { color: var(--nav-accent) !important; }
+.nav-link-cta::after { transform: scaleX(1) !important; opacity: 0.35; }
+.nav-link-cta:hover::after { opacity: 1; }
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -3px;
+  height: 1px;
+  background: var(--nav-accent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform var(--dur-2) var(--ease);
+}
+.nav-links a:hover { color: var(--nav-fg); }
+.nav-links a:hover::after,
+.nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+.nav-links a[aria-current="page"] { color: var(--nav-fg); }
+
+.nav-tools { display: flex; align-items: center; gap: var(--s3); flex-shrink: 0; }
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px; height: 38px;
+  border: 1px solid var(--nav-border);
+  border-radius: 50%;
+  color: var(--nav-fg-2);
+  transition: color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease),
+              background var(--dur-1) var(--ease);
+}
+.icon-btn:hover { color: var(--nav-accent); border-color: var(--nav-accent); background: var(--nav-tint); }
+/* El botón de tema lleva la luna y el sol: el CSS muestra el que toca
+   según data-theme, así que el JS ya no tiene que cambiar el icono. */
+.theme-sun, [data-theme="dark"] .theme-moon { display: none; }
+[data-theme="dark"] .theme-sun { display: inline-block; }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px; height: 38px;
+  border: 1px solid var(--nav-border);
+  border-radius: 50%;
+}
+.hamburger span {
+  display: block;
+  width: 16px; height: 1.5px;
+  margin-inline: auto;
+  background: var(--nav-fg);
+  border-radius: 2px;
+  transition: transform var(--dur-2) var(--ease), opacity var(--dur-1) var(--ease);
+}
+.hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* =========================================================
+   5. HERO
+   ========================================================= */
+.hero {
+  /* Oscuro en los dos temas, igual que la banda de cierre: la pagina
+     abre y cierra sobre tinta y el contenido queda en medio. */
+  --bg: var(--band-bg);
+  --bg-alt: var(--band-bg);
+  --surface: #16161e;
+  --surface-2: #1b1b24;
+  --ink: var(--band-ink);
+  --ink-2: var(--band-ink-2);
+  --line: var(--band-line);
+  --line-2: var(--band-line-2);
+  --accent: var(--band-accent);
+  --accent-hi: #e8b820;
+  --accent-on: #14100a;
+  --accent-rgb: 212,160,23;
+  --tint: rgba(212,160,23,0.10);
+  --tint-2: rgba(212,160,23,0.18);
+  --wash: rgba(196,128,48,0.12);
+  background: var(--band-bg);
+  color: var(--band-ink);
+
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding-block: calc(var(--nav-h) + clamp(1.25rem, 3.5vh, 2.75rem)) clamp(0.75rem, 2vh, 1.75rem);
+}
+.hero > .wrap { display: flex; flex-direction: column; flex: 1 1 auto; }
+
+/* Fondo: rejilla fina + dos lavados suaves. Todo decorativo. */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 76px 76px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 60% 25%, #000 0%, transparent 78%);
+  mask-image: radial-gradient(ellipse 90% 70% at 60% 25%, #000 0%, transparent 78%);
+  opacity: 0.85;
+}
+.hero-wash {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform;
+}
+.hero-wash-1 {
+  width: 46vw; height: 46vw; max-width: 620px; max-height: 620px;
+  top: -12%; right: -8%;
+  background: var(--tint-2);
+  animation: drift 22s ease-in-out infinite alternate;
+}
+.hero-wash-2 {
+  width: 38vw; height: 38vw; max-width: 500px; max-height: 500px;
+  bottom: -18%; left: -10%;
+  background: var(--wash);
+  animation: drift 28s ease-in-out infinite alternate-reverse;
+}
+@keyframes drift {
+  from { transform: translate3d(0,0,0) scale(1); }
+  to   { transform: translate3d(-28px, 34px, 0) scale(1.08); }
+}
+
+/* Línea trazada tipo forecast, muy tenue: conecta el fondo con el
+   tema de la página (datos financieros) sin robar atención. */
+.hero-plot {
+  position: absolute;
+  left: 0; right: 0; bottom: 8%;
+  width: 100%; height: 240px;
+  opacity: 0.9;
+}
+.hero-plot path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: 6 10;
+  opacity: 0.6;
+  animation: trace 26s linear infinite;
+}
+.hero-plot .plot-solid {
+  stroke-dasharray: none;
+  opacity: 0.34;
+  animation: none;
+}
+@keyframes trace { to { stroke-dashoffset: -320; } }
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  align-content: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+  align-items: center;
+}
+
+.hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 0.3rem 0.75rem 0.3rem 0.5rem;
+  border: 1px solid var(--tint-2);
+  border-radius: var(--r-pill);
+  background: var(--tint);
+}
+.hero-status b {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.55);
+  animation: ping 2.8s var(--ease) infinite;
+}
+@keyframes ping {
+  0%   { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(var(--accent-rgb), 0); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0); }
+}
+
+/* Estado y datos de contexto en una sola fila. En móvil vuelven a
+   apilarse solos por el flex-wrap. */
+.hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s3) var(--s5);
+  margin-bottom: clamp(0.75rem, 2vh, 1.25rem);
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.hero-meta li { display: flex; align-items: center; gap: var(--s3); }
+/* El separador va DETRÁS de cada elemento, no delante del siguiente: al
+   plegarse en dos líneas, un punto suelto abriendo la segunda línea
+   parecía una viñeta huérfana. */
+.hero-meta li:not(:last-child)::after {
+  content: "";
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.hero-name {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  margin-bottom: clamp(0.75rem, 2vh, 1.25rem);
+}
+.hero-name em {
+  display: block;
+  font-style: italic;
+  color: var(--accent);
+  /* La segunda línea entra ligeramente desplazada: composición
+     editorial, no un simple salto de línea. */
+  margin-left: 0.09em;
+}
+/* "Delgado" completa el nombre legal dentro del propio h1 sin competir
+   con la composición: monoespaciada, pequeña y alzada junto al apellido. */
+.hero-name span {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.19em;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  /* Comparte línea base con el apellido: apoyados en el mismo suelo. */
+  vertical-align: baseline;
+  /* El span empieza con un espacio real, para que el nombre se lea y se
+     copie como «Navarro Delgado» y no «NavarroDelgado». Ese espacio ya
+     ocupa 0.74em (0.6em de la mono + 0.14em de letter-spacing); con
+     -0.24em el hueco visible sigue siendo el 0.5em de antes. */
+  margin-left: -0.24em;
+  white-space: nowrap;
+}
+
+/* El cargo va inmediatamente bajo el nombre, en monoespaciada de acento:
+   se lee como una credencial y no compite con la frase de valor. */
+.hero-position {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  margin-bottom: clamp(0.6rem, 1.6vh, 1rem);
+}
+.hero-position::before {
+  content: "";
+  width: 22px; height: 1px;
+  flex-shrink: 0;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.hero-role {
+  font-size: var(--fs-lede);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ink);
+  margin-bottom: clamp(0.5rem, 1.4vh, 0.85rem);
+  max-width: 42ch;
+}
+.hero-lede {
+  font-size: var(--fs-lede);
+  line-height: 1.62;
+  color: var(--ink-2);
+  max-width: 54ch;
+  margin-bottom: clamp(0.75rem, 2vh, 1.25rem);
+}
+.hero-lede b { color: var(--ink); font-weight: 600; }
+
+.hero-ctas { display: flex; flex-wrap: wrap; gap: var(--s3); margin-bottom: clamp(0.75rem, 2vh, 1.25rem); }
+
+/* Descarga del CV: un enlace de texto y no un tercer botón, para no
+   competir con las dos llamadas principales. En la fila de botones se
+   estira a su altura (toda ella es zona de clic); si pasa a una línea
+   propia, el relleno mantiene un área de toque cómoda. */
+.hero-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  padding: 0.4rem 0.3rem;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--accent);
+}
+.hero-cv-label {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.3em;
+  transition: text-decoration-color var(--dur-1) var(--ease);
+}
+.hero-cv:hover .hero-cv-label { text-decoration-color: currentColor; }
+.hero-cv-meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--ink-2);
+}
+.hero-cv .icon { font-size: 0.9em; transition: transform var(--dur-2) var(--ease); }
+.hero-cv:hover .icon { transform: translateY(2px); }
+
+.hero-tags { display: flex; flex-wrap: wrap; gap: var(--s2); }
+
+/* Retrato: marco alto, no un círculo. Aprovecha el encuadre vertical
+   de la fotografía original en lugar de recortarlo casi entero. */
+.hero-figure { position: relative; justify-self: center; width: 100%; max-width: 340px; }
+.hero-figure::after {
+  /* Halo detrás del marco */
+  content: "";
+  position: absolute;
+  inset: 12% -12% -8% -12%;
+  background: radial-gradient(ellipse at 50% 50%, var(--tint-2), transparent 70%);
+  filter: blur(30px);
+  z-index: -1;
+}
+.hero-photo {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--line-2);
+  background: var(--surface-2);
+  aspect-ratio: 4 / 5;
+  box-shadow: var(--shadow-lg);
+}
+.hero-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 16%;
+}
+.hero-caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s1) var(--s3);
+  margin-top: var(--s3);
+  padding-top: var(--s3);
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* Cinta de cifras: una línea reglada, como el resumen de un modelo. */
+.ledger {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  flex: 0 0 auto;
+  margin-top: auto;
+  padding-top: clamp(1.25rem, 3vh, 2.25rem);
+  border-top: 1px solid var(--line-2);
+  border-bottom: 1px solid var(--line);
+}
+.ledger li {
+  padding: clamp(0.6rem, 1.6vh, 1rem) var(--s4) clamp(0.6rem, 1.6vh, 1rem) 0;
+  border-left: 1px solid var(--line);
+  padding-left: var(--s4);
+}
+.ledger li:first-child { border-left: 0; padding-left: 0; }
+.ledger-num {
+  font-family: var(--font-mono);
+  font-size: clamp(1.5rem, min(3.4vw, 4.6vh), 2.6rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--s2);
+}
+.ledger-label {
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.ledger-label b { display: block; color: var(--ink); font-weight: 600; }
+
+/* =========================================================
+   6. CAPACIDADES
+   ========================================================= */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s4);
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+.pillar { display: flex; flex-direction: column; }
+.pillar-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px; height: 42px;
+  border-radius: var(--r-md);
+  background: var(--tint);
+  color: var(--accent);
+  font-size: 1rem;
+  margin-bottom: var(--s4);
+}
+.pillar h3 {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  font-family: var(--font-sans);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--s3);
+}
+.pillar p { font-size: var(--fs-sm); color: var(--ink-2); margin-bottom: var(--s4); }
+.pillar .tags { margin-top: auto; }
+
+/* Flujo: de dónde vienen los datos hasta la decisión. Texto real y
+   maquetado con CSS, para que se reordene en vertical en móvil. */
+.flow-block {
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--surface-2);
+  padding: clamp(1.4rem, 3vw, 2.4rem);
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+.flow-title {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: var(--s5);
+}
+.flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s5);
+}
+.flow-step { position: relative; padding-top: var(--s5); }
+.flow-step::before {
+  /* Riel horizontal + nodo */
+  content: "";
+  position: absolute;
+  top: 5px; left: 0; right: calc(var(--s5) * -1);
+  height: 1px;
+  background: var(--line-2);
+}
+.flow-step:last-child::before { right: 0; }
+.flow-step::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: var(--bg-alt);
+  border: 2px solid var(--accent);
+}
+.section:not(.section--alt) .flow-step::after { background: var(--surface-2); }
+.flow-step h4 {
+  font-family: var(--font-sans);
+  font-size: 1.06rem;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  margin-bottom: var(--s2);
+  line-height: 1.3;
+}
+.flow-step p { font-size: var(--fs-sm); color: var(--ink-2); line-height: 1.6; }
+.flow-kicker {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--s2);
+}
+.flow-layer {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s3);
+  margin-top: var(--s5);
+  padding-top: var(--s5);
+  border-top: 1px dashed var(--line-2);
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+.flow-layer .icon { color: var(--accent); margin-top: 3px; }
+.flow-layer b { color: var(--ink); font-weight: 700; }
+
+/* Stack: índice reglado en columnas, sin barras de porcentaje. */
+/* Dos columnas fijas: con auto-fit los cuatro bloques caían en 3+1 y
+   dejaban un hueco grande a la derecha del último. */
+.stack {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s6) var(--s7);
+  align-items: start;
+}
+.stack-group h3 {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-bottom: var(--s3);
+  border-bottom: 1px solid var(--line-2);
+  margin-bottom: var(--s3);
+}
+.stack-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s3);
+  padding-block: 0.45rem;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-sm);
+}
+.stack-row:last-child { border-bottom: 0; }
+.stack-level {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.stack-group .tags { margin-top: var(--s3); }
+
+/* =========================================================
+   7. TRABAJO / PROYECTOS
+   ========================================================= */
+.work {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--s4);
+}
+.work-card { display: flex; flex-direction: column; }
+.work-card--lead { grid-column: span 2; }
+.work-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  padding-bottom: var(--s4);
+  margin-bottom: var(--s4);
+  border-bottom: 1px solid var(--line);
+}
+.work-idx {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.12em;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.work-kind {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 0.22rem 0.55rem;
+  border: 1px solid var(--tint-2);
+  border-radius: var(--r-xs);
+  white-space: nowrap;
+}
+.work-card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  margin-bottom: var(--s4);
+}
+.work-facts { margin-bottom: var(--s4); }
+.work-facts div { display: grid; grid-template-columns: 104px 1fr; gap: var(--s3); padding-block: 0.45rem; }
+.work-facts div + div { border-top: 1px solid var(--line); }
+.work-facts dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  padding-top: 3px;
+}
+.work-facts dd { font-size: 1.02rem; color: var(--ink-2); line-height: 1.6; }
+.work-facts dd b { color: var(--ink); font-weight: 600; }
+.work-card .tags { margin-top: auto; padding-top: var(--s4); }
+/* Caso de estudio destacado: ocupa toda la fila y despliega el detalle
+   de construcción bajo demanda, para no volcar un muro de texto en la
+   portada de la sección. */
+.work-card--feature { grid-column: 1 / -1; }
+.work-card--feature h3 {
+  font-size: clamp(1.65rem, 3.1vw, 2.5rem);
+  max-width: 26ch;
+}
+.case-lede {
+  font-size: var(--fs-lede);
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 68ch;
+  margin-bottom: var(--s5);
+}
+.case-lede b { color: var(--ink); font-weight: 600; }
+
+.case-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--s5) var(--s6);
+  margin-bottom: var(--s5);
+}
+.case-facts > div { border-top: 1px solid var(--line-2); padding-top: var(--s3); }
+.case-facts dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--s2);
+}
+.case-facts dd { font-size: 1.02rem; color: var(--ink-2); line-height: 1.6; }
+.case-facts dd b { color: var(--ink); font-weight: 600; }
+
+.case-more { border-top: 1px solid var(--line); padding-top: var(--s4); }
+.case-more summary {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  list-style: none;
+}
+.case-more summary::-webkit-details-marker { display: none; }
+.case-more summary::before {
+  content: "";
+  display: inline-block;
+  width: 20px; height: 20px;
+  flex-shrink: 0;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  /* Dos barras cruzadas: la vertical se encoge a cero al abrir, y el
+     mas se convierte en menos. Sin caracteres, no hay riesgo de que la
+     fuente no cubra el glifo. */
+  background-image:
+    linear-gradient(currentColor, currentColor),
+    linear-gradient(currentColor, currentColor);
+  background-size: 8px 1px, 1px 8px;
+  background-position: center, center;
+  background-repeat: no-repeat;
+  transition: background-size var(--dur-2) var(--ease);
+}
+.case-more[open] summary::before { background-size: 8px 1px, 1px 0; }
+/* padding y no margin: un margen superior se saldría de la caja que se
+   anima (ver abajo) y aparecería de golpe al abrir. */
+.case-more ul { padding-top: var(--s4); display: grid; gap: var(--s2); }
+
+/* Apertura suave del detalle: interpolate-size permite animar la altura
+   hasta auto. Donde no existe (o no hay ::details-content), el bloque se
+   abre de golpe, como siempre. */
+@supports (interpolate-size: allow-keywords) {
+  .case-more { interpolate-size: allow-keywords; }
+  .case-more::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition: block-size var(--dur-2) var(--ease),
+                content-visibility var(--dur-2) allow-discrete;
+  }
+  .case-more[open]::details-content { block-size: auto; }
+}
+.case-more li {
+  position: relative;
+  padding-left: var(--s5);
+  font-size: 1.02rem;
+  color: var(--ink-2);
+  line-height: 1.6;
+  max-width: 80ch;
+}
+.case-more li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.85em;
+  width: 10px; height: 1px;
+  background: var(--accent);
+  opacity: 0.7;
+}
+.case-more li strong { color: var(--ink); font-weight: 600; }
+
+/* =========================================================
+   8. TRAYECTORIA
+   ========================================================= */
+.timeline { position: relative; }
+.tl-item {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  padding-block: clamp(1.8rem, 3.5vw, 2.8rem);
+  border-top: 1px solid var(--line-2);
+}
+.tl-item:last-child { border-bottom: 1px solid var(--line-2); }
+.tl-aside { position: relative; }
+.tl-period {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--s3);
+}
+.tl-company {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.tl-now {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  margin-top: var(--s3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.tl-now::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.tl-role {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  /* Propio, para que se vea igual como <p> (puesto único) o como <h4>
+     (puestos agrupados), que de base tiene un interlineado muy cerrado */
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--s3);
+}
+.tl-desc {
+  color: var(--ink-2);
+  font-size: 1.06rem;
+  line-height: 1.6;
+  margin-bottom: var(--s5);
+  max-width: 72ch;
+}
+.tl-list { margin-bottom: var(--s5); }
+.tl-list li {
+  position: relative;
+  padding-left: var(--s5);
+  padding-block: 0.35rem;
+  font-size: 1.06rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 74ch;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+}
+.tl-list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.95em;
+  width: 10px; height: 1px;
+  background: var(--accent);
+  opacity: 0.7;
+}
+.tl-list li strong { color: var(--ink); font-weight: 600; }
+
+/* Varios puestos en la misma empresa: una sola entrada, con los puestos
+   unidos por un riel con nodos, el mismo lenguaje que el flujo de
+   Capacidades. El nodo relleno marca el puesto actual. */
+.tl-count {
+  margin-top: var(--s3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.tl-role-item {
+  /* Centro vertical de la primera línea (la del periodo): ahí va el nodo */
+  --tl-node: calc(var(--fs-micro) * 1.65 / 2);
+  position: relative;
+  padding-left: var(--s6);
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+}
+.tl-role-item:last-child { padding-bottom: 0; }
+/* Tramo de riel desde este nodo hasta el del puesto siguiente */
+.tl-role-item::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: var(--tl-node);
+  bottom: calc(var(--tl-node) * -1);
+  width: 1px;
+  background: var(--line-2);
+}
+.tl-role-item:last-child::before { display: none; }
+.tl-role-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(var(--tl-node) - 5.5px);
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: var(--bg-alt);
+  border: 2px solid var(--accent);
+}
+.tl-role-item--now::after { background: var(--accent); }
+/* El periodo y la marca «Puesto actual» comparten línea */
+.tl-roles .tl-period {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s1) var(--s4);
+}
+.tl-roles .tl-now { margin-top: 0; }
+
+/* =========================================================
+   9. FORMACIÓN
+   ========================================================= */
+.edu {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s4);
+  margin-bottom: var(--s6);
+}
+.edu-card { display: flex; flex-direction: column; }
+.edu-period {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.12em;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--s4);
+}
+.edu-card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.2vw, 1.7rem);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  margin-bottom: var(--s2);
+}
+.edu-degree { font-size: var(--fs-sm); font-weight: 600; margin-bottom: var(--s1); }
+.edu-place { font-size: var(--fs-xs); color: var(--ink-2); margin-bottom: var(--s4); }
+.edu-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.06em;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--r-xs);
+  background: var(--tint);
+  color: var(--accent);
+  margin-bottom: var(--s3);
+}
+.edu-note { font-size: var(--fs-xs); color: var(--ink-2); margin-top: auto; }
+
+.langs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s3);
+  padding-top: var(--s5);
+  border-top: 1px solid var(--line-2);
+}
+.lang {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  padding: 0.4rem 0.85rem 0.4rem 0.5rem;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-pill);
+  font-size: var(--fs-xs);
+  transition: border-color var(--dur-1) var(--ease);
+}
+.lang:hover { border-color: var(--accent); }
+.lang-flag {
+  width: 20px; height: 15px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px var(--line);
+}
+.lang-level {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+/* =========================================================
+   10. CERTIFICACIONES (índice filtrable)
+   ========================================================= */
+.cert-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s2);
+  padding-bottom: var(--s4);
+  margin-bottom: var(--s5);
+  border-bottom: 1px solid var(--line-2);
+}
+/* Igual que con las fichas: `display: flex` anularía el atributo hidden
+   y, sin JS, se verían unos filtros que no hacen nada. */
+.cert-toolbar[hidden] { display: none; }
+.filter {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--s2);
+  padding: 0.42rem 0.9rem;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-pill);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--ink-2);
+  transition: color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease),
+              background var(--dur-1) var(--ease);
+}
+.filter i {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: var(--fs-micro);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.75;
+}
+.filter:hover { color: var(--ink); border-color: var(--ink-2); }
+.filter[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-on);
+}
+.filter[aria-pressed="true"] i { opacity: 0.8; }
+.cert-count {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Columnas tipo índice impreso: reparte los grupos y se reequilibra
+   solo al filtrar, sin recolocar nada por JS. */
+.cert-index { columns: 3; column-gap: var(--s7); }
+.cert-group {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  margin-bottom: var(--s6);
+}
+.cert-issuer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s3);
+  padding-bottom: var(--s2);
+  border-bottom: 1px solid var(--line-2);
+  margin-bottom: var(--s2);
+}
+.cert-issuer h3 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.cert-issuer span {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.cert-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--s3);
+  padding-block: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.cert-item:last-child { border-bottom: 0; }
+/* Sin esto, el atributo hidden no surte efecto sobre las fichas:
+   `display: grid` de la línea de arriba es estilo de autor y prevalece
+   sobre el `[hidden] { display: none }` del navegador. */
+.cert-item[hidden], .cert-group[hidden] { display: none; }
+.cert-name { font-size: var(--fs-sm); line-height: 1.4; }
+.cert-meta {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--ink-2);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.cert-topic { color: var(--accent); }
+.cert-empty {
+  padding: var(--s5) 0;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+.cert-note {
+  margin-top: var(--s5);
+  padding-top: var(--s4);
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-xs);
+  color: var(--ink-2);
+  max-width: 70ch;
+}
+
+/* =========================================================
+   11. BANDA DE CIERRE: MÉTODO + CONTACTO
+   Oscura en los dos temas, a propósito: cierra la página.
+   ========================================================= */
+.band {
+  position: relative;
+  background: var(--band-bg);
+  color: var(--band-ink);
+  overflow: hidden;
+  /* La pagina abre y cierra sobre tinta ocupando la pantalla completa,
+     igual que el hero. Es min-height: si el contenido crece, la banda
+     crece con el y nunca se recorta. */
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--band-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--band-line) 1px, transparent 1px);
+  background-size: 76px 76px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 30% 0%, #000, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 30% 0%, #000, transparent 75%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.band .wrap { position: relative; z-index: 1; }
+.band .eyebrow { color: var(--band-accent); }
+.band .title em { color: var(--band-accent); }
+.band .lede { color: var(--band-ink-2); }
+
+.method {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s5);
+}
+.method-item { padding-top: var(--s4); border-top: 1px solid var(--line-2); }
+.method-idx {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: var(--s3);
+  font-variant-numeric: tabular-nums;
+}
+.method-item h3 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--s3);
+}
+.method-item p { font-size: var(--fs-sm); color: var(--ink-2); }
+
+.contact-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+.contact-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--s4);
+}
+.contact-title em { font-style: italic; color: var(--band-accent); }
+.contact-lede { color: var(--band-ink-2); font-size: var(--fs-lede); max-width: 46ch; margin-bottom: var(--s5); }
+.contact-mail {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: 0.95rem 1.7rem;
+  border-radius: var(--r-pill);
+  background: var(--band-accent);
+  color: #14100a;
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  transition: transform var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease);
+}
+.contact-mail:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(212,160,23,0.26); }
+
+.contact-links { display: grid; gap: 0; }
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+  padding-block: var(--s4);
+  border-top: 1px solid var(--band-line);
+  color: var(--band-ink);
+  transition: color var(--dur-1) var(--ease), padding-left var(--dur-2) var(--ease);
+}
+/* Cada enlace va solo dentro de su <li>, así que un :last-child a secas
+   los marcaba a todos y los separadores salían dobles. El borde inferior
+   es solo para el último de la lista. */
+.contact-links li:last-child .contact-link { border-bottom: 1px solid var(--band-line); }
+.contact-link .icon:first-child { color: var(--band-accent); font-size: 1rem; }
+.contact-link span { font-weight: 600; font-size: var(--fs-sm); }
+.contact-link small {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--band-ink-2);
+  letter-spacing: 0.04em;
+}
+/* Flecha final: a la derecha en los perfiles y el correo, hacia abajo en
+   las descargas del CV. Al pasar el ratón se desplaza en su sentido. */
+.contact-go {
+  color: var(--band-ink-2);
+  font-size: var(--fs-xs);
+  transition: transform var(--dur-2) var(--ease), color var(--dur-1) var(--ease);
+}
+.contact-link:hover { color: var(--band-accent); padding-left: var(--s2); }
+.contact-link:hover .contact-go { transform: translateX(4px); color: var(--band-accent); }
+.contact-link[download]:hover .contact-go { transform: translateY(3px); }
+
+/* =========================================================
+   12. PIE
+   ========================================================= */
+.footer {
+  background: var(--band-bg);
+  color: var(--band-ink-2);
+  border-top: 1px solid var(--band-line);
+  padding-block: var(--s5);
+  font-size: var(--fs-xs);
+}
+.footer .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+}
+.footer b { color: var(--band-ink); font-weight: 700; }
+.footer-meta { font-family: var(--font-mono); font-size: var(--fs-micro); letter-spacing: 0.08em; }
+.footer a { transition: color var(--dur-1) var(--ease); }
+.footer a:hover { color: var(--band-accent); }
+
+/* =========================================================
+   13. RESPONSIVE
+   ========================================================= */
+/* En ventanas bajas el hero se ciñe un punto más para seguir cabiendo de
+   una sola vista. Solo afecta al hero a dos columnas: en móvil el
+   contenido es alto de por sí y esta regla no entra. */
+@media (min-width: 841px) and (max-height: 900px) {
+  .hero-lede { line-height: 1.45; }
+  /* Sin tope de medida, el cargo cabe en una sola línea cuando hay ancho */
+  .hero-role { font-size: var(--fs-body); max-width: none; }
+  .hero-name { line-height: 0.82; }
+  .hero-top { margin-bottom: clamp(0.5rem, 1.4vh, 0.9rem); }
+  .hero .btn { padding: 0.7rem 1.3rem; }
+  .hero-tags .chip { padding: 0.2rem 0.55rem; }
+  .ledger li { padding-block: clamp(0.5rem, 1.3vh, 0.85rem); }
+  .ledger-label { line-height: 1.4; }
+  .hero-caption { display: none; }
+}
+
+/* Portátiles con la ventana baja: una pantalla de 1366×768, o una de
+   1920×1080 al 125 %, deja entre 650 y 730 px útiles una vez restadas
+   las barras del navegador. Para que la portada entera, cifras incluidas,
+   quepa de una vista sin quitar contenido, se compactan un punto el
+   nombre, los márgenes, la presentación, las cifras y la foto. Los chips
+   mantienen su tamaño de letra. */
+@media (min-width: 841px) and (max-height: 760px) {
+  :root { --fs-display: clamp(2.8rem, min(9.5vw, 9.2vh), 7rem); }
+  .hero { padding-block: calc(var(--nav-h) + clamp(0.75rem, 2.2vh, 1.5rem)) clamp(0.5rem, 1.2vh, 1rem); }
+  .hero-name { margin-bottom: clamp(0.5rem, 1.2vh, 0.9rem); }
+  .hero-position { margin-bottom: clamp(0.4rem, 1.1vh, 0.75rem); }
+  .hero-role { margin-bottom: clamp(0.4rem, 1vh, 0.7rem); }
+  .hero-lede { font-size: var(--fs-body); }
+  .hero-ctas { margin-bottom: clamp(0.5rem, 1.4vh, 0.9rem); }
+  .ledger { padding-top: clamp(0.6rem, 1.8vh, 1.2rem); }
+  .ledger li { padding-block: 0.45rem; }
+  .ledger-label { font-size: var(--fs-xs); line-height: 1.35; }
+  .hero-figure { max-width: min(340px, 52svh); }
+}
+
+/* Con el cronograma a dos columnas, la lista de logros ocupaba poco más
+   de media fila. Repartida en dos columnas llena el ancho disponible y
+   cada columna mantiene una medida de lectura cómoda. */
+@media (min-width: 1081px) {
+  .tl-list { columns: 2; column-gap: var(--s7); }
+  .tl-list li { max-width: none; }
+}
+
+@media (max-width: 1080px) {
+  .cert-index { columns: 2; }
+  .pillars, .method, .stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .work-card--lead { grid-column: auto; }
+  .flow { grid-template-columns: repeat(2, 1fr); row-gap: var(--s6); }
+  .flow-step:nth-child(2)::before { right: 0; }
+}
+
+@media (max-width: 1020px) {
+  .nav-links {
+    display: none;
+    position: fixed;
+    inset: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--s5);
+    background: var(--bg);
+    z-index: 101;
+    opacity: 0;
+    /* Mientras se desvanece, el panel no debe recibir toques
+       destinados a la página. */
+    pointer-events: none;
+  }
+  /* Fundido de entrada y salida. allow-discrete retrasa el paso a
+     display: none hasta que acaba el fundido, y @starting-style (abajo)
+     da el punto de partida al aparecer. La transición vive solo en .open
+     y en .closing (que el JS pone durante el cierre) y no en el estado
+     cerrado: si no, al girar una tablet y cruzar los 1020px, el panel
+     aparecería y se desvanecería sin que nadie lo hubiera abierto.
+     Sin soporte, el menú se abre y se cierra al instante, como antes. */
+  .nav-links.open,
+  .nav-links.closing {
+    transition: opacity var(--dur-2) var(--ease),
+                display var(--dur-2) allow-discrete;
+    /* Los enlaces conservan los colores del panel mientras se desvanece */
+    --nav-fg: var(--ink);
+    --nav-fg-2: var(--ink-2);
+    --nav-accent: var(--accent);
+  }
+  .nav-links.open {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  @starting-style {
+    .nav-links.open { opacity: 0; }
+  }
+  /* .nav-tools va después de .nav-links en el DOM: con el panel abierto,
+     la X debe verse sobre el panel del tema, no sobre tinta. */
+  .nav-links.open ~ .nav-tools {
+    --nav-fg: var(--ink);
+    --nav-fg-2: var(--ink-2);
+    --nav-border: var(--line-2);
+    --nav-accent: var(--accent);
+    --nav-tint: var(--tint);
+  }
+  .nav-links a { font-size: 1.35rem; font-weight: 600; color: var(--nav-fg); }
+  .nav-links a::after { left: 50%; right: 50%; }
+  .nav-links a:hover::after,
+  .nav-links a[aria-current="page"]::after { left: 0; right: 0; transform: scaleX(1); }
+  /* Por encima del panel, para que la X siga siendo pulsable */
+  .hamburger { display: flex; position: relative; z-index: 102; }
+  .nav-link-cta::after { opacity: 1; }
+}
+
+/* La barra pasa a hamburguesa antes que la línea de tiempo: a 1020px
+   la barra ya no cabe con siete secciones, pero el cronograma a dos
+   columnas sigue funcionando bien. */
+@media (max-width: 900px) {
+  .tl-item { grid-template-columns: 1fr; gap: var(--s4); }
+}
+
+/* Con el cronograma a dos columnas, la empresa y su periodo total
+   acompañan al lector mientras recorre sus puestos. align-self: start
+   es imprescindible: estirada a todo el alto de la fila, la columna no
+   tendría hueco para desplazarse. */
+@media (min-width: 901px) {
+  .tl-item--group .tl-aside {
+    position: sticky;
+    top: calc(var(--nav-h) + var(--s5));
+    align-self: start;
+  }
+}
+
+/* El hero pasa a una columna por debajo del nav: hasta 840px dos
+   columnas siguen siendo legibles. Ahí el retrato se convierte en un
+   cuadrado compacto, para que el nombre y la propuesta de valor
+   entren en la primera pantalla de un móvil en lugar de quedar
+   empujados por una foto a media página. */
+@media (max-width: 840px) {
+  .hero-inner { grid-template-columns: 1fr; gap: var(--s6); }
+  .hero-figure { order: -1; max-width: 150px; justify-self: start; }
+  .hero-photo { aspect-ratio: 1 / 1; border-radius: var(--r-md); }
+  .hero-caption { display: none; }
+  .hero-name { line-height: 0.9; }
+  .stack { grid-template-columns: 1fr; }
+  .edu { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  .cert-index { columns: 1; }
+  .ledger { grid-template-columns: repeat(2, 1fr); border-bottom: 0; }
+  .ledger li:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .ledger li:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .work { grid-template-columns: 1fr; }
+  /* "Iniciativa interna · Deloitte" en una sola línea fijaba el ancho
+     mínimo de la tarjeta y desbordaba la rejilla en móvil. */
+  .work-top { flex-wrap: wrap; }
+  .work-kind { white-space: normal; }
+  .pillars, .method { grid-template-columns: 1fr; }
+  .contact-inner { grid-template-columns: 1fr; }
+  .flow { grid-template-columns: 1fr; row-gap: var(--s5); }
+  .flow-step::before { right: 0; }
+  .work-facts div { grid-template-columns: 1fr; gap: var(--s1); }
+  .footer .wrap { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 420px) {
+  .hero-ctas .btn { flex: 1 1 100%; }
+  .cert-item { grid-template-columns: 1fr; gap: var(--s1); }
+  .cert-meta { white-space: normal; }
+  /* La dirección de correo es larga: se reduce el botón antes de que
+     llegue a desbordar en pantallas de 320px. */
+  .contact-mail { padding: 0.85rem 1.1rem; gap: var(--s2); font-size: var(--fs-xs); }
+}
+
+/* =========================================================
+   14. MOVIMIENTO REDUCIDO
+   Se apagan animaciones y transiciones, pero ningún contenido
+   depende del movimiento para poder leerse.
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .hero-wash-1, .hero-wash-2, .hero-plot path, .hero-status b { animation: none; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  /* ::details-content no es ::before ni ::after: la regla de arriba no
+     la alcanza. */
+  .case-more::details-content { transition: none; }
+}
+
+/* =========================================================
+   15. IMPRESIÓN
+   Un recruiter que imprima la página debe obtener algo legible.
+   ========================================================= */
+@media print {
+  .nav, .skip-link, .hero-bg, .hero-figure, .cert-toolbar, .nav-progress { display: none !important; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .hero, .band { min-height: 0; display: block; }
+  .band, .footer { background: #fff !important; color: #000 !important; }
+  .band .lede, .method-item p, .contact-lede, .footer { color: #333 !important; }
+  .band::before { display: none; }
+  .contact-mail { background: none !important; color: #000 !important; border: 1px solid #000; }
+  .section { padding-block: 1.2rem; }
+  .card, .tl-item, .cert-group { break-inside: avoid; }
+  /* La entrada agrupada ocupa más de una página: se corta entre
+     puestos, no por la mitad de uno. */
+  .tl-item--group { break-inside: auto; }
+  .tl-item--group .tl-aside { position: static; }
+  .tl-role-item { break-inside: avoid; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  /* El JS abre los detalles antes de imprimir: sin transición, el papel
+     recoge el bloque entero y no a medio desplegar. */
+  .case-more::details-content { transition: none; block-size: auto; }
+  /* Si el visitante imprime con un filtro aplicado, el papel debe
+     llevar el índice completo, no solo el itinerario que estaba viendo. */
+  .cert-item[hidden] { display: grid !important; }
+  .cert-group[hidden] { display: block !important; }
+  .cert-index { columns: 2; }
+  a[href^="http"]::after,
+  a[href^="mailto"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; }
+}
