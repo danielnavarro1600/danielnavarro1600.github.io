@@ -48,12 +48,16 @@ Features:
 ```text
 danielnavarro1600.github.io/
 ├── .github/workflows/static.yml
+├── AGENTS.md
 ├── CLAUDE.md
 ├── README.md
+├── cv/
+│   ├── cv-daniel-navarro-delgado.pdf
+│   └── cv-daniel-navarro-delgado-en.pdf
 ├── img/
 │   ├── favicon.png
 │   ├── foto-perfil.jpg
-│   └── logo.jpg
+│   └── og-image.jpg
 └── index.html
 ```
 

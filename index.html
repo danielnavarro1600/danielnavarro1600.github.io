@@ -1696,7 +1696,10 @@
       color: var(--band-ink);
       transition: color var(--dur-1) var(--ease), padding-left var(--dur-2) var(--ease);
     }
-    .contact-link:last-child { border-bottom: 1px solid var(--band-line); }
+    /* Cada enlace va solo dentro de su <li>, así que un :last-child a secas
+       los marcaba a todos y los separadores salían dobles. El borde inferior
+       es solo para el último de la lista. */
+    .contact-links li:last-child .contact-link { border-bottom: 1px solid var(--band-line); }
     .contact-link .icon:first-child { color: var(--band-accent); font-size: 1rem; }
     .contact-link span { font-weight: 600; font-size: var(--fs-sm); }
     .contact-link small {
@@ -1783,6 +1786,10 @@
         gap: var(--s5);
         background: var(--bg);
         z-index: 101;
+        opacity: 0;
+        /* Mientras se desvanece, el panel no debe recibir toques
+           destinados a la página. */
+        pointer-events: none;
       }
       /* Fundido de entrada y salida. allow-discrete retrasa el paso a
          display: none hasta que acaba el fundido, y @starting-style (abajo)
@@ -1796,17 +1803,10 @@
         transition: opacity var(--dur-2) var(--ease),
                     display var(--dur-2) allow-discrete;
         /* Los enlaces conservan los colores del panel mientras se desvanece */
-        opacity: 0;
-        /* Mientras se desvanece, el panel no debe recibir toques
-           destinados a la página. */
-        pointer-events: none;
         --nav-fg: var(--ink);
         --nav-fg-2: var(--ink-2);
         --nav-accent: var(--accent);
       }
-      /* .nav-tools va después de .nav-links en el DOM: con el panel abierto,
-         la X debe verse sobre el panel del tema, no sobre tinta. */
-      .nav-links.open ~ .nav-tools {
       .nav-links.open {
         display: flex;
         opacity: 1;
@@ -1815,6 +1815,9 @@
       @starting-style {
         .nav-links.open { opacity: 0; }
       }
+      /* .nav-tools va después de .nav-links en el DOM: con el panel abierto,
+         la X debe verse sobre el panel del tema, no sobre tinta. */
+      .nav-links.open ~ .nav-tools {
         --nav-fg: var(--ink);
         --nav-fg-2: var(--ink-2);
         --nav-border: var(--line-2);
@@ -1837,9 +1840,6 @@
       .tl-item { grid-template-columns: 1fr; gap: var(--s4); }
     }
 
-    /* El hero pasa a una columna por debajo del nav: hasta 840px dos
-       columnas siguen siendo legibles. Ahí el retrato se convierte en un
-       cuadrado compacto, para que el nombre y la propuesta de valor
     /* Con el cronograma a dos columnas, la empresa y su periodo total
        acompañan al lector mientras recorre sus puestos. align-self: start
        es imprescindible: estirada a todo el alto de la fila, la columna no
@@ -1852,6 +1852,9 @@
       }
     }
 
+    /* El hero pasa a una columna por debajo del nav: hasta 840px dos
+       columnas siguen siendo legibles. Ahí el retrato se convierte en un
+       cuadrado compacto, para que el nombre y la propuesta de valor
        entren en la primera pantalla de un móvil en lugar de quedar
        empujados por una foto a media página. */
     @media (max-width: 840px) {
@@ -1905,12 +1908,12 @@
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
       }
-    }
-
-    /* =========================================================
       /* ::details-content no es ::before ni ::after: la regla de arriba no
          la alcanza. */
       .case-more::details-content { transition: none; }
+    }
+
+    /* =========================================================
        15. IMPRESIÓN
        Un recruiter que imprima la página debe obtener algo legible.
        ========================================================= */
@@ -1924,18 +1927,18 @@
       .contact-mail { background: none !important; color: #000 !important; border: 1px solid #000; }
       .section { padding-block: 1.2rem; }
       .card, .tl-item, .cert-group { break-inside: avoid; }
-      .reveal { opacity: 1 !important; transform: none !important; }
-      /* Si el visitante imprime con un filtro aplicado, el papel debe
-         llevar el índice completo, no solo el itinerario que estaba viendo. */
       /* La entrada agrupada ocupa más de una página: se corta entre
          puestos, no por la mitad de uno. */
       .tl-item--group { break-inside: auto; }
       .tl-item--group .tl-aside { position: static; }
       .tl-role-item { break-inside: avoid; }
-      .cert-item[hidden] { display: grid !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
       /* El JS abre los detalles antes de imprimir: sin transición, el papel
          recoge el bloque entero y no a medio desplegar. */
       .case-more::details-content { transition: none; block-size: auto; }
+      /* Si el visitante imprime con un filtro aplicado, el papel debe
+         llevar el índice completo, no solo el itinerario que estaba viendo. */
+      .cert-item[hidden] { display: grid !important; }
       .cert-group[hidden] { display: block !important; }
       .cert-index { columns: 2; }
       a[href^="http"]::after,
@@ -1956,9 +1959,6 @@
 
 <body>
 
-<a href="#main" class="skip-link">Saltar al contenido</a>
-
-<!-- ============================ NAV ============================ -->
 <!-- ============================ ICONOS ============================ -->
 <!-- Iconos propios, dibujados en una rejilla de 24×24. Cada uno se usa con
      <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-…"/></svg>;
@@ -1983,6 +1983,9 @@
   <symbol id="i-github" viewBox="-2 -2 20 20"><path fill="currentColor" stroke="none" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
 </svg>
 
+<a href="#main" class="skip-link">Saltar al contenido</a>
+
+<!-- ============================ NAV ============================ -->
 <nav class="nav over-hero" id="navbar">
   <span class="nav-progress" id="navProgress" aria-hidden="true"></span>
 
@@ -2050,14 +2053,14 @@
         <div class="hero-ctas">
           <a href="#projects" class="btn btn--solid">Ver el trabajo <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg></a>
           <a href="#contact" class="btn btn--ghost">Contactar</a>
-        </div>
-
-        <ul class="hero-tags">
           <a href="cv/cv-daniel-navarro-delgado.pdf" class="hero-cv" download>
             <span class="hero-cv-label">Descargar CV</span>
             <span class="hero-cv-meta">PDF</span>
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>
           </a>
+        </div>
+
+        <ul class="hero-tags">
           <li class="chip" lang="en">Oracle EPM Cloud</li>
           <li class="chip" lang="en">Essbase</li>
           <li class="chip" lang="en">ODI</li>
@@ -3222,9 +3225,6 @@
       document.documentElement.removeAttribute('data-theme');
     }
     syncThemeUI(isDark);
-    try { localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light'); } catch (e) {}
-  }
-
   }
 
   // Al pulsar el botón, fundido corto entre un tema y otro con la View
@@ -3239,6 +3239,9 @@
     } else {
       applyTheme(isDark);
     }
+    try { localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light'); } catch (e) {}
+  }
+
   // Si el visitante nunca ha elegido manualmente, seguir en vivo los cambios
   // de preferencia del sistema (por ejemplo, si el SO cambia de tema con la
   // persona ya en la página).
@@ -3255,16 +3258,13 @@
   const navLinksEl = document.getElementById('navLinks');
   const hamburger = document.getElementById('hamburger');
 
-  function setMenuOpen(isOpen) {
-    navLinksEl.classList.toggle('open', isOpen);
-    hamburger.setAttribute('aria-expanded', String(isOpen));
   // .closing solo dura el fundido de salida (ver el CSS del menú): se retira
   // pasado un margen algo mayor que --dur-2 (0.32s). Si esa duración crece,
   // hay que subir también este margen.
   const CLOSING_MS = 450;
   let closingTimer = 0;
 
-    hamburger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+  function setMenuOpen(isOpen) {
     // Se mira si estaba abierto porque este cierre también se llama al
     // pulsar cualquier ancla, con el menú ya cerrado.
     const wasOpen = navLinksEl.classList.contains('open');
@@ -3274,6 +3274,9 @@
     if (isClosing) {
       closingTimer = setTimeout(() => navLinksEl.classList.remove('closing'), CLOSING_MS);
     }
+    navLinksEl.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    hamburger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
     // Con el panel a pantalla completa abierto, la página no debe seguir
     // desplazándose por detrás.
     document.body.style.overflow = isOpen ? 'hidden' : '';
