@@ -26,8 +26,12 @@
 
   <meta property="og:title" content="Daniel Navarro Delgado — Consultor de transformación financiera y tecnológica" />
   <meta property="og:description" content="Modelos de planificación y controlling en Oracle EPM Cloud, integración de datos, automatización y herramientas digitales para equipos financieros. Deloitte · Barcelona." />
-  <meta property="og:image" content="https://danielnavarro1600.github.io/img/logo.jpg" />
-  <meta property="og:image:alt" content="Logotipo profesional de Daniel Navarro Delgado" />
+  <!-- Imagen para compartir en redes: 1200×630, la proporción que LinkedIn,
+       WhatsApp y X muestran sin recortar. -->
+  <meta property="og:image" content="https://danielnavarro1600.github.io/img/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Retrato de Daniel Navarro Delgado junto a su nombre y su cargo, Finance &amp; Technology Consultant: transformación financiera, Oracle EPM e inteligencia artificial aplicada." />
   <meta property="og:type" content="profile" />
   <meta property="og:url" content="https://danielnavarro1600.github.io/" />
   <meta property="og:locale" content="es_ES" />
@@ -35,7 +39,8 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Daniel Navarro Delgado — Consultor de transformación financiera y tecnológica" />
   <meta name="twitter:description" content="Oracle EPM Cloud, integración de datos, automatización y desarrollo de herramientas para equipos financieros. Deloitte · Barcelona." />
-  <meta name="twitter:image" content="https://danielnavarro1600.github.io/img/logo.jpg" />
+  <meta name="twitter:image" content="https://danielnavarro1600.github.io/img/og-image.jpg" />
+  <meta name="twitter:image:alt" content="Retrato de Daniel Navarro Delgado junto a su nombre y su cargo, Finance &amp; Technology Consultant: transformación financiera, Oracle EPM e inteligencia artificial aplicada." />
 
   <link rel="canonical" href="https://danielnavarro1600.github.io/" />
   <link rel="icon" type="image/png" href="img/favicon.png" />
@@ -248,17 +253,17 @@
     strong { font-weight: 700; }
     ::selection { background: var(--tint-2); color: var(--ink); }
 
-    :focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-      border-radius: var(--r-xs);
-    }
     /* Titulares repartidos en líneas de largo parecido y párrafos sin una
        palabra suelta en la última línea. Un navegador que no conoce
        text-wrap lo ignora y corta las líneas como siempre. */
     h1, h2, h3, h4, .hero-role { text-wrap: balance; }
     p, li, dd { text-wrap: pretty; }
 
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: var(--r-xs);
+    }
 
     .sr-only {
       position: absolute; width: 1px; height: 1px;
@@ -351,11 +356,6 @@
     /* =========================================================
        3. COMPONENTES BASE: ICONOS, BOTONES, CHIPS, TARJETAS
        ========================================================= */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--s2);
     /* Iconos: SVG propios, definidos una sola vez en el sprite del principio
        de <body> y usados con <svg class="icon"><use href="#i-…"/></svg>.
        Toman el color del texto que los rodea; las marcas de LinkedIn y
@@ -374,6 +374,11 @@
       stroke-linejoin: round;
     }
 
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--s2);
       padding: 0.85rem 1.6rem;
       font-size: var(--fs-sm);
       font-weight: 700;
@@ -575,15 +580,15 @@
                   background var(--dur-1) var(--ease);
     }
     .icon-btn:hover { color: var(--nav-accent); border-color: var(--nav-accent); background: var(--nav-tint); }
+    /* El botón de tema lleva la luna y el sol: el CSS muestra el que toca
+       según data-theme, así que el JS ya no tiene que cambiar el icono. */
+    .theme-sun, [data-theme="dark"] .theme-moon { display: none; }
+    [data-theme="dark"] .theme-sun { display: inline-block; }
 
     .hamburger {
       display: none;
       flex-direction: column;
       justify-content: center;
-    /* El botón de tema lleva la luna y el sol: el CSS muestra el que toca
-       según data-theme, así que el JS ya no tiene que cambiar el icono. */
-    .theme-sun, [data-theme="dark"] .theme-moon { display: none; }
-    [data-theme="dark"] .theme-sun { display: inline-block; }
       gap: 5px;
       width: 38px; height: 38px;
       border: 1px solid var(--nav-border);
@@ -844,11 +849,6 @@
 
     .hero-ctas { display: flex; flex-wrap: wrap; gap: var(--s3); margin-bottom: clamp(0.75rem, 2vh, 1.25rem); }
 
-    .hero-tags { display: flex; flex-wrap: wrap; gap: var(--s2); }
-
-    /* Retrato: marco alto, no un círculo. Aprovecha el encuadre vertical
-       de la fotografía original en lugar de recortarlo casi entero. */
-    .hero-figure { position: relative; justify-self: center; width: 100%; max-width: 340px; }
     /* Descarga del CV: un enlace de texto y no un tercer botón, para no
        competir con las dos llamadas principales. En la fila de botones se
        estira a su altura (toda ella es zona de clic); si pasa a una línea
@@ -880,6 +880,11 @@
     .hero-cv .icon { font-size: 0.9em; transition: transform var(--dur-2) var(--ease); }
     .hero-cv:hover .icon { transform: translateY(2px); }
 
+    .hero-tags { display: flex; flex-wrap: wrap; gap: var(--s2); }
+
+    /* Retrato: marco alto, no un círculo. Aprovecha el encuadre vertical
+       de la fotografía original en lugar de recortarlo casi entero. */
+    .hero-figure { position: relative; justify-self: center; width: 100%; max-width: 340px; }
     .hero-figure::after {
       /* Halo detrás del marco */
       content: "";
@@ -1308,14 +1313,14 @@
     .tl-role {
       font-size: var(--fs-h3);
       font-weight: 700;
+      /* Propio, para que se vea igual como <p> (puesto único) o como <h4>
+         (puestos agrupados), que de base tiene un interlineado muy cerrado */
+      line-height: 1.35;
       letter-spacing: -0.01em;
       margin-bottom: var(--s3);
     }
     .tl-desc {
       color: var(--ink-2);
-      /* Propio, para que se vea igual como <p> (puesto único) o como <h4>
-         (puestos agrupados), que de base tiene un interlineado muy cerrado */
-      line-height: 1.35;
       font-size: 1.06rem;
       line-height: 1.6;
       margin-bottom: var(--s5);
@@ -1343,11 +1348,6 @@
     }
     .tl-list li strong { color: var(--ink); font-weight: 600; }
 
-    /* =========================================================
-       9. FORMACIÓN
-       ========================================================= */
-    .edu {
-      display: grid;
     /* Varios puestos en la misma empresa: una sola entrada, con los puestos
        unidos por un riel con nodos, el mismo lenguaje que el flujo de
        Capacidades. El nodo relleno marca el puesto actual. */
@@ -1398,6 +1398,11 @@
     }
     .tl-roles .tl-now { margin-top: 0; }
 
+    /* =========================================================
+       9. FORMACIÓN
+       ========================================================= */
+    .edu {
+      display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: var(--s4);
       margin-bottom: var(--s6);
@@ -1479,14 +1484,14 @@
       margin-bottom: var(--s5);
       border-bottom: 1px solid var(--line-2);
     }
+    /* Igual que con las fichas: `display: flex` anularía el atributo hidden
+       y, sin JS, se verían unos filtros que no hacen nada. */
+    .cert-toolbar[hidden] { display: none; }
     .filter {
       display: inline-flex;
       align-items: baseline;
       gap: var(--s2);
       padding: 0.42rem 0.9rem;
-    /* Igual que con las fichas: `display: flex` anularía el atributo hidden
-       y, sin JS, se verían unos filtros que no hacen nada. */
-    .cert-toolbar[hidden] { display: none; }
       border: 1px solid var(--line-2);
       border-radius: var(--r-pill);
       font-size: var(--fs-xs);
@@ -1791,22 +1796,17 @@
         transition: opacity var(--dur-2) var(--ease),
                     display var(--dur-2) allow-discrete;
         /* Los enlaces conservan los colores del panel mientras se desvanece */
+        opacity: 0;
+        /* Mientras se desvanece, el panel no debe recibir toques
+           destinados a la página. */
+        pointer-events: none;
         --nav-fg: var(--ink);
         --nav-fg-2: var(--ink-2);
         --nav-accent: var(--accent);
       }
       /* .nav-tools va después de .nav-links en el DOM: con el panel abierto,
-        opacity: 0;
-        /* Mientras se desvanece, el panel no debe recibir toques
-           destinados a la página. */
-        pointer-events: none;
          la X debe verse sobre el panel del tema, no sobre tinta. */
       .nav-links.open ~ .nav-tools {
-        --nav-fg: var(--ink);
-        --nav-fg-2: var(--ink-2);
-        --nav-border: var(--line-2);
-        --nav-accent: var(--accent);
-        --nav-tint: var(--tint);
       .nav-links.open {
         display: flex;
         opacity: 1;
@@ -1815,6 +1815,11 @@
       @starting-style {
         .nav-links.open { opacity: 0; }
       }
+        --nav-fg: var(--ink);
+        --nav-fg-2: var(--ink-2);
+        --nav-border: var(--line-2);
+        --nav-accent: var(--accent);
+        --nav-tint: var(--tint);
       }
       .nav-links a { font-size: 1.35rem; font-weight: 600; color: var(--nav-fg); }
       .nav-links a::after { left: 50%; right: 50%; }
@@ -1835,11 +1840,6 @@
     /* El hero pasa a una columna por debajo del nav: hasta 840px dos
        columnas siguen siendo legibles. Ahí el retrato se convierte en un
        cuadrado compacto, para que el nombre y la propuesta de valor
-       entren en la primera pantalla de un móvil en lugar de quedar
-       empujados por una foto a media página. */
-    @media (max-width: 840px) {
-      .hero-inner { grid-template-columns: 1fr; gap: var(--s6); }
-      .hero-figure { order: -1; max-width: 150px; justify-self: start; }
     /* Con el cronograma a dos columnas, la empresa y su periodo total
        acompañan al lector mientras recorre sus puestos. align-self: start
        es imprescindible: estirada a todo el alto de la fila, la columna no
@@ -1852,6 +1852,11 @@
       }
     }
 
+       entren en la primera pantalla de un móvil en lugar de quedar
+       empujados por una foto a media página. */
+    @media (max-width: 840px) {
+      .hero-inner { grid-template-columns: 1fr; gap: var(--s6); }
+      .hero-figure { order: -1; max-width: 150px; justify-self: start; }
       .hero-photo { aspect-ratio: 1 / 1; border-radius: var(--r-md); }
       .hero-caption { display: none; }
       .hero-name { line-height: 0.9; }
@@ -1903,14 +1908,14 @@
     }
 
     /* =========================================================
+      /* ::details-content no es ::before ni ::after: la regla de arriba no
+         la alcanza. */
+      .case-more::details-content { transition: none; }
        15. IMPRESIÓN
        Un recruiter que imprima la página debe obtener algo legible.
        ========================================================= */
     @media print {
       .nav, .skip-link, .hero-bg, .hero-figure, .cert-toolbar, .nav-progress { display: none !important; }
-      /* ::details-content no es ::before ni ::after: la regla de arriba no
-         la alcanza. */
-      .case-more::details-content { transition: none; }
       body { background: #fff; color: #000; font-size: 11pt; }
       .hero, .band { min-height: 0; display: block; }
       .band, .footer { background: #fff !important; color: #000 !important; }
@@ -1922,20 +1927,20 @@
       .reveal { opacity: 1 !important; transform: none !important; }
       /* Si el visitante imprime con un filtro aplicado, el papel debe
          llevar el índice completo, no solo el itinerario que estaba viendo. */
-      .cert-item[hidden] { display: grid !important; }
-      .cert-group[hidden] { display: block !important; }
-      .cert-index { columns: 2; }
-      a[href^="http"]::after,
-      a[href^="mailto"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; }
       /* La entrada agrupada ocupa más de una página: se corta entre
          puestos, no por la mitad de uno. */
       .tl-item--group { break-inside: auto; }
       .tl-item--group .tl-aside { position: static; }
       .tl-role-item { break-inside: avoid; }
-    }
+      .cert-item[hidden] { display: grid !important; }
       /* El JS abre los detalles antes de imprimir: sin transición, el papel
          recoge el bloque entero y no a medio desplegar. */
       .case-more::details-content { transition: none; block-size: auto; }
+      .cert-group[hidden] { display: block !important; }
+      .cert-index { columns: 2; }
+      a[href^="http"]::after,
+      a[href^="mailto"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; }
+    }
   </style>
 
   <noscript>
@@ -1954,11 +1959,6 @@
 <a href="#main" class="skip-link">Saltar al contenido</a>
 
 <!-- ============================ NAV ============================ -->
-<nav class="nav over-hero" id="navbar">
-  <span class="nav-progress" id="navProgress" aria-hidden="true"></span>
-
-  <a href="#hero" class="nav-logo">DN<span aria-hidden="true"></span></a>
-
 <!-- ============================ ICONOS ============================ -->
 <!-- Iconos propios, dibujados en una rejilla de 24×24. Cada uno se usa con
      <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-…"/></svg>;
@@ -1982,6 +1982,11 @@
   <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" fill-rule="evenodd" d="M4.5 2h15A2.5 2.5 0 0 1 22 4.5v15a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 19.5v-15A2.5 2.5 0 0 1 4.5 2zM8.2 7.2a1.6 1.6 0 1 1-3.2 0 1.6 1.6 0 0 1 3.2 0zM5.1 9.8h3v8.4h-3zM10 9.8h2.8v1.3c.5-.9 1.6-1.5 3-1.5 2.4 0 3.1 1.5 3.1 3.8v4.8h-2.9v-4.3c0-1.1-.3-1.9-1.4-1.9s-1.8.8-1.8 2v4.2H10z"/></symbol>
   <symbol id="i-github" viewBox="-2 -2 20 20"><path fill="currentColor" stroke="none" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
 </svg>
+
+<nav class="nav over-hero" id="navbar">
+  <span class="nav-progress" id="navProgress" aria-hidden="true"></span>
+
+  <a href="#hero" class="nav-logo">DN<span aria-hidden="true"></span></a>
 
   <div class="nav-links" id="navLinks">
     <a href="#skills">Capacidades</a>
@@ -2048,16 +2053,16 @@
         </div>
 
         <ul class="hero-tags">
-          <li class="chip" lang="en">Oracle EPM Cloud</li>
-          <li class="chip" lang="en">Essbase</li>
-          <li class="chip" lang="en">ODI</li>
-          <li class="chip">Integración de datos</li>
-          <li class="chip">Desarrollo de soluciones</li>
           <a href="cv/cv-daniel-navarro-delgado.pdf" class="hero-cv" download>
             <span class="hero-cv-label">Descargar CV</span>
             <span class="hero-cv-meta">PDF</span>
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>
           </a>
+          <li class="chip" lang="en">Oracle EPM Cloud</li>
+          <li class="chip" lang="en">Essbase</li>
+          <li class="chip" lang="en">ODI</li>
+          <li class="chip">Integración de datos</li>
+          <li class="chip">Desarrollo de soluciones</li>
           <li class="chip">IA aplicada</li>
         </ul>
       </div>
@@ -3220,11 +3225,6 @@
     try { localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light'); } catch (e) {}
   }
 
-  // Si el visitante nunca ha elegido manualmente, seguir en vivo los cambios
-  // de preferencia del sistema (por ejemplo, si el SO cambia de tema con la
-  // persona ya en la página).
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    let stored = null;
   }
 
   // Al pulsar el botón, fundido corto entre un tema y otro con la View
@@ -3239,6 +3239,11 @@
     } else {
       applyTheme(isDark);
     }
+  // Si el visitante nunca ha elegido manualmente, seguir en vivo los cambios
+  // de preferencia del sistema (por ejemplo, si el SO cambia de tema con la
+  // persona ya en la página).
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    let stored = null;
     try { stored = localStorage.getItem(THEME_KEY); } catch (err) {}
     if (stored) return;
     applyTheme(e.matches);
@@ -3253,18 +3258,13 @@
   function setMenuOpen(isOpen) {
     navLinksEl.classList.toggle('open', isOpen);
     hamburger.setAttribute('aria-expanded', String(isOpen));
-    hamburger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
-    // Con el panel a pantalla completa abierto, la página no debe seguir
-    // desplazándose por detrás.
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    // El botón va después de los enlaces en el DOM: al abrir con teclado, el
   // .closing solo dura el fundido de salida (ver el CSS del menú): se retira
   // pasado un margen algo mayor que --dur-2 (0.32s). Si esa duración crece,
   // hay que subir también este margen.
   const CLOSING_MS = 450;
   let closingTimer = 0;
 
-    // foco se queda en él y el siguiente Tab saltaría fuera del menú, detrás
+    hamburger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
     // Se mira si estaba abierto porque este cierre también se llama al
     // pulsar cualquier ancla, con el menú ya cerrado.
     const wasOpen = navLinksEl.classList.contains('open');
@@ -3274,6 +3274,11 @@
     if (isClosing) {
       closingTimer = setTimeout(() => navLinksEl.classList.remove('closing'), CLOSING_MS);
     }
+    // Con el panel a pantalla completa abierto, la página no debe seguir
+    // desplazándose por detrás.
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    // El botón va después de los enlaces en el DOM: al abrir con teclado, el
+    // foco se queda en él y el siguiente Tab saltaría fuera del menú, detrás
     // del panel a pantalla completa. Moverlo al primer enlace hace que la
     // trampa de foco de abajo funcione de verdad.
     if (isOpen) {
