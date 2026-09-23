@@ -4,11 +4,12 @@ Personal portfolio website presenting my experience at the intersection of finan
 
 ## Live website
 
-[Visit the professional website](https://danielnavarro1600.github.io)
+- [Spanish version](https://danielnavarro1600.github.io)
+- [English version](https://danielnavarro1600.github.io/en/)
 
 ## Overview
 
-This is a lightweight, single-page website built without a framework or build process. The current version keeps the structure, styling and interactivity in one `index.html` file so it can be opened locally and deployed directly to GitHub Pages.
+This is a lightweight, bilingual single-page website built without a framework or build process. The Spanish page (`index.html`) and the English page (`en/index.html`) share the same structure and differ only in their text; all styling lives in `assets/site.css` and all interactivity in `assets/site.js`, so a design change is made once and reaches both languages. Any content change has to be made in both pages. The site can be opened locally and deployed directly to GitHub Pages.
 
 The website is organised as a single narrative: what I can solve, what I have built, where I have worked, what I studied, what I keep learning, how I work, and how to reach me.
 
@@ -27,6 +28,7 @@ Sections and anchors:
 
 Features:
 
+- Spanish and English versions, linked by an EN / ES switch and `hreflang` alternates
 - Light and dark themes with no flash on reload, following the system preference until the visitor chooses
 - Filterable certification index whose counts are derived from the DOM
 - Full keyboard navigation, visible focus states and AA contrast in both themes
@@ -51,14 +53,20 @@ danielnavarro1600.github.io/
 ├── AGENTS.md
 ├── CLAUDE.md
 ├── README.md
+├── assets/
+│   ├── site.css          (all styles, shared by both pages)
+│   └── site.js           (all interactivity, shared by both pages)
 ├── cv/
 │   ├── cv-daniel-navarro-delgado.pdf
 │   └── cv-daniel-navarro-delgado-en.pdf
+├── en/
+│   └── index.html        (English page)
 ├── img/
 │   ├── favicon.png
 │   ├── foto-perfil.jpg
-│   └── og-image.jpg
-└── index.html
+│   ├── og-image.jpg      (social preview, Spanish)
+│   └── og-image-en.jpg   (social preview, English)
+└── index.html            (Spanish page)
 ```
 
 ## Run locally
@@ -66,7 +74,7 @@ danielnavarro1600.github.io/
 No installation or package manager is required.
 
 1. Download or clone the repository.
-2. Open `index.html` in a web browser.
+2. Open `index.html` (Spanish) or `en/index.html` (English) in a web browser.
 
 On Windows PowerShell, from the project folder:
 
@@ -83,11 +91,11 @@ The project intentionally uses a simple setup:
 - No compilation or build step
 - No environment variables
 
-Before making substantial changes, create a Git branch or a backup copy of `index.html`. Review and test each change locally before publishing it.
+Before making substantial changes, create a Git branch or a backup copy of the files you will touch. Review and test each change locally, in both languages, before publishing it.
 
 ## External resources
 
-The page loads its fonts from Google Fonts. Icons are inline SVG defined once in a sprite at the top of `<body>`, and all images (profile photo, favicon and social preview) are hosted locally in `img/`. Without an internet connection the page still works; only the typefaces fall back to system fonts.
+The pages load their fonts from Google Fonts. Icons are inline SVG defined in a sprite at the top of each page's `<body>`, and all images (profile photo, favicon and social preview) are hosted locally in `img/`. Without an internet connection the page still works; only the typefaces fall back to system fonts.
 
 ## Deployment
 
@@ -97,7 +105,6 @@ The website is designed for static hosting with GitHub Pages. Publishing is hand
 
 - Serve a smaller, pre-cropped portrait to reduce the image payload
 - Self-host the fonts to remove the last CDN dependency
-- Separate CSS and JavaScript if the project becomes harder to maintain
 - Add automated checks only if the project grows beyond the current static setup
 
 ## Author
