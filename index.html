@@ -773,7 +773,11 @@
       color: var(--ink-2);
       /* Comparte línea base con el apellido: apoyados en el mismo suelo. */
       vertical-align: baseline;
-      margin-left: 0.5em;
+      /* El span empieza con un espacio real, para que el nombre se lea y se
+         copie como «Navarro Delgado» y no «NavarroDelgado». Ese espacio ya
+         ocupa 0.74em (0.6em de la mono + 0.14em de letter-spacing); con
+         -0.24em el hueco visible sigue siendo el 0.5em de antes. */
+      margin-left: -0.24em;
       white-space: nowrap;
     }
 
@@ -1480,6 +1484,9 @@
       position: absolute;
       inset: 0;
       background-image:
+    /* Igual que con las fichas: `display: flex` anularía el atributo hidden
+       y, sin JS, se verían unos filtros que no hacen nada. */
+    .cert-toolbar[hidden] { display: none; }
         linear-gradient(to right, var(--band-line) 1px, transparent 1px),
         linear-gradient(to bottom, var(--band-line) 1px, transparent 1px);
       background-size: 76px 76px;
@@ -1826,7 +1833,7 @@
           </ul>
         </div>
 
-        <h1 class="hero-name">Daniel<em>Navarro<span>Delgado</span></em></h1>
+        <h1 class="hero-name">Daniel <em>Navarro<span> Delgado</span></em></h1>
 
         <p class="hero-position" lang="en">Finance &amp; Technology Consultant</p>
 
@@ -1877,19 +1884,19 @@
     <ul class="ledger">
       <li>
         <div class="ledger-num">3</div>
-        <div class="ledger-label"><b>Roles en Deloitte</b>de analista a consultor desde enero de 2025</div>
+        <div class="ledger-label"><b>Roles en Deloitte</b> de analista a consultor desde enero de 2025</div>
       </li>
       <li>
         <div class="ledger-num">9</div>
-        <div class="ledger-label"><b>Dominios financieros</b>que incorporé al acelerador de evaluación de madurez</div>
+        <div class="ledger-label"><b>Dominios financieros</b> que incorporé al acelerador de evaluación de madurez</div>
       </li>
       <li>
         <div class="ledger-num" id="certTotalHero">34</div>
-        <div class="ledger-label"><b>Certificaciones</b>20 de ellas en inteligencia artificial</div>
+        <div class="ledger-label"><b>Certificaciones</b> 20 de ellas en inteligencia artificial</div>
       </li>
       <li>
         <div class="ledger-num">3</div>
-        <div class="ledger-label"><b>Titulaciones</b>economía, negocio internacional y psicología empresarial</div>
+        <div class="ledger-label"><b>Titulaciones</b> economía, negocio internacional y psicología empresarial</div>
       </li>
     </ul>
   </div>
