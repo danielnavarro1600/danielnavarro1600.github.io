@@ -26,8 +26,12 @@
 
   <meta property="og:title" content="Daniel Navarro Delgado — Consultor de transformación financiera y tecnológica" />
   <meta property="og:description" content="Modelos de planificación y controlling en Oracle EPM Cloud, integración de datos, automatización y herramientas digitales para equipos financieros. Deloitte · Barcelona." />
-  <meta property="og:image" content="https://danielnavarro1600.github.io/img/logo.jpg" />
-  <meta property="og:image:alt" content="Logotipo profesional de Daniel Navarro Delgado" />
+  <!-- Imagen para compartir en redes: 1200×630, la proporción que LinkedIn,
+       WhatsApp y X muestran sin recortar. -->
+  <meta property="og:image" content="https://danielnavarro1600.github.io/img/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Retrato de Daniel Navarro Delgado junto a su nombre y su cargo, Finance &amp; Technology Consultant: transformación financiera, Oracle EPM e inteligencia artificial aplicada." />
   <meta property="og:type" content="profile" />
   <meta property="og:url" content="https://danielnavarro1600.github.io/" />
   <meta property="og:locale" content="es_ES" />
@@ -35,18 +39,15 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Daniel Navarro Delgado — Consultor de transformación financiera y tecnológica" />
   <meta name="twitter:description" content="Oracle EPM Cloud, integración de datos, automatización y desarrollo de herramientas para equipos financieros. Deloitte · Barcelona." />
-  <meta name="twitter:image" content="https://danielnavarro1600.github.io/img/logo.jpg" />
+  <meta name="twitter:image" content="https://danielnavarro1600.github.io/img/og-image.jpg" />
+  <meta name="twitter:image:alt" content="Retrato de Daniel Navarro Delgado junto a su nombre y su cargo, Finance &amp; Technology Consultant: transformación financiera, Oracle EPM e inteligencia artificial aplicada." />
 
   <link rel="canonical" href="https://danielnavarro1600.github.io/" />
   <link rel="icon" type="image/png" href="img/favicon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css" />
 
   <script type="application/ld+json">
   {
@@ -252,6 +253,12 @@
     strong { font-weight: 700; }
     ::selection { background: var(--tint-2); color: var(--ink); }
 
+    /* Titulares repartidos en líneas de largo parecido y párrafos sin una
+       palabra suelta en la última línea. Un navegador que no conoce
+       text-wrap lo ignora y corta las líneas como siempre. */
+    h1, h2, h3, h4, .hero-role { text-wrap: balance; }
+    p, li, dd { text-wrap: pretty; }
+
     :focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 3px;
@@ -347,8 +354,26 @@
     .stagger > *:nth-child(7) { transition-delay: 0.36s; }
 
     /* =========================================================
-       3. COMPONENTES BASE: BOTONES, CHIPS, TARJETAS
+       3. COMPONENTES BASE: ICONOS, BOTONES, CHIPS, TARJETAS
        ========================================================= */
+    /* Iconos: SVG propios, definidos una sola vez en el sprite del principio
+       de <body> y usados con <svg class="icon"><use href="#i-…"/></svg>.
+       Toman el color del texto que los rodea; las marcas de LinkedIn y
+       GitHub traen su propio relleno en el sprite. El dibujo deja margen
+       dentro de su rejilla de 24×24: a 1.2em ocupa lo mismo que la letra. */
+    .icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+    .icon {
+      display: inline-block;
+      width: 1.2em; height: 1.2em;
+      flex-shrink: 0;
+      vertical-align: -0.25em;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -364,7 +389,7 @@
                   border-color var(--dur-1) var(--ease), transform var(--dur-1) var(--ease),
                   box-shadow var(--dur-1) var(--ease);
     }
-    .btn i { font-size: 0.9em; }
+    .btn .icon { font-size: 0.9em; }
     .btn--solid { background: var(--accent); color: var(--accent-on); }
     .btn--solid:hover { background: var(--accent-hi); transform: translateY(-2px); box-shadow: var(--shadow); }
     .btn--ghost { border-color: var(--line-2); color: var(--ink); }
@@ -555,6 +580,10 @@
                   background var(--dur-1) var(--ease);
     }
     .icon-btn:hover { color: var(--nav-accent); border-color: var(--nav-accent); background: var(--nav-tint); }
+    /* El botón de tema lleva la luna y el sol: el CSS muestra el que toca
+       según data-theme, así que el JS ya no tiene que cambiar el icono. */
+    .theme-sun, [data-theme="dark"] .theme-moon { display: none; }
+    [data-theme="dark"] .theme-sun { display: inline-block; }
 
     .hamburger {
       display: none;
@@ -773,7 +802,11 @@
       color: var(--ink-2);
       /* Comparte línea base con el apellido: apoyados en el mismo suelo. */
       vertical-align: baseline;
-      margin-left: 0.5em;
+      /* El span empieza con un espacio real, para que el nombre se lea y se
+         copie como «Navarro Delgado» y no «NavarroDelgado». Ese espacio ya
+         ocupa 0.74em (0.6em de la mono + 0.14em de letter-spacing); con
+         -0.24em el hueco visible sigue siendo el 0.5em de antes. */
+      margin-left: -0.24em;
       white-space: nowrap;
     }
 
@@ -815,6 +848,37 @@
     .hero-lede b { color: var(--ink); font-weight: 600; }
 
     .hero-ctas { display: flex; flex-wrap: wrap; gap: var(--s3); margin-bottom: clamp(0.75rem, 2vh, 1.25rem); }
+
+    /* Descarga del CV: un enlace de texto y no un tercer botón, para no
+       competir con las dos llamadas principales. En la fila de botones se
+       estira a su altura (toda ella es zona de clic); si pasa a una línea
+       propia, el relleno mantiene un área de toque cómoda. */
+    .hero-cv {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s2);
+      padding: 0.4rem 0.3rem;
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .hero-cv-label {
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-decoration-color: transparent;
+      text-underline-offset: 0.3em;
+      transition: text-decoration-color var(--dur-1) var(--ease);
+    }
+    .hero-cv:hover .hero-cv-label { text-decoration-color: currentColor; }
+    .hero-cv-meta {
+      font-family: var(--font-mono);
+      font-size: var(--fs-micro);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--ink-2);
+    }
+    .hero-cv .icon { font-size: 0.9em; transition: transform var(--dur-2) var(--ease); }
+    .hero-cv:hover .icon { transform: translateY(2px); }
 
     .hero-tags { display: flex; flex-wrap: wrap; gap: var(--s2); }
 
@@ -999,7 +1063,7 @@
       font-size: var(--fs-sm);
       color: var(--ink-2);
     }
-    .flow-layer i { color: var(--accent); margin-top: 3px; }
+    .flow-layer .icon { color: var(--accent); margin-top: 3px; }
     .flow-layer b { color: var(--ink); font-weight: 700; }
 
     /* Stack: índice reglado en columnas, sin barras de porcentaje. */
@@ -1166,7 +1230,23 @@
       transition: background-size var(--dur-2) var(--ease);
     }
     .case-more[open] summary::before { background-size: 8px 1px, 1px 0; }
-    .case-more ul { margin-top: var(--s4); display: grid; gap: var(--s2); }
+    /* padding y no margin: un margen superior se saldría de la caja que se
+       anima (ver abajo) y aparecería de golpe al abrir. */
+    .case-more ul { padding-top: var(--s4); display: grid; gap: var(--s2); }
+
+    /* Apertura suave del detalle: interpolate-size permite animar la altura
+       hasta auto. Donde no existe (o no hay ::details-content), el bloque se
+       abre de golpe, como siempre. */
+    @supports (interpolate-size: allow-keywords) {
+      .case-more { interpolate-size: allow-keywords; }
+      .case-more::details-content {
+        block-size: 0;
+        overflow: clip;
+        transition: block-size var(--dur-2) var(--ease),
+                    content-visibility var(--dur-2) allow-discrete;
+      }
+      .case-more[open]::details-content { block-size: auto; }
+    }
     .case-more li {
       position: relative;
       padding-left: var(--s5);
@@ -1233,6 +1313,9 @@
     .tl-role {
       font-size: var(--fs-h3);
       font-weight: 700;
+      /* Propio, para que se vea igual como <p> (puesto único) o como <h4>
+         (puestos agrupados), que de base tiene un interlineado muy cerrado */
+      line-height: 1.35;
       letter-spacing: -0.01em;
       margin-bottom: var(--s3);
     }
@@ -1264,6 +1347,56 @@
       opacity: 0.7;
     }
     .tl-list li strong { color: var(--ink); font-weight: 600; }
+
+    /* Varios puestos en la misma empresa: una sola entrada, con los puestos
+       unidos por un riel con nodos, el mismo lenguaje que el flujo de
+       Capacidades. El nodo relleno marca el puesto actual. */
+    .tl-count {
+      margin-top: var(--s3);
+      font-family: var(--font-mono);
+      font-size: var(--fs-micro);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+    }
+    .tl-role-item {
+      /* Centro vertical de la primera línea (la del periodo): ahí va el nodo */
+      --tl-node: calc(var(--fs-micro) * 1.65 / 2);
+      position: relative;
+      padding-left: var(--s6);
+      padding-bottom: clamp(2rem, 4vw, 3rem);
+    }
+    .tl-role-item:last-child { padding-bottom: 0; }
+    /* Tramo de riel desde este nodo hasta el del puesto siguiente */
+    .tl-role-item::before {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: var(--tl-node);
+      bottom: calc(var(--tl-node) * -1);
+      width: 1px;
+      background: var(--line-2);
+    }
+    .tl-role-item:last-child::before { display: none; }
+    .tl-role-item::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: calc(var(--tl-node) - 5.5px);
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--bg-alt);
+      border: 2px solid var(--accent);
+    }
+    .tl-role-item--now::after { background: var(--accent); }
+    /* El periodo y la marca «Puesto actual» comparten línea */
+    .tl-roles .tl-period {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--s1) var(--s4);
+    }
+    .tl-roles .tl-now { margin-top: 0; }
 
     /* =========================================================
        9. FORMACIÓN
@@ -1351,6 +1484,9 @@
       margin-bottom: var(--s5);
       border-bottom: 1px solid var(--line-2);
     }
+    /* Igual que con las fichas: `display: flex` anularía el atributo hidden
+       y, sin JS, se verían unos filtros que no hacen nada. */
+    .cert-toolbar[hidden] { display: none; }
     .filter {
       display: inline-flex;
       align-items: baseline;
@@ -1560,8 +1696,11 @@
       color: var(--band-ink);
       transition: color var(--dur-1) var(--ease), padding-left var(--dur-2) var(--ease);
     }
-    .contact-link:last-child { border-bottom: 1px solid var(--band-line); }
-    .contact-link i:first-child { width: 20px; color: var(--band-accent); font-size: 1rem; }
+    /* Cada enlace va solo dentro de su <li>, así que un :last-child a secas
+       los marcaba a todos y los separadores salían dobles. El borde inferior
+       es solo para el último de la lista. */
+    .contact-links li:last-child .contact-link { border-bottom: 1px solid var(--band-line); }
+    .contact-link .icon:first-child { color: var(--band-accent); font-size: 1rem; }
     .contact-link span { font-weight: 600; font-size: var(--fs-sm); }
     .contact-link small {
       margin-left: auto;
@@ -1570,13 +1709,16 @@
       color: var(--band-ink-2);
       letter-spacing: 0.04em;
     }
-    .contact-link .fa-arrow-right {
+    /* Flecha final: a la derecha en los perfiles y el correo, hacia abajo en
+       las descargas del CV. Al pasar el ratón se desplaza en su sentido. */
+    .contact-go {
       color: var(--band-ink-2);
       font-size: var(--fs-xs);
       transition: transform var(--dur-2) var(--ease), color var(--dur-1) var(--ease);
     }
     .contact-link:hover { color: var(--band-accent); padding-left: var(--s2); }
-    .contact-link:hover .fa-arrow-right { transform: translateX(4px); color: var(--band-accent); }
+    .contact-link:hover .contact-go { transform: translateX(4px); color: var(--band-accent); }
+    .contact-link[download]:hover .contact-go { transform: translateY(3px); }
 
     /* =========================================================
        12. PIE
@@ -1644,12 +1786,34 @@
         gap: var(--s5);
         background: var(--bg);
         z-index: 101;
+        opacity: 0;
+        /* Mientras se desvanece, el panel no debe recibir toques
+           destinados a la página. */
+        pointer-events: none;
       }
-      .nav-links.open {
-        display: flex;
+      /* Fundido de entrada y salida. allow-discrete retrasa el paso a
+         display: none hasta que acaba el fundido, y @starting-style (abajo)
+         da el punto de partida al aparecer. La transición vive solo en .open
+         y en .closing (que el JS pone durante el cierre) y no en el estado
+         cerrado: si no, al girar una tablet y cruzar los 1020px, el panel
+         aparecería y se desvanecería sin que nadie lo hubiera abierto.
+         Sin soporte, el menú se abre y se cierra al instante, como antes. */
+      .nav-links.open,
+      .nav-links.closing {
+        transition: opacity var(--dur-2) var(--ease),
+                    display var(--dur-2) allow-discrete;
+        /* Los enlaces conservan los colores del panel mientras se desvanece */
         --nav-fg: var(--ink);
         --nav-fg-2: var(--ink-2);
         --nav-accent: var(--accent);
+      }
+      .nav-links.open {
+        display: flex;
+        opacity: 1;
+        pointer-events: auto;
+      }
+      @starting-style {
+        .nav-links.open { opacity: 0; }
       }
       /* .nav-tools va después de .nav-links en el DOM: con el panel abierto,
          la X debe verse sobre el panel del tema, no sobre tinta. */
@@ -1674,6 +1838,18 @@
        columnas sigue funcionando bien. */
     @media (max-width: 900px) {
       .tl-item { grid-template-columns: 1fr; gap: var(--s4); }
+    }
+
+    /* Con el cronograma a dos columnas, la empresa y su periodo total
+       acompañan al lector mientras recorre sus puestos. align-self: start
+       es imprescindible: estirada a todo el alto de la fila, la columna no
+       tendría hueco para desplazarse. */
+    @media (min-width: 901px) {
+      .tl-item--group .tl-aside {
+        position: sticky;
+        top: calc(var(--nav-h) + var(--s5));
+        align-self: start;
+      }
     }
 
     /* El hero pasa a una columna por debajo del nav: hasta 840px dos
@@ -1732,6 +1908,9 @@
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
       }
+      /* ::details-content no es ::before ni ::after: la regla de arriba no
+         la alcanza. */
+      .case-more::details-content { transition: none; }
     }
 
     /* =========================================================
@@ -1748,7 +1927,15 @@
       .contact-mail { background: none !important; color: #000 !important; border: 1px solid #000; }
       .section { padding-block: 1.2rem; }
       .card, .tl-item, .cert-group { break-inside: avoid; }
+      /* La entrada agrupada ocupa más de una página: se corta entre
+         puestos, no por la mitad de uno. */
+      .tl-item--group { break-inside: auto; }
+      .tl-item--group .tl-aside { position: static; }
+      .tl-role-item { break-inside: avoid; }
       .reveal { opacity: 1 !important; transform: none !important; }
+      /* El JS abre los detalles antes de imprimir: sin transición, el papel
+         recoge el bloque entero y no a medio desplegar. */
+      .case-more::details-content { transition: none; block-size: auto; }
       /* Si el visitante imprime con un filtro aplicado, el papel debe
          llevar el índice completo, no solo el itinerario que estaba viendo. */
       .cert-item[hidden] { display: grid !important; }
@@ -1772,6 +1959,30 @@
 
 <body>
 
+<!-- ============================ ICONOS ============================ -->
+<!-- Iconos propios, dibujados en una rejilla de 24×24. Cada uno se usa con
+     <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-…"/></svg>;
+     el color y el grosor del trazo los pone .icon en el CSS. LinkedIn y
+     GitHub son marcas y van rellenas. -->
+<svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 4v16M5.5 13.5 12 20l6.5-6.5"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h16M13.5 5.5 20 12l-6.5 6.5"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 13.5A9 9 0 1 1 10.5 3a7.5 7.5 0 0 0 10.5 10.5z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.64 5.64l1.77 1.77M16.6 16.6l1.77 1.77M5.64 18.36l1.77-1.77M16.6 7.4l1.77-1.77"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 3.5V20h16.5M8 15.5l3.5-4.5 3 3 5-6.5"/></symbol>
+  <symbol id="i-data" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.5"/><path d="M4.5 5.5v13c0 1.38 3.36 2.5 7.5 2.5s7.5-1.12 7.5-2.5v-13M4.5 12c0 1.38 3.36 2.5 7.5 2.5s7.5-1.12 7.5-2.5"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-4.5 3.5V17H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM7.5 9.5h9M7.5 13h5.5"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.5 4.5 13.5H12l-1 8 8.5-11H12l1-8z"/></symbol>
+  <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5"/><path d="M8.5 13.3 7 21.5l5-2.5 5 2.5-1.5-8.2"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.47 6.1 6.57.46-5.05 4.24 1.59 6.39L12 16.7l-5.58 3.49 1.59-6.39-5.05-4.24 6.57-.46L12 3z"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5zM14 3v5h5M8.5 13h7M8.5 16.5h5"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" fill-rule="evenodd" d="M4.5 2h15A2.5 2.5 0 0 1 22 4.5v15a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 19.5v-15A2.5 2.5 0 0 1 4.5 2zM8.2 7.2a1.6 1.6 0 1 1-3.2 0 1.6 1.6 0 0 1 3.2 0zM5.1 9.8h3v8.4h-3zM10 9.8h2.8v1.3c.5-.9 1.6-1.5 3-1.5 2.4 0 3.1 1.5 3.1 3.8v4.8h-2.9v-4.3c0-1.1-.3-1.9-1.4-1.9s-1.8.8-1.8 2v4.2H10z"/></symbol>
+  <symbol id="i-github" viewBox="-2 -2 20 20"><path fill="currentColor" stroke="none" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
+</svg>
+
 <a href="#main" class="skip-link">Saltar al contenido</a>
 
 <!-- ============================ NAV ============================ -->
@@ -1792,7 +2003,8 @@
 
   <div class="nav-tools">
     <button class="icon-btn" id="themeToggle" onclick="toggleTheme()" aria-pressed="false">
-      <i class="fa-solid fa-moon" id="themeIcon" aria-hidden="true"></i>
+      <svg class="icon theme-moon" aria-hidden="true" focusable="false"><use href="#i-moon"/></svg>
+      <svg class="icon theme-sun" aria-hidden="true" focusable="false"><use href="#i-sun"/></svg>
       <span class="sr-only" id="themeLabel">Activar tema oscuro</span>
     </button>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">
@@ -1826,7 +2038,7 @@
           </ul>
         </div>
 
-        <h1 class="hero-name">Daniel<em>Navarro<span>Delgado</span></em></h1>
+        <h1 class="hero-name">Daniel <em>Navarro<span> Delgado</span></em></h1>
 
         <p class="hero-position" lang="en">Finance &amp; Technology Consultant</p>
 
@@ -1839,8 +2051,13 @@
         </p>
 
         <div class="hero-ctas">
-          <a href="#projects" class="btn btn--solid">Ver el trabajo <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
+          <a href="#projects" class="btn btn--solid">Ver el trabajo <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg></a>
           <a href="#contact" class="btn btn--ghost">Contactar</a>
+          <a href="cv/cv-daniel-navarro-delgado.pdf" class="hero-cv" download>
+            <span class="hero-cv-label">Descargar CV</span>
+            <span class="hero-cv-meta">PDF</span>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>
+          </a>
         </div>
 
         <ul class="hero-tags">
@@ -1877,19 +2094,19 @@
     <ul class="ledger">
       <li>
         <div class="ledger-num">3</div>
-        <div class="ledger-label"><b>Roles en Deloitte</b>de analista a consultor desde enero de 2025</div>
+        <div class="ledger-label"><b>Roles en Deloitte</b> de analista a consultor desde enero de 2025</div>
       </li>
       <li>
         <div class="ledger-num">9</div>
-        <div class="ledger-label"><b>Dominios financieros</b>que incorporé al acelerador de evaluación de madurez</div>
+        <div class="ledger-label"><b>Dominios financieros</b> que incorporé al acelerador de evaluación de madurez</div>
       </li>
       <li>
         <div class="ledger-num" id="certTotalHero">34</div>
-        <div class="ledger-label"><b>Certificaciones</b>20 de ellas en inteligencia artificial</div>
+        <div class="ledger-label"><b>Certificaciones</b> 20 de ellas en inteligencia artificial</div>
       </li>
       <li>
         <div class="ledger-num">3</div>
-        <div class="ledger-label"><b>Titulaciones</b>economía, negocio internacional y psicología empresarial</div>
+        <div class="ledger-label"><b>Titulaciones</b> economía, negocio internacional y psicología empresarial</div>
       </li>
     </ul>
   </div>
@@ -1910,7 +2127,7 @@
 
     <ul class="pillars stagger">
       <li class="card pillar reveal">
-        <span class="pillar-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></span>
+        <span class="pillar-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chart"/></svg></span>
         <h3>Entender el proceso financiero</h3>
         <p>
           Planificación, presupuesto, forecast y datos reales; análisis de desviaciones,
@@ -1925,7 +2142,7 @@
       </li>
 
       <li class="card pillar reveal">
-        <span class="pillar-icon"><i class="fa-solid fa-arrows-turn-to-dots" aria-hidden="true"></i></span>
+        <span class="pillar-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-data"/></svg></span>
         <h3>Modelar y mover los datos</h3>
         <p>
           Modelos dimensionales en Oracle EPM Cloud —cubos, jerarquías y reglas de cálculo— e
@@ -1940,7 +2157,7 @@
       </li>
 
       <li class="card pillar reveal">
-        <span class="pillar-icon"><i class="fa-solid fa-cubes" aria-hidden="true"></i></span>
+        <span class="pillar-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-cube"/></svg></span>
         <h3>Construir la solución</h3>
         <p>
           Cuando la respuesta no es otra hoja de cálculo, la construyo: interfaz, visualización
@@ -1955,7 +2172,7 @@
       </li>
 
       <li class="card pillar reveal">
-        <span class="pillar-icon"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
+        <span class="pillar-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chat"/></svg></span>
         <h3>Explicarla para que se use</h3>
         <p>
           Documentación funcional, guías de usuario y de administración que se entregan al
@@ -1995,7 +2212,7 @@
         </li>
       </ol>
       <p class="flow-layer">
-        <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-bolt"/></svg>
         <span><b>Automatización e IA aplicada, en cualquiera de los cuatro pasos</b> — donde reducen
         trabajo manual, mejoran la documentación o elevan la calidad de la entrega. No donde solo
         quedan bien.</span>
@@ -2345,101 +2562,100 @@
 
     <ol class="timeline">
 
-      <li class="tl-item reveal">
-        <div class="tl-aside">
-          <p class="tl-period"><time datetime="2026-07">Jul 2026</time> — Presente</p>
+      <!-- Los tres puestos en Deloitte forman una sola entrada: a la izquierda,
+           la empresa y el periodo total (fijos al desplazarse, en escritorio);
+           a la derecha, los puestos del más reciente al más antiguo, unidos
+           por un riel. Si se añade un puesto, actualizar también «3 puestos». -->
+      <li class="tl-item tl-item--group">
+        <div class="tl-aside reveal">
+          <p class="tl-period"><time datetime="2025-01">Ene 2025</time> — Presente</p>
           <h3 class="tl-company">Deloitte</h3>
-          <p class="tl-now">Puesto actual</p>
+          <p class="tl-count">3 puestos</p>
         </div>
-        <div>
-          <p class="tl-role" lang="en">Finance &amp; Technology Consultant</p>
-          <p class="tl-desc">
-            Consultor en proyectos de transformación financiera y tecnológica, con foco en la
-            evolución de soluciones Oracle EPM Cloud, la coordinación funcional y técnica y la
-            aplicación práctica de inteligencia artificial en entornos de consultoría.
-          </p>
-          <ul class="tl-list">
-            <li>Evolución funcional y técnica de soluciones <strong>Oracle EPM Cloud</strong> para procesos de planificación, controlling, I+D e inversiones.</li>
-            <li><strong>Desarrollo de un acelerador digital de evaluación de madurez financiera</strong>: interpretación funcional del modelo, incorporación de nueve dominios, despliegue e industrialización del alta de nuevos dominios.</li>
-            <li><strong>Interlocución directa con el cliente</strong> en reuniones de seguimiento, y coordinación con equipos de negocio y tecnología para convertir requisitos financieros en soluciones implementables.</li>
-            <li>Gestión y seguimiento de integraciones, metadatos, reglas de negocio, mapeos y cargas de datos mediante Oracle EPM, ODI, Data Exchange y EPM Automate.</li>
-            <li><strong>Revisión y soporte técnico</strong> al trabajo de compañeros del equipo, y mejoras de <strong>automatización y calidad de entrega</strong> incorporando herramientas de IA cuando aportan valor real.</li>
-            <li>Consolidación de una especialización multiplataforma mediante <strong>20 certificaciones de inteligencia artificial</strong> de Anthropic, OpenAI, Google, Deloitte y Oracle, aplicadas a proyectos reales.</li>
-          </ul>
-          <ul class="tags">
-            <li class="chip" lang="en">Oracle EPM Cloud</li>
-            <li class="chip">Desarrollo de soluciones</li>
-            <li class="chip">IA aplicada</li>
-            <li class="chip">Integración de datos</li>
-            <li class="chip">Automatización</li>
-            <li class="chip">Consultoría</li>
-          </ul>
-        </div>
-      </li>
+        <ol class="tl-roles">
 
-      <li class="tl-item reveal">
-        <div class="tl-aside">
-          <p class="tl-period"><time datetime="2025-07">Jul 2025</time> — <time datetime="2026-06">Jun 2026</time></p>
-          <h3 class="tl-company">Deloitte</h3>
-        </div>
-        <div>
-          <p class="tl-role" lang="en">Finance &amp; Technology Senior Analyst</p>
-          <span class="edu-mark"><i class="fa-solid fa-award" aria-hidden="true"></i> FY26 · Supera expectativas</span>
-          <p class="tl-desc">
-            Consultor senior en proyectos de transformación financiera y tecnológica, participando en
-            la definición funcional e implementación de soluciones Oracle EPM Cloud para grandes
-            organizaciones del sector industrial.
-          </p>
-          <ul class="tl-list">
-            <li>Diseño funcional e implementación de <strong>Oracle EPM Cloud</strong> para procesos de planificación y controlling (Budget, Forecast y Real) en el ámbito de I+D e inversiones para uno de los 10 mayores grupos empresariales de España por facturación.</li>
-            <li>Estructuración de modelos dimensionales mediante cubos, dimensiones, jerarquías, atributos y reglas de cálculo.</li>
-            <li>Definición y validación de <strong>alrededor de un centenar de reglas de negocio</strong> para activaciones, amortizaciones y efectos financieros bajo criterios IFRS y fiscales.</li>
-            <li><strong>Optimización del rendimiento</strong> de dos cubos de cálculo, con reducciones del tiempo de proceso del 80 % y del 90 %.</li>
-            <li><strong>Automatización del cálculo de amortizaciones</strong>, que eliminó una carga manual equivalente a dos personas a tiempo completo, y rediseño del proceso de cálculo fiscal para reducir errores recurrentes.</li>
-            <li>Coordinación funcional de <strong>más de una decena de integraciones</strong> y de entre treinta y cuarenta mapeos entre Oracle EPM Cloud, SAP, Oracle Data Integrator (ODI), Data Exchange y EPM Automate.</li>
-            <li>Diseño y optimización de Data Forms, Task Lists, Smart View, dashboards y salidas analíticas.</li>
-            <li>Diagnóstico de incidencias de carga revisando <strong>reglas, mapeos y logs de ejecución</strong> hasta localizar el registro que no cuadraba.</li>
-            <li>Elaboración de la documentación funcional y de las <strong>guías de usuario y de administración de Oracle EPM</strong> entregadas al equipo y al cliente.</li>
-            <li>Evaluación anual FY26 con calificación de <strong>supera expectativas</strong> y la máxima valoración —4,0, excelente— en las cuatro competencias técnicas, en pensamiento analítico y crítico y en desarrollo de personas.</li>
-            <li>Obtención de <strong>10 certificaciones Oracle</strong>, seis relacionadas con inteligencia artificial, para reforzar la base tecnológica aplicada al proyecto.</li>
-          </ul>
-          <ul class="tags">
-            <li class="chip" lang="en">Oracle EPM Cloud</li>
-            <li class="chip" lang="en">Essbase</li>
-            <li class="chip" lang="en">ODI</li>
-            <li class="chip" lang="en">FDMEE</li>
-            <li class="chip" lang="en">Smart View</li>
-            <li class="chip" lang="en">IFRS</li>
-          </ul>
-        </div>
-      </li>
+          <li class="tl-role-item tl-role-item--now reveal">
+            <p class="tl-period"><span><time datetime="2026-07">Jul 2026</time> — Presente</span> <span class="tl-now">Puesto actual</span></p>
+            <h4 class="tl-role" lang="en">Finance &amp; Technology Consultant</h4>
+            <p class="tl-desc">
+              Consultor en proyectos de transformación financiera y tecnológica, con foco en la
+              evolución de soluciones Oracle EPM Cloud, la coordinación funcional y técnica y la
+              aplicación práctica de inteligencia artificial en entornos de consultoría.
+            </p>
+            <ul class="tl-list">
+              <li>Evolución funcional y técnica de soluciones <strong>Oracle EPM Cloud</strong> para procesos de planificación, controlling, I+D e inversiones.</li>
+              <li><strong>Desarrollo de un acelerador digital de evaluación de madurez financiera</strong>: interpretación funcional del modelo, incorporación de nueve dominios, despliegue e industrialización del alta de nuevos dominios.</li>
+              <li><strong>Interlocución directa con el cliente</strong> en reuniones de seguimiento, y coordinación con equipos de negocio y tecnología para convertir requisitos financieros en soluciones implementables.</li>
+              <li>Gestión y seguimiento de integraciones, metadatos, reglas de negocio, mapeos y cargas de datos mediante Oracle EPM, ODI, Data Exchange y EPM Automate.</li>
+              <li><strong>Revisión y soporte técnico</strong> al trabajo de compañeros del equipo, y mejoras de <strong>automatización y calidad de entrega</strong> incorporando herramientas de IA cuando aportan valor real.</li>
+              <li>Consolidación de una especialización multiplataforma mediante <strong>20 certificaciones de inteligencia artificial</strong> de Anthropic, OpenAI, Google, Deloitte y Oracle, aplicadas a proyectos reales.</li>
+            </ul>
+            <ul class="tags">
+              <li class="chip" lang="en">Oracle EPM Cloud</li>
+              <li class="chip">Desarrollo de soluciones</li>
+              <li class="chip">IA aplicada</li>
+              <li class="chip">Integración de datos</li>
+              <li class="chip">Automatización</li>
+              <li class="chip">Consultoría</li>
+            </ul>
+          </li>
 
-      <li class="tl-item reveal">
-        <div class="tl-aside">
-          <p class="tl-period"><time datetime="2025-01">Ene 2025</time> — <time datetime="2025-06">Jun 2025</time></p>
-          <h3 class="tl-company">Deloitte</h3>
-        </div>
-        <div>
-          <p class="tl-role" lang="en">Finance &amp; Technology Analyst</p>
-          <p class="tl-desc">
-            Incorporación a proyectos de transformación financiera con foco en análisis funcional,
-            levantamiento de requisitos, documentación y configuración inicial de soluciones
-            Oracle EPM Cloud.
-          </p>
-          <ul class="tl-list">
-            <li>Análisis de procesos financieros y traducción de necesidades de negocio a requisitos funcionales.</li>
-            <li>Apoyo en el diseño y configuración de soluciones Oracle EPM Cloud para planificación y controlling.</li>
-            <li>Elaboración y mantenimiento de documentación funcional y técnico-funcional.</li>
-            <li>Validación de datos, formularios, reglas de negocio y resultados durante las distintas fases del proyecto.</li>
-            <li>Coordinación con equipos de negocio y tecnología para el seguimiento de requisitos, incidencias y decisiones.</li>
-          </ul>
-          <ul class="tags">
-            <li class="chip" lang="en">Oracle EPM</li>
-            <li class="chip" lang="en">Business Analysis</li>
-            <li class="chip" lang="en">Requirements Gathering</li>
-            <li class="chip" lang="en">Documentation</li>
-          </ul>
-        </div>
+          <li class="tl-role-item reveal">
+            <p class="tl-period"><span><time datetime="2025-07">Jul 2025</time> — <time datetime="2026-06">Jun 2026</time></span></p>
+            <h4 class="tl-role" lang="en">Finance &amp; Technology Senior Analyst</h4>
+            <span class="edu-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-award"/></svg> FY26 · Supera expectativas</span>
+            <p class="tl-desc">
+              Consultor senior en proyectos de transformación financiera y tecnológica, participando en
+              la definición funcional e implementación de soluciones Oracle EPM Cloud para grandes
+              organizaciones del sector industrial.
+            </p>
+            <ul class="tl-list">
+              <li>Diseño funcional e implementación de <strong>Oracle EPM Cloud</strong> para procesos de planificación y controlling (Budget, Forecast y Real) en el ámbito de I+D e inversiones para uno de los 10 mayores grupos empresariales de España por facturación.</li>
+              <li>Estructuración de modelos dimensionales mediante cubos, dimensiones, jerarquías, atributos y reglas de cálculo.</li>
+              <li>Definición y validación de <strong>alrededor de un centenar de reglas de negocio</strong> para activaciones, amortizaciones y efectos financieros bajo criterios IFRS y fiscales.</li>
+              <li><strong>Optimización del rendimiento</strong> de dos cubos de cálculo, con reducciones del tiempo de proceso del 80 % y del 90 %.</li>
+              <li><strong>Automatización del cálculo de amortizaciones</strong>, que eliminó una carga manual equivalente a dos personas a tiempo completo, y rediseño del proceso de cálculo fiscal para reducir errores recurrentes.</li>
+              <li>Coordinación funcional de <strong>más de una decena de integraciones</strong> y de entre treinta y cuarenta mapeos entre Oracle EPM Cloud, SAP, Oracle Data Integrator (ODI), Data Exchange y EPM Automate.</li>
+              <li>Diseño y optimización de Data Forms, Task Lists, Smart View, dashboards y salidas analíticas.</li>
+              <li>Diagnóstico de incidencias de carga revisando <strong>reglas, mapeos y logs de ejecución</strong> hasta localizar el registro que no cuadraba.</li>
+              <li>Elaboración de la documentación funcional y de las <strong>guías de usuario y de administración de Oracle EPM</strong> entregadas al equipo y al cliente.</li>
+              <li>Evaluación anual FY26 con calificación de <strong>supera expectativas</strong> y la máxima valoración —4,0, excelente— en las cuatro competencias técnicas, en pensamiento analítico y crítico y en desarrollo de personas.</li>
+              <li>Obtención de <strong>10 certificaciones Oracle</strong>, seis relacionadas con inteligencia artificial, para reforzar la base tecnológica aplicada al proyecto.</li>
+            </ul>
+            <ul class="tags">
+              <li class="chip" lang="en">Oracle EPM Cloud</li>
+              <li class="chip" lang="en">Essbase</li>
+              <li class="chip" lang="en">ODI</li>
+              <li class="chip" lang="en">FDMEE</li>
+              <li class="chip" lang="en">Smart View</li>
+              <li class="chip" lang="en">IFRS</li>
+            </ul>
+          </li>
+
+          <li class="tl-role-item reveal">
+            <p class="tl-period"><span><time datetime="2025-01">Ene 2025</time> — <time datetime="2025-06">Jun 2025</time></span></p>
+            <h4 class="tl-role" lang="en">Finance &amp; Technology Analyst</h4>
+            <p class="tl-desc">
+              Incorporación a proyectos de transformación financiera con foco en análisis funcional,
+              levantamiento de requisitos, documentación y configuración inicial de soluciones
+              Oracle EPM Cloud.
+            </p>
+            <ul class="tl-list">
+              <li>Análisis de procesos financieros y traducción de necesidades de negocio a requisitos funcionales.</li>
+              <li>Apoyo en el diseño y configuración de soluciones Oracle EPM Cloud para planificación y controlling.</li>
+              <li>Elaboración y mantenimiento de documentación funcional y técnico-funcional.</li>
+              <li>Validación de datos, formularios, reglas de negocio y resultados durante las distintas fases del proyecto.</li>
+              <li>Coordinación con equipos de negocio y tecnología para el seguimiento de requisitos, incidencias y decisiones.</li>
+            </ul>
+            <ul class="tags">
+              <li class="chip" lang="en">Oracle EPM</li>
+              <li class="chip" lang="en">Business Analysis</li>
+              <li class="chip" lang="en">Requirements Gathering</li>
+              <li class="chip" lang="en">Documentation</li>
+            </ul>
+          </li>
+
+        </ol>
       </li>
 
       <li class="tl-item reveal">
@@ -2490,7 +2706,7 @@
         <h3>Universitat Pompeu Fabra</h3>
         <p class="edu-degree">Grado en Economía</p>
         <p class="edu-place">Barcelona</p>
-        <span class="edu-mark"><i class="fa-solid fa-star" aria-hidden="true"></i> TFG premiado y publicado</span>
+        <span class="edu-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-star"/></svg> TFG premiado y publicado</span>
         <p class="edu-note">Tesis sobre las implicaciones distributivas de un impuesto al carbono. Nota: 9,7/10.</p>
       </li>
 
@@ -2499,7 +2715,7 @@
         <h3>Università Milano-Bicocca</h3>
         <p class="edu-degree">Erasmus — <span lang="en">International Business Economics</span></p>
         <p class="edu-place">Milán, Italia</p>
-        <span class="edu-mark"><i class="fa-solid fa-globe" aria-hidden="true"></i> 29/30 · Magna Cum Laude</span>
+        <span class="edu-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-globe"/></svg> 29/30 · Magna Cum Laude</span>
         <p class="edu-note">Materias: <span lang="en">Global Management, Behavioral Economics, Data-Driven Decision Making</span>.</p>
       </li>
 
@@ -2508,7 +2724,7 @@
         <h3>Steinbeis University Berlin</h3>
         <p class="edu-degree">Máster en Psicología Empresarial y Organizativa</p>
         <p class="edu-place" lang="en">Schools of Next Practices, Berlín</p>
-        <span class="edu-mark"><i class="fa-solid fa-award" aria-hidden="true"></i> Nota 1,3 — A</span>
+        <span class="edu-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-award"/></svg> Nota 1,3 — A</span>
         <p class="edu-note">Tesis: impacto de los chatbots de IA en el compromiso y el bienestar de los empleados.</p>
       </li>
 
@@ -2856,7 +3072,7 @@
             inteligencia artificial aplicada y proyectos de transformación financiera y tecnológica.
           </p>
           <a href="mailto:danielnavarrodelgado16@gmail.com" class="contact-mail">
-            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>
             danielnavarrodelgado16@gmail.com
           </a>
         </div>
@@ -2864,42 +3080,42 @@
         <ul class="contact-links reveal">
           <li>
             <a class="contact-link" href="https://www.linkedin.com/in/daniel-navarro-delgado" target="_blank" rel="noopener noreferrer">
-              <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg>
               <span>LinkedIn</span>
               <small>Trayectoria y publicaciones</small>
-              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              <svg class="icon contact-go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
             </a>
           </li>
           <li>
             <a class="contact-link" href="https://github.com/danielnavarro1600" target="_blank" rel="noopener noreferrer">
-              <i class="fa-brands fa-github" aria-hidden="true"></i>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg>
               <span>GitHub</span>
               <small>Proyectos y herramientas</small>
-              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              <svg class="icon contact-go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
             </a>
           </li>
           <li>
             <a class="contact-link" href="mailto:danielnavarrodelgado16@gmail.com">
-              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>
               <span lang="en">Email</span>
               <small>Respuesta directa</small>
-              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              <svg class="icon contact-go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
             </a>
           </li>
           <li>
             <a class="contact-link" href="cv/cv-daniel-navarro-delgado.pdf" download>
-              <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-file"/></svg>
               <span>Currículum</span>
               <small>PDF, dos páginas</small>
-              <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+              <svg class="icon contact-go" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>
             </a>
           </li>
           <li>
             <a class="contact-link" href="cv/cv-daniel-navarro-delgado-en.pdf" download>
-              <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-file"/></svg>
               <span lang="en">CV in English</span>
               <small>PDF, two pages</small>
-              <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+              <svg class="icon contact-go" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>
             </a>
           </li>
         </ul>
@@ -2987,15 +3203,14 @@
 
   // ---- TEMA ----
   // El estado real (claro u oscuro) ya lo decidió, sin destello, el script
-  // del <head>. Aquí solo se sincronizan icono, etiqueta y aria-pressed con
-  // ese estado y se guarda la elección manual del visitante.
+  // del <head>. Aquí solo se sincronizan la etiqueta y aria-pressed con ese
+  // estado (el icono lo cambia el CSS según data-theme) y se guarda la
+  // elección manual del visitante.
   const THEME_KEY = 'theme';
-  const themeIcon = document.getElementById('themeIcon');
   const themeLabel = document.getElementById('themeLabel');
   const themeToggle = document.getElementById('themeToggle');
 
   function syncThemeUI(isDark) {
-    themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
     themeLabel.textContent = isDark ? 'Activar tema claro' : 'Activar tema oscuro';
     themeToggle.setAttribute('aria-label', themeLabel.textContent);
     themeToggle.setAttribute('aria-pressed', String(isDark));
@@ -3003,14 +3218,27 @@
 
   syncThemeUI(document.documentElement.getAttribute('data-theme') === 'dark');
 
-  function toggleTheme() {
-    const isDark = document.documentElement.getAttribute('data-theme') !== 'dark';
+  function applyTheme(isDark) {
     if (isDark) {
       document.documentElement.setAttribute('data-theme', 'dark');
     } else {
       document.documentElement.removeAttribute('data-theme');
     }
     syncThemeUI(isDark);
+  }
+
+  // Al pulsar el botón, fundido corto entre un tema y otro con la View
+  // Transitions API. Si el navegador no la tiene, o el visitante pide menos
+  // movimiento, el tema cambia al instante, como antes.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function toggleTheme() {
+    const isDark = document.documentElement.getAttribute('data-theme') !== 'dark';
+    if (document.startViewTransition && !reduceMotion.matches) {
+      document.startViewTransition(() => applyTheme(isDark));
+    } else {
+      applyTheme(isDark);
+    }
     try { localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light'); } catch (e) {}
   }
 
@@ -3021,12 +3249,7 @@
     let stored = null;
     try { stored = localStorage.getItem(THEME_KEY); } catch (err) {}
     if (stored) return;
-    if (e.matches) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-    }
-    syncThemeUI(e.matches);
+    applyTheme(e.matches);
   });
 
   // ---- MENÚ MÓVIL ----
@@ -3035,7 +3258,22 @@
   const navLinksEl = document.getElementById('navLinks');
   const hamburger = document.getElementById('hamburger');
 
+  // .closing solo dura el fundido de salida (ver el CSS del menú): se retira
+  // pasado un margen algo mayor que --dur-2 (0.32s). Si esa duración crece,
+  // hay que subir también este margen.
+  const CLOSING_MS = 450;
+  let closingTimer = 0;
+
   function setMenuOpen(isOpen) {
+    // Se mira si estaba abierto porque este cierre también se llama al
+    // pulsar cualquier ancla, con el menú ya cerrado.
+    const wasOpen = navLinksEl.classList.contains('open');
+    const isClosing = wasOpen && !isOpen;
+    clearTimeout(closingTimer);
+    navLinksEl.classList.toggle('closing', isClosing);
+    if (isClosing) {
+      closingTimer = setTimeout(() => navLinksEl.classList.remove('closing'), CLOSING_MS);
+    }
     navLinksEl.classList.toggle('open', isOpen);
     hamburger.setAttribute('aria-expanded', String(isOpen));
     hamburger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');

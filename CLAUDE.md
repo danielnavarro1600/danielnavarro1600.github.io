@@ -28,13 +28,14 @@ No hay build, gestor de paquetes ni tests automatizados. La web ejecutable está
 - **Interactividad** (JS nativo, sin dependencias): estado y barra de progreso del navbar (un solo listener de scroll con `requestAnimationFrame`), medida real de `--nav-h`, menú móvil con trampa de foco, Escape y bloqueo del scroll de fondo, marcado de la sección activa (`aria-current`), aparición al hacer scroll con `IntersectionObserver` (`.reveal`), índice de certificaciones filtrable y apertura de los `<details>` de los casos de estudio al imprimir.
 - **Casos de estudio**: las dos fichas destacadas de `#projects` usan `.work-card--feature` (ocupan la fila entera) con `.case-facts` para contexto/reto/aportación y un `<details class="case-more">` para el detalle de construcción. El resto de fichas usan `.work-facts`.
 - **Índice de certificaciones**: cada certificación aparece una sola vez en `#certIndex`, etiquetada con `data-track` (`ia`, `oracle`, `gestion`; admite varios itinerarios). Los recuentos de los filtros, el total por emisor y la cifra del hero se calculan desde el DOM, así que añadir o quitar una entrada en el HTML actualiza todas las cifras sin tocar ningún número a mano. La barra de filtros nace con `hidden` y solo la muestra el JS.
-- **Dependencias externas** (CDN, en `<head>`): Google Fonts y Font Awesome. Todas las imágenes (retrato, favicon y og:image) se sirven desde `img/` en el propio repositorio.
+- **Dependencias externas** (CDN, en `<head>`): solo Google Fonts. Todas las imágenes (retrato, favicon y og:image) se sirven desde `img/` en el propio repositorio.
+- **Iconos**: SVG propios, sin librería. Se definen una sola vez como `<symbol id="i-…">` en el sprite `.icon-sprite` del principio de `<body>` y se usan con `<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-…"/></svg>`. `.icon` pone tamaño (1.2em), color (el del texto) y trazo; LinkedIn y GitHub traen su relleno en el sprite. Para añadir un icono, se añade un `<symbol>` con `viewBox="0 0 24 24"`.
 - Idioma del contenido: español (`<html lang="es">`), con `lang="en"` en los términos y títulos que están en inglés.
 
 ## Reglas de trabajo
 
 - Trabajar únicamente con los archivos locales del repositorio actual.
-- No utilizar herramientas MCP.
+- No utilizar herramientas MCP, con una excepción: el navegador integrado de la app (herramientas `mcp__Claude_Browser__*`), solo para previsualizar y comprobar la web, tanto la copia local como la publicada en GitHub Pages.
 - No acceder a Canva, Gmail, Google Calendar ni Google Drive.
 - Antes de modificar archivos, presentar un plan breve: archivos afectados, resultado esperado y riesgos.
 - No realizar ningún cambio hasta que el usuario apruebe expresamente el plan.

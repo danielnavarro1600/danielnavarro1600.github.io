@@ -18,7 +18,7 @@ Use this command to open the site locally. For changes involving responsive layo
 
 ## Coding Style & Naming Conventions
 
-Use two-space indentation in HTML, CSS, and JavaScript, and preserve the current Spanish page content and accessibility attributes. Prefer semantic HTML (`<section>`, headings, lists, `<time>`) and meaningful `aria-*` labels when adding interactive elements. Reuse the CSS custom properties and existing component classes (`.card`, `.chip`, `.pill`, `.btn`, `.eyebrow`, `.title`, `.lede`, `.reveal`) rather than introducing inline styles or new dependencies. Name CSS classes with lowercase kebab-case (for example, `.cert-item`) and JavaScript identifiers in camelCase (for example, `toggleTheme`).
+Use two-space indentation in HTML, CSS, and JavaScript, and preserve the current Spanish page content and accessibility attributes. Prefer semantic HTML (`<section>`, headings, lists, `<time>`) and meaningful `aria-*` labels when adding interactive elements. Reuse the CSS custom properties and existing component classes (`.card`, `.chip`, `.pill`, `.btn`, `.icon`, `.eyebrow`, `.title`, `.lede`, `.reveal`) rather than introducing inline styles or new dependencies. Icons are inline SVG symbols defined once in the sprite at the top of `<body>`: to add one, add a `<symbol>` there instead of an icon library. Name CSS classes with lowercase kebab-case (for example, `.cert-item`) and JavaScript identifiers in camelCase (for example, `toggleTheme`).
 
 Keep light and dark theme values synchronized between `:root` and `[data-theme="dark"]`; theme preferences are stored in `localStorage`. The closing band uses its own always-dark `--band-*` tokens and is not themed.
 
@@ -26,7 +26,7 @@ To add or remove a certification, edit only `#certIndex`: give the entry a `data
 
 ## Testing Guidelines
 
-There is no automated coverage requirement. Before submitting a change, manually verify that the page loads without console errors, all navigation links reach their sections, the mobile menu opens and closes by keyboard (Escape returns focus to the button and the focus trap holds), the certification filters keep their counts consistent, and both themes remain readable. Confirm images load from `img/` and external font/icon fallbacks do not break essential content. Check the layout at roughly 375px, 768px, and 1280px, and confirm the page still reads correctly with JavaScript disabled and with `prefers-reduced-motion` enabled.
+There is no automated coverage requirement. Before submitting a change, manually verify that the page loads without console errors, all navigation links reach their sections, the mobile menu opens and closes by keyboard (Escape returns focus to the button and the focus trap holds), the certification filters keep their counts consistent, and both themes remain readable. Confirm images load from `img/` and that the fallback fonts, used when Google Fonts does not load, do not break essential content. Check the layout at roughly 375px, 768px, and 1280px, and confirm the page still reads correctly with JavaScript disabled and with `prefers-reduced-motion` enabled.
 
 ## Commit & Pull Request Guidelines
 
