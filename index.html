@@ -1313,6 +1313,9 @@
     }
     .tl-desc {
       color: var(--ink-2);
+      /* Propio, para que se vea igual como <p> (puesto único) o como <h4>
+         (puestos agrupados), que de base tiene un interlineado muy cerrado */
+      line-height: 1.35;
       font-size: 1.06rem;
       line-height: 1.6;
       margin-bottom: var(--s5);
@@ -1345,6 +1348,56 @@
        ========================================================= */
     .edu {
       display: grid;
+    /* Varios puestos en la misma empresa: una sola entrada, con los puestos
+       unidos por un riel con nodos, el mismo lenguaje que el flujo de
+       Capacidades. El nodo relleno marca el puesto actual. */
+    .tl-count {
+      margin-top: var(--s3);
+      font-family: var(--font-mono);
+      font-size: var(--fs-micro);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+    }
+    .tl-role-item {
+      /* Centro vertical de la primera línea (la del periodo): ahí va el nodo */
+      --tl-node: calc(var(--fs-micro) * 1.65 / 2);
+      position: relative;
+      padding-left: var(--s6);
+      padding-bottom: clamp(2rem, 4vw, 3rem);
+    }
+    .tl-role-item:last-child { padding-bottom: 0; }
+    /* Tramo de riel desde este nodo hasta el del puesto siguiente */
+    .tl-role-item::before {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: var(--tl-node);
+      bottom: calc(var(--tl-node) * -1);
+      width: 1px;
+      background: var(--line-2);
+    }
+    .tl-role-item:last-child::before { display: none; }
+    .tl-role-item::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: calc(var(--tl-node) - 5.5px);
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--bg-alt);
+      border: 2px solid var(--accent);
+    }
+    .tl-role-item--now::after { background: var(--accent); }
+    /* El periodo y la marca «Puesto actual» comparten línea */
+    .tl-roles .tl-period {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--s1) var(--s4);
+    }
+    .tl-roles .tl-now { margin-top: 0; }
+
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: var(--s4);
       margin-bottom: var(--s6);
@@ -1431,6 +1484,9 @@
       align-items: baseline;
       gap: var(--s2);
       padding: 0.42rem 0.9rem;
+    /* Igual que con las fichas: `display: flex` anularía el atributo hidden
+       y, sin JS, se verían unos filtros que no hacen nada. */
+    .cert-toolbar[hidden] { display: none; }
       border: 1px solid var(--line-2);
       border-radius: var(--r-pill);
       font-size: var(--fs-xs);
@@ -1484,9 +1540,6 @@
     .cert-issuer h3 {
       font-family: var(--font-sans);
       font-size: var(--fs-sm);
-    /* Igual que con las fichas: `display: flex` anularía el atributo hidden
-       y, sin JS, se verían unos filtros que no hacen nada. */
-    .cert-toolbar[hidden] { display: none; }
       font-weight: 700;
       letter-spacing: 0.01em;
     }
@@ -1743,6 +1796,10 @@
         --nav-accent: var(--accent);
       }
       /* .nav-tools va después de .nav-links en el DOM: con el panel abierto,
+        opacity: 0;
+        /* Mientras se desvanece, el panel no debe recibir toques
+           destinados a la página. */
+        pointer-events: none;
          la X debe verse sobre el panel del tema, no sobre tinta. */
       .nav-links.open ~ .nav-tools {
         --nav-fg: var(--ink);
@@ -1750,6 +1807,14 @@
         --nav-border: var(--line-2);
         --nav-accent: var(--accent);
         --nav-tint: var(--tint);
+      .nav-links.open {
+        display: flex;
+        opacity: 1;
+        pointer-events: auto;
+      }
+      @starting-style {
+        .nav-links.open { opacity: 0; }
+      }
       }
       .nav-links a { font-size: 1.35rem; font-weight: 600; color: var(--nav-fg); }
       .nav-links a::after { left: 50%; right: 50%; }
@@ -1775,6 +1840,18 @@
     @media (max-width: 840px) {
       .hero-inner { grid-template-columns: 1fr; gap: var(--s6); }
       .hero-figure { order: -1; max-width: 150px; justify-self: start; }
+    /* Con el cronograma a dos columnas, la empresa y su periodo total
+       acompañan al lector mientras recorre sus puestos. align-self: start
+       es imprescindible: estirada a todo el alto de la fila, la columna no
+       tendría hueco para desplazarse. */
+    @media (min-width: 901px) {
+      .tl-item--group .tl-aside {
+        position: sticky;
+        top: calc(var(--nav-h) + var(--s5));
+        align-self: start;
+      }
+    }
+
       .hero-photo { aspect-ratio: 1 / 1; border-radius: var(--r-md); }
       .hero-caption { display: none; }
       .hero-name { line-height: 0.9; }
@@ -1796,10 +1873,6 @@
       .contact-inner { grid-template-columns: 1fr; }
       .flow { grid-template-columns: 1fr; row-gap: var(--s5); }
       .flow-step::before { right: 0; }
-        opacity: 0;
-        /* Mientras se desvanece, el panel no debe recibir toques
-           destinados a la página. */
-        pointer-events: none;
       .work-facts div { grid-template-columns: 1fr; gap: var(--s1); }
       .footer .wrap { flex-direction: column; align-items: flex-start; }
     }
@@ -1807,14 +1880,6 @@
     @media (max-width: 420px) {
       .hero-ctas .btn { flex: 1 1 100%; }
       .cert-item { grid-template-columns: 1fr; gap: var(--s1); }
-      .nav-links.open {
-        display: flex;
-        opacity: 1;
-        pointer-events: auto;
-      }
-      @starting-style {
-        .nav-links.open { opacity: 0; }
-      }
       .cert-meta { white-space: normal; }
       /* La dirección de correo es larga: se reduce el botón antes de que
          llegue a desbordar en pantallas de 320px. */
@@ -1843,6 +1908,9 @@
        ========================================================= */
     @media print {
       .nav, .skip-link, .hero-bg, .hero-figure, .cert-toolbar, .nav-progress { display: none !important; }
+      /* ::details-content no es ::before ni ::after: la regla de arriba no
+         la alcanza. */
+      .case-more::details-content { transition: none; }
       body { background: #fff; color: #000; font-size: 11pt; }
       .hero, .band { min-height: 0; display: block; }
       .band, .footer { background: #fff !important; color: #000 !important; }
@@ -1859,7 +1927,15 @@
       .cert-index { columns: 2; }
       a[href^="http"]::after,
       a[href^="mailto"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; }
+      /* La entrada agrupada ocupa más de una página: se corta entre
+         puestos, no por la mitad de uno. */
+      .tl-item--group { break-inside: auto; }
+      .tl-item--group .tl-aside { position: static; }
+      .tl-role-item { break-inside: avoid; }
     }
+      /* El JS abre los detalles antes de imprimir: sin transición, el papel
+         recoge el bloque entero y no a medio desplegar. */
+      .case-more::details-content { transition: none; block-size: auto; }
   </style>
 
   <noscript>
@@ -1882,6 +1958,30 @@
   <span class="nav-progress" id="navProgress" aria-hidden="true"></span>
 
   <a href="#hero" class="nav-logo">DN<span aria-hidden="true"></span></a>
+
+<!-- ============================ ICONOS ============================ -->
+<!-- Iconos propios, dibujados en una rejilla de 24×24. Cada uno se usa con
+     <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-…"/></svg>;
+     el color y el grosor del trazo los pone .icon en el CSS. LinkedIn y
+     GitHub son marcas y van rellenas. -->
+<svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 4v16M5.5 13.5 12 20l6.5-6.5"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h16M13.5 5.5 20 12l-6.5 6.5"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 13.5A9 9 0 1 1 10.5 3a7.5 7.5 0 0 0 10.5 10.5z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.64 5.64l1.77 1.77M16.6 16.6l1.77 1.77M5.64 18.36l1.77-1.77M16.6 7.4l1.77-1.77"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 3.5V20h16.5M8 15.5l3.5-4.5 3 3 5-6.5"/></symbol>
+  <symbol id="i-data" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.5"/><path d="M4.5 5.5v13c0 1.38 3.36 2.5 7.5 2.5s7.5-1.12 7.5-2.5v-13M4.5 12c0 1.38 3.36 2.5 7.5 2.5s7.5-1.12 7.5-2.5"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-4.5 3.5V17H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM7.5 9.5h9M7.5 13h5.5"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.5 4.5 13.5H12l-1 8 8.5-11H12l1-8z"/></symbol>
+  <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5"/><path d="M8.5 13.3 7 21.5l5-2.5 5 2.5-1.5-8.2"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.47 6.1 6.57.46-5.05 4.24 1.59 6.39L12 16.7l-5.58 3.49 1.59-6.39-5.05-4.24 6.57-.46L12 3z"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5zM14 3v5h5M8.5 13h7M8.5 16.5h5"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" fill-rule="evenodd" d="M4.5 2h15A2.5 2.5 0 0 1 22 4.5v15a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 19.5v-15A2.5 2.5 0 0 1 4.5 2zM8.2 7.2a1.6 1.6 0 1 1-3.2 0 1.6 1.6 0 0 1 3.2 0zM5.1 9.8h3v8.4h-3zM10 9.8h2.8v1.3c.5-.9 1.6-1.5 3-1.5 2.4 0 3.1 1.5 3.1 3.8v4.8h-2.9v-4.3c0-1.1-.3-1.9-1.4-1.9s-1.8.8-1.8 2v4.2H10z"/></symbol>
+  <symbol id="i-github" viewBox="-2 -2 20 20"><path fill="currentColor" stroke="none" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
+</svg>
 
   <div class="nav-links" id="navLinks">
     <a href="#skills">Capacidades</a>
@@ -1909,9 +2009,6 @@
 
 <!-- ============================ HERO ============================ -->
 <section class="hero" id="hero">
-      /* ::details-content no es ::before ni ::after: la regla de arriba no
-         la alcanza. */
-      .case-more::details-content { transition: none; }
   <div class="hero-bg" aria-hidden="true">
     <div class="hero-grid"></div>
     <div class="hero-wash hero-wash-1"></div>
@@ -1934,9 +2031,6 @@
         </div>
 
         <h1 class="hero-name">Daniel <em>Navarro<span> Delgado</span></em></h1>
-      /* El JS abre los detalles antes de imprimir: sin transición, el papel
-         recoge el bloque entero y no a medio desplegar. */
-      .case-more::details-content { transition: none; block-size: auto; }
 
         <p class="hero-position" lang="en">Finance &amp; Technology Consultant</p>
 
@@ -1959,31 +2053,12 @@
           <li class="chip" lang="en">ODI</li>
           <li class="chip">Integración de datos</li>
           <li class="chip">Desarrollo de soluciones</li>
+          <a href="cv/cv-daniel-navarro-delgado.pdf" class="hero-cv" download>
+            <span class="hero-cv-label">Descargar CV</span>
+            <span class="hero-cv-meta">PDF</span>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>
+          </a>
           <li class="chip">IA aplicada</li>
-<!-- ============================ ICONOS ============================ -->
-<!-- Iconos propios, dibujados en una rejilla de 24×24. Cada uno se usa con
-     <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-…"/></svg>;
-     el color y el grosor del trazo los pone .icon en el CSS. LinkedIn y
-     GitHub son marcas y van rellenas. -->
-<svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-  <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 4v16M5.5 13.5 12 20l6.5-6.5"/></symbol>
-  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h16M13.5 5.5 20 12l-6.5 6.5"/></symbol>
-  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 13.5A9 9 0 1 1 10.5 3a7.5 7.5 0 0 0 10.5 10.5z"/></symbol>
-  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.64 5.64l1.77 1.77M16.6 16.6l1.77 1.77M5.64 18.36l1.77-1.77M16.6 7.4l1.77-1.77"/></symbol>
-  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 3.5V20h16.5M8 15.5l3.5-4.5 3 3 5-6.5"/></symbol>
-  <symbol id="i-data" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.5"/><path d="M4.5 5.5v13c0 1.38 3.36 2.5 7.5 2.5s7.5-1.12 7.5-2.5v-13M4.5 12c0 1.38 3.36 2.5 7.5 2.5s7.5-1.12 7.5-2.5"/></symbol>
-  <symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol>
-  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-4.5 3.5V17H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM7.5 9.5h9M7.5 13h5.5"/></symbol>
-  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.5 4.5 13.5H12l-1 8 8.5-11H12l1-8z"/></symbol>
-  <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5"/><path d="M8.5 13.3 7 21.5l5-2.5 5 2.5-1.5-8.2"/></symbol>
-  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.47 6.1 6.57.46-5.05 4.24 1.59 6.39L12 16.7l-5.58 3.49 1.59-6.39-5.05-4.24 6.57-.46L12 3z"/></symbol>
-  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/></symbol>
-  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
-  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5zM14 3v5h5M8.5 13h7M8.5 16.5h5"/></symbol>
-  <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" fill-rule="evenodd" d="M4.5 2h15A2.5 2.5 0 0 1 22 4.5v15a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 19.5v-15A2.5 2.5 0 0 1 4.5 2zM8.2 7.2a1.6 1.6 0 1 1-3.2 0 1.6 1.6 0 0 1 3.2 0zM5.1 9.8h3v8.4h-3zM10 9.8h2.8v1.3c.5-.9 1.6-1.5 3-1.5 2.4 0 3.1 1.5 3.1 3.8v4.8h-2.9v-4.3c0-1.1-.3-1.9-1.4-1.9s-1.8.8-1.8 2v4.2H10z"/></symbol>
-  <symbol id="i-github" viewBox="-2 -2 20 20"><path fill="currentColor" stroke="none" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
-</svg>
-
         </ul>
       </div>
 
@@ -2053,11 +2128,6 @@
         </p>
         <ul class="tags">
           <li class="chip">Planificación</li>
-          <a href="cv/cv-daniel-navarro-delgado.pdf" class="hero-cv" download>
-            <span class="hero-cv-label">Descargar CV</span>
-            <span class="hero-cv-meta">PDF</span>
-            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>
-          </a>
           <li class="chip">Controlling</li>
           <li class="chip" lang="en">IFRS</li>
         </ul>
@@ -2484,101 +2554,100 @@
 
     <ol class="timeline">
 
-      <li class="tl-item reveal">
-        <div class="tl-aside">
-          <p class="tl-period"><time datetime="2026-07">Jul 2026</time> — Presente</p>
+      <!-- Los tres puestos en Deloitte forman una sola entrada: a la izquierda,
+           la empresa y el periodo total (fijos al desplazarse, en escritorio);
+           a la derecha, los puestos del más reciente al más antiguo, unidos
+           por un riel. Si se añade un puesto, actualizar también «3 puestos». -->
+      <li class="tl-item tl-item--group">
+        <div class="tl-aside reveal">
+          <p class="tl-period"><time datetime="2025-01">Ene 2025</time> — Presente</p>
           <h3 class="tl-company">Deloitte</h3>
-          <p class="tl-now">Puesto actual</p>
+          <p class="tl-count">3 puestos</p>
         </div>
-        <div>
-          <p class="tl-role" lang="en">Finance &amp; Technology Consultant</p>
-          <p class="tl-desc">
-            Consultor en proyectos de transformación financiera y tecnológica, con foco en la
-            evolución de soluciones Oracle EPM Cloud, la coordinación funcional y técnica y la
-            aplicación práctica de inteligencia artificial en entornos de consultoría.
-          </p>
-          <ul class="tl-list">
-            <li>Evolución funcional y técnica de soluciones <strong>Oracle EPM Cloud</strong> para procesos de planificación, controlling, I+D e inversiones.</li>
-            <li><strong>Desarrollo de un acelerador digital de evaluación de madurez financiera</strong>: interpretación funcional del modelo, incorporación de nueve dominios, despliegue e industrialización del alta de nuevos dominios.</li>
-            <li><strong>Interlocución directa con el cliente</strong> en reuniones de seguimiento, y coordinación con equipos de negocio y tecnología para convertir requisitos financieros en soluciones implementables.</li>
-            <li>Gestión y seguimiento de integraciones, metadatos, reglas de negocio, mapeos y cargas de datos mediante Oracle EPM, ODI, Data Exchange y EPM Automate.</li>
-            <li><strong>Revisión y soporte técnico</strong> al trabajo de compañeros del equipo, y mejoras de <strong>automatización y calidad de entrega</strong> incorporando herramientas de IA cuando aportan valor real.</li>
-            <li>Consolidación de una especialización multiplataforma mediante <strong>20 certificaciones de inteligencia artificial</strong> de Anthropic, OpenAI, Google, Deloitte y Oracle, aplicadas a proyectos reales.</li>
-          </ul>
-          <ul class="tags">
-            <li class="chip" lang="en">Oracle EPM Cloud</li>
-            <li class="chip">Desarrollo de soluciones</li>
-            <li class="chip">IA aplicada</li>
-            <li class="chip">Integración de datos</li>
-            <li class="chip">Automatización</li>
-            <li class="chip">Consultoría</li>
-          </ul>
-        </div>
-      </li>
+        <ol class="tl-roles">
 
-      <li class="tl-item reveal">
-        <div class="tl-aside">
-          <p class="tl-period"><time datetime="2025-07">Jul 2025</time> — <time datetime="2026-06">Jun 2026</time></p>
-          <h3 class="tl-company">Deloitte</h3>
-        </div>
-        <div>
-          <p class="tl-role" lang="en">Finance &amp; Technology Senior Analyst</p>
-          <span class="edu-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-award"/></svg> FY26 · Supera expectativas</span>
-          <p class="tl-desc">
-            Consultor senior en proyectos de transformación financiera y tecnológica, participando en
-            la definición funcional e implementación de soluciones Oracle EPM Cloud para grandes
-            organizaciones del sector industrial.
-          </p>
-          <ul class="tl-list">
-            <li>Diseño funcional e implementación de <strong>Oracle EPM Cloud</strong> para procesos de planificación y controlling (Budget, Forecast y Real) en el ámbito de I+D e inversiones para uno de los 10 mayores grupos empresariales de España por facturación.</li>
-            <li>Estructuración de modelos dimensionales mediante cubos, dimensiones, jerarquías, atributos y reglas de cálculo.</li>
-            <li>Definición y validación de <strong>alrededor de un centenar de reglas de negocio</strong> para activaciones, amortizaciones y efectos financieros bajo criterios IFRS y fiscales.</li>
-            <li><strong>Optimización del rendimiento</strong> de dos cubos de cálculo, con reducciones del tiempo de proceso del 80 % y del 90 %.</li>
-            <li><strong>Automatización del cálculo de amortizaciones</strong>, que eliminó una carga manual equivalente a dos personas a tiempo completo, y rediseño del proceso de cálculo fiscal para reducir errores recurrentes.</li>
-            <li>Coordinación funcional de <strong>más de una decena de integraciones</strong> y de entre treinta y cuarenta mapeos entre Oracle EPM Cloud, SAP, Oracle Data Integrator (ODI), Data Exchange y EPM Automate.</li>
-            <li>Diseño y optimización de Data Forms, Task Lists, Smart View, dashboards y salidas analíticas.</li>
-            <li>Diagnóstico de incidencias de carga revisando <strong>reglas, mapeos y logs de ejecución</strong> hasta localizar el registro que no cuadraba.</li>
-            <li>Elaboración de la documentación funcional y de las <strong>guías de usuario y de administración de Oracle EPM</strong> entregadas al equipo y al cliente.</li>
-            <li>Evaluación anual FY26 con calificación de <strong>supera expectativas</strong> y la máxima valoración —4,0, excelente— en las cuatro competencias técnicas, en pensamiento analítico y crítico y en desarrollo de personas.</li>
-            <li>Obtención de <strong>10 certificaciones Oracle</strong>, seis relacionadas con inteligencia artificial, para reforzar la base tecnológica aplicada al proyecto.</li>
-          </ul>
-          <ul class="tags">
-            <li class="chip" lang="en">Oracle EPM Cloud</li>
-            <li class="chip" lang="en">Essbase</li>
-            <li class="chip" lang="en">ODI</li>
-            <li class="chip" lang="en">FDMEE</li>
-            <li class="chip" lang="en">Smart View</li>
-            <li class="chip" lang="en">IFRS</li>
-          </ul>
-        </div>
-      </li>
+          <li class="tl-role-item tl-role-item--now reveal">
+            <p class="tl-period"><span><time datetime="2026-07">Jul 2026</time> — Presente</span> <span class="tl-now">Puesto actual</span></p>
+            <h4 class="tl-role" lang="en">Finance &amp; Technology Consultant</h4>
+            <p class="tl-desc">
+              Consultor en proyectos de transformación financiera y tecnológica, con foco en la
+              evolución de soluciones Oracle EPM Cloud, la coordinación funcional y técnica y la
+              aplicación práctica de inteligencia artificial en entornos de consultoría.
+            </p>
+            <ul class="tl-list">
+              <li>Evolución funcional y técnica de soluciones <strong>Oracle EPM Cloud</strong> para procesos de planificación, controlling, I+D e inversiones.</li>
+              <li><strong>Desarrollo de un acelerador digital de evaluación de madurez financiera</strong>: interpretación funcional del modelo, incorporación de nueve dominios, despliegue e industrialización del alta de nuevos dominios.</li>
+              <li><strong>Interlocución directa con el cliente</strong> en reuniones de seguimiento, y coordinación con equipos de negocio y tecnología para convertir requisitos financieros en soluciones implementables.</li>
+              <li>Gestión y seguimiento de integraciones, metadatos, reglas de negocio, mapeos y cargas de datos mediante Oracle EPM, ODI, Data Exchange y EPM Automate.</li>
+              <li><strong>Revisión y soporte técnico</strong> al trabajo de compañeros del equipo, y mejoras de <strong>automatización y calidad de entrega</strong> incorporando herramientas de IA cuando aportan valor real.</li>
+              <li>Consolidación de una especialización multiplataforma mediante <strong>20 certificaciones de inteligencia artificial</strong> de Anthropic, OpenAI, Google, Deloitte y Oracle, aplicadas a proyectos reales.</li>
+            </ul>
+            <ul class="tags">
+              <li class="chip" lang="en">Oracle EPM Cloud</li>
+              <li class="chip">Desarrollo de soluciones</li>
+              <li class="chip">IA aplicada</li>
+              <li class="chip">Integración de datos</li>
+              <li class="chip">Automatización</li>
+              <li class="chip">Consultoría</li>
+            </ul>
+          </li>
 
-      <li class="tl-item reveal">
-        <div class="tl-aside">
-          <p class="tl-period"><time datetime="2025-01">Ene 2025</time> — <time datetime="2025-06">Jun 2025</time></p>
-          <h3 class="tl-company">Deloitte</h3>
-        </div>
-        <div>
-          <p class="tl-role" lang="en">Finance &amp; Technology Analyst</p>
-          <p class="tl-desc">
-            Incorporación a proyectos de transformación financiera con foco en análisis funcional,
-            levantamiento de requisitos, documentación y configuración inicial de soluciones
-            Oracle EPM Cloud.
-          </p>
-          <ul class="tl-list">
-            <li>Análisis de procesos financieros y traducción de necesidades de negocio a requisitos funcionales.</li>
-            <li>Apoyo en el diseño y configuración de soluciones Oracle EPM Cloud para planificación y controlling.</li>
-            <li>Elaboración y mantenimiento de documentación funcional y técnico-funcional.</li>
-            <li>Validación de datos, formularios, reglas de negocio y resultados durante las distintas fases del proyecto.</li>
-            <li>Coordinación con equipos de negocio y tecnología para el seguimiento de requisitos, incidencias y decisiones.</li>
-          </ul>
-          <ul class="tags">
-            <li class="chip" lang="en">Oracle EPM</li>
-            <li class="chip" lang="en">Business Analysis</li>
-            <li class="chip" lang="en">Requirements Gathering</li>
-            <li class="chip" lang="en">Documentation</li>
-          </ul>
-        </div>
+          <li class="tl-role-item reveal">
+            <p class="tl-period"><span><time datetime="2025-07">Jul 2025</time> — <time datetime="2026-06">Jun 2026</time></span></p>
+            <h4 class="tl-role" lang="en">Finance &amp; Technology Senior Analyst</h4>
+            <span class="edu-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-award"/></svg> FY26 · Supera expectativas</span>
+            <p class="tl-desc">
+              Consultor senior en proyectos de transformación financiera y tecnológica, participando en
+              la definición funcional e implementación de soluciones Oracle EPM Cloud para grandes
+              organizaciones del sector industrial.
+            </p>
+            <ul class="tl-list">
+              <li>Diseño funcional e implementación de <strong>Oracle EPM Cloud</strong> para procesos de planificación y controlling (Budget, Forecast y Real) en el ámbito de I+D e inversiones para uno de los 10 mayores grupos empresariales de España por facturación.</li>
+              <li>Estructuración de modelos dimensionales mediante cubos, dimensiones, jerarquías, atributos y reglas de cálculo.</li>
+              <li>Definición y validación de <strong>alrededor de un centenar de reglas de negocio</strong> para activaciones, amortizaciones y efectos financieros bajo criterios IFRS y fiscales.</li>
+              <li><strong>Optimización del rendimiento</strong> de dos cubos de cálculo, con reducciones del tiempo de proceso del 80 % y del 90 %.</li>
+              <li><strong>Automatización del cálculo de amortizaciones</strong>, que eliminó una carga manual equivalente a dos personas a tiempo completo, y rediseño del proceso de cálculo fiscal para reducir errores recurrentes.</li>
+              <li>Coordinación funcional de <strong>más de una decena de integraciones</strong> y de entre treinta y cuarenta mapeos entre Oracle EPM Cloud, SAP, Oracle Data Integrator (ODI), Data Exchange y EPM Automate.</li>
+              <li>Diseño y optimización de Data Forms, Task Lists, Smart View, dashboards y salidas analíticas.</li>
+              <li>Diagnóstico de incidencias de carga revisando <strong>reglas, mapeos y logs de ejecución</strong> hasta localizar el registro que no cuadraba.</li>
+              <li>Elaboración de la documentación funcional y de las <strong>guías de usuario y de administración de Oracle EPM</strong> entregadas al equipo y al cliente.</li>
+              <li>Evaluación anual FY26 con calificación de <strong>supera expectativas</strong> y la máxima valoración —4,0, excelente— en las cuatro competencias técnicas, en pensamiento analítico y crítico y en desarrollo de personas.</li>
+              <li>Obtención de <strong>10 certificaciones Oracle</strong>, seis relacionadas con inteligencia artificial, para reforzar la base tecnológica aplicada al proyecto.</li>
+            </ul>
+            <ul class="tags">
+              <li class="chip" lang="en">Oracle EPM Cloud</li>
+              <li class="chip" lang="en">Essbase</li>
+              <li class="chip" lang="en">ODI</li>
+              <li class="chip" lang="en">FDMEE</li>
+              <li class="chip" lang="en">Smart View</li>
+              <li class="chip" lang="en">IFRS</li>
+            </ul>
+          </li>
+
+          <li class="tl-role-item reveal">
+            <p class="tl-period"><span><time datetime="2025-01">Ene 2025</time> — <time datetime="2025-06">Jun 2025</time></span></p>
+            <h4 class="tl-role" lang="en">Finance &amp; Technology Analyst</h4>
+            <p class="tl-desc">
+              Incorporación a proyectos de transformación financiera con foco en análisis funcional,
+              levantamiento de requisitos, documentación y configuración inicial de soluciones
+              Oracle EPM Cloud.
+            </p>
+            <ul class="tl-list">
+              <li>Análisis de procesos financieros y traducción de necesidades de negocio a requisitos funcionales.</li>
+              <li>Apoyo en el diseño y configuración de soluciones Oracle EPM Cloud para planificación y controlling.</li>
+              <li>Elaboración y mantenimiento de documentación funcional y técnico-funcional.</li>
+              <li>Validación de datos, formularios, reglas de negocio y resultados durante las distintas fases del proyecto.</li>
+              <li>Coordinación con equipos de negocio y tecnología para el seguimiento de requisitos, incidencias y decisiones.</li>
+            </ul>
+            <ul class="tags">
+              <li class="chip" lang="en">Oracle EPM</li>
+              <li class="chip" lang="en">Business Analysis</li>
+              <li class="chip" lang="en">Requirements Gathering</li>
+              <li class="chip" lang="en">Documentation</li>
+            </ul>
+          </li>
+
+        </ol>
       </li>
 
       <li class="tl-item reveal">
@@ -3156,6 +3225,20 @@
   // persona ya en la página).
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
     let stored = null;
+  }
+
+  // Al pulsar el botón, fundido corto entre un tema y otro con la View
+  // Transitions API. Si el navegador no la tiene, o el visitante pide menos
+  // movimiento, el tema cambia al instante, como antes.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function toggleTheme() {
+    const isDark = document.documentElement.getAttribute('data-theme') !== 'dark';
+    if (document.startViewTransition && !reduceMotion.matches) {
+      document.startViewTransition(() => applyTheme(isDark));
+    } else {
+      applyTheme(isDark);
+    }
     try { stored = localStorage.getItem(THEME_KEY); } catch (err) {}
     if (stored) return;
     applyTheme(e.matches);
@@ -3175,7 +3258,22 @@
     // desplazándose por detrás.
     document.body.style.overflow = isOpen ? 'hidden' : '';
     // El botón va después de los enlaces en el DOM: al abrir con teclado, el
+  // .closing solo dura el fundido de salida (ver el CSS del menú): se retira
+  // pasado un margen algo mayor que --dur-2 (0.32s). Si esa duración crece,
+  // hay que subir también este margen.
+  const CLOSING_MS = 450;
+  let closingTimer = 0;
+
     // foco se queda en él y el siguiente Tab saltaría fuera del menú, detrás
+    // Se mira si estaba abierto porque este cierre también se llama al
+    // pulsar cualquier ancla, con el menú ya cerrado.
+    const wasOpen = navLinksEl.classList.contains('open');
+    const isClosing = wasOpen && !isOpen;
+    clearTimeout(closingTimer);
+    navLinksEl.classList.toggle('closing', isClosing);
+    if (isClosing) {
+      closingTimer = setTimeout(() => navLinksEl.classList.remove('closing'), CLOSING_MS);
+    }
     // del panel a pantalla completa. Moverlo al primer enlace hace que la
     // trampa de foco de abajo funcione de verdad.
     if (isOpen) {
@@ -3220,20 +3318,6 @@
     anchor.addEventListener('click', () => setMenuOpen(false));
   });
 
-  }
-
-  // Al pulsar el botón, fundido corto entre un tema y otro con la View
-  // Transitions API. Si el navegador no la tiene, o el visitante pide menos
-  // movimiento, el tema cambia al instante, como antes.
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  function toggleTheme() {
-    const isDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-    if (document.startViewTransition && !reduceMotion.matches) {
-      document.startViewTransition(() => applyTheme(isDark));
-    } else {
-      applyTheme(isDark);
-    }
   // ---- SECCIÓN ACTIVA EN EL NAV ----
   const navSectionLinks = new Map();
   document.querySelectorAll('#navLinks a[href^="#"]').forEach(a => {
@@ -3258,22 +3342,7 @@
 
   // ---- APARICIÓN AL HACER SCROLL ----
   const revealObserver = new IntersectionObserver((entries) => {
-  // .closing solo dura el fundido de salida (ver el CSS del menú): se retira
-  // pasado un margen algo mayor que --dur-2 (0.32s). Si esa duración crece,
-  // hay que subir también este margen.
-  const CLOSING_MS = 450;
-  let closingTimer = 0;
-
     entries.forEach(entry => {
-    // Se mira si estaba abierto porque este cierre también se llama al
-    // pulsar cualquier ancla, con el menú ya cerrado.
-    const wasOpen = navLinksEl.classList.contains('open');
-    const isClosing = wasOpen && !isOpen;
-    clearTimeout(closingTimer);
-    navLinksEl.classList.toggle('closing', isClosing);
-    if (isClosing) {
-      closingTimer = setTimeout(() => navLinksEl.classList.remove('closing'), CLOSING_MS);
-    }
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
         revealObserver.unobserve(entry.target);
