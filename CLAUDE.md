@@ -35,7 +35,7 @@ No hay build, gestor de paquetes ni tests automatizados. La web ejecutable está
 ## Reglas de trabajo
 
 - Trabajar únicamente con los archivos locales del repositorio actual.
-- No utilizar herramientas MCP.
+- No utilizar herramientas MCP, con una excepción: el navegador integrado de la app (herramientas `mcp__Claude_Browser__*`), solo para previsualizar y comprobar la web, tanto la copia local como la publicada en GitHub Pages.
 - No acceder a Canva, Gmail, Google Calendar ni Google Drive.
 - Antes de modificar archivos, presentar un plan breve: archivos afectados, resultado esperado y riesgos.
 - No realizar ningún cambio hasta que el usuario apruebe expresamente el plan.
