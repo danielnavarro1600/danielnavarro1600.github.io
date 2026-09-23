@@ -849,6 +849,37 @@
     /* Retrato: marco alto, no un círculo. Aprovecha el encuadre vertical
        de la fotografía original en lugar de recortarlo casi entero. */
     .hero-figure { position: relative; justify-self: center; width: 100%; max-width: 340px; }
+    /* Descarga del CV: un enlace de texto y no un tercer botón, para no
+       competir con las dos llamadas principales. En la fila de botones se
+       estira a su altura (toda ella es zona de clic); si pasa a una línea
+       propia, el relleno mantiene un área de toque cómoda. */
+    .hero-cv {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s2);
+      padding: 0.4rem 0.3rem;
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .hero-cv-label {
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-decoration-color: transparent;
+      text-underline-offset: 0.3em;
+      transition: text-decoration-color var(--dur-1) var(--ease);
+    }
+    .hero-cv:hover .hero-cv-label { text-decoration-color: currentColor; }
+    .hero-cv-meta {
+      font-family: var(--font-mono);
+      font-size: var(--fs-micro);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--ink-2);
+    }
+    .hero-cv .icon { font-size: 0.9em; transition: transform var(--dur-2) var(--ease); }
+    .hero-cv:hover .icon { transform: translateY(2px); }
+
     .hero-figure::after {
       /* Halo detrás del marco */
       content: "";
@@ -1453,6 +1484,9 @@
     .cert-issuer h3 {
       font-family: var(--font-sans);
       font-size: var(--fs-sm);
+    /* Igual que con las fichas: `display: flex` anularía el atributo hidden
+       y, sin JS, se verían unos filtros que no hacen nada. */
+    .cert-toolbar[hidden] { display: none; }
       font-weight: 700;
       letter-spacing: 0.01em;
     }
@@ -1484,9 +1518,6 @@
       font-size: var(--fs-micro);
       color: var(--ink-2);
       white-space: nowrap;
-    /* Igual que con las fichas: `display: flex` anularía el atributo hidden
-       y, sin JS, se verían unos filtros que no hacen nada. */
-    .cert-toolbar[hidden] { display: none; }
       font-variant-numeric: tabular-nums;
     }
     .cert-topic { color: var(--accent); }
@@ -1765,6 +1796,10 @@
       .contact-inner { grid-template-columns: 1fr; }
       .flow { grid-template-columns: 1fr; row-gap: var(--s5); }
       .flow-step::before { right: 0; }
+        opacity: 0;
+        /* Mientras se desvanece, el panel no debe recibir toques
+           destinados a la página. */
+        pointer-events: none;
       .work-facts div { grid-template-columns: 1fr; gap: var(--s1); }
       .footer .wrap { flex-direction: column; align-items: flex-start; }
     }
@@ -1772,6 +1807,14 @@
     @media (max-width: 420px) {
       .hero-ctas .btn { flex: 1 1 100%; }
       .cert-item { grid-template-columns: 1fr; gap: var(--s1); }
+      .nav-links.open {
+        display: flex;
+        opacity: 1;
+        pointer-events: auto;
+      }
+      @starting-style {
+        .nav-links.open { opacity: 0; }
+      }
       .cert-meta { white-space: normal; }
       /* La dirección de correo es larga: se reduce el botón antes de que
          llegue a desbordar en pantallas de 320px. */
@@ -1796,10 +1839,6 @@
 
     /* =========================================================
        15. IMPRESIÓN
-        opacity: 0;
-        /* Mientras se desvanece, el panel no debe recibir toques
-           destinados a la página. */
-        pointer-events: none;
        Un recruiter que imprima la página debe obtener algo legible.
        ========================================================= */
     @media print {
@@ -1807,14 +1846,6 @@
       body { background: #fff; color: #000; font-size: 11pt; }
       .hero, .band { min-height: 0; display: block; }
       .band, .footer { background: #fff !important; color: #000 !important; }
-      .nav-links.open {
-        display: flex;
-        opacity: 1;
-        pointer-events: auto;
-      }
-      @starting-style {
-        .nav-links.open { opacity: 0; }
-      }
       .band .lede, .method-item p, .contact-lede, .footer { color: #333 !important; }
       .band::before { display: none; }
       .contact-mail { background: none !important; color: #000 !important; border: 1px solid #000; }
@@ -1878,6 +1909,9 @@
 
 <!-- ============================ HERO ============================ -->
 <section class="hero" id="hero">
+      /* ::details-content no es ::before ni ::after: la regla de arriba no
+         la alcanza. */
+      .case-more::details-content { transition: none; }
   <div class="hero-bg" aria-hidden="true">
     <div class="hero-grid"></div>
     <div class="hero-wash hero-wash-1"></div>
@@ -1900,6 +1934,9 @@
         </div>
 
         <h1 class="hero-name">Daniel <em>Navarro<span> Delgado</span></em></h1>
+      /* El JS abre los detalles antes de imprimir: sin transición, el papel
+         recoge el bloque entero y no a medio desplegar. */
+      .case-more::details-content { transition: none; block-size: auto; }
 
         <p class="hero-position" lang="en">Finance &amp; Technology Consultant</p>
 
@@ -1909,9 +1946,6 @@
           Entiendo una necesidad financiera, la traduzco a una <b>estructura funcional</b>, la
           construyo sobre <b>sistemas y datos empresariales</b> y la dejo probada, documentada
           y lista para usar.
-      /* ::details-content no es ::before ni ::after: la regla de arriba no
-         la alcanza. */
-      .case-more::details-content { transition: none; }
         </p>
 
         <div class="hero-ctas">
@@ -1926,40 +1960,6 @@
           <li class="chip">Integración de datos</li>
           <li class="chip">Desarrollo de soluciones</li>
           <li class="chip">IA aplicada</li>
-        </ul>
-      </div>
-
-      <figure class="hero-figure">
-        <div class="hero-photo">
-          <img
-            src="img/foto-perfil.jpg"
-            alt="Retrato de Daniel Navarro Delgado"
-      /* El JS abre los detalles antes de imprimir: sin transición, el papel
-         recoge el bloque entero y no a medio desplegar. */
-      .case-more::details-content { transition: none; block-size: auto; }
-            width="528" height="660"
-            fetchpriority="high"
-            decoding="async" />
-        </div>
-        <figcaption class="hero-caption">
-          <span>Daniel Navarro Delgado</span>
-          <span>Barcelona</span>
-        </figcaption>
-      </figure>
-    </div>
-
-    <!-- Cifras: cada una se sostiene con lo que aparece más abajo en la página.
-         VERIFICAR: 34 es el total sin duplicar de las certificaciones listadas en
-         #certifications (20 IA + 10 Oracle + 10 gestión, con 6 certificaciones
-         Oracle de IA contadas en dos itinerarios). El JS lo recalcula desde el
-         índice al cargar, así que basta con añadir o quitar entradas allí. -->
-    <ul class="ledger">
-      <li>
-        <div class="ledger-num">3</div>
-        <div class="ledger-label"><b>Roles en Deloitte</b> de analista a consultor desde enero de 2025</div>
-      </li>
-      <li>
-        <div class="ledger-num">9</div>
 <!-- ============================ ICONOS ============================ -->
 <!-- Iconos propios, dibujados en una rejilla de 24×24. Cada uno se usa con
      <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-…"/></svg>;
@@ -1984,6 +1984,37 @@
   <symbol id="i-github" viewBox="-2 -2 20 20"><path fill="currentColor" stroke="none" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
 </svg>
 
+        </ul>
+      </div>
+
+      <figure class="hero-figure">
+        <div class="hero-photo">
+          <img
+            src="img/foto-perfil.jpg"
+            alt="Retrato de Daniel Navarro Delgado"
+            width="528" height="660"
+            fetchpriority="high"
+            decoding="async" />
+        </div>
+        <figcaption class="hero-caption">
+          <span>Daniel Navarro Delgado</span>
+          <span>Barcelona</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <!-- Cifras: cada una se sostiene con lo que aparece más abajo en la página.
+         VERIFICAR: 34 es el total sin duplicar de las certificaciones listadas en
+         #certifications (20 IA + 10 Oracle + 10 gestión, con 6 certificaciones
+         Oracle de IA contadas en dos itinerarios). El JS lo recalcula desde el
+         índice al cargar, así que basta con añadir o quitar entradas allí. -->
+    <ul class="ledger">
+      <li>
+        <div class="ledger-num">3</div>
+        <div class="ledger-label"><b>Roles en Deloitte</b> de analista a consultor desde enero de 2025</div>
+      </li>
+      <li>
+        <div class="ledger-num">9</div>
         <div class="ledger-label"><b>Dominios financieros</b> que incorporé al acelerador de evaluación de madurez</div>
       </li>
       <li>
@@ -2022,6 +2053,11 @@
         </p>
         <ul class="tags">
           <li class="chip">Planificación</li>
+          <a href="cv/cv-daniel-navarro-delgado.pdf" class="hero-cv" download>
+            <span class="hero-cv-label">Descargar CV</span>
+            <span class="hero-cv-meta">PDF</span>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>
+          </a>
           <li class="chip">Controlling</li>
           <li class="chip" lang="en">IFRS</li>
         </ul>
@@ -3184,6 +3220,20 @@
     anchor.addEventListener('click', () => setMenuOpen(false));
   });
 
+  }
+
+  // Al pulsar el botón, fundido corto entre un tema y otro con la View
+  // Transitions API. Si el navegador no la tiene, o el visitante pide menos
+  // movimiento, el tema cambia al instante, como antes.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function toggleTheme() {
+    const isDark = document.documentElement.getAttribute('data-theme') !== 'dark';
+    if (document.startViewTransition && !reduceMotion.matches) {
+      document.startViewTransition(() => applyTheme(isDark));
+    } else {
+      applyTheme(isDark);
+    }
   // ---- SECCIÓN ACTIVA EN EL NAV ----
   const navSectionLinks = new Map();
   document.querySelectorAll('#navLinks a[href^="#"]').forEach(a => {
@@ -3208,7 +3258,22 @@
 
   // ---- APARICIÓN AL HACER SCROLL ----
   const revealObserver = new IntersectionObserver((entries) => {
+  // .closing solo dura el fundido de salida (ver el CSS del menú): se retira
+  // pasado un margen algo mayor que --dur-2 (0.32s). Si esa duración crece,
+  // hay que subir también este margen.
+  const CLOSING_MS = 450;
+  let closingTimer = 0;
+
     entries.forEach(entry => {
+    // Se mira si estaba abierto porque este cierre también se llama al
+    // pulsar cualquier ancla, con el menú ya cerrado.
+    const wasOpen = navLinksEl.classList.contains('open');
+    const isClosing = wasOpen && !isOpen;
+    clearTimeout(closingTimer);
+    navLinksEl.classList.toggle('closing', isClosing);
+    if (isClosing) {
+      closingTimer = setTimeout(() => navLinksEl.classList.remove('closing'), CLOSING_MS);
+    }
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
         revealObserver.unobserve(entry.target);
@@ -3220,20 +3285,6 @@
 
   // ---- BLOQUES PLEGABLES AL IMPRIMIR ----
   // Un <details> cerrado no se imprime: en papel faltaría justo el detalle de
-  }
-
-  // Al pulsar el botón, fundido corto entre un tema y otro con la View
-  // Transitions API. Si el navegador no la tiene, o el visitante pide menos
-  // movimiento, el tema cambia al instante, como antes.
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  function toggleTheme() {
-    const isDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-    if (document.startViewTransition && !reduceMotion.matches) {
-      document.startViewTransition(() => applyTheme(isDark));
-    } else {
-      applyTheme(isDark);
-    }
   // cómo se construyó cada caso. Se abren antes de imprimir y se devuelven a
   // su estado anterior después.
   const collapsibles = document.querySelectorAll('.case-more');
@@ -3258,22 +3309,7 @@
     const filters = [...toolbar.querySelectorAll('.filter')];
     const counter = document.getElementById('certCount');
     const heroTotal = document.getElementById('certTotalHero');
-  // .closing solo dura el fundido de salida (ver el CSS del menú): se retira
-  // pasado un margen algo mayor que --dur-2 (0.32s). Si esa duración crece,
-  // hay que subir también este margen.
-  const CLOSING_MS = 450;
-  let closingTimer = 0;
 
-
-    // Se mira si estaba abierto porque este cierre también se llama al
-    // pulsar cualquier ancla, con el menú ya cerrado.
-    const wasOpen = navLinksEl.classList.contains('open');
-    const isClosing = wasOpen && !isOpen;
-    clearTimeout(closingTimer);
-    navLinksEl.classList.toggle('closing', isClosing);
-    if (isClosing) {
-      closingTimer = setTimeout(() => navLinksEl.classList.remove('closing'), CLOSING_MS);
-    }
     const tracksOf = (el) => (el.dataset.track || '').split(/\s+/).filter(Boolean);
     const matches = (el, filter) => filter === 'all' || tracksOf(el).includes(filter);
 
