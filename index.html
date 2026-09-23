@@ -42,11 +42,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css" />
 
   <script type="application/ld+json">
   {
@@ -253,16 +249,16 @@
     ::selection { background: var(--tint-2); color: var(--ink); }
 
     :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: var(--r-xs);
+    }
     /* Titulares repartidos en líneas de largo parecido y párrafos sin una
        palabra suelta en la última línea. Un navegador que no conoce
        text-wrap lo ignora y corta las líneas como siempre. */
     h1, h2, h3, h4, .hero-role { text-wrap: balance; }
     p, li, dd { text-wrap: pretty; }
 
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-      border-radius: var(--r-xs);
-    }
 
     .sr-only {
       position: absolute; width: 1px; height: 1px;
@@ -353,13 +349,31 @@
     .stagger > *:nth-child(7) { transition-delay: 0.36s; }
 
     /* =========================================================
-       3. COMPONENTES BASE: BOTONES, CHIPS, TARJETAS
+       3. COMPONENTES BASE: ICONOS, BOTONES, CHIPS, TARJETAS
        ========================================================= */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: var(--s2);
+    /* Iconos: SVG propios, definidos una sola vez en el sprite del principio
+       de <body> y usados con <svg class="icon"><use href="#i-…"/></svg>.
+       Toman el color del texto que los rodea; las marcas de LinkedIn y
+       GitHub traen su propio relleno en el sprite. El dibujo deja margen
+       dentro de su rejilla de 24×24: a 1.2em ocupa lo mismo que la letra. */
+    .icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+    .icon {
+      display: inline-block;
+      width: 1.2em; height: 1.2em;
+      flex-shrink: 0;
+      vertical-align: -0.25em;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
       padding: 0.85rem 1.6rem;
       font-size: var(--fs-sm);
       font-weight: 700;
@@ -370,7 +384,7 @@
                   border-color var(--dur-1) var(--ease), transform var(--dur-1) var(--ease),
                   box-shadow var(--dur-1) var(--ease);
     }
-    .btn i { font-size: 0.9em; }
+    .btn .icon { font-size: 0.9em; }
     .btn--solid { background: var(--accent); color: var(--accent-on); }
     .btn--solid:hover { background: var(--accent-hi); transform: translateY(-2px); box-shadow: var(--shadow); }
     .btn--ghost { border-color: var(--line-2); color: var(--ink); }
@@ -566,6 +580,10 @@
       display: none;
       flex-direction: column;
       justify-content: center;
+    /* El botón de tema lleva la luna y el sol: el CSS muestra el que toca
+       según data-theme, así que el JS ya no tiene que cambiar el icono. */
+    .theme-sun, [data-theme="dark"] .theme-moon { display: none; }
+    [data-theme="dark"] .theme-sun { display: inline-block; }
       gap: 5px;
       width: 38px; height: 38px;
       border: 1px solid var(--nav-border);
@@ -1009,7 +1027,7 @@
       font-size: var(--fs-sm);
       color: var(--ink-2);
     }
-    .flow-layer i { color: var(--accent); margin-top: 3px; }
+    .flow-layer .icon { color: var(--accent); margin-top: 3px; }
     .flow-layer b { color: var(--ink); font-weight: 700; }
 
     /* Stack: índice reglado en columnas, sin barras de porcentaje. */
@@ -1466,6 +1484,9 @@
       font-size: var(--fs-micro);
       color: var(--ink-2);
       white-space: nowrap;
+    /* Igual que con las fichas: `display: flex` anularía el atributo hidden
+       y, sin JS, se verían unos filtros que no hacen nada. */
+    .cert-toolbar[hidden] { display: none; }
       font-variant-numeric: tabular-nums;
     }
     .cert-topic { color: var(--accent); }
@@ -1484,9 +1505,6 @@
     }
 
     /* =========================================================
-    /* Igual que con las fichas: `display: flex` anularía el atributo hidden
-       y, sin JS, se verían unos filtros que no hacen nada. */
-    .cert-toolbar[hidden] { display: none; }
        11. BANDA DE CIERRE: MÉTODO + CONTACTO
        Oscura en los dos temas, a propósito: cierra la página.
        ========================================================= */
@@ -1590,7 +1608,7 @@
       transition: color var(--dur-1) var(--ease), padding-left var(--dur-2) var(--ease);
     }
     .contact-link:last-child { border-bottom: 1px solid var(--band-line); }
-    .contact-link i:first-child { width: 20px; color: var(--band-accent); font-size: 1rem; }
+    .contact-link .icon:first-child { color: var(--band-accent); font-size: 1rem; }
     .contact-link span { font-weight: 600; font-size: var(--fs-sm); }
     .contact-link small {
       margin-left: auto;
@@ -1599,13 +1617,16 @@
       color: var(--band-ink-2);
       letter-spacing: 0.04em;
     }
-    .contact-link .fa-arrow-right {
+    /* Flecha final: a la derecha en los perfiles y el correo, hacia abajo en
+       las descargas del CV. Al pasar el ratón se desplaza en su sentido. */
+    .contact-go {
       color: var(--band-ink-2);
       font-size: var(--fs-xs);
       transition: transform var(--dur-2) var(--ease), color var(--dur-1) var(--ease);
     }
     .contact-link:hover { color: var(--band-accent); padding-left: var(--s2); }
-    .contact-link:hover .fa-arrow-right { transform: translateX(4px); color: var(--band-accent); }
+    .contact-link:hover .contact-go { transform: translateX(4px); color: var(--band-accent); }
+    .contact-link[download]:hover .contact-go { transform: translateY(3px); }
 
     /* =========================================================
        12. PIE
@@ -1775,6 +1796,10 @@
 
     /* =========================================================
        15. IMPRESIÓN
+        opacity: 0;
+        /* Mientras se desvanece, el panel no debe recibir toques
+           destinados a la página. */
+        pointer-events: none;
        Un recruiter que imprima la página debe obtener algo legible.
        ========================================================= */
     @media print {
@@ -1782,6 +1807,14 @@
       body { background: #fff; color: #000; font-size: 11pt; }
       .hero, .band { min-height: 0; display: block; }
       .band, .footer { background: #fff !important; color: #000 !important; }
+      .nav-links.open {
+        display: flex;
+        opacity: 1;
+        pointer-events: auto;
+      }
+      @starting-style {
+        .nav-links.open { opacity: 0; }
+      }
       .band .lede, .method-item p, .contact-lede, .footer { color: #333 !important; }
       .band::before { display: none; }
       .contact-mail { background: none !important; color: #000 !important; border: 1px solid #000; }
@@ -1796,10 +1829,6 @@
       a[href^="http"]::after,
       a[href^="mailto"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; }
     }
-        opacity: 0;
-        /* Mientras se desvanece, el panel no debe recibir toques
-           destinados a la página. */
-        pointer-events: none;
   </style>
 
   <noscript>
@@ -1807,14 +1836,6 @@
       /* Sin JS no se añade .visible: el contenido debe verse igual. */
       .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
       /* Tampoco se añaden .scrolled ni .over-hero: se fija el fondo de la
-      .nav-links.open {
-        display: flex;
-        opacity: 1;
-        pointer-events: auto;
-      }
-      @starting-style {
-        .nav-links.open { opacity: 0; }
-      }
          barra para que sus enlaces se lean sobre cualquier sección. */
       .nav::before { opacity: 1 !important; }
     </style>
@@ -1843,7 +1864,8 @@
 
   <div class="nav-tools">
     <button class="icon-btn" id="themeToggle" onclick="toggleTheme()" aria-pressed="false">
-      <i class="fa-solid fa-moon" id="themeIcon" aria-hidden="true"></i>
+      <svg class="icon theme-moon" aria-hidden="true" focusable="false"><use href="#i-moon"/></svg>
+      <svg class="icon theme-sun" aria-hidden="true" focusable="false"><use href="#i-sun"/></svg>
       <span class="sr-only" id="themeLabel">Activar tema oscuro</span>
     </button>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">
@@ -1887,10 +1909,13 @@
           Entiendo una necesidad financiera, la traduzco a una <b>estructura funcional</b>, la
           construyo sobre <b>sistemas y datos empresariales</b> y la dejo probada, documentada
           y lista para usar.
+      /* ::details-content no es ::before ni ::after: la regla de arriba no
+         la alcanza. */
+      .case-more::details-content { transition: none; }
         </p>
 
         <div class="hero-ctas">
-          <a href="#projects" class="btn btn--solid">Ver el trabajo <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
+          <a href="#projects" class="btn btn--solid">Ver el trabajo <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg></a>
           <a href="#contact" class="btn btn--ghost">Contactar</a>
         </div>
 
@@ -1908,10 +1933,10 @@
         <div class="hero-photo">
           <img
             src="img/foto-perfil.jpg"
-      /* ::details-content no es ::before ni ::after: la regla de arriba no
-         la alcanza. */
-      .case-more::details-content { transition: none; }
             alt="Retrato de Daniel Navarro Delgado"
+      /* El JS abre los detalles antes de imprimir: sin transición, el papel
+         recoge el bloque entero y no a medio desplegar. */
+      .case-more::details-content { transition: none; block-size: auto; }
             width="528" height="660"
             fetchpriority="high"
             decoding="async" />
@@ -1933,11 +1958,32 @@
         <div class="ledger-num">3</div>
         <div class="ledger-label"><b>Roles en Deloitte</b> de analista a consultor desde enero de 2025</div>
       </li>
-      /* El JS abre los detalles antes de imprimir: sin transición, el papel
-         recoge el bloque entero y no a medio desplegar. */
-      .case-more::details-content { transition: none; block-size: auto; }
       <li>
         <div class="ledger-num">9</div>
+<!-- ============================ ICONOS ============================ -->
+<!-- Iconos propios, dibujados en una rejilla de 24×24. Cada uno se usa con
+     <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-…"/></svg>;
+     el color y el grosor del trazo los pone .icon en el CSS. LinkedIn y
+     GitHub son marcas y van rellenas. -->
+<svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 4v16M5.5 13.5 12 20l6.5-6.5"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h16M13.5 5.5 20 12l-6.5 6.5"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 13.5A9 9 0 1 1 10.5 3a7.5 7.5 0 0 0 10.5 10.5z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.64 5.64l1.77 1.77M16.6 16.6l1.77 1.77M5.64 18.36l1.77-1.77M16.6 7.4l1.77-1.77"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 3.5V20h16.5M8 15.5l3.5-4.5 3 3 5-6.5"/></symbol>
+  <symbol id="i-data" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.5"/><path d="M4.5 5.5v13c0 1.38 3.36 2.5 7.5 2.5s7.5-1.12 7.5-2.5v-13M4.5 12c0 1.38 3.36 2.5 7.5 2.5s7.5-1.12 7.5-2.5"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3zM4 7.5l8 4.5 8-4.5M12 12v9"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-4.5 3.5V17H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM7.5 9.5h9M7.5 13h5.5"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.5 4.5 13.5H12l-1 8 8.5-11H12l1-8z"/></symbol>
+  <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5"/><path d="M8.5 13.3 7 21.5l5-2.5 5 2.5-1.5-8.2"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.47 6.1 6.57.46-5.05 4.24 1.59 6.39L12 16.7l-5.58 3.49 1.59-6.39-5.05-4.24 6.57-.46L12 3z"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5zM14 3v5h5M8.5 13h7M8.5 16.5h5"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" fill-rule="evenodd" d="M4.5 2h15A2.5 2.5 0 0 1 22 4.5v15a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 19.5v-15A2.5 2.5 0 0 1 4.5 2zM8.2 7.2a1.6 1.6 0 1 1-3.2 0 1.6 1.6 0 0 1 3.2 0zM5.1 9.8h3v8.4h-3zM10 9.8h2.8v1.3c.5-.9 1.6-1.5 3-1.5 2.4 0 3.1 1.5 3.1 3.8v4.8h-2.9v-4.3c0-1.1-.3-1.9-1.4-1.9s-1.8.8-1.8 2v4.2H10z"/></symbol>
+  <symbol id="i-github" viewBox="-2 -2 20 20"><path fill="currentColor" stroke="none" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
+</svg>
+
         <div class="ledger-label"><b>Dominios financieros</b> que incorporé al acelerador de evaluación de madurez</div>
       </li>
       <li>
@@ -1967,7 +2013,7 @@
 
     <ul class="pillars stagger">
       <li class="card pillar reveal">
-        <span class="pillar-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></span>
+        <span class="pillar-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chart"/></svg></span>
         <h3>Entender el proceso financiero</h3>
         <p>
           Planificación, presupuesto, forecast y datos reales; análisis de desviaciones,
@@ -1982,7 +2028,7 @@
       </li>
 
       <li class="card pillar reveal">
-        <span class="pillar-icon"><i class="fa-solid fa-arrows-turn-to-dots" aria-hidden="true"></i></span>
+        <span class="pillar-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-data"/></svg></span>
         <h3>Modelar y mover los datos</h3>
         <p>
           Modelos dimensionales en Oracle EPM Cloud —cubos, jerarquías y reglas de cálculo— e
@@ -1997,7 +2043,7 @@
       </li>
 
       <li class="card pillar reveal">
-        <span class="pillar-icon"><i class="fa-solid fa-cubes" aria-hidden="true"></i></span>
+        <span class="pillar-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-cube"/></svg></span>
         <h3>Construir la solución</h3>
         <p>
           Cuando la respuesta no es otra hoja de cálculo, la construyo: interfaz, visualización
@@ -2012,7 +2058,7 @@
       </li>
 
       <li class="card pillar reveal">
-        <span class="pillar-icon"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
+        <span class="pillar-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chat"/></svg></span>
         <h3>Explicarla para que se use</h3>
         <p>
           Documentación funcional, guías de usuario y de administración que se entregan al
@@ -2052,7 +2098,7 @@
         </li>
       </ol>
       <p class="flow-layer">
-        <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-bolt"/></svg>
         <span><b>Automatización e IA aplicada, en cualquiera de los cuatro pasos</b> — donde reducen
         trabajo manual, mejoran la documentación o elevan la calidad de la entrega. No donde solo
         quedan bien.</span>
@@ -2441,7 +2487,7 @@
         </div>
         <div>
           <p class="tl-role" lang="en">Finance &amp; Technology Senior Analyst</p>
-          <span class="edu-mark"><i class="fa-solid fa-award" aria-hidden="true"></i> FY26 · Supera expectativas</span>
+          <span class="edu-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-award"/></svg> FY26 · Supera expectativas</span>
           <p class="tl-desc">
             Consultor senior en proyectos de transformación financiera y tecnológica, participando en
             la definición funcional e implementación de soluciones Oracle EPM Cloud para grandes
@@ -2547,7 +2593,7 @@
         <h3>Universitat Pompeu Fabra</h3>
         <p class="edu-degree">Grado en Economía</p>
         <p class="edu-place">Barcelona</p>
-        <span class="edu-mark"><i class="fa-solid fa-star" aria-hidden="true"></i> TFG premiado y publicado</span>
+        <span class="edu-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-star"/></svg> TFG premiado y publicado</span>
         <p class="edu-note">Tesis sobre las implicaciones distributivas de un impuesto al carbono. Nota: 9,7/10.</p>
       </li>
 
@@ -2556,7 +2602,7 @@
         <h3>Università Milano-Bicocca</h3>
         <p class="edu-degree">Erasmus — <span lang="en">International Business Economics</span></p>
         <p class="edu-place">Milán, Italia</p>
-        <span class="edu-mark"><i class="fa-solid fa-globe" aria-hidden="true"></i> 29/30 · Magna Cum Laude</span>
+        <span class="edu-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-globe"/></svg> 29/30 · Magna Cum Laude</span>
         <p class="edu-note">Materias: <span lang="en">Global Management, Behavioral Economics, Data-Driven Decision Making</span>.</p>
       </li>
 
@@ -2565,7 +2611,7 @@
         <h3>Steinbeis University Berlin</h3>
         <p class="edu-degree">Máster en Psicología Empresarial y Organizativa</p>
         <p class="edu-place" lang="en">Schools of Next Practices, Berlín</p>
-        <span class="edu-mark"><i class="fa-solid fa-award" aria-hidden="true"></i> Nota 1,3 — A</span>
+        <span class="edu-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-award"/></svg> Nota 1,3 — A</span>
         <p class="edu-note">Tesis: impacto de los chatbots de IA en el compromiso y el bienestar de los empleados.</p>
       </li>
 
@@ -2913,7 +2959,7 @@
             inteligencia artificial aplicada y proyectos de transformación financiera y tecnológica.
           </p>
           <a href="mailto:danielnavarrodelgado16@gmail.com" class="contact-mail">
-            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>
             danielnavarrodelgado16@gmail.com
           </a>
         </div>
@@ -2921,42 +2967,42 @@
         <ul class="contact-links reveal">
           <li>
             <a class="contact-link" href="https://www.linkedin.com/in/daniel-navarro-delgado" target="_blank" rel="noopener noreferrer">
-              <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg>
               <span>LinkedIn</span>
               <small>Trayectoria y publicaciones</small>
-              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              <svg class="icon contact-go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
             </a>
           </li>
           <li>
             <a class="contact-link" href="https://github.com/danielnavarro1600" target="_blank" rel="noopener noreferrer">
-              <i class="fa-brands fa-github" aria-hidden="true"></i>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg>
               <span>GitHub</span>
               <small>Proyectos y herramientas</small>
-              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              <svg class="icon contact-go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
             </a>
           </li>
           <li>
             <a class="contact-link" href="mailto:danielnavarrodelgado16@gmail.com">
-              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>
               <span lang="en">Email</span>
               <small>Respuesta directa</small>
-              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              <svg class="icon contact-go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
             </a>
           </li>
           <li>
             <a class="contact-link" href="cv/cv-daniel-navarro-delgado.pdf" download>
-              <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-file"/></svg>
               <span>Currículum</span>
               <small>PDF, dos páginas</small>
-              <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+              <svg class="icon contact-go" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>
             </a>
           </li>
           <li>
             <a class="contact-link" href="cv/cv-daniel-navarro-delgado-en.pdf" download>
-              <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-file"/></svg>
               <span lang="en">CV in English</span>
               <small>PDF, two pages</small>
-              <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+              <svg class="icon contact-go" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>
             </a>
           </li>
         </ul>
@@ -3044,15 +3090,14 @@
 
   // ---- TEMA ----
   // El estado real (claro u oscuro) ya lo decidió, sin destello, el script
-  // del <head>. Aquí solo se sincronizan icono, etiqueta y aria-pressed con
-  // ese estado y se guarda la elección manual del visitante.
+  // del <head>. Aquí solo se sincronizan la etiqueta y aria-pressed con ese
+  // estado (el icono lo cambia el CSS según data-theme) y se guarda la
+  // elección manual del visitante.
   const THEME_KEY = 'theme';
-  const themeIcon = document.getElementById('themeIcon');
   const themeLabel = document.getElementById('themeLabel');
   const themeToggle = document.getElementById('themeToggle');
 
   function syncThemeUI(isDark) {
-    themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
     themeLabel.textContent = isDark ? 'Activar tema claro' : 'Activar tema oscuro';
     themeToggle.setAttribute('aria-label', themeLabel.textContent);
     themeToggle.setAttribute('aria-pressed', String(isDark));
@@ -3175,6 +3220,20 @@
 
   // ---- BLOQUES PLEGABLES AL IMPRIMIR ----
   // Un <details> cerrado no se imprime: en papel faltaría justo el detalle de
+  }
+
+  // Al pulsar el botón, fundido corto entre un tema y otro con la View
+  // Transitions API. Si el navegador no la tiene, o el visitante pide menos
+  // movimiento, el tema cambia al instante, como antes.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function toggleTheme() {
+    const isDark = document.documentElement.getAttribute('data-theme') !== 'dark';
+    if (document.startViewTransition && !reduceMotion.matches) {
+      document.startViewTransition(() => applyTheme(isDark));
+    } else {
+      applyTheme(isDark);
+    }
   // cómo se construyó cada caso. Se abren antes de imprimir y se devuelven a
   // su estado anterior después.
   const collapsibles = document.querySelectorAll('.case-more');
@@ -3199,7 +3258,22 @@
     const filters = [...toolbar.querySelectorAll('.filter')];
     const counter = document.getElementById('certCount');
     const heroTotal = document.getElementById('certTotalHero');
+  // .closing solo dura el fundido de salida (ver el CSS del menú): se retira
+  // pasado un margen algo mayor que --dur-2 (0.32s). Si esa duración crece,
+  // hay que subir también este margen.
+  const CLOSING_MS = 450;
+  let closingTimer = 0;
 
+
+    // Se mira si estaba abierto porque este cierre también se llama al
+    // pulsar cualquier ancla, con el menú ya cerrado.
+    const wasOpen = navLinksEl.classList.contains('open');
+    const isClosing = wasOpen && !isOpen;
+    clearTimeout(closingTimer);
+    navLinksEl.classList.toggle('closing', isClosing);
+    if (isClosing) {
+      closingTimer = setTimeout(() => navLinksEl.classList.remove('closing'), CLOSING_MS);
+    }
     const tracksOf = (el) => (el.dataset.track || '').split(/\s+/).filter(Boolean);
     const matches = (el, filter) => filter === 'all' || tracksOf(el).includes(filter);
 
@@ -3220,20 +3294,6 @@
         if (visible) shown++;
       });
       // Un grupo sin entradas visibles se oculta entero: si no, quedaría un
-  }
-
-  // Al pulsar el botón, fundido corto entre un tema y otro con la View
-  // Transitions API. Si el navegador no la tiene, o el visitante pide menos
-  // movimiento, el tema cambia al instante, como antes.
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  function toggleTheme() {
-    const isDark = document.documentElement.getAttribute('data-theme') !== 'dark';
-    if (document.startViewTransition && !reduceMotion.matches) {
-      document.startViewTransition(() => applyTheme(isDark));
-    } else {
-      applyTheme(isDark);
-    }
       // encabezado de emisor colgando sin nada debajo. El recuento del
       // encabezado cuenta solo lo visible, para que cuadre con lo listado.
       groups.forEach(group => {
@@ -3258,19 +3318,4 @@
 </script>
 
 </body>
-  // .closing solo dura el fundido de salida (ver el CSS del menú): se retira
-  // pasado un margen algo mayor que --dur-2 (0.32s). Si esa duración crece,
-  // hay que subir también este margen.
-  const CLOSING_MS = 450;
-  let closingTimer = 0;
-
 </html>
-    // Se mira si estaba abierto porque este cierre también se llama al
-    // pulsar cualquier ancla, con el menú ya cerrado.
-    const wasOpen = navLinksEl.classList.contains('open');
-    const isClosing = wasOpen && !isOpen;
-    clearTimeout(closingTimer);
-    navLinksEl.classList.toggle('closing', isClosing);
-    if (isClosing) {
-      closingTimer = setTimeout(() => navLinksEl.classList.remove('closing'), CLOSING_MS);
-    }

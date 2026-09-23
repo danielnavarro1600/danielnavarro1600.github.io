@@ -39,7 +39,7 @@ Features:
 - HTML5
 - CSS3
 - Vanilla JavaScript
-- Font Awesome
+- Inline SVG icons (no icon library)
 - Google Fonts
 - GitHub Pages
 
@@ -83,7 +83,7 @@ Before making substantial changes, create a Git branch or a backup copy of `inde
 
 ## External resources
 
-The page loads fonts and icons from external services. All images (profile photo, favicon and social preview) are hosted locally in `img/`. An internet connection is required for fonts and icons to display correctly.
+The page loads its fonts from Google Fonts. Icons are inline SVG defined once in a sprite at the top of `<body>`, and all images (profile photo, favicon and social preview) are hosted locally in `img/`. Without an internet connection the page still works; only the typefaces fall back to system fonts.
 
 ## Deployment
 
@@ -92,7 +92,7 @@ The website is designed for static hosting with GitHub Pages. Publishing is hand
 ## Potential improvements
 
 - Serve a smaller, pre-cropped portrait to reduce the image payload
-- Self-host the fonts and icons to remove the CDN dependency
+- Self-host the fonts to remove the last CDN dependency
 - Separate CSS and JavaScript if the project becomes harder to maintain
 - Add automated checks only if the project grows beyond the current static setup
 
