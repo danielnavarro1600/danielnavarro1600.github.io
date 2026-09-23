@@ -1750,7 +1750,8 @@
        contenido es alto de por sí y esta regla no entra. */
     @media (min-width: 841px) and (max-height: 900px) {
       .hero-lede { line-height: 1.45; }
-      .hero-role { font-size: var(--fs-body); }
+      /* Sin tope de medida, el cargo cabe en una sola línea cuando hay ancho */
+      .hero-role { font-size: var(--fs-body); max-width: none; }
       .hero-name { line-height: 0.82; }
       .hero-top { margin-bottom: clamp(0.5rem, 1.4vh, 0.9rem); }
       .hero .btn { padding: 0.7rem 1.3rem; }
@@ -1758,6 +1759,26 @@
       .ledger li { padding-block: clamp(0.5rem, 1.3vh, 0.85rem); }
       .ledger-label { line-height: 1.4; }
       .hero-caption { display: none; }
+    }
+
+    /* Portátiles con la ventana baja: una pantalla de 1366×768, o una de
+       1920×1080 al 125 %, deja entre 650 y 730 px útiles una vez restadas
+       las barras del navegador. Para que la portada entera, cifras incluidas,
+       quepa de una vista sin quitar contenido, se compactan un punto el
+       nombre, los márgenes, la presentación, las cifras y la foto. Los chips
+       mantienen su tamaño de letra. */
+    @media (min-width: 841px) and (max-height: 760px) {
+      :root { --fs-display: clamp(2.8rem, min(9.5vw, 9.2vh), 7rem); }
+      .hero { padding-block: calc(var(--nav-h) + clamp(0.75rem, 2.2vh, 1.5rem)) clamp(0.5rem, 1.2vh, 1rem); }
+      .hero-name { margin-bottom: clamp(0.5rem, 1.2vh, 0.9rem); }
+      .hero-position { margin-bottom: clamp(0.4rem, 1.1vh, 0.75rem); }
+      .hero-role { margin-bottom: clamp(0.4rem, 1vh, 0.7rem); }
+      .hero-lede { font-size: var(--fs-body); }
+      .hero-ctas { margin-bottom: clamp(0.5rem, 1.4vh, 0.9rem); }
+      .ledger { padding-top: clamp(0.6rem, 1.8vh, 1.2rem); }
+      .ledger li { padding-block: 0.45rem; }
+      .ledger-label { font-size: var(--fs-xs); line-height: 1.35; }
+      .hero-figure { max-width: min(340px, 52svh); }
     }
 
     /* Con el cronograma a dos columnas, la lista de logros ocupaba poco más
