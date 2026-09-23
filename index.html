@@ -253,6 +253,12 @@
     ::selection { background: var(--tint-2); color: var(--ink); }
 
     :focus-visible {
+    /* Titulares repartidos en líneas de largo parecido y párrafos sin una
+       palabra suelta en la última línea. Un navegador que no conoce
+       text-wrap lo ignora y corta las líneas como siempre. */
+    h1, h2, h3, h4, .hero-role { text-wrap: balance; }
+    p, li, dd { text-wrap: pretty; }
+
       outline: 2px solid var(--accent);
       outline-offset: 3px;
       border-radius: var(--r-xs);
@@ -1170,7 +1176,23 @@
       transition: background-size var(--dur-2) var(--ease);
     }
     .case-more[open] summary::before { background-size: 8px 1px, 1px 0; }
-    .case-more ul { margin-top: var(--s4); display: grid; gap: var(--s2); }
+    /* padding y no margin: un margen superior se saldría de la caja que se
+       anima (ver abajo) y aparecería de golpe al abrir. */
+    .case-more ul { padding-top: var(--s4); display: grid; gap: var(--s2); }
+
+    /* Apertura suave del detalle: interpolate-size permite animar la altura
+       hasta auto. Donde no existe (o no hay ::details-content), el bloque se
+       abre de golpe, como siempre. */
+    @supports (interpolate-size: allow-keywords) {
+      .case-more { interpolate-size: allow-keywords; }
+      .case-more::details-content {
+        block-size: 0;
+        overflow: clip;
+        transition: block-size var(--dur-2) var(--ease),
+                    content-visibility var(--dur-2) allow-discrete;
+      }
+      .case-more[open]::details-content { block-size: auto; }
+    }
     .case-more li {
       position: relative;
       padding-left: var(--s5);
@@ -1462,6 +1484,9 @@
     }
 
     /* =========================================================
+    /* Igual que con las fichas: `display: flex` anularía el atributo hidden
+       y, sin JS, se verían unos filtros que no hacen nada. */
+    .cert-toolbar[hidden] { display: none; }
        11. BANDA DE CIERRE: MÉTODO + CONTACTO
        Oscura en los dos temas, a propósito: cierra la página.
        ========================================================= */
@@ -1484,9 +1509,6 @@
       position: absolute;
       inset: 0;
       background-image:
-    /* Igual que con las fichas: `display: flex` anularía el atributo hidden
-       y, sin JS, se verían unos filtros que no hacen nada. */
-    .cert-toolbar[hidden] { display: none; }
         linear-gradient(to right, var(--band-line) 1px, transparent 1px),
         linear-gradient(to bottom, var(--band-line) 1px, transparent 1px);
       background-size: 76px 76px;
@@ -1652,8 +1674,18 @@
         background: var(--bg);
         z-index: 101;
       }
-      .nav-links.open {
-        display: flex;
+      /* Fundido de entrada y salida. allow-discrete retrasa el paso a
+         display: none hasta que acaba el fundido, y @starting-style (abajo)
+         da el punto de partida al aparecer. La transición vive solo en .open
+         y en .closing (que el JS pone durante el cierre) y no en el estado
+         cerrado: si no, al girar una tablet y cruzar los 1020px, el panel
+         aparecería y se desvanecería sin que nadie lo hubiera abierto.
+         Sin soporte, el menú se abre y se cierra al instante, como antes. */
+      .nav-links.open,
+      .nav-links.closing {
+        transition: opacity var(--dur-2) var(--ease),
+                    display var(--dur-2) allow-discrete;
+        /* Los enlaces conservan los colores del panel mientras se desvanece */
         --nav-fg: var(--ink);
         --nav-fg-2: var(--ink-2);
         --nav-accent: var(--accent);
@@ -1764,6 +1796,10 @@
       a[href^="http"]::after,
       a[href^="mailto"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; }
     }
+        opacity: 0;
+        /* Mientras se desvanece, el panel no debe recibir toques
+           destinados a la página. */
+        pointer-events: none;
   </style>
 
   <noscript>
@@ -1771,6 +1807,14 @@
       /* Sin JS no se añade .visible: el contenido debe verse igual. */
       .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
       /* Tampoco se añaden .scrolled ni .over-hero: se fija el fondo de la
+      .nav-links.open {
+        display: flex;
+        opacity: 1;
+        pointer-events: auto;
+      }
+      @starting-style {
+        .nav-links.open { opacity: 0; }
+      }
          barra para que sus enlaces se lean sobre cualquier sección. */
       .nav::before { opacity: 1 !important; }
     </style>
@@ -1864,6 +1908,9 @@
         <div class="hero-photo">
           <img
             src="img/foto-perfil.jpg"
+      /* ::details-content no es ::before ni ::after: la regla de arriba no
+         la alcanza. */
+      .case-more::details-content { transition: none; }
             alt="Retrato de Daniel Navarro Delgado"
             width="528" height="660"
             fetchpriority="high"
@@ -1886,6 +1933,9 @@
         <div class="ledger-num">3</div>
         <div class="ledger-label"><b>Roles en Deloitte</b> de analista a consultor desde enero de 2025</div>
       </li>
+      /* El JS abre los detalles antes de imprimir: sin transición, el papel
+         recoge el bloque entero y no a medio desplegar. */
+      .case-more::details-content { transition: none; block-size: auto; }
       <li>
         <div class="ledger-num">9</div>
         <div class="ledger-label"><b>Dominios financieros</b> que incorporé al acelerador de evaluación de madurez</div>
@@ -3010,8 +3060,7 @@
 
   syncThemeUI(document.documentElement.getAttribute('data-theme') === 'dark');
 
-  function toggleTheme() {
-    const isDark = document.documentElement.getAttribute('data-theme') !== 'dark';
+  function applyTheme(isDark) {
     if (isDark) {
       document.documentElement.setAttribute('data-theme', 'dark');
     } else {
@@ -3028,12 +3077,7 @@
     let stored = null;
     try { stored = localStorage.getItem(THEME_KEY); } catch (err) {}
     if (stored) return;
-    if (e.matches) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-    }
-    syncThemeUI(e.matches);
+    applyTheme(e.matches);
   });
 
   // ---- MENÚ MÓVIL ----
@@ -3176,6 +3220,20 @@
         if (visible) shown++;
       });
       // Un grupo sin entradas visibles se oculta entero: si no, quedaría un
+  }
+
+  // Al pulsar el botón, fundido corto entre un tema y otro con la View
+  // Transitions API. Si el navegador no la tiene, o el visitante pide menos
+  // movimiento, el tema cambia al instante, como antes.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function toggleTheme() {
+    const isDark = document.documentElement.getAttribute('data-theme') !== 'dark';
+    if (document.startViewTransition && !reduceMotion.matches) {
+      document.startViewTransition(() => applyTheme(isDark));
+    } else {
+      applyTheme(isDark);
+    }
       // encabezado de emisor colgando sin nada debajo. El recuento del
       // encabezado cuenta solo lo visible, para que cuadre con lo listado.
       groups.forEach(group => {
@@ -3200,4 +3258,19 @@
 </script>
 
 </body>
+  // .closing solo dura el fundido de salida (ver el CSS del menú): se retira
+  // pasado un margen algo mayor que --dur-2 (0.32s). Si esa duración crece,
+  // hay que subir también este margen.
+  const CLOSING_MS = 450;
+  let closingTimer = 0;
+
 </html>
+    // Se mira si estaba abierto porque este cierre también se llama al
+    // pulsar cualquier ancla, con el menú ya cerrado.
+    const wasOpen = navLinksEl.classList.contains('open');
+    const isClosing = wasOpen && !isOpen;
+    clearTimeout(closingTimer);
+    navLinksEl.classList.toggle('closing', isClosing);
+    if (isClosing) {
+      closingTimer = setTimeout(() => navLinksEl.classList.remove('closing'), CLOSING_MS);
+    }
