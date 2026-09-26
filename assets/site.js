@@ -305,3 +305,42 @@ window.addEventListener('afterprint', () => {
   toolbar.hidden = false;
   apply('all');
 })();
+
+// ---- SHOWREEL ----
+// El retrato enlaza al MP4: sin JS, o en un navegador sin <dialog>, el
+// vídeo se abre tal cual. Con los dos, se reproduce en una ventana modal:
+// el navegador ya atrapa el foco, cierra con Escape y devuelve el foco al
+// retrato. Nada se descarga hasta que alguien la abre: src y póster se
+// copian de data-src y data-poster en ese momento.
+(function initReel() {
+  const dialog = document.getElementById('reel');
+  const video = document.getElementById('reelVideo');
+  if (!dialog || !video || typeof dialog.showModal !== 'function') return;
+
+  document.querySelectorAll('[data-reel]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!video.getAttribute('src')) {
+        video.poster = video.dataset.poster;
+        video.src = video.dataset.src;
+      }
+      dialog.showModal();
+      // Igual que con el menú: la página no se desplaza por detrás.
+      document.body.style.overflow = 'hidden';
+      // Quien pide menos movimiento decide cuándo empieza el vídeo.
+      if (!reduceMotion.matches) video.play().catch(() => {});
+    });
+  });
+
+  // Cerrar (con la ×, con Escape o desde fuera) siempre pasa por aquí.
+  dialog.addEventListener('close', () => {
+    video.pause();
+    document.body.style.overflow = '';
+  });
+
+  // .reel-inner ocupa toda la ventana: un clic que llega al propio
+  // <dialog> viene del fondo oscuro, y también cierra.
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+})();

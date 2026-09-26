@@ -146,6 +146,8 @@
   <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5zM14 3v5h5M8.5 13h7M8.5 16.5h5"/></symbol>
   <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" fill-rule="evenodd" d="M4.5 2h15A2.5 2.5 0 0 1 22 4.5v15a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 19.5v-15A2.5 2.5 0 0 1 4.5 2zM8.2 7.2a1.6 1.6 0 1 1-3.2 0 1.6 1.6 0 0 1 3.2 0zM5.1 9.8h3v8.4h-3zM10 9.8h2.8v1.3c.5-.9 1.6-1.5 3-1.5 2.4 0 3.1 1.5 3.1 3.8v4.8h-2.9v-4.3c0-1.1-.3-1.9-1.4-1.9s-1.8.8-1.8 2v4.2H10z"/></symbol>
   <symbol id="i-github" viewBox="-2 -2 20 20"><path fill="currentColor" stroke="none" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M8 5.14v13.72a1 1 0 0 0 1.52.85l10.56-6.86a1 1 0 0 0 0-1.7L9.52 4.29A1 1 0 0 0 8 5.14z"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
 </svg>
 
 <a href="#main" class="skip-link">Saltar al contenido</a>
@@ -244,6 +246,16 @@
             width="528" height="660"
             fetchpriority="high"
             decoding="async" />
+          <!-- Showreel: toda la foto abre el vídeo. Sin JS, el enlace abre el
+               MP4 tal cual; con JS, se reproduce en la ventana #reel. -->
+          <a class="hero-reel" href="video/showreel.mp4" data-reel>
+            <span class="hero-reel-badge">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-play"/></svg>
+              <span class="hero-reel-label">Ver <span lang="en">showreel</span></span>
+              <span class="hero-reel-meta" aria-hidden="true">0:15</span>
+              <span class="sr-only">(vídeo de 15 segundos, con sonido)</span>
+            </span>
+          </a>
         </div>
         <figcaption class="hero-caption">
           <span>Daniel Navarro Delgado</span>
@@ -1300,6 +1312,27 @@
     <p class="footer-meta">Barcelona · <span id="footerYear">2026</span> · <a href="#hero">Volver arriba</a></p>
   </div>
 </footer>
+
+<!-- ========================== SHOWREEL ========================== -->
+<!-- Ventana nativa: el navegador atrapa el foco, cierra con Escape y
+     devuelve el foco al retrato. El vídeo no se descarga hasta que
+     alguien la abre: el JS copia data-src y data-poster en ese momento. -->
+<dialog class="reel" id="reel" aria-labelledby="reelTitle" aria-describedby="reelDesc">
+  <div class="reel-inner">
+    <div class="reel-head">
+      <p class="reel-title" id="reelTitle"><span lang="en">Showreel</span> <span class="reel-meta">0:15</span></p>
+      <form method="dialog">
+        <button class="reel-close" type="submit" aria-label="Cerrar el vídeo">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-close"/></svg>
+        </button>
+      </form>
+    </div>
+    <video class="reel-video" id="reelVideo" controls playsinline preload="none"
+           width="1920" height="1080"
+           data-src="video/showreel.mp4" data-poster="img/showreel-poster.jpg"></video>
+    <p class="reel-desc" id="reelDesc">Mi trabajo, en 15 segundos y con sonido. Animación y música hechas con código e IA.</p>
+  </div>
+</dialog>
 
 <!-- ============================ JS ============================ -->
 <script src="assets/site.js"></script>

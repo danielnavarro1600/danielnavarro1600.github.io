@@ -815,7 +815,68 @@ p, li, dd { text-wrap: pretty; }
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center 16%;
+  transition: transform var(--dur-3) var(--ease);
 }
+
+/* Showreel: toda la foto abre el vídeo y el distintivo lo anuncia. Sin
+   JS, el enlace abre el MP4 tal cual; con JS, la ventana .reel (al final
+   de esta sección). Un velo inferior asegura que el distintivo se lea
+   sobre cualquier zona de la foto. */
+.hero-reel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--s3);
+  border-radius: inherit;
+  background: linear-gradient(to top, rgba(10,10,15,0.55), rgba(10,10,15,0) 42%);
+}
+/* El retrato recorta lo que sobresale (overflow: hidden): el anillo de
+   foco va por dentro para que se vea entero. */
+.hero-reel:focus-visible { outline-offset: -4px; border-radius: inherit; }
+.hero-reel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  padding: 0.55rem 0.95rem 0.55rem 0.75rem;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(10,10,15,0.6);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+  transition: background var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease),
+              color var(--dur-2) var(--ease), transform var(--dur-2) var(--ease);
+}
+.hero-reel-badge .icon {
+  width: 1em; height: 1em;
+  color: var(--accent);
+  transition: color var(--dur-2) var(--ease);
+}
+.hero-reel-meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--ink-2);
+  transition: color var(--dur-2) var(--ease);
+}
+.hero-reel:hover .hero-reel-badge,
+.hero-reel:focus-visible .hero-reel-badge {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-on);
+  transform: translateY(-2px);
+}
+.hero-reel:hover .hero-reel-badge .icon,
+.hero-reel:focus-visible .hero-reel-badge .icon,
+.hero-reel:hover .hero-reel-meta,
+.hero-reel:focus-visible .hero-reel-meta { color: var(--accent-on); }
+.hero-photo:has(.hero-reel:hover) img,
+.hero-photo:has(.hero-reel:focus-visible) img { transform: scale(1.03); }
 .hero-caption {
   display: flex;
   flex-wrap: wrap;
@@ -867,6 +928,70 @@ p, li, dd { text-wrap: pretty; }
   color: var(--ink-2);
 }
 .ledger-label b { display: block; color: var(--ink); font-weight: 600; }
+
+/* Ventana del showreel. <dialog> nativo: el navegador atrapa el foco,
+   cierra con Escape y devuelve el foco al retrato. Vive fuera del hero,
+   así que usa los tokens --band-* para ser oscura en los dos temas. El
+   ancho también respeta el alto disponible: en un móvil en horizontal el
+   vídeo cabe entero sin deformarse. */
+.reel {
+  /* Primero un ancho que entiende cualquier navegador; el segundo, con
+     svh, lo sustituye donde se conoce esa unidad (igual que en .hero). */
+  width: min(1120px, calc(100vw - 2 * var(--gutter)));
+  width: min(1120px, calc(100vw - 2 * var(--gutter)), calc((100svh - 10rem) * 16 / 9));
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--band-line-2);
+  border-radius: var(--r-lg);
+  background: var(--band-bg);
+  color: var(--band-ink);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.55);
+  overflow: auto;
+}
+.reel::backdrop {
+  background: rgba(6,6,10,0.78);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.reel[open] { animation: reel-in var(--dur-2) var(--ease); }
+.reel[open]::backdrop { animation: reel-fade var(--dur-2) var(--ease); }
+@keyframes reel-in { from { opacity: 0; transform: translateY(12px) scale(0.98); } }
+@keyframes reel-fade { from { opacity: 0; } }
+/* El contenido ocupa toda la ventana: así un clic que llega al propio
+   <dialog> solo puede venir del fondo, y el JS lo usa para cerrar. */
+.reel-inner { display: grid; gap: var(--s3); padding: var(--s4); }
+.reel-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); }
+.reel-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--band-accent);
+}
+.reel-meta { margin-left: var(--s2); color: var(--band-ink-2); }
+.reel-close {
+  display: inline-grid;
+  place-items: center;
+  width: 2.5rem; height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--band-line-2);
+  color: var(--band-ink);
+  transition: border-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+}
+.reel-close:hover { border-color: var(--band-accent); color: var(--band-accent); }
+.reel-close:focus-visible { outline-color: var(--band-accent); }
+.reel-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: var(--r-md);
+}
+.reel-desc { font-size: var(--fs-sm); line-height: 1.5; color: var(--band-ink-2); }
 
 /* =========================================================
    6. CAPACIDADES
@@ -1791,12 +1916,21 @@ p, li, dd { text-wrap: pretty; }
   .hero-figure { order: -1; max-width: 150px; justify-self: start; }
   .hero-photo { aspect-ratio: 1 / 1; border-radius: var(--r-md); }
   .hero-caption { display: none; }
+  /* En el retrato pequeño solo caben el icono y la duración. El texto
+     sigue ahí para los lectores de pantalla (mismo recurso que .sr-only). */
+  .hero-reel { padding: var(--s2); }
+  .hero-reel-badge { padding: 0.4rem 0.65rem 0.4rem 0.5rem; }
+  .hero-reel-label {
+    position: absolute; width: 1px; height: 1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  }
   .hero-name { line-height: 0.9; }
   .stack { grid-template-columns: 1fr; }
   .edu { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 720px) {
+  .reel-inner { padding: var(--s3); gap: var(--s2); }
   .cert-index { columns: 1; }
   .ledger { grid-template-columns: repeat(2, 1fr); border-bottom: 0; }
   .ledger li:nth-child(odd) { border-left: 0; padding-left: 0; }
@@ -1840,6 +1974,9 @@ p, li, dd { text-wrap: pretty; }
   /* ::details-content no es ::before ni ::after: la regla de arriba no
      la alcanza. */
   .case-more::details-content { transition: none; }
+  /* Sin acercamiento del retrato al pasar por encima. */
+  .hero-photo:has(.hero-reel:hover) img,
+  .hero-photo:has(.hero-reel:focus-visible) img { transform: none; }
 }
 
 /* =========================================================
@@ -1847,7 +1984,7 @@ p, li, dd { text-wrap: pretty; }
    Un recruiter que imprima la página debe obtener algo legible.
    ========================================================= */
 @media print {
-  .nav, .skip-link, .hero-bg, .hero-figure, .cert-toolbar, .nav-progress { display: none !important; }
+  .nav, .skip-link, .hero-bg, .hero-figure, .cert-toolbar, .nav-progress, .reel { display: none !important; }
   body { background: #fff; color: #000; font-size: 11pt; }
   .hero, .band { min-height: 0; display: block; }
   .band, .footer { background: #fff !important; color: #000 !important; }

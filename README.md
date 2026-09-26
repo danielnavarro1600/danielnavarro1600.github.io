@@ -31,6 +31,7 @@ Features:
 - Spanish and English versions, linked by an EN / ES switch and `hreflang` alternates
 - Light and dark themes with no flash on reload, following the system preference until the visitor chooses
 - Filterable certification index whose counts are derived from the DOM
+- A 15-second showreel (original animation and music) that opens from the hero portrait in an accessible modal and only downloads when played
 - Full keyboard navigation, visible focus states and AA contrast in both themes
 - Scroll-based reveals that respect `prefers-reduced-motion`
 - Readable print stylesheet
@@ -65,7 +66,10 @@ danielnavarro1600.github.io/
 │   ├── favicon.png
 │   ├── foto-perfil.jpg
 │   ├── og-image.jpg      (social preview, Spanish)
-│   └── og-image-en.jpg   (social preview, English)
+│   ├── og-image-en.jpg   (social preview, English)
+│   └── showreel-poster.jpg
+├── video/
+│   └── showreel.mp4      (15 s showreel, shared by both pages)
 └── index.html            (Spanish page)
 ```
 
