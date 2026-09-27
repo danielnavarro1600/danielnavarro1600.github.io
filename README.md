@@ -32,6 +32,7 @@ Features:
 - Light and dark themes with no flash on reload, following the system preference until the visitor chooses
 - Filterable certification index whose counts are derived from the DOM
 - A 15-second showreel (original animation and music) that opens from the hero portrait in an accessible modal and only downloads when played
+- An explorable 3D world, "The valley of data", in both languages: a sunset valley where each structure is a real part of my work, with a guided tour, free exploration and a text fallback
 - Full keyboard navigation, visible focus states and AA contrast in both themes
 - Scroll-based reveals that respect `prefers-reduced-motion`
 - Readable print stylesheet
@@ -43,6 +44,7 @@ Features:
 - CSS3
 - Vanilla JavaScript
 - Inline SVG icons (no icon library)
+- Three.js r149, vendored, only for the 3D world
 - Google Fonts
 - GitHub Pages
 
@@ -56,12 +58,21 @@ danielnavarro1600.github.io/
 ├── README.md
 ├── assets/
 │   ├── site.css          (all styles, shared by both pages)
-│   └── site.js           (all interactivity, shared by both pages)
+│   ├── site.js           (all interactivity, shared by both pages)
+│   ├── world.css         (3D world interface)
+│   ├── world.js          (3D world: landscape, places, camera and tour)
+│   └── vendor/
+│       ├── three.min.js  (Three.js r149)
+│       └── three-LICENSE.txt
 ├── cv/
 │   ├── cv-daniel-navarro-delgado.pdf
 │   └── cv-daniel-navarro-delgado-en.pdf
 ├── en/
+│   ├── explore/
+│   │   └── index.html    (3D world, English)
 │   └── index.html        (English page)
+├── explora/
+│   └── index.html        (3D world, Spanish)
 ├── img/
 │   ├── favicon.png
 │   ├── foto-perfil.jpg
@@ -78,7 +89,7 @@ danielnavarro1600.github.io/
 No installation or package manager is required.
 
 1. Download or clone the repository.
-2. Open `index.html` (Spanish) or `en/index.html` (English) in a web browser.
+2. Open `index.html` (Spanish) or `en/index.html` (English) in a web browser. The 3D world is `explora/index.html` (Spanish) or `en/explore/index.html` (English).
 
 On Windows PowerShell, from the project folder:
 
@@ -99,7 +110,7 @@ Before making substantial changes, create a Git branch or a backup copy of the f
 
 ## External resources
 
-The pages load their fonts from Google Fonts. Icons are inline SVG defined in a sprite at the top of each page's `<body>`, and all images (profile photo, favicon and social preview) are hosted locally in `img/`. Without an internet connection the page still works; only the typefaces fall back to system fonts.
+The pages load their fonts from Google Fonts. The 3D world also uses Three.js, which is stored in the repository (`assets/vendor/`) rather than loaded from a CDN. Icons are inline SVG defined in a sprite at the top of each page's `<body>`, and all images (profile photo, favicon and social preview) are hosted locally in `img/`. Without an internet connection the page still works; only the typefaces fall back to system fonts.
 
 ## Deployment
 

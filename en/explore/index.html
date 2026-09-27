@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>The valley of data — Daniel Navarro Delgado in 3D</title>
+  <meta name="description" content="My professional path turned into a 3D landscape you can explore with the camera: from source data to the decision, projects, experience, education and certifications." />
+  <meta name="author" content="Daniel Navarro Delgado" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0a0a0f" />
+  <meta property="og:title" content="The valley of data — Daniel Navarro Delgado in 3D" />
+  <meta property="og:description" content="My professional path turned into a 3D landscape: from source data to the decision." />
+  <meta property="og:image" content="https://danielnavarro1600.github.io/img/og-image-en.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://danielnavarro1600.github.io/en/explore/" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:locale:alternate" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://danielnavarro1600.github.io/en/explore/" />
+  <link rel="alternate" hreflang="es" href="https://danielnavarro1600.github.io/explora/" />
+  <link rel="alternate" hreflang="en" href="https://danielnavarro1600.github.io/en/explore/" />
+  <link rel="alternate" hreflang="x-default" href="https://danielnavarro1600.github.io/explora/" />
+  <link rel="icon" type="image/png" href="../../img/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../assets/world.css" />
+</head>
+<body>
+
+<svg class="sr-only" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h16M13.5 5.5 20 12l-6.5 6.5"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+</svg>
+
+<!-- El valle: decorativo para los lectores de pantalla. Todo su contenido
+     está también en texto, en los paneles y en la web. -->
+<canvas id="world" aria-hidden="true"></canvas>
+<div class="w-load" id="loadBar"></div>
+
+<header class="w-bar">
+  <a class="w-back" href="../" data-folder>
+    <svg class="icon icon--back" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
+    <span>Back to the website</span>
+  </a>
+  <p class="w-brand">Daniel Navarro Delgado · <b>The valley of data</b></p>
+  <nav class="w-actions" aria-label="Tour">
+    <button type="button" class="w-btn" id="tourBtn">Tour</button>
+    <button type="button" class="w-btn" id="placesBtn" aria-expanded="false" aria-controls="placesMenu">Places</button>
+    <a class="w-btn" href="../../explora/" hreflang="es" lang="es" data-folder aria-label="Versión en español">ES</a>
+  </nav>
+</header>
+
+<nav class="w-places" id="placesMenu" aria-label="Places in the valley" hidden>
+  <ol id="placesList"></ol>
+</nav>
+
+<main>
+  <section class="w-intro" id="intro">
+    <div class="w-intro-inner">
+      <p class="w-kicker">Daniel Navarro Delgado · 3D</p>
+      <h1 class="w-title">The valley <em>of data</em></h1>
+      <p class="w-lede">My professional path turned into a landscape: each structure is a real part of my work, from source data to the decision.</p>
+      <div class="w-ctas">
+        <button type="button" class="w-btn w-btn--solid" id="startTour" disabled>Start the tour</button>
+        <button type="button" class="w-btn" id="startFree" disabled>Explore freely</button>
+      </div>
+      <p class="w-intro-meta">10 places · about 3 minutes</p>
+    </div>
+  </section>
+
+  <aside class="w-panel" id="panel" aria-live="polite" hidden>
+    <button type="button" class="w-panel-close" id="panelClose" aria-label="Close the panel">
+      <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-close"/></svg>
+    </button>
+    <div class="w-panel-scroll" id="panelBody"></div>
+    <div class="w-tour" id="tourNav" hidden>
+      <button type="button" class="w-btn" id="tourPrev"><svg class="icon icon--back" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg> Previous</button>
+      <span class="w-tour-count" id="tourCount"></span>
+      <button type="button" class="w-btn w-btn--solid" id="tourNext">Next <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></button>
+    </div>
+  </aside>
+</main>
+
+<div class="w-markers" id="markers"></div>
+<p class="w-hint" id="hint"></p>
+<div class="w-fade" id="fade"></div>
+
+<div class="w-fallback" id="fallback" hidden>
+  <div>
+    <h1 class="w-title">The valley <em>of data</em></h1>
+    <p class="w-lede">Your browser cannot display this 3D world. All the information is also on the website.</p>
+    <a class="w-btn w-btn--solid" href="../" data-folder>Go to the website</a>
+  </div>
+</div>
+<noscript>
+  <div class="w-fallback">
+    <div>
+      <h1 class="w-title">The valley <em>of data</em></h1>
+      <p class="w-lede">This 3D world needs JavaScript. All the information is also on the website.</p>
+      <a class="w-btn w-btn--solid" href="../index.html">Go to the website</a>
+    </div>
+  </div>
+</noscript>
+
+<!-- Contenido de los lugares. Es un resumen de la web: si cambia algo
+     importante allí (un puesto, las certificaciones...), se actualiza aquí
+     y en explora/index.html. El orden es el del recorrido. -->
+<script type="application/json" id="worldData">
+{
+  "ui": {
+    "more": "See it on the website",
+    "of": "of",
+    "hintMouse": "Drag to look · WASD or arrow keys to move · Q / E to go down and up · Shift to go faster",
+    "hintTouch": "Drag to look · Pinch to move forward · Tap a place to go there"
+  },
+  "places": [
+    {
+      "id": "inicio",
+      "marker": "Start",
+      "kicker": "The lookout",
+      "title": "Daniel Navarro Delgado",
+      "subtitle": "Finance & Technology Consultant",
+      "body": [
+        "Finance transformation, Oracle EPM and applied artificial intelligence.",
+        "I understand a finance need, translate it into a functional structure, build it on enterprise systems and data and leave it tested, documented and ready to use."
+      ],
+      "facts": [
+        { "value": "3", "label": "roles at Deloitte, from analyst to consultant since January 2025" },
+        { "value": "9", "label": "finance domains in the maturity assessment accelerator" },
+        { "value": "34", "label": "certifications, 20 of them in artificial intelligence" },
+        { "value": "3", "label": "degrees: economics, international business and business psychology" }
+      ],
+      "link": "../#hero"
+    },
+    {
+      "id": "flujo",
+      "marker": "From data to decision",
+      "kicker": "The river of light",
+      "title": "From source data to the finance decision",
+      "body": [
+        "The stream of light crosses the valley: it rises at the spring, passes through the three locks of the aqueduct, is put in order in the floating cube and climbs to the observatory.",
+        "Automation and applied AI, at any of the four steps: where they reduce manual work, improve documentation or raise the quality of the deliverable. Not where they only look good."
+      ],
+      "items": [
+        { "title": "Source · Business systems", "meta": "The spring", "text": "SAP and the organisation's other finance and operational sources." },
+        { "title": "Integration · Metadata, mappings and loads", "meta": "The aqueduct locks", "text": "ODI, Data Exchange and EPM Automate, so that data arrives complete and traceable." },
+        { "title": "Model · Oracle EPM Cloud", "meta": "The floating cube", "text": "Cubes, dimensions, hierarchies and business rules that represent how the company plans." },
+        { "title": "Output · Budget, forecast and reporting", "meta": "The observatory", "text": "Data Forms, Task Lists, Smart View and dashboards for whoever has to decide." }
+      ],
+      "link": "../#skills"
+    },
+    {
+      "id": "capacidades",
+      "marker": "Capabilities",
+      "kicker": "Four towers",
+      "title": "What I can solve",
+      "body": [
+        "Not four separate specialities, but a single path: understand the finance process, model and move its data, build the solution and explain it so that someone else can use it."
+      ],
+      "items": [
+        { "title": "Understand the finance process", "meta": "The tower of slabs", "text": "Planning, budgeting, forecasting and actuals; variance analysis, product profitability and financial management of R&D and investments." },
+        { "title": "Model and move the data", "meta": "The tower of cubes", "text": "Dimensional models on Oracle EPM Cloud and integrations with SAP, ODI, Data Exchange and EPM Automate: loads, mappings, metadata and working out why a figure does not reconcile." },
+        { "title": "Build the solution", "meta": "The cantilevered tower", "text": "When the answer is not another spreadsheet, I build it: interface, data visualisation, version control, deployment and shared persistence." },
+        { "title": "Explain it so it gets used", "meta": "The tower of the open book", "text": "Functional documentation, user and administration guides, executive presentations and guided demos. A solution that nobody knows how to use is not finished yet." }
+      ],
+      "link": "../#skills"
+    },
+    {
+      "id": "caso1",
+      "marker": "Case 01",
+      "kicker": "Case 01 · Internal initiative · Deloitte",
+      "title": "From a spreadsheet methodology to a diagnostic tool",
+      "body": [
+        "A methodology for assessing the maturity of the finance function lived scattered across spreadsheets. I developed the web application that replaces it: a team can walk through it in a client conversation without losing the rigour of the model behind it.",
+        "The nine spires are its nine finance domains; the golden radar at the centre, the diagnosis. The methodological content was developed by the team."
+      ],
+      "facts": [
+        { "value": "9", "label": "finance domains, all built into the tool" },
+        { "value": "1–5", "label": "maturity levels across processes, technology and organisation" }
+      ],
+      "link": "../#projects"
+    },
+    {
+      "id": "caso2",
+      "marker": "Case 02",
+      "kicker": "Case 02 · Client project · Deloitte",
+      "title": "Planning and controlling for an industrial group, moving to Oracle EPM Cloud",
+      "body": [
+        "One of Spain's ten largest business groups by revenue ran its planning and controlling on an earlier platform. The project moved those processes to Oracle EPM Cloud without losing the business logic behind each figure.",
+        "The vault keeps its calculation rules: around one hundred of them."
+      ],
+      "facts": [
+        { "value": "−80% / −90%", "label": "processing time in two calculation cubes" },
+        { "value": "2", "label": "full-time employees' worth of manual effort, removed" },
+        { "value": "~100", "label": "business rules under IFRS and tax criteria" },
+        { "value": "10+", "label": "integrations, and between 30 and 40 mappings" }
+      ],
+      "link": "../#projects"
+    },
+    {
+      "id": "trayectoria",
+      "marker": "Experience",
+      "kicker": "The terraced stairway",
+      "title": "The path so far",
+      "body": [
+        "From analyst to consultant on finance and technology transformation projects, with a steady increase in functional, technical and coordination responsibility."
+      ],
+      "items": [
+        { "title": "Finance & Technology Consultant", "meta": "Deloitte · Jul 2026 — Present", "text": "Evolution of Oracle EPM Cloud solutions, functional and technical coordination, and applied AI in consulting." },
+        { "title": "Finance & Technology Senior Analyst", "meta": "Deloitte · Jul 2025 — Jun 2026", "text": "Functional design and implementation of Oracle EPM Cloud for large organisations in the industrial sector. FY26 review: exceeds expectations." },
+        { "title": "Finance & Technology Analyst", "meta": "Deloitte · Jan 2025 — Jun 2025", "text": "Functional analysis, requirements gathering, documentation and initial configuration of Oracle EPM Cloud solutions." },
+        { "title": "IT Business Consultant", "meta": "CleverStrategy · Jul 2024 — Dec 2024", "text": "IT business consulting focused on digital transformation and artificial intelligence applications for companies." }
+      ],
+      "link": "../#experience"
+    },
+    {
+      "id": "formacion",
+      "marker": "Education",
+      "kicker": "Three gates",
+      "title": "Economics, business and psychology",
+      "body": [
+        "An unusual foundation for a technical profile: understanding the numbers, the international context and also the people who, in the end, have to work with the system."
+      ],
+      "items": [
+        { "title": "Universitat Pompeu Fabra", "meta": "BSc in Economics · 2019 — 2023", "text": "Award-winning, published thesis. Grade: 9.7/10." },
+        { "title": "Università Milano-Bicocca", "meta": "Erasmus · International Business Economics · 2021 — 2022", "text": "29/30 · Magna Cum Laude." },
+        { "title": "Steinbeis University Berlin", "meta": "MSc in Business and Organisational Psychology · 2023 — 2025", "text": "Grade 1.3 (A). Thesis on the impact of AI chatbots on employee engagement and wellbeing." }
+      ],
+      "body2": "Spanish and Catalan native · English C1 · Italian B2",
+      "link": "../#education"
+    },
+    {
+      "id": "certificaciones",
+      "marker": "Certifications",
+      "kicker": "The crystal forest",
+      "title": "34 certifications, by track",
+      "body": [
+        "Three tracks that reinforce each other: artificial intelligence, Oracle technology and project management. Each crystal is a certification: gold for AI, copper for Oracle and pale for management."
+      ],
+      "facts": [
+        { "value": "20", "label": "artificial intelligence" },
+        { "value": "10", "label": "Oracle Cloud (6 of them also in AI)" },
+        { "value": "10", "label": "management and consulting" },
+        { "value": "7", "label": "issuers: Oracle, LinkedIn Learning, Deloitte, Google, Anthropic, OpenAI and Udemy" }
+      ],
+      "link": "../#certifications"
+    },
+    {
+      "id": "metodo",
+      "marker": "Approach",
+      "kicker": "The stone circle",
+      "title": "How I work",
+      "body": [
+        "The same cycle, whether the deliverable is a planning model or a tool. It is short on purpose: hardly anyone can describe what they need until they can see it working."
+      ],
+      "items": [
+        { "title": "01 — Understand", "text": "Turn the need into a concrete improvement." },
+        { "title": "02 — Build", "text": "Incrementally and under control." },
+        { "title": "03 — Test", "text": "Functionality, readability and edge cases." },
+        { "title": "04 — Share", "text": "Publish, document and gather feedback." }
+      ],
+      "link": "../#approach"
+    },
+    {
+      "id": "contacto",
+      "marker": "Contact",
+      "kicker": "The lighthouse",
+      "title": "Shall we talk about your project?",
+      "body": [
+        "Open to conversations about Oracle EPM Cloud, data integration, automation, applied artificial intelligence, and finance and technology transformation projects."
+      ],
+      "links": [
+        { "href": "mailto:danielnavarrodelgado16@gmail.com", "label": "danielnavarrodelgado16@gmail.com" },
+        { "href": "https://www.linkedin.com/in/daniel-navarro-delgado", "label": "LinkedIn" },
+        { "href": "https://github.com/danielnavarro1600", "label": "GitHub" },
+        { "href": "../../cv/cv-daniel-navarro-delgado-en.pdf", "label": "CV (PDF)" }
+      ],
+      "link": "../#contact"
+    }
+  ]
+}
+</script>
+<script src="../../assets/vendor/three.min.js"></script>
+<script src="../../assets/world.js"></script>
+</body>
+</html>
