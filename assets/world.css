@@ -1,0 +1,403 @@
+/* =========================================================
+   MUNDO 3D: la interfaz que flota sobre el valle
+   Mismos valores que la banda oscura de la web (tinta, papel, oro) y las
+   mismas tipografías. No carga site.css: esta página es otra cosa y así
+   no arrastra estilos que no usa.
+   ========================================================= */
+:root {
+  --ink: #0a0a0f;
+  --text: #f0ede8;
+  --text-2: #b8b0a4;
+  --gold: #d4a017;
+  --gold-hi: #e8b820;
+  --gold-on: #14100a;
+  --line: rgba(240,237,232,0.12);
+  --line-2: rgba(240,237,232,0.24);
+  --glass: rgba(10,10,15,0.7);
+
+  --font-display: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --edge: clamp(12px, 2.5vw, 28px);
+  --r-lg: 22px;
+  --r-pill: 999px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* Lo oculto se oculta siempre, aunque su clase le dé otro display. */
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body {
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+ol, ul { list-style: none; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.icon {
+  display: inline-block;
+  width: 1.1em; height: 1.1em;
+  flex-shrink: 0;
+  fill: none; stroke: currentColor; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.icon--back { transform: scaleX(-1); }
+
+/* El lienzo del valle, a pantalla completa */
+#world {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  display: block;
+  touch-action: none;
+  cursor: grab;
+}
+#world:active { cursor: grabbing; }
+
+/* ---- Botones ---- */
+.w-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.62rem 1.1rem;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-2);
+  background: rgba(10,10,15,0.45);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-size: 0.9rem; font-weight: 700; letter-spacing: 0.01em;
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+.w-btn:hover { border-color: var(--gold); color: var(--gold-hi); }
+.w-btn--solid { background: var(--gold); border-color: var(--gold); color: var(--gold-on); }
+.w-btn--solid:hover { background: var(--gold-hi); border-color: var(--gold-hi); color: var(--gold-on); }
+.w-btn:disabled { opacity: 0.5; cursor: progress; }
+.w-btn[aria-expanded="true"] { border-color: var(--gold); color: var(--gold-hi); }
+
+/* ---- Barra superior ---- */
+.w-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px var(--edge) 28px;
+  background: linear-gradient(rgba(10,10,15,0.75), rgba(10,10,15,0));
+  pointer-events: none;
+}
+.w-bar > * { pointer-events: auto; }
+.w-back {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.92rem; font-weight: 700;
+  text-decoration: none;
+  padding: 0.5rem 0.2rem;
+}
+.w-back:hover { color: var(--gold-hi); }
+.w-brand {
+  font-family: var(--font-mono);
+  font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text-2);
+}
+.w-brand b { color: var(--gold); font-weight: 500; }
+.w-actions { display: flex; gap: 8px; }
+
+/* ---- Barra de carga ---- */
+/* Solo existe mientras el mundo se construye (sin JS o sin WebGL, nunca). */
+.w-load {
+  display: none;
+  position: fixed; left: 0; top: 0; z-index: 30;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, #b8860b, #f0c63f);
+  transform-origin: 0 50%;
+  transform: scaleX(0.08);
+  transition: transform 0.8s var(--ease), opacity 0.5s 0.9s;
+}
+body.loading .w-load { display: block; }
+body.ready .w-load { opacity: 0; }
+
+/* ---- Pantalla de entrada ---- */
+.w-intro {
+  position: fixed; inset: 0; z-index: 20;
+  display: grid; place-items: center;
+  padding: 88px 24px 32px;
+  background: radial-gradient(ellipse at 50% 55%, rgba(10,10,15,0.2), rgba(10,10,15,0.78) 75%);
+  transition: opacity 0.7s var(--ease);
+}
+.w-intro.gone { opacity: 0; pointer-events: none; }
+.w-intro-inner { max-width: 660px; text-align: center; }
+.w-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold);
+}
+.w-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3.2rem, 10vw, 7rem);
+  line-height: 0.95;
+  margin: 16px 0 20px;
+  text-shadow: 0 4px 40px rgba(0,0,0,0.5);
+}
+.w-title em { color: var(--gold); }
+.w-lede {
+  max-width: 50ch; margin: 0 auto 30px;
+  font-size: clamp(1rem, 1.6vw, 1.16rem);
+  line-height: 1.62;
+  color: var(--text);
+  text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+}
+.w-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.w-ctas .w-btn { padding: 0.85rem 1.5rem; font-size: 0.95rem; }
+.w-intro-meta {
+  margin-top: 22px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem; letter-spacing: 0.08em;
+  color: var(--text-2);
+}
+
+/* ---- Panel del lugar ---- */
+.w-panel {
+  position: fixed; z-index: 12;
+  top: 78px; right: var(--edge);
+  width: min(430px, calc(100vw - 24px));
+  max-height: calc(100vh - 100px);
+  max-height: calc(100svh - 100px);
+  display: flex; flex-direction: column;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line-2);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  backdrop-filter: blur(16px) saturate(1.1);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+}
+.w-panel.open { opacity: 1; transform: none; }
+.w-panel:focus:not(:focus-visible) { outline: none; }
+.w-panel:focus-visible { outline-offset: 4px; border-radius: var(--r-lg); }
+.w-panel-close {
+  position: absolute; top: 12px; right: 12px; z-index: 1;
+  display: grid; place-items: center;
+  width: 2.25rem; height: 2.25rem;
+  border-radius: 50%;
+  border: 1px solid var(--line-2);
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+.w-panel-close:hover { border-color: var(--gold); color: var(--gold-hi); }
+.w-panel-scroll { overflow: auto; padding: 22px 24px 20px; overscroll-behavior: contain; }
+
+.p-kicker {
+  margin-right: 44px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold);
+}
+.p-title {
+  margin: 10px 0 4px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 3vw, 2.35rem);
+  line-height: 1.04;
+  text-wrap: balance;
+}
+.p-sub {
+  font-family: var(--font-mono);
+  font-size: 0.78rem; letter-spacing: 0.06em;
+  color: var(--gold-hi);
+}
+.p-text { margin-top: 10px; font-size: 0.97rem; line-height: 1.6; color: var(--text-2); }
+.p-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; margin-top: 16px; }
+.p-facts div { padding-top: 8px; border-top: 1px solid var(--line-2); }
+.p-facts dt {
+  font-family: var(--font-mono);
+  font-size: 1.3rem; font-weight: 500;
+  line-height: 1.2;
+  color: var(--gold);
+}
+.p-facts dd { margin-top: 2px; font-size: 0.84rem; line-height: 1.4; color: var(--text-2); }
+.p-items { display: grid; gap: 12px; margin-top: 16px; }
+.p-items li { padding-left: 12px; border-left: 2px solid var(--gold); }
+.p-item-title { font-size: 0.98rem; font-weight: 700; line-height: 1.35; }
+.p-item-meta {
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem; letter-spacing: 0.06em;
+  color: var(--gold-hi);
+}
+.p-item-text { margin-top: 4px; font-size: 0.9rem; line-height: 1.5; color: var(--text-2); }
+.p-links { display: grid; gap: 8px; margin-top: 16px; }
+.p-links a, .p-more {
+  font-weight: 700;
+  color: var(--gold-hi);
+  text-decoration: underline;
+  text-decoration-color: rgba(232,184,32,0.4);
+  text-underline-offset: 0.25em;
+}
+.p-links a:hover, .p-more:hover { text-decoration-color: currentColor; }
+.p-more { display: inline-block; margin-top: 18px; }
+.p-more::after { content: " \2192"; }
+
+/* Controles del recorrido, al pie del panel */
+.w-tour {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+}
+.w-tour[hidden] { display: none; }
+.w-tour .w-btn { padding: 0.55rem 0.95rem; font-size: 0.86rem; }
+.w-tour-count {
+  font-family: var(--font-mono);
+  font-size: 0.76rem; letter-spacing: 0.08em;
+  color: var(--text-2);
+}
+
+/* ---- Lista de lugares ---- */
+.w-places {
+  position: fixed; z-index: 14;
+  top: 70px; right: var(--edge);
+  width: min(330px, calc(100vw - 24px));
+  max-height: calc(100svh - 90px);
+  overflow: auto;
+  padding: 8px;
+  border-radius: 18px;
+  border: 1px solid var(--line-2);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+}
+.w-places button {
+  width: 100%;
+  display: flex; align-items: baseline; gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-align: left;
+}
+.w-places button:hover, .w-places button:focus-visible { background: rgba(212,160,23,0.14); }
+.pl-num { font-family: var(--font-mono); font-size: 0.72rem; color: var(--gold); }
+.pl-name { font-weight: 600; }
+
+/* ---- Marcadores sobre cada lugar ---- */
+.w-markers { position: fixed; inset: 0; z-index: 5; overflow: hidden; pointer-events: none; }
+.w-marker {
+  position: absolute; left: 0; top: 0;
+  display: none; align-items: center; gap: 8px;
+  padding: 6px 12px 6px 8px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-2);
+  background: rgba(10,10,15,0.55);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  font-family: var(--font-mono);
+  font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: auto;
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+.w-marker.show { display: inline-flex; }
+.m-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 4px rgba(212,160,23,0.25);
+}
+.w-marker:hover, .w-marker.current { border-color: var(--gold); color: var(--gold-hi); }
+
+/* ---- Pista de controles ---- */
+.w-hint {
+  position: fixed; z-index: 8;
+  left: var(--edge); bottom: 16px;
+  max-width: min(600px, calc(100vw - 2 * var(--edge)));
+  padding: 8px 14px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line);
+  background: rgba(10,10,15,0.5);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  font-family: var(--font-mono);
+  font-size: 0.7rem; letter-spacing: 0.04em;
+  color: rgba(240,237,232,0.78);
+  opacity: 0;
+  transition: opacity 0.6s var(--ease);
+  pointer-events: none;
+}
+body.started .w-hint { opacity: 1; }
+body.started.hint-done .w-hint { opacity: 0; }
+
+/* Fundido para los cortes con movimiento reducido */
+.w-fade {
+  position: fixed; inset: 0; z-index: 9;
+  background: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s linear;
+}
+.w-fade.on { opacity: 1; }
+
+/* ---- Sin 3D (o sin JavaScript) ---- */
+.w-fallback {
+  position: fixed; inset: 0; z-index: 25;
+  display: grid; place-items: center;
+  padding: 24px;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 40%, #1c1626, var(--ink) 70%);
+}
+.w-fallback[hidden] { display: none; }
+.w-fallback .w-lede { color: var(--text-2); }
+
+/* ---- Móvil: el panel pasa a ser una hoja inferior ---- */
+/* Móvil, y tabletas en vertical: el panel pasa a ser una hoja inferior
+   (misma condición que SHEET en world.js). */
+@media (max-width: 720px), (orientation: portrait) and (max-width: 1100px) {
+  .w-bar { padding-top: 10px; gap: 8px; }
+  .w-brand { display: none; }
+  .w-back span { display: none; }
+  .w-actions { gap: 6px; }
+  .w-actions .w-btn { padding: 0.55rem 0.85rem; font-size: 0.84rem; }
+  .w-panel {
+    top: auto; bottom: 10px;
+    left: max(10px, calc((100vw - 620px) / 2)); right: max(10px, calc((100vw - 620px) / 2));
+    width: auto;
+    max-height: 56vh;
+    max-height: 56svh;
+  }
+  .w-panel-scroll { padding: 18px 18px 14px; }
+  .p-title { font-size: 1.7rem; }
+  .w-hint { bottom: 10px; left: 10px; right: 10px; max-width: none; margin-inline: auto; width: fit-content; text-align: center; border-radius: 14px; }
+  body.panel-open .w-hint { opacity: 0; }
+  .w-places { top: 62px; }
+}
+
+/* Sin sitio para el rótulo central: en tabletas en vertical se oculta. */
+@media (max-width: 960px) {
+  .w-brand { display: none; }
+}
+
+/* Móvil en horizontal: poca altura, así que barra y panel más compactos. */
+@media (max-height: 500px) and (min-width: 721px) {
+  .w-bar { padding-top: 8px; }
+  .w-back span { display: none; }
+  .w-actions .w-btn { padding: 0.5rem 0.85rem; font-size: 0.84rem; }
+  .w-panel { top: 58px; bottom: 8px; max-height: none; width: min(400px, 48vw); }
+  .w-panel-scroll { padding: 14px 16px 10px; }
+  .p-title { font-size: 1.45rem; }
+  .w-tour { padding-top: 8px; padding-bottom: 8px; }
+  .w-places { top: 56px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

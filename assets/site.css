@@ -787,6 +787,11 @@ p, li, dd { text-wrap: pretty; }
 }
 .hero-cv .icon { font-size: 0.9em; transition: transform var(--dur-2) var(--ease); }
 .hero-cv:hover .icon { transform: translateY(2px); }
+/* El mundo 3D usa el mismo enlace de texto; su flecha avanza hacia la derecha.
+   Los dos enlaces van juntos: si no caben junto a los botones, bajan a la
+   vez a su propia línea en lugar de quedar uno suelto. */
+.hero-links { display: inline-flex; flex-wrap: wrap; column-gap: var(--s3); }
+.hero-cv--go:hover .icon { transform: translateX(2px); }
 
 .hero-tags { display: flex; flex-wrap: wrap; gap: var(--s2); }
 

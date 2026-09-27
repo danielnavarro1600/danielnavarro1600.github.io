@@ -9,12 +9,13 @@
 const footerYear = document.getElementById('footerYear');
 if (footerYear) footerYear.textContent = new Date().getFullYear();
 
-// ---- SELECTOR DE IDIOMA EN LOCAL ----
-// En la web publicada, "en/" o "../" llevan a la portada de cada idioma. Al
-// abrir el archivo con doble clic (file://) no hay servidor que añada el
-// index.html, y el navegador mostraría una carpeta: se completa la ruta.
+// ---- ENLACES A CARPETAS EN LOCAL ----
+// En la web publicada, "en/", "../" o "explora/" llevan a la página de esa
+// carpeta (la portada de cada idioma o el mundo 3D). Al abrir el archivo con
+// doble clic (file://) no hay servidor que añada el index.html, y el
+// navegador mostraría una carpeta: se completa la ruta.
 if (location.protocol === 'file:') {
-  document.querySelectorAll('a.lang-switch').forEach(a => {
+  document.querySelectorAll('a.lang-switch, a[data-folder]').forEach(a => {
     const href = a.getAttribute('href');
     if (href.endsWith('/')) a.setAttribute('href', href + 'index.html');
   });
